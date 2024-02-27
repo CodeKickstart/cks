@@ -6,4 +6,5 @@ export type RawValue =
   | boolean
   | JsonObjectType
   | null
-  | undefined;
+  | undefined
+  | number[];

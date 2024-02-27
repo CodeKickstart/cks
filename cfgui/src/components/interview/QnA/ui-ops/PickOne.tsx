@@ -68,6 +68,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
           </option>
         ))}
       </select>
+      <div className='flex-grow'></div>
       <div>
         <button
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
