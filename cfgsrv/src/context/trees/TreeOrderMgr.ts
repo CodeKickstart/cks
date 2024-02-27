@@ -1,4 +1,15 @@
-import { ASIS_post, ASIS_pre, KEY_SID } from "../../shared/defs/constants";
+import {
+  ASIS_post,
+  ASIS_pre,
+  KEY_KIND,
+  KEY_SID,
+  OP_BOOLEAN,
+  OP_DEC,
+  OP_INT,
+  OP_PICKMANY,
+  OP_PICKONE,
+  OP_TEXT,
+} from "../../shared/defs/constants";
 import { JsonObjectType } from "../../shared/defs/types";
 import { Str } from "../../typeStr";
 
@@ -11,12 +22,31 @@ export function TreeOrderMgr() {
     indent: number = 0
   ): { error: Str; prefixOrderList: string[] | null } {
     const keys = Object.keys(obj);
-
+    const validSids = [];
     if (keys.includes(KEY_SID)) {
       for (const [k, v] of Object.entries(obj)) {
-        if (k === KEY_SID && typeof v === "string") {
-          const val = `${ASIS_pre}.${v}`;
-          prefixOrderList.push(val);
+        if (
+          k === KEY_KIND &&
+          (v === OP_TEXT ||
+            v === OP_INT ||
+            v === OP_DEC ||
+            v === OP_BOOLEAN ||
+            v === OP_PICKONE ||
+            v === OP_PICKMANY)
+        ) {
+          const sid = obj[KEY_SID];
+          validSids.push(sid);
+        }
+      }
+    }
+
+    if (keys.includes(KEY_SID)) {
+      for (const [k, valSid] of Object.entries(obj)) {
+        if (k === KEY_SID && typeof valSid === "string") {
+          if (validSids.includes(valSid)) {
+            const val = `${ASIS_pre}.${valSid}`;
+            prefixOrderList.push(val);
+          }
         }
       }
     }
