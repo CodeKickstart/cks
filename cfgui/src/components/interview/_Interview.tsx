@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import QueryContext from "./QueryContext";
 
 import ResponseContext from "./ResponseContext";
@@ -55,13 +55,16 @@ const _Interview = ({
     }
   };
 
-  const fetchData = async (url: string) => {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
-  };
+  const fetchData = useMemo(
+    () => async (url: string) => {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    },
+    [] // No dependencies, so it will only be created once
+  );
 
   useEffect(() => {
     // Set initial height
