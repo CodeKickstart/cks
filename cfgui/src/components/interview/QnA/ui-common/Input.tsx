@@ -22,16 +22,33 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const queryObject = fnRetrieveQueryObject();
-    if (!queryObject) {
-      return;
+    try {
+      const queryObject = fnRetrieveQueryObject();
+      if (!queryObject) {
+        throw new Error("Failed to retrieve query object");
+      }
+      const { prompt } = queryObject;
+      if (prompt) {
+        setPrompt(prompt as string);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error retrieving query object:", error);
+      // Handle the error state accordingly, e.g., display an error message
+      setPrompt("Error: Failed to retrieve data");
+      setIsLoading(false);
     }
-    const { prompt } = queryObject;
-    if (prompt) {
-      setPrompt(prompt as string);
-    }
-    setIsLoading(false);
   }, []);
+
+  if (
+    ![INPUT_TEXT, INPUT_BOOL, INPUT_INT, INPUT_DEC, INPUT_PICKONE].includes(
+      inputType
+    )
+  ) {
+    console.error("Invalid inputType:", inputType);
+    // Handle the error state accordingly, e.g., display an error message
+    return <div>Error: Invalid inputType</div>;
+  }
 
   let inputComponent;
   const queryObject = fnRetrieveQueryObject();
