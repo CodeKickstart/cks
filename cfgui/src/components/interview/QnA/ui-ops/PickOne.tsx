@@ -25,7 +25,13 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   }, [answer, onResponse, sidCursor]);
 
   useEffect(() => {
-    const { defval, sid } = queryObject || {};
+    interface ObjTemplate {
+      defval?: number;
+      sid?: string;
+      // Other properties as needed
+    }
+
+    const { defval, sid } = (queryObject || {}) as ObjTemplate;
 
     setSidCursor(sid as string);
 

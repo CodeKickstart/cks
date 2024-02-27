@@ -1,6 +1,12 @@
-export interface JsonObjectType {
-  [key: string]: null | string | number | boolean | JsonObjectType;
-}
+export type Primitive = null | string | number | boolean;
+export type JsonObjectType =
+  | null
+  | undefined
+  | { [key: string]: JsonObjectType }
+  | Primitive
+  | JsonObjectType[]
+  | Primitive[]
+  | object[];
 
 export type AttrsType = {
   required: string[];

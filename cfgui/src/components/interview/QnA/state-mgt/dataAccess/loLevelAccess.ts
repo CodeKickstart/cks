@@ -1,6 +1,5 @@
 import { KEY_SID } from "../../../../../shared/defs/constants";
 import { JsonObjectType } from "../../../../../shared/defs/types";
-import { RawValue } from "../../defs/types/RawValue";
 import { Str } from "../../defs/types/Str";
 import { valtioStore } from "../../defs/types/ValtioTypes";
 import { fnInfixTraversal } from "../treeTraversal/inTraversal";
@@ -44,7 +43,8 @@ export const fnGetQueryAttribute = (
     return { error: `fnGetQueryAttribute: queryObject is null`, value: null };
   }
 
-  const rawValue: RawValue = queryObject[attribute];
+  const rawValue: JsonObjectType =
+    queryObject[attribute as keyof JsonObjectType];
 
   return { error: null, value: rawValue };
 };
@@ -154,8 +154,8 @@ export const fnGetQueryAttributeJsonObject = (
 export const fnSetQueryAttribute = (
   sidCursor: string,
   attribute: string,
-  value: string | number | boolean | JsonObjectType | null
-): { error: Str } => {
+  value: JsonObjectType
+): { error: string | null } => {
   const { error, queryObject } = fnGetQueryObject(sidCursor);
   if (error) {
     return { error };
@@ -163,6 +163,14 @@ export const fnSetQueryAttribute = (
   if (!queryObject) {
     return { error: `fnSetQueryAttribute: queryObject is null` };
   }
+
+  // Check if queryObject is actually an object
+  if (typeof queryObject !== "object" || Array.isArray(queryObject)) {
+    return { error: `fnSetQueryAttribute: queryObject is not an object` };
+  }
+
+  // Update queryObject
   queryObject[attribute] = value;
+
   return { error: null };
 };

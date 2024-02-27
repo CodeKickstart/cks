@@ -28,7 +28,11 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       if (!queryObject) {
         throw new Error("Failed to retrieve query object");
       }
-      const { prompt } = queryObject;
+      interface ObjTemplate {
+        prompt?: string;
+      }
+
+      const { prompt } = queryObject as ObjTemplate;
       if (prompt) {
         setPrompt(prompt as string);
       }

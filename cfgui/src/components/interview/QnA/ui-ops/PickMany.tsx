@@ -26,7 +26,12 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   }, [answer, onResponse, sidCursor]);
 
   useEffect(() => {
-    const { defval, sid } = queryObject || {};
+    interface ObjTemplate {
+      defval?: number[];
+      sid?: string;
+      // Other properties as needed
+    }
+    const { defval, sid } = queryObject as ObjTemplate;
 
     setSidCursor(sid as string);
 
@@ -52,6 +57,10 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   }, [handleEnter, sidCursor]);
 
   const handleCheckboxChange = (index: number) => {
+    if (answer === null) {
+      return;
+    }
+
     const currentIndex = answer.indexOf(index);
     const newAnswer = [...answer];
 
@@ -77,7 +86,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
             <label className='flex items-center'>
               <input
                 type='checkbox'
-                checked={answer.includes(index)}
+                checked={answer !== null && answer.includes(index)} // Added null check for 'answer'
                 onChange={() => handleCheckboxChange(index)}
                 className='mr-2'
               />
@@ -90,10 +99,12 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       <div>
         <button
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            answer.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+            answer !== null && answer.length === 0
+              ? "opacity-50 cursor-not-allowed"
+              : ""
           }`}
           onClick={handleSubmitButtonClick}
-          disabled={answer.length === 0}>
+          disabled={answer !== null && answer.length === 0}>
           {ENTER_BUTTON_LABEL}
         </button>
       </div>
