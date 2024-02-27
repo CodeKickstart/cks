@@ -154,7 +154,7 @@ export const fnGetQueryAttributeJsonObject = (
 export const fnSetQueryAttribute = (
   sidCursor: string,
   attribute: string,
-  value: number[] | string | number | boolean | JsonObjectType | null
+  value: string | number | boolean | JsonObjectType | null
 ): { error: Str } => {
   const { error, queryObject } = fnGetQueryObject(sidCursor);
   if (error) {

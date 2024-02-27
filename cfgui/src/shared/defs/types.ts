@@ -1,5 +1,5 @@
 export interface JsonObjectType {
-  [key: string]: null | string | number | boolean | JsonObjectType | number[];
+  [key: string]: null | string | number | boolean | JsonObjectType;
 }
 
 export type AttrsType = {
