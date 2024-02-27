@@ -1,0 +1,10 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_name1",
+      "kind": "text",
+      "prompt": "please enter your name:",
+      "defval": "Basab"
+    }
+  ]
+}

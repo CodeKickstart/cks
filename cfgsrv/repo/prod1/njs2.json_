@@ -1,0 +1,15 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_name2a",
+      "kind": "text",
+      "prompt": "Hi - whats your name 2:",
+      "defval": "Magic Johnson"
+    },
+    {
+      "id": "id_name2b",
+      "kind": "text",
+      "defval": "Steph Curry"
+    }
+  ]
+}

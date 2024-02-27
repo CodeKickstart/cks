@@ -1,0 +1,27 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_name3a",
+      "kind": "text",
+      "prompt": "please enter your name 3a:",
+      "override": "Yassar Arafat"
+    },
+    {
+      "id": "id_name3b",
+      "kind": "text",
+      "prompt": "please enter your name 3b:",
+      "override": "Aeriel Sharon"
+    },
+    {
+      "id": "id_name3c",
+      "kind": "text",
+      "prompt": "please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:please enter your name 3c:"
+    },
+    {
+      "id": "id_name3d",
+      "kind": "text",
+      "prompt": "please enter your name 3d:",
+      "override": "Golda Meir"
+    }
+  ]
+}

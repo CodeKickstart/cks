@@ -1,0 +1,9 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_pickone",
+      "kind": "pickone",
+      "prompt": "select one"
+    }
+  ]
+}

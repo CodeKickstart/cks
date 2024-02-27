@@ -1,0 +1,28 @@
+{
+  "name": "cfgsrv-v1",
+  "version": "1.0.0",
+  "description": "experimenting with MERN",
+  "type": "module",
+  "scripts": {
+    "edevn": "NODE_ENV=production tsx src/index.ts",
+    "edevnm": "nodemon src/index.ts",
+    "edevi": "nodemon --inspect --exec tsx src/expressServer.ts",
+    "sdevi": "nodemon --inspect --exec tsx src/socketServer.ts"
+  },
+  "author": "Basab Dattaray",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "socket.io": "^4.7.3",
+    "tsx": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^4.5.4"
+  }
+}

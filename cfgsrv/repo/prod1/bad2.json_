@@ -1,0 +1,32 @@
+{
+  "BAD2": null,
+  "__CONTENT": [
+    {
+      "id": "id_name1",
+      "kind": "text",
+      "prompt": "please enter your name:",
+      "defval": "Ashwini"
+    },
+    {
+      "id": "id_var_pages",
+      "kind": "pickmany",
+      "prompt": "enter ...",
+      "defval": [
+        4,
+        2,
+        1
+      ],
+      "children": {
+        "kind": "literal",
+        "defval": [
+          "hotels",
+          "restaurants",
+          "attractions",
+          "events",
+          "shopping",
+          "nightlife"
+        ]
+      }
+    }
+  ]
+}

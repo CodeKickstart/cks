@@ -1,0 +1,14 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_dec",
+      "kind": "dec",
+      "prompt": "Enter a decimal number"
+    },
+    {
+      "id": "id_dec2",
+      "kind": "dec",
+      "override": -44.05
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_int",
+      "kind": "int",
+      "prompt": "Enter an integer"
+    },
+    {
+      "id": "id_int2",
+      "kind": "int",
+      "override": -44
+    }
+  ]
+}
