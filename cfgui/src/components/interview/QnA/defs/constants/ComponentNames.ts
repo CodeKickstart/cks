@@ -7,4 +7,5 @@ export const INPUT_BOOL = "bool";
 export const INPUT_INT = "int";
 export const INPUT_DEC = "dec";
 export const INPUT_PICKONE = "pickone";
+export const INPUT_LITERAL = "literal";
 export const INPUT_PICKMANY = "pickmany";

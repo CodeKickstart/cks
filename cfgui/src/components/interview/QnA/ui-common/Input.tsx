@@ -7,11 +7,12 @@ import {
   INPUT_INT,
   INPUT_DEC,
   INPUT_PICKONE,
+  INPUT_LITERAL,
 } from "../defs/constants/ComponentNames";
 import { fnRetrieveQueryObject } from "./_support";
 import Text from "../ui-ops/Text";
 import Bool from "../ui-ops/Bool";
-import Int from "./Int";
+import Int from "../ui-ops/Int";
 import Dec from "../ui-ops/Dec";
 import PickOne from "../ui-ops/PickOne";
 
@@ -41,9 +42,14 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   }, []);
 
   if (
-    ![INPUT_TEXT, INPUT_BOOL, INPUT_INT, INPUT_DEC, INPUT_PICKONE].includes(
-      inputType
-    )
+    ![
+      INPUT_TEXT,
+      INPUT_BOOL,
+      INPUT_INT,
+      INPUT_DEC,
+      INPUT_PICKONE,
+      INPUT_LITERAL,
+    ].includes(inputType)
   ) {
     console.error("Invalid inputType:", inputType);
     // Handle the error state accordingly, e.g., display an error message
