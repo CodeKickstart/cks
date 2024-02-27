@@ -5,6 +5,13 @@ import { valtioStore } from "../../defs/types/ValtioTypes";
 import { fnInfixTraversal } from "../treeTraversal/inTraversal";
 import { fnRetrieveQueryFragment } from "../treeWorkers/queryFragment";
 
+// Define a function for error logging
+function logError(error: string): void {
+  // You can replace this with your preferred logging mechanism,
+  // such as logging to a file, sending logs to a logging service, etc.
+  console.error(`Error: ${error}`);
+}
+
 export const fnGetQueryObject = (
   sidCursor: string
 ): { error: Str; queryObject: JsonObjectType | null } => {
@@ -18,11 +25,13 @@ export const fnGetQueryObject = (
       }
     );
   if (errOrderSequences) {
-    console.log("navigator", errOrderSequences);
+    logError(errOrderSequences); // Log the error
     return { error: errOrderSequences, queryObject: null };
   }
   if (retList.length === 0) {
-    return { error: `fnGetQueryObject: retList is empty`, queryObject: null };
+    const error = `fnGetQueryObject: retList is empty`;
+    logError(error); // Log the error
+    return { error, queryObject: null };
   }
   const queryObject = retList[0];
   return { error: null, queryObject };
@@ -37,10 +46,13 @@ export const fnGetQueryAttribute = (
 } => {
   const { error, queryObject } = fnGetQueryObject(sidCursor);
   if (error) {
+    logError(error); // Log the error
     return { error, value: null };
   }
   if (!queryObject) {
-    return { error: `fnGetQueryAttribute: queryObject is null`, value: null };
+    const error = `fnGetQueryAttribute: queryObject is null`;
+    logError(error); // Log the error
+    return { error, value: null };
   }
 
   const rawValue: JsonObjectType =
@@ -55,13 +67,13 @@ export const fnGetQueryAttributeString = (
 ): { error: Str; value: Str | undefined | null } => {
   const { error, value } = fnGetQueryAttribute(sidCursor, attribute);
   if (error) {
+    logError(error); // Log the error
     return { error, value: null };
   }
   if (!(typeof value === "string" || value === undefined)) {
-    return {
-      error: `fnGetQueryAttributeString: ${value} is neither a string nor is it undefined`,
-      value: null,
-    };
+    const error = `fnGetQueryAttributeString: ${value} is neither a string nor is it undefined`;
+    logError(error); // Log the error
+    return { error, value: null };
   }
   return { error: null, value };
 };
@@ -72,13 +84,13 @@ export const _fnGetQueryAttributeNumber = (
 ): { error: Str; value: number | undefined | null } => {
   const { error, value } = fnGetQueryAttribute(sidCursor, attribute);
   if (error) {
+    logError(error); // Log the error
     return { error, value: null };
   }
   if (!(typeof value == "number" || value === undefined)) {
-    return {
-      error: `fnGetQueryAttributeNumber: ${value} is neither a number nor is it undefined`,
-      value: null,
-    };
+    const error = `fnGetQueryAttributeNumber: ${value} is neither a number nor is it undefined`;
+    logError(error); // Log the error
+    return { error, value: null };
   }
   return { error: null, value };
 };
@@ -89,13 +101,13 @@ export const fnGetQueryAttributeInteger = (
 ): { error: Str; value: number | undefined | null } => {
   const { error, value } = _fnGetQueryAttributeNumber(sidCursor, attribute);
   if (error) {
+    logError(error); // Log the error
     return { error, value: null };
   }
   if (!(Number.isInteger(value) || value === undefined)) {
-    return {
-      error: `fnGetQueryAttributeInteger: ${value} is neither an integer nor is undefined`,
-      value: null,
-    };
+    const error = `fnGetQueryAttributeInteger: ${value} is neither an integer nor is undefined`;
+    logError(error); // Log the error
+    return { error, value: null };
   }
   return { error: null, value };
 };
@@ -106,13 +118,13 @@ export const fnGetQueryAttributeDec = (
 ): { error: Str; value: number | undefined | null } => {
   const { error, value } = _fnGetQueryAttributeNumber(sidCursor, attribute);
   if (error) {
+    logError(error); // Log the error
     return { error, value: null };
   }
   if (!(Number.isFinite(value) || value === undefined)) {
-    return {
-      error: `fnGetQueryAttributeInteger: ${value} is not neither a decimal number or an undefined`,
-      value: null,
-    };
+    const error = `fnGetQueryAttributeDec: ${value} is not neither a decimal number or an undefined`;
+    logError(error); // Log the error
+    return { error, value: null };
   }
   return { error: null, value };
 };
@@ -123,13 +135,13 @@ export const fnGetQueryAttributeBoolean = (
 ): { error: Str; value: boolean | undefined | null } => {
   const { error, value } = fnGetQueryAttribute(sidCursor, attribute);
   if (error) {
+    logError(error); // Log the error
     return { error, value: null };
   }
   if (!(typeof value === "boolean" || value === undefined)) {
-    return {
-      error: `fnGetQueryAttributeBoolean: ${value} is neither a boolean nor is it undefined`,
-      value: null,
-    };
+    const error = `fnGetQueryAttributeBoolean: ${value} is neither a boolean nor is it undefined`;
+    logError(error); // Log the error
+    return { error, value: null };
   }
   return { error: null, value };
 };
@@ -140,13 +152,13 @@ export const fnGetQueryAttributeJsonObject = (
 ): { error: Str; value: JsonObjectType | undefined | null } => {
   const { error, value } = fnGetQueryAttribute(sidCursor, attribute);
   if (error) {
+    logError(error); // Log the error
     return { error, value: null };
   }
   if (!(typeof value === "object" || value === undefined)) {
-    return {
-      error: `fnGetQueryAttributeJsonObject: ${value} is not a JsonObjectType`,
-      value: null,
-    };
+    const error = `fnGetQueryAttributeJsonObject: ${value} is not a JsonObjectType`;
+    logError(error); // Log the error
+    return { error, value: null };
   }
   return { error: null, value };
 };
@@ -158,15 +170,20 @@ export const fnSetQueryAttribute = (
 ): { error: string | null } => {
   const { error, queryObject } = fnGetQueryObject(sidCursor);
   if (error) {
+    logError(error); // Log the error
     return { error };
   }
   if (!queryObject) {
-    return { error: `fnSetQueryAttribute: queryObject is null` };
+    const error = `fnSetQueryAttribute: queryObject is null`;
+    logError(error); // Log the error
+    return { error };
   }
 
   // Check if queryObject is actually an object
   if (typeof queryObject !== "object" || Array.isArray(queryObject)) {
-    return { error: `fnSetQueryAttribute: queryObject is not an object` };
+    const error = `fnSetQueryAttribute: queryObject is not an object`;
+    logError(error); // Log the error
+    return { error };
   }
 
   // Update queryObject
