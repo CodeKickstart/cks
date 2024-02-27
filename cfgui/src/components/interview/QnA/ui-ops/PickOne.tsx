@@ -57,7 +57,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   };
 
   return (
-    <div>
+    <div className='flex'>
       <select
         value={answer !== null ? answer : ""}
         onChange={(e) => setAnswer(parseInt(e.target.value))}>

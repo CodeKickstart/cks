@@ -69,7 +69,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   };
 
   return (
-    <div className='space-y-2'>
+    <div className='flex'>
       <h2 className='font-semibold'>Select one or more options:</h2>
       <ul className='space-y-1'>
         {options.map((option, index) => (
