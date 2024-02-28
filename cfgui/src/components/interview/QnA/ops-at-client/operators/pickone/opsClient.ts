@@ -2,6 +2,7 @@ import { OP_PICKONE } from "../../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
+import { fnRetrieveQueryObject } from "../../../ui-common/_support";
 
 const name = OP_PICKONE;
 export const opsClient = () => {
@@ -12,6 +13,21 @@ export const opsClient = () => {
     nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
+    const queryObject = fnRetrieveQueryObject();
+    if (!queryObject) {
+      throw new Error("Failed to retrieve query object");
+    }
+    interface ObjTemplate {
+      children?: string;
+    }
+
+    const { children } = queryObject as ObjTemplate;
+
+    interface ObjTemplateChildren {
+      kind?: string;
+    }
+    const { kind: childrenKind } = children as ObjTemplateChildren;
+    console.log(`opsClient::${name}:pre childrenKind: ${childrenKind}`);
 
     const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 
