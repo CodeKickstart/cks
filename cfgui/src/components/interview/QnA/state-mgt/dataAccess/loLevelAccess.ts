@@ -155,7 +155,7 @@ export const fnGetQueryAttributeJsonObject = (
     logError(error); // Log the error
     return { error, value: null };
   }
-  if (!(typeof value === "object" || value === undefined)) {
+  if (value === null || !(typeof value === "object" || value === undefined)) {
     const error = `fnGetQueryAttributeJsonObject: ${value} is not a JsonObjectType`;
     logError(error); // Log the error
     return { error, value: null };
