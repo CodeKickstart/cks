@@ -78,23 +78,29 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   };
 
   return (
-    <div className='flex'>
-      <h2 className='font-semibold'>Select one or more options:</h2>
-      <ul className='space-y-1'>
-        {options.map((option, index) => (
-          <li key={index}>
-            <label className='flex items-center'>
-              <input
-                type='checkbox'
-                checked={answer !== null && answer.includes(index)}
-                onChange={() => handleCheckboxChange(index)}
-                className='mr-2'
-              />
-              {option}
-            </label>
-          </li>
-        ))}
-      </ul>
+    <div className='flex flex-col'>
+      {" "}
+      {/* Use flex-col to make the children stack vertically */}
+      <h2 className='font-semibold mb-4'>Select one or more options:</h2>
+      <div className='flex flex-col'>
+        {" "}
+        {/* Use flex-col to make the children stack vertically */}
+        <ul className='space-y-1'>
+          {options.map((option, index) => (
+            <li key={index}>
+              <label className='flex items-center'>
+                <input
+                  type='checkbox'
+                  checked={answer !== null && answer.includes(index)}
+                  onChange={() => handleCheckboxChange(index)}
+                  className='mr-2'
+                />
+                {option}
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className='flex-grow'></div> {/* Add a gap using flex-grow */}
       <div>
         <button
