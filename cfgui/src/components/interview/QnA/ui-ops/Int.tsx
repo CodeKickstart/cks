@@ -30,7 +30,12 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
   }, [answer, onResponse, sidCursor]);
 
   useEffect(() => {
-    const { defval, sid } = queryObject || {};
+    interface ObjTemplate {
+      defval?: number;
+      sid?: string;
+    }
+
+    const { defval, sid } = (queryObject || {}) as ObjTemplate;
 
     setSidCursor(sid as string);
 

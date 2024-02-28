@@ -29,7 +29,12 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
   }, [answer, onResponse, sidCursor]);
 
   useEffect(() => {
-    const { defval, sid } = queryObject || {};
+    interface ObjTemplate {
+      defval?: boolean;
+      sid?: string;
+    }
+
+    const { defval, sid } = (queryObject || {}) as ObjTemplate;
 
     setSidCursor(sid as string);
 

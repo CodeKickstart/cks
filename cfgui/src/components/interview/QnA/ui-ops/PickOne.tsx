@@ -28,7 +28,6 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
     interface ObjTemplate {
       defval?: number;
       sid?: string;
-      // Other properties as needed
     }
 
     const { defval, sid } = (queryObject || {}) as ObjTemplate;
