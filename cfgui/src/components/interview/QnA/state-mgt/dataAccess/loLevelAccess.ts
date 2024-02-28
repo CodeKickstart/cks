@@ -180,7 +180,11 @@ export const fnSetQueryAttribute = (
   }
 
   // Check if queryObject is actually an object
-  if (typeof queryObject !== "object" || Array.isArray(queryObject)) {
+  if (
+    queryObject === null ||
+    typeof queryObject !== "object" ||
+    Array.isArray(queryObject)
+  ) {
     const error = `fnSetQueryAttribute: queryObject is not an object`;
     logError(error); // Log the error
     return { error };
