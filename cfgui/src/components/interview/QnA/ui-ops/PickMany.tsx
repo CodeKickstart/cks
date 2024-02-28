@@ -97,13 +97,8 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       </ul>
       <div className='self-end'>
         <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            answer !== null && answer.length === 0
-              ? "opacity-50 cursor-not-allowed"
-              : ""
-          }`}
-          onClick={handleSubmitButtonClick}
-          disabled={answer !== null && answer.length === 0}>
+          className='bg-blue-500 text-white px-4 py-2 rounded-md'
+          onClick={handleSubmitButtonClick}>
           {ENTER_BUTTON_LABEL}
         </button>
       </div>
