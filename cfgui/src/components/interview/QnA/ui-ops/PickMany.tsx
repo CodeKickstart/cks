@@ -86,7 +86,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
             <label className='flex items-center'>
               <input
                 type='checkbox'
-                checked={answer !== null && answer.includes(index)} // Added null check for 'answer'
+                checked={answer !== null && answer.includes(index)}
                 onChange={() => handleCheckboxChange(index)}
                 className='mr-2'
               />

@@ -8,6 +8,7 @@ import {
   INPUT_DEC,
   INPUT_PICKONE,
   INPUT_LITERAL,
+  INPUT_PICKMANY,
 } from "../defs/constants/ComponentNames";
 import { fnRetrieveQueryObject } from "./_support";
 import Text from "../ui-ops/Text";
@@ -15,6 +16,7 @@ import Bool from "../ui-ops/Bool";
 import Int from "../ui-ops/Int";
 import Dec from "../ui-ops/Dec";
 import PickOne from "../ui-ops/PickOne";
+import PickMany from "../ui-ops/PickMany";
 
 const CANCEL_BUTTON = "Cancel";
 
@@ -52,6 +54,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       INPUT_INT,
       INPUT_DEC,
       INPUT_PICKONE,
+      INPUT_PICKMANY,
       INPUT_LITERAL,
     ].includes(inputType)
   ) {
@@ -98,6 +101,12 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
     case INPUT_PICKONE:
       inputComponent = (
         <PickOne queryObject={queryObject} onResponse={onResponse} />
+      );
+      break;
+
+    case INPUT_PICKMANY:
+      inputComponent = (
+        <PickMany queryObject={queryObject} onResponse={onResponse} />
       );
       break;
 
