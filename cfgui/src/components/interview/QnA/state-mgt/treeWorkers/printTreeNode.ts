@@ -9,5 +9,5 @@ export const fnPrintNode: FnNodeProcessor<null> = (
 ) => {
   const spacing = "  ".repeat(indent);
   console.log(`${spacing}${key}: ${JSON.stringify(value)}`);
-  return { error: null, returnObj: null };
+  return { error: null };
 };

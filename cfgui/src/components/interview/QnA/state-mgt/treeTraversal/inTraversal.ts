@@ -60,7 +60,9 @@ export function fnInfixTraversal<O>(
                     accumulator.push(obj);
                   }
                 } else {
-                  accumulator.push(returnObj);
+                  if (returnObj !== undefined) {
+                    accumulator.push(returnObj);
+                  }
                 }
               }
             }

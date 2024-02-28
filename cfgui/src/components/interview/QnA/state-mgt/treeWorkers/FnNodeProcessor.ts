@@ -6,4 +6,4 @@ export type FnNodeProcessor<W> = (
   key: string,
   value: JsonObjectType,
   indent?: number
-) => { error: Str; returnObj: W };
+) => { error: Str; returnObj?: W };
