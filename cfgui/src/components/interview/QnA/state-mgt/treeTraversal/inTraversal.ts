@@ -23,9 +23,16 @@ export function fnInfixTraversal<O>(
     indent: number
   ): { error: Str } {
     try {
+      if (!queryFragment || typeof queryFragment !== "object") {
+        return { error: "queryFragment is null" };
+      }
       for (const k in queryFragment) {
         if (Object.prototype.hasOwnProperty.call(queryFragment, k)) {
-          const value = queryFragment[k];
+          interface ObjTemplate {
+            [key: string]: JsonObjectType;
+          }
+          const queryObj = queryFragment as ObjTemplate;
+          const value = queryObj[k];
           if (typeof value === "object" && value !== null) {
             const { error } = _fnRunInfix(value as JsonObjectType, indent + 1);
             if (error) {

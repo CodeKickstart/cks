@@ -16,14 +16,19 @@ export function fnPrefixTraversal<O>(
 } {
   const { indent, matchingKeys, matchingValue } = options || {};
   const accumulator: O[] = [];
+  interface ObjTemplate {
+    [key: string]: JsonObjectType;
+  }
+
   function _fnRunInfix(
     queryFragment: JsonObjectType,
     indent: number
   ): { error: Str } {
     try {
-      for (const k in queryFragment) {
+      const queryObj = queryFragment as ObjTemplate;
+      for (const k in queryObj) {
         if (Object.prototype.hasOwnProperty.call(queryFragment, k)) {
-          const value = queryFragment[k];
+          const value = queryObj[k];
           if (typeof value === "object" && value !== null) {
             const { error } = _fnRunInfix(value as JsonObjectType, indent + 1);
             if (error) {

@@ -16,14 +16,19 @@ export function fnPostfixTraversal<O>(
 } {
   const { indent, matchingKeys, matchingValue } = options || {};
   const accumulator: O[] = [];
+  interface ObjTemplate {
+    [key: string]: JsonObjectType;
+  }
   function _fnRunPostfix(
     queryFragment: JsonObjectType,
     indent: number
   ): { error: Str } {
     try {
-      for (const key in queryFragment) {
+      let queryObj = queryFragment as ObjTemplate;
+
+      for (const key in queryObj) {
         if (Object.prototype.hasOwnProperty.call(queryFragment, key)) {
-          const value = queryFragment[key];
+          const value = queryObj[key];
           if (typeof value === "object" && value !== null) {
             const { error } = _fnRunPostfix(
               value as JsonObjectType,
@@ -35,7 +40,8 @@ export function fnPostfixTraversal<O>(
           }
         }
       }
-      for (const [k, value] of Object.entries(queryFragment)) {
+      queryObj = queryFragment as ObjTemplate;
+      for (const [k, value] of Object.entries(queryObj)) {
         if (!matchingKeys || (matchingKeys && matchingKeys.includes(k))) {
           if (
             !matchingValue ||
