@@ -7,13 +7,13 @@ import { fnSplitCursor } from "../../misc/strings";
 import { fnGetAllPreOrderCursors } from "../cursor/cursor";
 import { fnGetQueryAttribute } from "./loLevelAccess";
 
-export const fnGetAllPreOrderAnswers = (
+export const fnGetAllPreOrderAnswers = <T>(
   key: string
 ): {
   error: Str;
-  answers: string[] | null;
+  answers: T[] | null;
 } => {
-  const answers: string[] = [];
+  const answers: T[] = [];
   for (const cursor of fnGetAllPreOrderCursors()) {
     if (cursor !== null) {
       const { sidCursor } = fnSplitCursor(cursor);
@@ -40,7 +40,7 @@ export const fnGetAllPreOrderAnswers = (
         if (error) {
           return { error, answers: null };
         }
-        answers.push(value as string);
+        answers.push(value as T);
       }
     }
   }

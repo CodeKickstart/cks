@@ -8,7 +8,7 @@ const Finish: React.FC = () => {
     logListingSuccess();
   }, []); // Run once after initial rendering
 
-  const { error, answers: valList } = fnGetAllPreOrderAnswers(KEY_VAL);
+  const { error, answers: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
   if (error) {
     return <div>{error}</div>;
   }
