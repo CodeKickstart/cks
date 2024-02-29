@@ -16,13 +16,13 @@ export const fnFindAndStoreSelectableChildNames = (
     children?: string;
     sid?: string;
   }
-  const { children, sid: sidCursor } = parentQueryObj as ObjTemplate;
+  const { children, sid } = parentQueryObj as ObjTemplate;
 
   if (
     !children ||
     typeof children !== "object" ||
-    !sidCursor ||
-    typeof sidCursor !== "string"
+    !sid ||
+    typeof sid !== "string"
   ) {
     const error = `fnFindAndStoreSelectableChildNames: children or sidCursor is invalid`;
     return { error, childNames: [] };
@@ -42,7 +42,7 @@ export const fnFindAndStoreSelectableChildNames = (
   } else {
     childrenData = Object.keys(children);
   }
-  const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
+  const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sid, {
     childNames: childrenData,
   });
   if (errorUpdateQueryObject) {
