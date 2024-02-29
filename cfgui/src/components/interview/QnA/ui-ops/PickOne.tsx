@@ -14,7 +14,18 @@ const ENTER_BUTTON_LABEL = "Enter";
 const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null); // Updated state name to 'answer'
   const [sidCursor, setSidCursor] = useState<string>("");
-  const fruits = ["Mango", "Guava", "Apple"]; // Define the array of fruits
+
+  // let childNames: { [key: string]: string } | undefined;
+  interface ObjTemplate {
+    childNames?: { [key: string]: string };
+  }
+  const { childNames } = queryObject as ObjTemplate;
+  if (childNames === undefined || typeof childNames !== "object") {
+    throw new Error("Failed to retrieve query object");
+  }
+  const listOfChildNames = Object.values(childNames);
+
+  // [("Mango", "Guava", "Apple")]; // Define the array of fruits
 
   const handleEnter = useCallback(() => {
     if (answer !== null) {
@@ -67,7 +78,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
         value={answer !== null ? answer : ""}
         onChange={(e) => setAnswer(parseInt(e.target.value))}>
         <option value=''>Select an option...</option>
-        {fruits.map((fruit, index) => (
+        {listOfChildNames.map((fruit, index) => (
           <option key={index} value={index}>
             {fruit}
           </option>

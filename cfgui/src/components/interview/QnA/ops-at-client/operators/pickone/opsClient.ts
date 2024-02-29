@@ -28,26 +28,26 @@ export const opsClient = () => {
     const { children } = queryObject as ObjTemplate;
 
     interface ObjTemplateChildren {
+      defval?: { [key: string]: string };
       kind?: string;
       sid?: string;
     }
-    const { kind: childrenKind } = children as ObjTemplateChildren;
-    console.log(`opsClient::${name}:pre childrenKind: ${childrenKind}`);
+    const { kind: childrenKind, defval: childrenDefval } =
+      children as ObjTemplateChildren;
 
     if (childrenKind === OP_LITERAL) {
-      const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
-        childNames: ["Mango", "Guava", "Apple"],
-      });
-      if (errorUpdateQueryObject) {
-        return { error: errorUpdateQueryObject, nextSidCursor: null };
+      if (childrenDefval) {
+        const { error: errorUpdateQueryObject } = fnUpdateQueryObject(
+          sidCursor,
+          {
+            childNames: childrenDefval,
+          }
+        );
+        if (errorUpdateQueryObject) {
+          return { error: errorUpdateQueryObject, nextSidCursor: null };
+        }
       }
     }
-
-    // const names = ["A", "B", "C"];
-
-    // const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
-    //   names: names,
-    // });
 
     const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 
