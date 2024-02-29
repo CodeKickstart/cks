@@ -3,7 +3,7 @@ import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
 import { fnRetrieveQueryObject } from "../../../ui-common/_support";
-import { fnFindAndStoreSelectableChildNames } from "../../support/pickChildren";
+import { fnFindAndStoreSelectablenamesOfChildren } from "../../support/childrenUtil";
 
 const name = OP_PICKMANY;
 export const opsClient = () => {
@@ -17,12 +17,12 @@ export const opsClient = () => {
     if (!queryObject) {
       throw new Error("Failed to retrieve query object");
     }
-    const { error: errorFindChildNames, childNames } =
-      fnFindAndStoreSelectableChildNames(queryObject);
-    if (errorFindChildNames) {
-      return { error: errorFindChildNames, nextSidCursor: null };
+    const { error: errorFindnamesOfChildren, namesOfChildren } =
+      fnFindAndStoreSelectablenamesOfChildren(queryObject);
+    if (errorFindnamesOfChildren) {
+      return { error: errorFindnamesOfChildren, nextSidCursor: null };
     }
-    console.log(`opsClient::${name}:pre childNames: ${childNames}`);
+    console.log(`opsClient::${name}:pre namesOfChildren: ${namesOfChildren}`);
 
     const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 
