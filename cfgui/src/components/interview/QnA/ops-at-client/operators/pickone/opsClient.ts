@@ -1,4 +1,7 @@
-import { OP_PICKONE } from "../../../../../../shared/defs/constants";
+import {
+  OP_LITERAL,
+  OP_PICKONE,
+} from "../../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
@@ -31,13 +34,20 @@ export const opsClient = () => {
     const { kind: childrenKind } = children as ObjTemplateChildren;
     console.log(`opsClient::${name}:pre childrenKind: ${childrenKind}`);
 
-    const names = ["A", "B", "C"];
-    const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
-      names: names,
-    });
-    if (errorUpdateQueryObject) {
-      return { error: errorUpdateQueryObject, nextSidCursor: null };
+    if (childrenKind === OP_LITERAL) {
+      const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
+        childNames: ["Mango", "Guava", "Apple"],
+      });
+      if (errorUpdateQueryObject) {
+        return { error: errorUpdateQueryObject, nextSidCursor: null };
+      }
     }
+
+    // const names = ["A", "B", "C"];
+
+    // const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
+    //   names: names,
+    // });
 
     const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 
