@@ -2,6 +2,7 @@ import { OP_PICKONE } from "../../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
+import { fnUpdateQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 import { fnRetrieveQueryObject } from "../../../ui-common/_support";
 
 const name = OP_PICKONE;
@@ -25,9 +26,18 @@ export const opsClient = () => {
 
     interface ObjTemplateChildren {
       kind?: string;
+      sid?: string;
     }
     const { kind: childrenKind } = children as ObjTemplateChildren;
     console.log(`opsClient::${name}:pre childrenKind: ${childrenKind}`);
+
+    const names = ["A", "B", "C"];
+    const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
+      names: names,
+    });
+    if (errorUpdateQueryObject) {
+      return { error: errorUpdateQueryObject, nextSidCursor: null };
+    }
 
     const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 
