@@ -10,12 +10,13 @@ export function fnInfixTraversal<O>(
     indent?: number;
     matchingKeys?: string[] | null;
     matchingValue?: Str;
+    updateInfo?: unknown;
   }
 ): {
   error: Str;
   retList: O[];
 } {
-  const { indent, matchingKeys, matchingValue } = options || {};
+  const { indent, matchingKeys, matchingValue, updateInfo } = options || {};
 
   const accumulator: O[] = [];
   function _fnRunInfix(
@@ -49,7 +50,8 @@ export function fnInfixTraversal<O>(
                 queryFragment,
                 k,
                 val,
-                indent
+                indent,
+                updateInfo
               );
               if (error) {
                 return { error };

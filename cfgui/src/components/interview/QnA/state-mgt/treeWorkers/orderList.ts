@@ -8,7 +8,6 @@ export const fnGatherOrderSequences: FnNodeProcessor<string[] | null> = (
   _key: string,
   value: JsonObjectType | null
 ): { error: Str; returnObj: string[] | null } => {
-  // console.log(`${key}: ${JSON.stringify(value)}`);
   if (value === null || !Array.isArray(value)) {
     return { error: "Value is null or not an array", returnObj: null };
   }

@@ -3,7 +3,10 @@ import { JsonObjectType } from "../../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 import { valtioStore } from "../../defs/types/ValtioTypes";
 import { fnInfixTraversal } from "../treeTraversal/inTraversal";
-import { fnRetrieveQueryFragment } from "../treeWorkers/queryFragment";
+import {
+  fnRetrieveQueryFragment,
+  fnUpsertQueryFragment,
+} from "../treeWorkers/queryFragment";
 
 // Define a function for error logging
 function logError(error: string): void {
@@ -35,6 +38,28 @@ export const fnGetQueryObject = (
   }
   const queryObject = retList[0];
   return { error: null, queryObject };
+};
+
+export const fnUpdateQueryObject = (
+  sidCursor: string,
+  updateInfo: { [key: string]: JsonObjectType }
+): { error: Str } => {
+  console.log("fnUpdateQueryObject: updateInfo", updateInfo);
+  const { error } = fnInfixTraversal<JsonObjectType>(
+    fnUpsertQueryFragment,
+    valtioStore.queryContext as JsonObjectType,
+    {
+      matchingKeys: [KEY_SID],
+      matchingValue: sidCursor,
+      updateInfo,
+    }
+  );
+  if (error) {
+    // Log the error
+    return { error: error };
+  }
+
+  return { error: null };
 };
 
 export const fnGetQueryAttribute = (
