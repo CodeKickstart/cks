@@ -31,14 +31,9 @@ export const fnFindChildNames = (
   interface ObjTemplateChildren {
     defval?: { [key: string]: string };
     kind?: string;
-    sid?: string;
-    children?: JsonObjectType;
   }
-  const {
-    kind: childrenKind,
-    defval: childrenDefval,
-    children: grandChildren,
-  } = children as ObjTemplateChildren;
+  const { kind: childrenKind, defval: childrenDefval } =
+    children as ObjTemplateChildren;
 
   if (childrenKind === OP_LITERAL) {
     if (childrenDefval) {
@@ -50,17 +45,7 @@ export const fnFindChildNames = (
       }
     }
   } else {
-    if (grandChildren === undefined || typeof grandChildren !== "object") {
-      const error = `fnFindChildNames: grandChildren is invalid`;
-      return { error, childNames: [] };
-    }
-    interface ObjTemplateGrandChildren {
-      [key: string]: unknown;
-    }
-    const grandChildrenKeys = Object.keys(
-      grandChildren as ObjTemplateGrandChildren
-    );
-    childrenData = grandChildrenKeys as string[];
+    childrenData = Object.keys(children);
   }
 
   return { error: null, childNames: childrenData };
