@@ -3,7 +3,7 @@ import { JsonObjectType } from "../../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 import { fnUpdateQueryObject } from "../../state-mgt/dataAccess/loLevelAccess";
 
-export const fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
+const _fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
   interface ObjTemplate {
     children?: string;
     sid?: string;
@@ -30,23 +30,7 @@ export const fnFindAndStoreSelectableChildNames = (
   }
   let childrenData: string[] = [];
 
-  // interface ObjTemplate {
-  //   children?: string;
-  //   sid?: string;
-  // }
-  // const { children, sid } = parentQueryObj as ObjTemplate;
-
-  // if (
-  //   !children ||
-  //   typeof children !== "object" ||
-  //   !sid ||
-  //   typeof sid !== "string"
-  // ) {
-  //   const error = `fnFindAndStoreSelectableChildNames: children or sidCursor is invalid`;
-  //   return { error, childNames: [] };
-  // }
-
-  const { children, sid } = fnDestructureJsonObj(parentQueryObj);
+  const { children, sid } = _fnDestructureJsonObj(parentQueryObj);
   if (!children || !sid) {
     const error = `fnFindAndStoreSelectableChildNames: children or sidCursor is invalid`;
     return { error, childNames: [] };
