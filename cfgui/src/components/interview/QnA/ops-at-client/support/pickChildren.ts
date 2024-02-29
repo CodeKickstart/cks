@@ -3,6 +3,24 @@ import { JsonObjectType } from "../../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 import { fnUpdateQueryObject } from "../../state-mgt/dataAccess/loLevelAccess";
 
+export const fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
+  interface ObjTemplate {
+    children?: string;
+    sid?: string;
+  }
+  const { children, sid } = jsonObj as ObjTemplate;
+
+  if (
+    !children ||
+    typeof children !== "object" ||
+    !sid ||
+    typeof sid !== "string"
+  ) {
+    return { children: undefined, sid: undefined };
+  }
+  return { children, sid };
+};
+
 export const fnFindAndStoreSelectableChildNames = (
   parentQueryObj: JsonObjectType
 ): { error: Str; childNames: string[] } => {
