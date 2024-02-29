@@ -32,9 +32,13 @@ export const fnFindChildNames = (
     defval?: { [key: string]: string };
     kind?: string;
     sid?: string;
+    children?: JsonObjectType;
   }
-  const { kind: childrenKind, defval: childrenDefval } =
-    children as ObjTemplateChildren;
+  const {
+    kind: childrenKind,
+    defval: childrenDefval,
+    children: grandChildren,
+  } = children as ObjTemplateChildren;
 
   if (childrenKind === OP_LITERAL) {
     if (childrenDefval) {
@@ -44,6 +48,11 @@ export const fnFindChildNames = (
       if (errorUpdateQueryObject) {
         return { error: errorUpdateQueryObject, childNames: [] };
       }
+    }
+  } else {
+    if (grandChildren === undefined || typeof grandChildren !== "object") {
+      const error = `fnFindChildNames: grandChildren is invalid`;
+      return { error, childNames: [] };
     }
   }
 
