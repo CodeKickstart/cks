@@ -21,20 +21,8 @@ const _fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
   return { children, sid };
 };
 
-export const fnFindAndStoreSelectableChildNames = (
-  parentQueryObj: JsonObjectType
-): { error: Str; childNames: string[] } => {
-  if (Array.isArray(parentQueryObj)) {
-    const error = `fnFindAndStoreSelectableChildNames: parentQueryObj is an array`;
-    return { error, childNames: [] };
-  }
+export const fnFindChildrenNames = (children: JsonObjectType) => {
   let childrenData: string[] = [];
-
-  const { children, sid } = _fnDestructureJsonObj(parentQueryObj);
-  if (!children || !sid) {
-    const error = `fnFindAndStoreSelectableChildNames: children or sidCursor is invalid`;
-    return { error, childNames: [] };
-  }
 
   interface ObjTemplateChildren {
     defval?: { [key: string]: string };
@@ -47,9 +35,43 @@ export const fnFindAndStoreSelectableChildNames = (
     if (childrenDefval) {
       childrenData = Object.values(childrenDefval);
     }
-  } else {
+  } else if (children) {
     childrenData = Object.keys(children);
   }
+  return childrenData;
+};
+
+export const fnFindAndStoreSelectableChildNames = (
+  parentQueryObj: JsonObjectType
+): { error: Str; childNames: string[] } => {
+  if (Array.isArray(parentQueryObj)) {
+    const error = `fnFindAndStoreSelectableChildNames: parentQueryObj is an array`;
+    return { error, childNames: [] };
+  }
+  // let childrenData: string[] = [];
+
+  const { children, sid } = _fnDestructureJsonObj(parentQueryObj);
+  if (!children || !sid) {
+    const error = `fnFindAndStoreSelectableChildNames: children or sidCursor is invalid`;
+    return { error, childNames: [] };
+  }
+
+  const childrenData = fnFindChildrenNames(children);
+
+  // interface ObjTemplateChildren {
+  //   defval?: { [key: string]: string };
+  //   kind?: string;
+  // }
+  // const { kind: childrenKind, defval: childrenDefval } =
+  //   children as ObjTemplateChildren;
+
+  // if (childrenKind === OP_LITERAL) {
+  //   if (childrenDefval) {
+  //     childrenData = Object.values(childrenDefval);
+  //   }
+  // } else {
+  //   childrenData = Object.keys(children);
+  // }
   const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sid, {
     childNames: childrenData,
   });
