@@ -30,18 +30,24 @@ export const fnFindAndStoreSelectableChildNames = (
   }
   let childrenData: string[] = [];
 
-  interface ObjTemplate {
-    children?: string;
-    sid?: string;
-  }
-  const { children, sid } = parentQueryObj as ObjTemplate;
+  // interface ObjTemplate {
+  //   children?: string;
+  //   sid?: string;
+  // }
+  // const { children, sid } = parentQueryObj as ObjTemplate;
 
-  if (
-    !children ||
-    typeof children !== "object" ||
-    !sid ||
-    typeof sid !== "string"
-  ) {
+  // if (
+  //   !children ||
+  //   typeof children !== "object" ||
+  //   !sid ||
+  //   typeof sid !== "string"
+  // ) {
+  //   const error = `fnFindAndStoreSelectableChildNames: children or sidCursor is invalid`;
+  //   return { error, childNames: [] };
+  // }
+
+  const { children, sid } = fnDestructureJsonObj(parentQueryObj);
+  if (!children || !sid) {
     const error = `fnFindAndStoreSelectableChildNames: children or sidCursor is invalid`;
     return { error, childNames: [] };
   }
