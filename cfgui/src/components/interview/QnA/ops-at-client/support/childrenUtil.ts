@@ -3,7 +3,7 @@ import { JsonObjectType } from "../../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 import { fnUpdateQueryObject } from "../../state-mgt/dataAccess/loLevelAccess";
 
-export const fnFindChildrenNames = (children: JsonObjectType) => {
+export const fnFindChildrenNames = (jsonObject: JsonObjectType) => {
   let namesOfChildren: string[] = [];
 
   interface ObjTemplateChildren {
@@ -11,14 +11,14 @@ export const fnFindChildrenNames = (children: JsonObjectType) => {
     kind?: string;
   }
   const { kind: childrenKind, defval: childrenDefval } =
-    children as ObjTemplateChildren;
+    jsonObject as ObjTemplateChildren;
 
   if (childrenKind === OP_LITERAL) {
     if (childrenDefval) {
       namesOfChildren = Object.values(childrenDefval);
     }
-  } else if (children) {
-    namesOfChildren = Object.keys(children);
+  } else if (jsonObject) {
+    namesOfChildren = Object.keys(jsonObject);
   }
   return namesOfChildren;
 };
