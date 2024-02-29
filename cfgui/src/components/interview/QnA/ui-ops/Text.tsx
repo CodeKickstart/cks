@@ -31,11 +31,17 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
   }, [answer, onResponse, sidCursor]);
 
   useEffect(() => {
-    const { defval, sid } = queryObject || {};
+    // const { defval, sid } = queryObject || {};
+    interface ObjTemplate {
+      defval?: number;
+      sid?: string;
+    }
+
+    const { defval, sid } = (queryObject || {}) as ObjTemplate;
 
     setSidCursor(sid as string);
 
-    if (defval) {
+    if (defval !== undefined && typeof defval === "string") {
       setAnswer(defval as string);
     }
 

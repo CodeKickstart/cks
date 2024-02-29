@@ -38,7 +38,7 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
 
     setSidCursor(sid as string);
 
-    if (defval !== undefined) {
+    if (defval !== undefined && typeof defval === "number") {
       setAnswer(defval as number);
     }
 

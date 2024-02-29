@@ -39,7 +39,7 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
 
     setSidCursor(sid as string);
 
-    if (defval !== undefined) {
+    if (defval !== undefined && typeof defval === "number") {
       setAnswer(defval as number); // Updated for number type
     }
 
@@ -80,7 +80,7 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
         value={answer !== null ? answer.toString() : ""}
         onChange={(e) => setAnswer(parseInt(e.target.value))}
       />
-      {/* Button */}
+      <div className='flex-grow' />
       <button
         className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
           !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""

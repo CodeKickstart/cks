@@ -38,7 +38,7 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
 
     setSidCursor(sid as string);
 
-    if (defval !== undefined) {
+    if (defval !== undefined && typeof defval === "boolean") {
       setAnswer(defval as boolean);
     }
 
@@ -94,7 +94,6 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
           <span className='ml-2'>False</span>
         </label>
       </div>
-
       <div className='flex-grow' />
       <div>
         <button
