@@ -15,7 +15,6 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null); // Updated state name to 'answer'
   const [sidCursor, setSidCursor] = useState<string>("");
 
-  // let childNames: { [key: string]: string } | undefined;
   interface ObjTemplate {
     childNames?: { [key: string]: string };
   }
@@ -24,8 +23,6 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
     throw new Error("Failed to retrieve query object");
   }
   const listOfChildNames = Object.values(childNames);
-
-  // [("Mango", "Guava", "Apple")]; // Define the array of fruits
 
   const handleEnter = useCallback(() => {
     if (answer !== null) {

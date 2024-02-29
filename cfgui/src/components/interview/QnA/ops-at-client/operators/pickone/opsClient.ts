@@ -1,12 +1,9 @@
-import {
-  OP_LITERAL,
-  OP_PICKONE,
-} from "../../../../../../shared/defs/constants";
+import { OP_PICKONE } from "../../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
-import { fnUpdateQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 import { fnRetrieveQueryObject } from "../../../ui-common/_support";
+import { fnFindChildNames } from "../../support/children";
 
 const name = OP_PICKONE;
 export const opsClient = () => {
@@ -21,33 +18,12 @@ export const opsClient = () => {
     if (!queryObject) {
       throw new Error("Failed to retrieve query object");
     }
-    interface ObjTemplate {
-      children?: string;
+    const { error: errorFindChildNames, childNames } =
+      fnFindChildNames(queryObject);
+    if (errorFindChildNames) {
+      return { error: errorFindChildNames, nextSidCursor: null };
     }
-
-    const { children } = queryObject as ObjTemplate;
-
-    interface ObjTemplateChildren {
-      defval?: { [key: string]: string };
-      kind?: string;
-      sid?: string;
-    }
-    const { kind: childrenKind, defval: childrenDefval } =
-      children as ObjTemplateChildren;
-
-    if (childrenKind === OP_LITERAL) {
-      if (childrenDefval) {
-        const { error: errorUpdateQueryObject } = fnUpdateQueryObject(
-          sidCursor,
-          {
-            childNames: childrenDefval,
-          }
-        );
-        if (errorUpdateQueryObject) {
-          return { error: errorUpdateQueryObject, nextSidCursor: null };
-        }
-      }
-    }
+    console.log(`opsClient::${name}:pre childNames: ${childNames}`);
 
     const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 
