@@ -39,23 +39,14 @@ export const fnFindAndStoreSelectableChildNames = (
     if (childrenDefval) {
       childrenData = Object.values(childrenDefval);
     }
-    if (childrenDefval) {
-      const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
-        childNames: childrenData,
-      });
-      if (errorUpdateQueryObject) {
-        return { error: errorUpdateQueryObject, childNames: [] };
-      }
-    }
   } else {
     childrenData = Object.keys(children);
-
-    const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
-      childNames: childrenData,
-    });
-    if (errorUpdateQueryObject) {
-      return { error: errorUpdateQueryObject, childNames: [] };
-    }
+  }
+  const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
+    childNames: childrenData,
+  });
+  if (errorUpdateQueryObject) {
+    return { error: errorUpdateQueryObject, childNames: [] };
   }
 
   return { error: null, childNames: childrenData };
