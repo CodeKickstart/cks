@@ -8,8 +8,10 @@ export const fnRetrieveQueryFragment: FnNodeProcessor<JsonObjectType> = (
 };
 
 export const fnUpsertQueryFragment: FnNodeProcessor<JsonObjectType> = (
-  queryFragment: JsonObjectType
+  queryFragment: JsonObjectType,
+  updateInfo: JsonObjectType
 ) => {
-  console.log("fnUpsertQueryFragment: ", queryFragment);
+  console.log("fnUpsertQueryFragment: updateInfo", updateInfo);
+  console.log("fnUpsertQueryFragment: queryFragment", queryFragment);
   return { error: null };
 };
