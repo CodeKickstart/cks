@@ -11,11 +11,20 @@ interface Props {
 const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 
-const options = ["Guava", "Mango", "Apple"];
+// const options = ["Guava", "Mango", "Apple"];
 
 const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number[] | null>(null); // Updated state name to 'answer'
   const [sidCursor, setSidCursor] = useState<string>("");
+
+  interface ObjTemplate {
+    childNames?: { [key: string]: string };
+  }
+  const { childNames } = queryObject as ObjTemplate;
+  if (childNames === undefined || typeof childNames !== "object") {
+    throw new Error("Failed to retrieve query object");
+  }
+  const listOfChildNames = Object.values(childNames);
 
   const handleEnter = useCallback(() => {
     if (answer !== null) {
@@ -81,7 +90,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     <div className='flex flex-col'>
       <h2 className='font-semibold mb-4'>Select one or more options:</h2>
       <ul className='space-y-1 flex-grow'>
-        {options.map((option, index) => (
+        {listOfChildNames.map((option, index) => (
           <li key={index}>
             <label className='flex items-center'>
               <input

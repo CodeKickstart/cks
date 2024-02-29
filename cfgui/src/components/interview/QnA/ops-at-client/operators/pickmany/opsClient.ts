@@ -2,6 +2,8 @@ import { OP_PICKMANY } from "../../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
+import { fnRetrieveQueryObject } from "../../../ui-common/_support";
+import { fnFindChildNames } from "../../support/children";
 
 const name = OP_PICKMANY;
 export const opsClient = () => {
@@ -11,7 +13,16 @@ export const opsClient = () => {
     error: Str;
     nextSidCursor: Str;
   } => {
-    console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
+    const queryObject = fnRetrieveQueryObject();
+    if (!queryObject) {
+      throw new Error("Failed to retrieve query object");
+    }
+    const { error: errorFindChildNames, childNames } =
+      fnFindChildNames(queryObject);
+    if (errorFindChildNames) {
+      return { error: errorFindChildNames, nextSidCursor: null };
+    }
+    console.log(`opsClient::${name}:pre childNames: ${childNames}`);
 
     const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 

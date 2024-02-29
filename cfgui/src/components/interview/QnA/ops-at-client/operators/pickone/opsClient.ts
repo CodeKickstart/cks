@@ -13,7 +13,6 @@ export const opsClient = () => {
     error: Str;
     nextSidCursor: Str;
   } => {
-    console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
     const queryObject = fnRetrieveQueryObject();
     if (!queryObject) {
       throw new Error("Failed to retrieve query object");
