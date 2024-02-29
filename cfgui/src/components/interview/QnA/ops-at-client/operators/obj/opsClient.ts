@@ -28,7 +28,7 @@ export const opsClient = () => {
     nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
-    return { error: null, nextSidCursor: null }; // Provide a default value for queryObject if necessary
+    return { error: null, nextSidCursor: null };
   };
 
   return { fnPreProcess, fnPostProcess };
