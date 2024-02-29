@@ -10,7 +10,7 @@ export const fnFindChildNames = (
     const error = `fnFindChildNames: parentQueryObj is an array`;
     return { error, childNames: [] };
   }
-  const childrenData: string[] = [];
+  let childrenData: string[] = [];
 
   interface ObjTemplate {
     children?: string;
@@ -54,8 +54,14 @@ export const fnFindChildNames = (
       const error = `fnFindChildNames: grandChildren is invalid`;
       return { error, childNames: [] };
     }
+    interface ObjTemplateGrandChildren {
+      [key: string]: unknown;
+    }
+    const grandChildrenKeys = Object.keys(
+      grandChildren as ObjTemplateGrandChildren
+    );
+    childrenData = grandChildrenKeys as string[];
   }
 
   return { error: null, childNames: childrenData };
 };
-// Compare this snippet from cfgui/src/components/interview/QnA/state-mgt/dataAccess/loLevelAccess.ts:
