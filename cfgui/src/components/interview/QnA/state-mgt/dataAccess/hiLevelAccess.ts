@@ -1,14 +1,15 @@
 import {
   KEY_BLOCKED,
   KEY_OVERRIDE,
-  KEY_VAL,
 } from "../../../../../shared/defs/constants";
 import { Str } from "../../defs/types/Str";
 import { fnSplitCursor } from "../../misc/strings";
 import { fnGetAllPreOrderCursors } from "../cursor/cursor";
 import { fnGetQueryAttribute } from "./loLevelAccess";
 
-export const fnGetAllPreOrderAnswers = (): {
+export const fnGetAllPreOrderAnswers = (
+  key: string
+): {
   error: Str;
   answers: string[] | null;
 } => {
@@ -35,7 +36,7 @@ export const fnGetAllPreOrderAnswers = (): {
       }
 
       if (!override && !blocked) {
-        const { error, value } = fnGetQueryAttribute(sidCursor, KEY_VAL);
+        const { error, value } = fnGetQueryAttribute(sidCursor, key);
         if (error) {
           return { error, answers: null };
         }
