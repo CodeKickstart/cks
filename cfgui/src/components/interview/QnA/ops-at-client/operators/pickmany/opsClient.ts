@@ -3,7 +3,7 @@ import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
 import { fnRetrieveQueryObject } from "../../../ui-common/_support";
-import { fnFindChildNames } from "../../support/children";
+import { fnFindAndStoreSelectableChildNames } from "../../support/children";
 
 const name = OP_PICKMANY;
 export const opsClient = () => {
@@ -18,7 +18,7 @@ export const opsClient = () => {
       throw new Error("Failed to retrieve query object");
     }
     const { error: errorFindChildNames, childNames } =
-      fnFindChildNames(queryObject);
+      fnFindAndStoreSelectableChildNames(queryObject);
     if (errorFindChildNames) {
       return { error: errorFindChildNames, nextSidCursor: null };
     }

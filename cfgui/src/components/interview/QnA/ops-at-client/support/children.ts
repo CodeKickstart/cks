@@ -3,11 +3,11 @@ import { JsonObjectType } from "../../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 import { fnUpdateQueryObject } from "../../state-mgt/dataAccess/loLevelAccess";
 
-export const fnFindChildNames = (
+export const fnFindAndStoreSelectableChildNames = (
   parentQueryObj: JsonObjectType
 ): { error: Str; childNames: string[] } => {
   if (Array.isArray(parentQueryObj)) {
-    const error = `fnFindChildNames: parentQueryObj is an array`;
+    const error = `fnFindAndStoreSelectableChildNames: parentQueryObj is an array`;
     return { error, childNames: [] };
   }
   let childrenData: string[] = [];
@@ -24,7 +24,7 @@ export const fnFindChildNames = (
     !sidCursor ||
     typeof sidCursor !== "string"
   ) {
-    const error = `fnFindChildNames: children or sidCursor is invalid`;
+    const error = `fnFindAndStoreSelectableChildNames: children or sidCursor is invalid`;
     return { error, childNames: [] };
   }
 
