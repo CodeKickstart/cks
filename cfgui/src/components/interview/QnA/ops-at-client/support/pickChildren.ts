@@ -58,20 +58,6 @@ export const fnFindAndStoreSelectableChildNames = (
 
   const childrenData = fnFindChildrenNames(children);
 
-  // interface ObjTemplateChildren {
-  //   defval?: { [key: string]: string };
-  //   kind?: string;
-  // }
-  // const { kind: childrenKind, defval: childrenDefval } =
-  //   children as ObjTemplateChildren;
-
-  // if (childrenKind === OP_LITERAL) {
-  //   if (childrenDefval) {
-  //     childrenData = Object.values(childrenDefval);
-  //   }
-  // } else {
-  //   childrenData = Object.keys(children);
-  // }
   const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sid, {
     childNames: childrenData,
   });
