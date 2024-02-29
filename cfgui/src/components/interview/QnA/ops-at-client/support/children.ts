@@ -35,6 +35,7 @@ export const fnFindAndStoreSelectableChildNames = (
   const { kind: childrenKind, defval: childrenDefval } =
     children as ObjTemplateChildren;
 
+  let childrenDataObject: { childNames: string[] } = { childNames: [] };
   if (childrenKind === OP_LITERAL) {
     if (childrenDefval) {
       const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
@@ -46,6 +47,13 @@ export const fnFindAndStoreSelectableChildNames = (
     }
   } else {
     childrenData = Object.keys(children);
+    childrenDataObject = { childNames: childrenData };
+    const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sidCursor, {
+      childNames: childrenDataObject,
+    });
+    if (errorUpdateQueryObject) {
+      return { error: errorUpdateQueryObject, childNames: [] };
+    }
   }
 
   return { error: null, childNames: childrenData };
