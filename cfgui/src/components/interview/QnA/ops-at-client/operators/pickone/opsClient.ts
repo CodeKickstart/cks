@@ -3,7 +3,7 @@ import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
 import { fnRetrieveQueryObject } from "../../../ui-common/_support";
-import { fnFindAndStoreSelectableChildNames } from "../../support/children";
+import { fnFindAndStoreSelectableChildNames } from "../../support/pickChildren";
 
 const name = OP_PICKONE;
 export const opsClient = () => {
