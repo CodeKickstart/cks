@@ -11,9 +11,9 @@ export const fnGetAllPreOrderAnswers = <T>(
   key: string
 ): {
   error: Str;
-  answers: T[] | null;
+  results: T[] | null;
 } => {
-  const answers: T[] = [];
+  const results: T[] = [];
   for (const cursor of fnGetAllPreOrderCursors()) {
     if (cursor !== null) {
       const { sidCursor } = fnSplitCursor(cursor);
@@ -23,7 +23,7 @@ export const fnGetAllPreOrderAnswers = <T>(
         KEY_BLOCKED
       );
       if (errorBlocked) {
-        return { error: errorBlocked, answers: null };
+        return { error: errorBlocked, results: null };
       }
 
       const { error: errorOverride, value: override } = fnGetQueryAttribute(
@@ -32,18 +32,20 @@ export const fnGetAllPreOrderAnswers = <T>(
       );
 
       if (errorOverride) {
-        return { error: errorOverride, answers: null };
+        return { error: errorOverride, results: null };
       }
 
       if (!override && !blocked) {
         const { error, value } = fnGetQueryAttribute(sidCursor, key);
         if (error) {
-          return { error, answers: null };
+          return { error, results: null };
         }
-        answers.push(value as T);
+        if (value) {
+          results.push(value as T);
+        }
       }
     }
   }
 
-  return { error: null, answers };
+  return { error: null, results: results };
 };
