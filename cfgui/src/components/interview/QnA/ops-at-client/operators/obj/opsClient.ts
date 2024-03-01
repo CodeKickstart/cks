@@ -2,7 +2,7 @@ import { OP_OBJ } from "../../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
-import { fnFindChildrenNames } from "../../support/childrenUtil";
+import { fnFindChildrenNamesFromSid } from "../../support/childrenUtil";
 
 const name = OP_OBJ;
 export const opsClient = () => {
@@ -29,7 +29,8 @@ export const opsClient = () => {
     nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
-    // const namesOfChildren = fnFindChildrenNames()
+    const namesOfChildren = fnFindChildrenNamesFromSid(sidCursor);
+    console.log(`opsClient::${name}:post namesOfChildren: ${namesOfChildren}`);
     return { error: null, nextSidCursor: null };
   };
 
