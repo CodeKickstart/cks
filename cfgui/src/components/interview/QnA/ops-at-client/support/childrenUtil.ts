@@ -37,22 +37,39 @@ export const fnFindChildrenNamesFromSid = (sid: string) => {
   return fnFindChildrenNames(namesOfChildren);
 };
 
-export const fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
-  interface ObjTemplate {
-    children?: string;
-    sid?: string;
-  }
-  const { children, sid } = jsonObj as ObjTemplate;
+// export const fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
+//   interface ObjTemplate {
+//     children?: string;
+//     sid?: string;
+//   }
+//   const { children, sid } = jsonObj as ObjTemplate;
 
-  if (
-    !children ||
-    typeof children !== "object" ||
-    !sid ||
-    typeof sid !== "string"
-  ) {
-    return { children: undefined, sid: undefined };
-  }
-  return { children, sid };
+//   if (
+//     !children ||
+//     typeof children !== "object" ||
+//     !sid ||
+//     typeof sid !== "string"
+//   ) {
+//     return { children: undefined, sid: undefined };
+//   }
+//   return { children, sid };
+// };
+
+// Import JsonObjectType from your types file
+
+// Define a generic function that takes a generic type T
+export const fnDestructureJsonObj = <T extends Record<string, unknown>>(
+  jsonObj: T,
+  keyNames: (keyof T)[]
+) => {
+  const result: Partial<T> = {}; // Use Partial<T> to allow undefined values
+
+  // Iterate through the provided keyNames
+  keyNames.forEach((key) => {
+    result[key] = jsonObj[key]; // Assign the value from jsonObj to the result object
+  });
+
+  return result; // Return the result object
 };
 
 export const fnFindAndStoreSelectablenamesOfChildren = (
@@ -62,14 +79,25 @@ export const fnFindAndStoreSelectablenamesOfChildren = (
     const error = `fnFindAndStoreSelectablenamesOfChildren: parentQueryObj is an array`;
     return { error, namesOfChildren: [] };
   }
+  const keyNames = ["children", "sid"];
 
-  const { children, sid } = fnDestructureJsonObj(parentQueryObj);
+  if (!parentQueryObj || typeof parentQueryObj !== "object") {
+    const error = `fnFindAndStoreSelectablenamesOfChildren: parentQueryObj is invalid`;
+    return { error, namesOfChildren: [] };
+  }
+  const { children, sid } = fnDestructureJsonObj(parentQueryObj, keyNames);
+  // const { children, sid } = fnDestructureJsonObj(parentQueryObj);
   if (!children || !sid) {
     const error = `fnFindAndStoreSelectablenamesOfChildren: children or sidCursor is invalid`;
     return { error, namesOfChildren: [] };
   }
 
   const namesOfChildren = fnFindChildrenNames(children);
+
+  if (typeof sid !== "string") {
+    const error = `fnFindAndStoreSelectablenamesOfChildren: sid is invalid`;
+    return { error, namesOfChildren: [] };
+  }
 
   const { error: errorUpdateQueryObject } = fnUpdateQueryObject(sid, {
     namesOfChildren,
