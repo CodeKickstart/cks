@@ -37,6 +37,24 @@ export const fnFindChildrenNamesFromSid = (sid: string) => {
   return fnFindChildrenNames(namesOfChildren);
 };
 
+export const fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
+  interface ObjTemplate {
+    children?: string;
+    sid?: string;
+  }
+  const { children, sid } = jsonObj as ObjTemplate;
+
+  if (
+    !children ||
+    typeof children !== "object" ||
+    !sid ||
+    typeof sid !== "string"
+  ) {
+    return { children: undefined, sid: undefined };
+  }
+  return { children, sid };
+};
+
 export const fnFindAndStoreSelectablenamesOfChildren = (
   parentQueryObj: JsonObjectType
 ): { error: Str; namesOfChildren: string[] } => {
@@ -44,25 +62,8 @@ export const fnFindAndStoreSelectablenamesOfChildren = (
     const error = `fnFindAndStoreSelectablenamesOfChildren: parentQueryObj is an array`;
     return { error, namesOfChildren: [] };
   }
-  const _fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
-    interface ObjTemplate {
-      children?: string;
-      sid?: string;
-    }
-    const { children, sid } = jsonObj as ObjTemplate;
 
-    if (
-      !children ||
-      typeof children !== "object" ||
-      !sid ||
-      typeof sid !== "string"
-    ) {
-      return { children: undefined, sid: undefined };
-    }
-    return { children, sid };
-  };
-
-  const { children, sid } = _fnDestructureJsonObj(parentQueryObj);
+  const { children, sid } = fnDestructureJsonObj(parentQueryObj);
   if (!children || !sid) {
     const error = `fnFindAndStoreSelectablenamesOfChildren: children or sidCursor is invalid`;
     return { error, namesOfChildren: [] };
