@@ -1,3 +1,5 @@
+import { KIND_ERROR } from "../defs/constants/ComponentNames";
+import { fnDispatchOp } from "../ops-at-client/support/opsDispatcher";
 import {
   fnCursorInitForResponse,
   fnGetAllPostOrderCursors,
@@ -8,6 +10,13 @@ export const fnSetupForResponse = () => {
 
   for (const cursor of fnGetAllPostOrderCursors()) {
     console.log(cursor);
+    if (!cursor) {
+      return { error: "fnSetupForResponse: cursor is null" };
+    }
+    const { error } = fnDispatchOp(cursor);
+    if (error) {
+      return { error, nextKind: KIND_ERROR };
+    }
   }
 
   return { error: null };
