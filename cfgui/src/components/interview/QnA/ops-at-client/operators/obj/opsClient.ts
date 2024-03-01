@@ -2,7 +2,8 @@ import { OP_OBJ } from "../../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
-import { fnFindChildrenNamesFromSid } from "../../../utils/children";
+
+import { fnPostProcessObj } from "./postProcess";
 
 const name = OP_OBJ;
 export const opsClient = () => {
@@ -29,9 +30,11 @@ export const opsClient = () => {
     nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
-    const descendantNames = fnFindChildrenNamesFromSid(sidCursor);
-    console.log(`opsClient::${name}:post descendantNames: ${descendantNames}`);
-    return { error: null, nextSidCursor: null };
+    // const descendantNames = fnFindChildrenNamesFromSid(sidCursor);
+    // console.log(`opsClient::${name}:post descendantNames: ${descendantNames}`);
+    const { error } = fnPostProcessObj(sidCursor);
+
+    return { error, nextSidCursor: null };
   };
 
   return { fnPreProcess, fnPostProcess };
