@@ -1,4 +1,4 @@
-import { fnDispatchOp } from "../ops-at-client/support/opsDispatcher";
+import { fnDispatchOp } from "../utils/opsDispatcher";
 import { KIND_ERROR, KIND_FINISH } from "../defs/constants/ComponentNames";
 // import { fnCursorMove } from "../storeLogic/cursor/cursor";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";

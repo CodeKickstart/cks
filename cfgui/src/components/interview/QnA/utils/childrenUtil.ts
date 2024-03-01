@@ -1,10 +1,10 @@
-import { OP_LITERAL } from "../../../../../shared/defs/constants";
-import { JsonObjectType } from "../../../../../shared/defs/types";
-import { Str } from "../../defs/types/Str";
+import { OP_LITERAL } from "../../../../shared/defs/constants";
+import { JsonObjectType } from "../../../../shared/defs/types";
+import { Str } from "../defs/types/Str";
 import {
   fnGetQueryObject,
   fnUpdateQueryObject,
-} from "../../state-mgt/dataAccess/loLevelAccess";
+} from "../state-mgt/dataAccess/loLevelAccess";
 
 export const fnFindChildrenNames = (jsonObject: JsonObjectType) => {
   let namesOfChildren: string[] = [];
@@ -36,26 +36,6 @@ export const fnFindChildrenNamesFromSid = (sid: string) => {
 
   return fnFindChildrenNames(namesOfChildren);
 };
-
-// export const fnDestructureJsonObj = (jsonObj: JsonObjectType) => {
-//   interface ObjTemplate {
-//     children?: string;
-//     sid?: string;
-//   }
-//   const { children, sid } = jsonObj as ObjTemplate;
-
-//   if (
-//     !children ||
-//     typeof children !== "object" ||
-//     !sid ||
-//     typeof sid !== "string"
-//   ) {
-//     return { children: undefined, sid: undefined };
-//   }
-//   return { children, sid };
-// };
-
-// Import JsonObjectType from your types file
 
 // Define a generic function that takes a generic type T
 export const fnDestructureJsonObj = <T extends Record<string, unknown>>(

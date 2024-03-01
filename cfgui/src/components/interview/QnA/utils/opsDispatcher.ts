@@ -1,14 +1,14 @@
-import { fnGetQueryAttributeString } from "../../state-mgt/dataAccess/loLevelAccess";
+import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import {
   ASIS_post,
   ASIS_pre,
   KEY_KIND,
-} from "../../../../../shared/defs/constants";
+} from "../../../../shared/defs/constants";
 
 import { opsMap } from "./opsMap";
 // import { JsonObjectType } from "../../../../../shared/defs/types";
-import { fnSplitCursor } from "../../misc/strings";
-import { Str } from "../../defs/types/Str";
+import { fnSplitCursor } from "../misc/strings";
+import { Str } from "../defs/types/Str";
 
 export const fnDispatchOp = (
   cursor: string

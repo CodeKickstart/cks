@@ -1,5 +1,5 @@
 import { KIND_ERROR } from "../defs/constants/ComponentNames";
-import { fnDispatchOp } from "../ops-at-client/support/opsDispatcher";
+import { fnDispatchOp } from "../utils/opsDispatcher";
 import {
   fnCursorInitForResponse,
   fnGetAllPostOrderCursors,
