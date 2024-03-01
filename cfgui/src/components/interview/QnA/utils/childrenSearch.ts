@@ -39,25 +39,26 @@ export const fnFindChildrenNamesFromSid = (sid: string) => {
 };
 
 export const fnFindDescendantNames = (
-  queryObj: JsonObjectType
+  parentQueryObj: JsonObjectType
 ): { error: Str; descendantNames: string[] } => {
-  const descendantNames: string[] = [];
-  if (Array.isArray(queryObj)) {
+  if (Array.isArray(parentQueryObj)) {
     const error = `fnFindAndStoreDescendantNames: parentQueryObj is an array`;
     return { error, descendantNames: [] };
   }
   const keyNames = ["children", "sid"];
 
-  if (!queryObj || typeof queryObj !== "object") {
+  if (!parentQueryObj || typeof parentQueryObj !== "object") {
     const error = `fnFindAndStoreDescendantNames: parentQueryObj is invalid`;
     return { error, descendantNames: [] };
   }
-  const { children, sid } = fnDestructureJsonObj(queryObj, keyNames);
+  const { children, sid } = fnDestructureJsonObj(parentQueryObj, keyNames);
   // const { children, sid } = fnDestructureJsonObj(parentQueryObj);
   if (!children || !sid) {
     const error = `fnFindAndStoreDescendantNames: children or sidCursor is invalid`;
     return { error, descendantNames: [] };
   }
+
+  const descendantNames = fnFindChildrenNames(children);
   return { error: null, descendantNames };
 };
 
