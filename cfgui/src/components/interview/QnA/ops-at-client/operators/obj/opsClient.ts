@@ -2,7 +2,7 @@ import { OP_OBJ } from "../../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
-import { fnFindChildrenNamesFromSid } from "../../../utils/childrenUtil";
+import { fnFindChildrenNamesFromSid } from "../../../utils/childrenSearch";
 
 const name = OP_OBJ;
 export const opsClient = () => {

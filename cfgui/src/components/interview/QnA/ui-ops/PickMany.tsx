@@ -11,8 +11,6 @@ interface Props {
 const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 
-// const options = ["Guava", "Mango", "Apple"];
-
 const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number[] | null>(null); // Updated state name to 'answer'
   const [sidCursor, setSidCursor] = useState<string>("");
