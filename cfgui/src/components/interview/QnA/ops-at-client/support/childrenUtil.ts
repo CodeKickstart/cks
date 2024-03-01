@@ -1,7 +1,10 @@
 import { OP_LITERAL } from "../../../../../shared/defs/constants";
 import { JsonObjectType } from "../../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
-import { fnUpdateQueryObject } from "../../state-mgt/dataAccess/loLevelAccess";
+import {
+  fnGetQueryObject,
+  fnUpdateQueryObject,
+} from "../../state-mgt/dataAccess/loLevelAccess";
 
 export const fnFindChildrenNames = (jsonObject: JsonObjectType) => {
   let namesOfChildren: string[] = [];
@@ -21,6 +24,17 @@ export const fnFindChildrenNames = (jsonObject: JsonObjectType) => {
     namesOfChildren = Object.keys(jsonObject);
   }
   return namesOfChildren;
+};
+
+export const fnFindChildrenNamesFromSid = (sid: string) => {
+  const { error, queryObject } = fnGetQueryObject(sid);
+  if (error) {
+    return { error, namesOfChildren: [] };
+  }
+
+  const namesOfChildren = fnFindChildrenNames(queryObject);
+
+  return fnFindChildrenNames(namesOfChildren);
 };
 
 export const fnFindAndStoreSelectablenamesOfChildren = (
