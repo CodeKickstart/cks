@@ -29,8 +29,8 @@ export const opsClient = () => {
     nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
-    const namesOfChildren = fnFindChildrenNamesFromSid(sidCursor);
-    console.log(`opsClient::${name}:post namesOfChildren: ${namesOfChildren}`);
+    const descendantNames = fnFindChildrenNamesFromSid(sidCursor);
+    console.log(`opsClient::${name}:post descendantNames: ${descendantNames}`);
     return { error: null, nextSidCursor: null };
   };
 

@@ -16,13 +16,13 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [sidCursor, setSidCursor] = useState<string>("");
 
   interface ObjTemplate {
-    namesOfChildren?: { [key: string]: string };
+    descendantNames?: { [key: string]: string };
   }
-  const { namesOfChildren } = queryObject as ObjTemplate;
-  if (namesOfChildren === undefined || typeof namesOfChildren !== "object") {
+  const { descendantNames } = queryObject as ObjTemplate;
+  if (descendantNames === undefined || typeof descendantNames !== "object") {
     throw new Error("Failed to retrieve query object");
   }
-  const listOfnamesOfChildren = Object.values(namesOfChildren);
+  const listOfdescendantNames = Object.values(descendantNames);
 
   const handleEnter = useCallback(() => {
     if (answer !== null) {
@@ -88,7 +88,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     <div className='flex flex-col'>
       <h2 className='font-semibold mb-4'>Select one or more options:</h2>
       <ul className='space-y-1 flex-grow'>
-        {listOfnamesOfChildren.map((option, index) => (
+        {listOfdescendantNames.map((option, index) => (
           <li key={index}>
             <label className='flex items-center'>
               <input

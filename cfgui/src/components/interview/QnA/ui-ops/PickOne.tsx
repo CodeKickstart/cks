@@ -16,13 +16,13 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [sidCursor, setSidCursor] = useState<string>("");
 
   interface ObjTemplate {
-    namesOfChildren?: { [key: string]: string };
+    descendantNames?: { [key: string]: string };
   }
-  const { namesOfChildren } = queryObject as ObjTemplate;
-  if (namesOfChildren === undefined || typeof namesOfChildren !== "object") {
+  const { descendantNames } = queryObject as ObjTemplate;
+  if (descendantNames === undefined || typeof descendantNames !== "object") {
     throw new Error("Failed to retrieve query object");
   }
-  const listOfnamesOfChildren = Object.values(namesOfChildren);
+  const listOfdescendantNames = Object.values(descendantNames);
 
   const handleEnter = useCallback(() => {
     if (answer !== null) {
@@ -75,7 +75,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
         value={answer !== null ? answer : ""}
         onChange={(e) => setAnswer(parseInt(e.target.value))}>
         <option value=''>Select an option...</option>
-        {listOfnamesOfChildren.map((fruit, index) => (
+        {listOfdescendantNames.map((fruit, index) => (
           <option key={index} value={index}>
             {fruit}
           </option>

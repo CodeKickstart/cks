@@ -17,7 +17,7 @@ const Finish: React.FC = () => {
   }
 
   const { error: errorNameLists, results: childNameLists } =
-    fnGetAllPreOrderAnswers<string[]>("namesOfChildren");
+    fnGetAllPreOrderAnswers<string[]>("descendantNames");
   if (errorNameLists) {
     return <div>{errorNameLists}</div>;
   }
