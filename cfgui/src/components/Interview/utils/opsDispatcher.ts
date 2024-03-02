@@ -2,9 +2,9 @@ import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess
 import { ASIS_post, ASIS_pre, KEY_KIND } from "../../../shared/defs/constants";
 
 import { opsMap } from "./opsMap";
-// import { JsonObjectType } from "../../../../../shared/defs/types";
-import { fnSplitCursor } from "../misc/strings";
+
 import { Str } from "../defs/types/Str";
+import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 
 export const fnDispatchOp = (
   cursor: string

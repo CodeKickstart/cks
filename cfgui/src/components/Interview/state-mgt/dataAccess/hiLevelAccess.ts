@@ -1,9 +1,22 @@
 import { KEY_BLOCKED, KEY_OVERRIDE } from "../../../../shared/defs/constants";
 import { Str } from "../../defs/types/Str";
-import { fnSplitCursor } from "../../misc/strings";
+
 import { fnGetAllPreOrderCursors, fnGetCurrentCursor } from "../cursor/cursor";
 import { fnGetQueryAttribute, fnGetQueryObject } from "./loLevelAccess";
 
+export function fnSplitCursor(str: string): {
+  phase: string;
+  sidCursor: string;
+} {
+  const index = str.indexOf(".");
+  if (index !== -1) {
+    const phase = str.substring(0, index);
+    const sidCursor = str.substring(index + 1);
+    return { phase, sidCursor };
+  } else {
+    return { phase: "", sidCursor: str };
+  }
+}
 export const fnGetAllPreOrderAnswers = <T>(
   key: string
 ): {

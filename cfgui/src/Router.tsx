@@ -1,5 +1,5 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./pages/Header";
+import Footer from "./pages/Footer";
 import Contact from "./pages/Contact";
 
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";

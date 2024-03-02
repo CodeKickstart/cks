@@ -5,11 +5,12 @@ import {
   ASIS_prefixOrderList,
 } from "../../../shared/defs/constants";
 import { JsonObjectType } from "../../../shared/defs/types";
-import { fnSplitCursor } from "../misc/strings";
+
 import { fnCursorInitForInterview, fnGetCurrentCursor } from "./cursor/cursor";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { fnPostfixTraversal } from "./treeTraversal/postTraversal";
 import { fnGatherOrderSequences } from "./treeWorkers/orderList";
+import { fnSplitCursor } from "./dataAccess/hiLevelAccess";
 
 export const fnSetupForInterview = () => {
   function _fnLogArrayInfo(orderList: string[], startWith: string) {

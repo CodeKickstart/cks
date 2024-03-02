@@ -1,9 +1,10 @@
 import { Str } from "../defs/types/Str";
-import { fnSplitCursor } from "./strings";
+
 import {
   fnGetAllPreOrderCursors,
   fnSetLastQuestionIndex,
 } from "../state-mgt/cursor/cursor";
+import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 import { fnShouldSkipQuestion } from "./shouldSkipQuestion";
 
 export function fnComputeAndStoreLastQuestionIndex(): {
