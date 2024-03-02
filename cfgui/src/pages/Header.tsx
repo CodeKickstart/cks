@@ -10,7 +10,7 @@ export default function Header() {
         <a href='/contact-us' className='text-white mr-4'>
           Contact
         </a>
-        <a href='/about' className='text-white'>
+        <a href='/about-us' className='text-white'>
           About
         </a>
       </li>
