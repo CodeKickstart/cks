@@ -1,5 +1,5 @@
 import {
-  KEY_DVAL,
+  KEY_DEFVAL,
   KEY_VAL,
   OP_LITERAL,
 } from "../../../../../shared/defs/constants";
@@ -22,7 +22,7 @@ export const opsClient = () => {
     console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
     const { error: errorDefval, value: defval } = fnGetQueryAttribute(
       sidCursor,
-      KEY_DVAL
+      KEY_DEFVAL
     );
     if (errorDefval) {
       return { error: errorDefval, nextSidCursor: null };

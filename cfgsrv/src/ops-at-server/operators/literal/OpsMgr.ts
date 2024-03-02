@@ -5,7 +5,7 @@ import {
   KEY_ID,
   KEY_INFO,
   KEY_KIND,
-  KEY_DVAL,
+  KEY_DEFVAL,
   KEY_PROMPT,
   KEY_SID,
   KEY_UID,
@@ -21,7 +21,7 @@ export const OpsMgr: OpsServerType = (jsonObj: JsonObjectType) => {
     required: [KEY_KIND, KEY_SID, KEY_BLOCKED],
     optional: [
       KEY_ID,
-      KEY_DVAL,
+      KEY_DEFVAL,
       KEY_PROMPT,
       KEY_INFO,
       KEY_COMMENTS,

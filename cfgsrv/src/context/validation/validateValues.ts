@@ -16,7 +16,7 @@ import {
   KEY_INFO,
   KEY_OVERRIDE,
   KEY_DPICK,
-  KEY_DVAL,
+  KEY_DEFVAL,
   KEY_MAX,
   KEY_MIN,
   OP_DEC,
@@ -229,7 +229,7 @@ export const fnValidateValues = (jsonObj: JsonObjectType): Str => {
           return error;
         }
         break;
-      case KEY_DVAL:
+      case KEY_DEFVAL:
         error = _fnCheckDval(kind, key, sidStr, val);
         break;
       case KEY_MAX:

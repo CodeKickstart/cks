@@ -3,7 +3,7 @@ import { fnValidateValues } from "../../../context/validation/validateValues";
 import {
   KEY_BLOCKED,
   KEY_COMMENTS,
-  KEY_DVAL,
+  KEY_DEFVAL,
   KEY_ID,
   KEY_INFO,
   KEY_KIND,
@@ -24,7 +24,7 @@ export const OpsMgr: OpsServerType = (jsonObj: JsonObjectType) => {
     required: [KEY_KIND, KEY_SID, KEY_BLOCKED],
     optional: [
       KEY_ID,
-      KEY_DVAL,
+      KEY_DEFVAL,
       KEY_MAX,
       KEY_MIN,
       KEY_OVERRIDE,
