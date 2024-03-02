@@ -3,9 +3,9 @@ import QueryContext from "./QueryContext";
 
 import ResponseContext from "./ResponseContext";
 import { useQuery } from "react-query";
-import QnA from "./QnA/ui-common/_QnA";
-import { valtioStore } from "./QnA/defs/types/ValtioTypes";
-import { JsonObjectType } from "../../shared/defs/types";
+import QnA from "../ui-ops/_QnA";
+import { valtioStore } from "../defs/types/ValtioTypes";
+import { JsonObjectType } from "../../../../shared/defs/types";
 
 interface InterviewProps {
   baseUrl: string;

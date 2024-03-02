@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
-import Welcome from "./Welcome";
-import Finish from "./Finish";
+import Welcome from "../ui-common/Welcome";
+import Finish from "../ui-common/Finish";
 import { fnPickNextKind } from "../misc/componentPicker";
 import { fnSetupForInterview } from "../state-mgt/setupForInterview";
 import {
@@ -8,14 +8,14 @@ import {
   KIND_FINISH,
   COMPONENT_INPUT,
 } from "../defs/constants/ComponentNames";
-import { Err } from "./Err";
+import { Err } from "../ui-common/Err";
 import { fnBypassUserResponses } from "../misc/interviewBypass";
 import { Str } from "../defs/types/Str";
 
 import { fnComputeAndStoreLastQuestionIndex } from "../state-mgt/helper/computeLastQuestionIndex";
 
 import { InputType } from "../defs/types/UITypes";
-import Input from "./Input";
+import Input from "../ui-common/Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../../shared/defs/constants";
 

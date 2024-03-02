@@ -1,18 +1,17 @@
 import React from "react";
-import { valtioStore } from "./QnA/defs/types/ValtioTypes";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   examine?: boolean;
+  // queryTree: JsonObjectType | null;
 }
 
-const ResponseContext: React.FC<Props> = ({
-  examine: debug = false,
-}: Props) => {
+const QueryContext: React.FC<Props> = ({ examine: debug = false }: Props) => {
   return (
     <>
       {debug && (
         <div className='flex-col'>
-          <h1 className='text-2xl'>Response Context</h1>
+          <h1 className='text-2xl'>Query Context</h1>
           <pre>{JSON.stringify(valtioStore.queryContext, null, 2)}</pre>
           <br />
         </div>
@@ -21,4 +20,4 @@ const ResponseContext: React.FC<Props> = ({
   );
 };
 
-export default ResponseContext;
+export default QueryContext;
