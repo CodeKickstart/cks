@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import _Interview from "../components/interview/QnA/ui-common/_Interview";
+import _Interview from "../components/QnA/ui-common/_Interview";
 
 const queryClient = new QueryClient();
 
