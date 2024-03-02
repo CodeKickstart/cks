@@ -1,4 +1,4 @@
-import { fnSplitCursor } from "../misc/strings";
+import { fnSplitCursor } from "./strings";
 import { fnGetCurrentCursor } from "../state-mgt/cursor/cursor";
 import { fnGetQueryObject } from "../state-mgt/dataAccess/loLevelAccess";
 
@@ -17,4 +17,13 @@ export const fnRetrieveQueryObject = () => {
     return null;
   }
   return queryObject;
+};
+
+export const fnGetSidCursor = () => {
+  const cursor = fnGetCurrentCursor();
+  if (!cursor) {
+    return null;
+  }
+  const { sidCursor } = fnSplitCursor(cursor);
+  return sidCursor;
 };

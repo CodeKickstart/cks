@@ -10,7 +10,7 @@ import {
   INPUT_LITERAL,
   INPUT_PICKMANY,
 } from "../defs/constants/ComponentNames";
-import { fnRetrieveQueryObject } from "./_support";
+import { fnRetrieveQueryObject } from "../misc/sidCursor";
 import Text from "../ui-ops/Text";
 import Bool from "../ui-ops/Bool";
 import Int from "../ui-ops/Int";

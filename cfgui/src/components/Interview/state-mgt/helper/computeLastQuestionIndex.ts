@@ -4,7 +4,7 @@ import {
   fnGetAllPreOrderCursors,
   fnSetLastQuestionIndex,
 } from "../cursor/cursor";
-import { fnShouldSkipQuestion } from "./ShouldSkipQuestion";
+import { fnShouldSkipQuestion } from "./shouldSkipQuestion";
 
 export function fnComputeAndStoreLastQuestionIndex(): {
   error: Str;
