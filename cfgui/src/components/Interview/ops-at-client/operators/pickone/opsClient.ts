@@ -2,7 +2,8 @@ import { OP_PICKONE } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
-import { fnRetrieveQueryObject } from "../../../misc/sidCursor";
+import { fnRetrieveQueryObject } from "../../../state-mgt/dataAccess/hiLevelAccess";
+
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
 
 const name = OP_PICKONE;

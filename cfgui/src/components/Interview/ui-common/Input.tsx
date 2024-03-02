@@ -10,13 +10,14 @@ import {
   INPUT_LITERAL,
   INPUT_PICKMANY,
 } from "../defs/constants/ComponentNames";
-import { fnRetrieveQueryObject } from "../misc/sidCursor";
+
 import Text from "../ui-ops/Text";
 import Bool from "../ui-ops/Bool";
 import Int from "../ui-ops/Int";
 import Dec from "../ui-ops/Dec";
 import PickOne from "../ui-ops/PickOne";
 import PickMany from "../ui-ops/PickMany";
+import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 
 const CANCEL_BUTTON = "Cancel";
 

@@ -2,14 +2,14 @@ import {
   KEY_OVERRIDE,
   KEY_VAL,
   KEY_BLOCKED,
-} from "../../../../shared/defs/constants";
-import { Str } from "../../defs/types/Str";
+} from "../../../shared/defs/constants";
+import { Str } from "../defs/types/Str";
 // import { valtioStore } from "../../defs/types/ValtioTypes";
 import {
   fnGetQueryAttribute,
   fnGetQueryAttributeBoolean,
   fnSetQueryAttribute,
-} from "../dataAccess/loLevelAccess";
+} from "../state-mgt/dataAccess/loLevelAccess";
 
 export const fnShouldSkipQuestion = (
   sidCursor: string,

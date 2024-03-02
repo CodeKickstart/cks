@@ -2,7 +2,7 @@ import { fnSplitCursor } from "./strings";
 import { fnCursorMove } from "../state-mgt/cursor/cursor";
 
 import { Str } from "../defs/types/Str";
-import { fnShouldSkipQuestion } from "../state-mgt/helper/shouldSkipQuestion";
+import { fnShouldSkipQuestion } from "./shouldSkipQuestion";
 
 export const fnBypassUserResponses = (
   sidCursor: string

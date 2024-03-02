@@ -1,8 +1,8 @@
 import { KEY_BLOCKED, KEY_OVERRIDE } from "../../../../shared/defs/constants";
 import { Str } from "../../defs/types/Str";
 import { fnSplitCursor } from "../../misc/strings";
-import { fnGetAllPreOrderCursors } from "../cursor/cursor";
-import { fnGetQueryAttribute } from "./loLevelAccess";
+import { fnGetAllPreOrderCursors, fnGetCurrentCursor } from "../cursor/cursor";
+import { fnGetQueryAttribute, fnGetQueryObject } from "./loLevelAccess";
 
 export const fnGetAllPreOrderAnswers = <T>(
   key: string
@@ -45,4 +45,30 @@ export const fnGetAllPreOrderAnswers = <T>(
   }
 
   return { error: null, results: results };
+};
+
+export const fnRetrieveQueryObject = () => {
+  const cursor = fnGetCurrentCursor();
+  if (!cursor) {
+    return null;
+  }
+  const { sidCursor } = fnSplitCursor(cursor);
+  const { error, queryObject } = fnGetQueryObject(sidCursor);
+  if (error) {
+    console.log(error);
+    return null;
+  }
+  if (!queryObject) {
+    return null;
+  }
+  return queryObject;
+};
+
+export const fnGetSidCursor = () => {
+  const cursor = fnGetCurrentCursor();
+  if (!cursor) {
+    return null;
+  }
+  const { sidCursor } = fnSplitCursor(cursor);
+  return sidCursor;
 };

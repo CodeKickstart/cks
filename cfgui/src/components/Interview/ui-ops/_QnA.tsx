@@ -12,7 +12,7 @@ import { Err } from "../ui-common/Err";
 import { fnBypassUserResponses } from "../misc/interviewBypass";
 import { Str } from "../defs/types/Str";
 
-import { fnComputeAndStoreLastQuestionIndex } from "../state-mgt/helper/computeLastQuestionIndex";
+import { fnComputeAndStoreLastQuestionIndex } from "../misc/computeLastQuestionIndex";
 
 import { InputType } from "../defs/types/UITypes";
 import Input from "../ui-common/Input";
