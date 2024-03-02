@@ -1,5 +1,5 @@
 import {
-  KEY_DEFVAL,
+  KEY_OVERRIDE,
   KEY_VAL,
   OP_LITERAL,
 } from "../../../../../shared/defs/constants";
@@ -20,15 +20,15 @@ export const opsClient = () => {
     nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
-    const { error: errorDefval, value: defval } = fnGetQueryAttribute(
+    const { error: errorOverride, value: override } = fnGetQueryAttribute(
       sidCursor,
-      KEY_DEFVAL
+      KEY_OVERRIDE
     );
-    if (errorDefval) {
-      return { error: errorDefval, nextSidCursor: null };
+    if (errorOverride) {
+      return { error: errorOverride, nextSidCursor: null };
     }
 
-    if (defval !== undefined) {
+    if (override !== undefined) {
       const error = `fnPreProcess: defval is not undefined in {name} with sidCursor: ${sidCursor}`;
       return { error, nextSidCursor: null };
     }
@@ -36,7 +36,7 @@ export const opsClient = () => {
     const { error: errorSetValue } = fnSetQueryAttribute(
       sidCursor,
       KEY_VAL,
-      defval
+      override
     );
     if (errorSetValue) {
       return { error: errorSetValue, nextSidCursor: null };

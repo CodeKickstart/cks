@@ -6,15 +6,15 @@ export const fnFindChildrenNames = (jsonObject: JsonObjectType) => {
   let childrenNames: string[] = [];
 
   interface ObjTemplateChildren {
-    defval?: { [key: string]: string };
+    override?: { [key: string]: string };
     kind?: string;
   }
-  const { kind: childrenKind, defval: childrenDefval } =
+  const { kind: childrenKind, override: childrenOverride } =
     jsonObject as ObjTemplateChildren;
 
   if (childrenKind === OP_LITERAL) {
-    if (childrenDefval) {
-      childrenNames = Object.values(childrenDefval);
+    if (childrenOverride) {
+      childrenNames = Object.values(childrenOverride);
     }
   } else if (jsonObject) {
     childrenNames = Object.keys(jsonObject);
