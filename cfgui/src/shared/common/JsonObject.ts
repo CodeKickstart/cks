@@ -1,4 +1,4 @@
-import { Str } from "../../components/QnA/defs/types/Str";
+import { Str } from "../../components/Interview/defs/types/Str";
 import { JsonObjectType } from "../defs/types";
 
 export const fnJsonObjIsArray = (jsonObj: JsonObjectType): { error: Str } => {
