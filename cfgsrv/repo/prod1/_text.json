@@ -4,7 +4,7 @@
       "id": "id_name2a",
       "kind": "text",
       "prompt": "Hi - whats your name 2:",
-      "defval": "Magic Johnson"
+      "override": "Magic Johnson"
     }
   ]
 }

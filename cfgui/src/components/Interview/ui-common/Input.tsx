@@ -21,7 +21,7 @@ import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 
 const CANCEL_BUTTON = "Cancel";
 
-const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
+const Input: React.FC<InputProps> = ({ onResponse, onOpEnded, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -59,9 +59,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       INPUT_LITERAL,
     ].includes(inputType)
   ) {
-    console.error("Invalid inputType:", inputType);
-    // Handle the error state accordingly, e.g., display an error message
-    return <div>Error: Invalid inputType</div>;
+    onOpEnded();
   }
 
   let inputComponent;

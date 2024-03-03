@@ -26,6 +26,7 @@ const QnA: React.FC = () => {
     useState<Str>(COMPONENT_INPUT);
   const [rerenderFlag, setRerenderFlag] = useState<boolean>(false);
   const [inputKind, setInputKind] = useState<InputType>();
+  const [opEnded, setOpEnded] = useState<boolean>(false);
 
   const handleStartInterview = useCallback(() => {
     const { error: errorInit, sidCursor } = fnSetupForInterview();
@@ -89,12 +90,20 @@ const QnA: React.FC = () => {
     }
   }, [interviewFinished]);
 
+  function handleOpEnded(): void {
+    setOpEnded(true);
+  }
+
   const _fnRenderCore = () => {
+    if (opEnded) {
+      return <Finish />;
+    }
     switch (selectedResponseComponent) {
       case COMPONENT_INPUT:
         return (
           <Input
             onResponse={handleNext}
+            onOpEnded={handleOpEnded}
             inputType={inputKind as InputType}
             key={rerenderFlag ? "text-1" : "text-2"}
           />
