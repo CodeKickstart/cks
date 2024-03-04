@@ -4,7 +4,11 @@ import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { valtioStore } from "../defs/types/ValtioTypes";
 
-const Finish: React.FC = () => {
+interface IFinishProps {
+  debug?: boolean;
+}
+
+const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
   useEffect(() => {
     logListingSuccess();
   }, []); // Run once after initial rendering
@@ -44,11 +48,13 @@ const Finish: React.FC = () => {
           ))}
         </ul>
       </div>
-      <div className='flex-col'>
-        <h1 className='text-2xl'>Debug Data</h1>
-        <pre>{JSON.stringify(valtioStore.queryContext, null, 2)}</pre>
-        <br />
-      </div>
+      {debug === true && (
+        <div className='flex-col'>
+          <h1 className='text-2xl'>Debug Data</h1>
+          <pre>{JSON.stringify(valtioStore.queryContext, null, 2)}</pre>
+          <br />
+        </div>
+      )}
     </>
   );
 };
