@@ -55,6 +55,5 @@ export const fnSetupForInterview = () => {
   // console.log(`Text: cursor: ${cursor}`);
   const { sidCursor } = fnSplitCursor(cursor);
 
-  valtioStore.preOrderComplete = true;
   return { error: null, sidCursor };
 };

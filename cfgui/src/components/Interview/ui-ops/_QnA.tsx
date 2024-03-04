@@ -27,7 +27,7 @@ const QnA: React.FC = () => {
     useState<Str>(COMPONENT_INPUT);
   const [rerenderFlag, setRerenderFlag] = useState<boolean>(false);
   const [inputKind, setInputKind] = useState<InputType>();
-  const [opEnded, setOpEnded] = useState<boolean>(false);
+  // const [opEnded, setOpEnded] = useState<boolean>(false);
 
   const handleStartInterview = useCallback(() => {
     const { error: errorInit, sidCursor } = fnSetupForInterview();
@@ -91,14 +91,14 @@ const QnA: React.FC = () => {
     }
   }, [interviewFinished]);
 
-  function handleOpEnded(): void {
-    setOpEnded(true);
-  }
+  // function handleOpEnded(): void {
+  //   setOpEnded(true);
+  // }
 
   const _fnRenderCore = () => {
-    if (opEnded) {
-      return <div>Operation ended</div>;
-    }
+    // if (opEnded) {
+    //   return <div>Operation ended</div>;
+    // }
     if (valtioStore.preOrderComplete) {
       return <Finish />;
     }
@@ -107,7 +107,7 @@ const QnA: React.FC = () => {
         return (
           <Input
             onResponse={handleNext}
-            onOpEnded={handleOpEnded}
+            onOpEnded={() => {}}
             inputType={inputKind as InputType}
             key={rerenderFlag ? "text-1" : "text-2"}
           />

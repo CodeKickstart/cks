@@ -2,7 +2,7 @@
   "__CONTENT": [
     {
       "id": "id_name1",
-      "kind": "bool",
+      "kind": "text",
       "prompt": "Comments?"
     }
   ]

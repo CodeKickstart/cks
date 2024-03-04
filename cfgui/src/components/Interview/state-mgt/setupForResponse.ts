@@ -1,4 +1,5 @@
 import { KIND_ERROR } from "../defs/constants/ComponentNames";
+import { valtioStore } from "../defs/types/ValtioTypes";
 import { fnDispatchOp } from "../utils/opsDispatcher";
 import {
   fnCursorInitForResponse,
@@ -6,6 +7,7 @@ import {
 } from "./cursor/cursor";
 
 export const fnSetupForResponse = () => {
+  valtioStore.preOrderComplete = true;
   fnCursorInitForResponse();
 
   for (const cursor of fnGetAllPostOrderCursors()) {
