@@ -1,12 +1,9 @@
 import Header from "./pages/Header";
 import Footer from "./pages/Footer";
 import Contact from "./pages/Contact";
-
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-
-//import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 
 export default function Router() {
   const Layout = () => {

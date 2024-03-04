@@ -7,7 +7,7 @@ const Home = () => {
   // Sample data for property Attributes
 
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <div className='flex items-center'>
       <QueryClientProvider client={queryClient}>
         <_Interview
           baseUrl={"http://localhost:3502"}
