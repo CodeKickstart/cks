@@ -21,11 +21,13 @@ import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Finish from "./Finish";
 
 const CANCEL_BUTTON = "Cancel";
+const SUBMIT_BUTTON = "Submit";
 
 const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cancelClicked, setCancelClicked] = useState<boolean>(false);
+  const [submitClicked, setSubmitClicked] = useState<boolean>(false);
 
   useEffect(() => {
     try {
@@ -123,6 +125,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   return (
     <>
       {cancelClicked && <Finish />}
+      {submitClicked && <Finish />}
       {isLoading && <div>Loading...</div>}
       <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
       <div className='p-4 border rounded-md shadow-md'>{inputComponent}</div>
@@ -133,6 +136,13 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
             setCancelClicked(true);
           }}>
           {CANCEL_BUTTON}
+        </button>
+        <button
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 `}
+          onClick={() => {
+            setSubmitClicked(true);
+          }}>
+          {SUBMIT_BUTTON}
         </button>
       </div>
     </>
