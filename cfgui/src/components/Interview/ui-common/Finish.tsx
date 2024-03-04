@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { logListingSuccess } from "../state-mgt/setupForResponse";
 import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 const Finish: React.FC = () => {
   useEffect(() => {
@@ -26,19 +27,29 @@ const Finish: React.FC = () => {
   }
 
   return (
-    <div>
-      <h3>All questions answered!</h3>
-      <ul>
-        {valList.map((answer, index) => (
-          <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
-        ))}
-      </ul>
-      <ul>
-        {childNameLists.map((nameList, index) => (
-          <li key={index}>{`Question ${index + 1}: ${nameList.join(", ")}`}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      {" "}
+      <div>
+        <h3>All questions answered!</h3>
+        <ul>
+          {valList.map((answer, index) => (
+            <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
+          ))}
+        </ul>
+        <ul>
+          {childNameLists.map((nameList, index) => (
+            <li key={index}>{`Question ${index + 1}: ${nameList.join(
+              ", "
+            )}`}</li>
+          ))}
+        </ul>
+      </div>
+      <div className='flex-col'>
+        <h1 className='text-2xl'>Debug Data</h1>
+        <pre>{JSON.stringify(valtioStore.queryContext, null, 2)}</pre>
+        <br />
+      </div>
+    </>
   );
 };
 

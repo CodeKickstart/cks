@@ -13,7 +13,7 @@ const ResponseContext: React.FC<Props> = ({
       {debug && (
         <div className='flex-col'>
           <h1 className='text-2xl'>Response Context</h1>
-          <pre>{JSON.stringify(valtioStore.queryContext, null, 2)}</pre>
+          <pre>{JSON.stringify(valtioStore, null, 2)}</pre>
           <br />
         </div>
       )}
