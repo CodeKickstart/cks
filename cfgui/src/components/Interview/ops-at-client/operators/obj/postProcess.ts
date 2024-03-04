@@ -50,7 +50,7 @@ export const fnPostProcessObj = (sid: string): { error: Str } => {
   for (const [k, v] of Object.entries(children)) {
     console.log(`fnPostProcessObj: children: ${k} => ${v}`);
     if (k) {
-      return { error: `fnPostProcessObj: children value is not a string` };
+      // return { error: `fnPostProcessObj: children value is not a string` };
     }
   }
 

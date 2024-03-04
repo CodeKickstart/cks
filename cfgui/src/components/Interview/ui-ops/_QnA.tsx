@@ -107,7 +107,6 @@ const QnA: React.FC = () => {
         return (
           <Input
             onResponse={handleNext}
-            onOpEnded={() => {}}
             inputType={inputKind as InputType}
             key={rerenderFlag ? "text-1" : "text-2"}
           />
