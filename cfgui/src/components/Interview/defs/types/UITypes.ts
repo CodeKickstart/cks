@@ -16,4 +16,5 @@ export type InputType =
   | "pickmany"
   | "bool"
   | "int"
-  | "dec";
+  | "dec"
+  | null;

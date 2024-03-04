@@ -18,6 +18,7 @@ import { InputType } from "../defs/types/UITypes";
 import Input from "../ui-common/Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 const QnA: React.FC = () => {
   const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
@@ -26,7 +27,7 @@ const QnA: React.FC = () => {
     useState<Str>(COMPONENT_INPUT);
   const [rerenderFlag, setRerenderFlag] = useState<boolean>(false);
   const [inputKind, setInputKind] = useState<InputType>();
-  // const [opEnded, setOpEnded] = useState<boolean>(false);
+  const [opEnded, setOpEnded] = useState<boolean>(false);
 
   const handleStartInterview = useCallback(() => {
     const { error: errorInit, sidCursor } = fnSetupForInterview();
@@ -91,13 +92,16 @@ const QnA: React.FC = () => {
   }, [interviewFinished]);
 
   function handleOpEnded(): void {
-    // setOpEnded(true);
+    setOpEnded(true);
   }
 
   const _fnRenderCore = () => {
-    // if (opEnded) {
-    //   return <Finish />;
-    // }
+    if (opEnded) {
+      return <div>Operation ended</div>;
+    }
+    if (valtioStore.preOrderComplete) {
+      return <Finish />;
+    }
     switch (selectedResponseComponent) {
       case COMPONENT_INPUT:
         return (

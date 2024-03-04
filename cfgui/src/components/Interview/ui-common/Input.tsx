@@ -48,19 +48,24 @@ const Input: React.FC<InputProps> = ({ onResponse, onOpEnded, inputType }) => {
     }
   }, []);
 
-  if (
-    ![
-      INPUT_TEXT,
-      INPUT_BOOL,
-      INPUT_INT,
-      INPUT_DEC,
-      INPUT_PICKONE,
-      INPUT_PICKMANY,
-      INPUT_LITERAL,
-    ].includes(inputType)
-  ) {
-    onOpEnded();
-  }
+  useEffect(() => {
+    // This effect will run whenever `inputType` changes
+    if (
+      inputType &&
+      ![
+        INPUT_TEXT,
+        INPUT_BOOL,
+        INPUT_INT,
+        INPUT_DEC,
+        INPUT_PICKONE,
+        INPUT_PICKMANY,
+        INPUT_LITERAL,
+      ].includes(inputType)
+    ) {
+      // Call onOpEnded if inputType is not one of the expected types
+      onOpEnded();
+    }
+  }, [inputType, onOpEnded]);
 
   let inputComponent;
   const queryObject = fnRetrieveQueryObject();
