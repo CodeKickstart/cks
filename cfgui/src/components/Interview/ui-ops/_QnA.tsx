@@ -86,19 +86,10 @@ const QnA: React.FC = () => {
     // Logic to handle actions when interviewFinished changes
     if (interviewFinished) {
       console.log("Interview finished.");
-
-      // Additional actions if needed
     }
   }, [interviewFinished]);
 
-  // function handleOpEnded(): void {
-  //   setOpEnded(true);
-  // }
-
   const _fnRenderCore = () => {
-    // if (opEnded) {
-    //   return <div>Operation ended</div>;
-    // }
     if (valtioStore.preOrderComplete) {
       return <Finish />;
     }
