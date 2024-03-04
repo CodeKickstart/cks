@@ -18,7 +18,7 @@ import { InputType } from "../defs/types/UITypes";
 import Input from "../ui-common/Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
-import { valtioStore } from "../defs/types/ValtioTypes";
+// import { valtioStore } from "../defs/types/ValtioTypes";
 
 const QnA: React.FC = () => {
   const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
@@ -90,9 +90,9 @@ const QnA: React.FC = () => {
   }, [interviewFinished]);
 
   const _fnRenderCore = () => {
-    if (valtioStore.preOrderComplete) {
-      return <Finish />;
-    }
+    // if (valtioStore.preOrderComplete) {
+    //   return <Finish />;
+    // }
     switch (selectedResponseComponent) {
       case COMPONENT_INPUT:
         return (

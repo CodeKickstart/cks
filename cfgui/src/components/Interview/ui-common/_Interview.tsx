@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import QnA from "../ui-ops/_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
+import Finish from "./Finish";
 
 interface InterviewProps {
   baseUrl: string;
@@ -88,6 +89,10 @@ const _Interview = ({
 
   if (isError || !data) {
     return <div>Error fetching data</div>;
+  }
+
+  if (valtioStore.preOrderComplete) {
+    return <Finish />;
   }
 
   valtioStore.queryContext = data as JsonObjectType;
