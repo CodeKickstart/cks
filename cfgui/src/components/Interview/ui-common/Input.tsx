@@ -62,6 +62,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         INPUT_LITERAL,
       ].includes(inputType)
     ) {
+      console.log(`Input: Invalid inputType: ${inputType}`);
     }
   }, [inputType]);
 
