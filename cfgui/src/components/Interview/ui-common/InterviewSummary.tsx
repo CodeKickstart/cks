@@ -9,10 +9,14 @@ export function InterviewSummary() {
   };
 
   return (
-    <div style={{ display: isOpen ? "block" : "none" }}>
-      <h2>Interview Summary</h2>
+    <div className={`p-4 ${isOpen ? "block" : "hidden"}`}>
+      <h2 className='text-2xl font-bold mb-4'>Interview Summary</h2>
       <Finish />
-      <button onClick={handleClose}>Close</button>
+      <button
+        className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
+        onClick={handleClose}>
+        Close
+      </button>
     </div>
   );
 }
