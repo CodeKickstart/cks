@@ -39,13 +39,6 @@ const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
             <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
           ))}
         </ul>
-        <ul>
-          {childNameLists.map((nameList, index) => (
-            <li key={index}>{`Question ${index + 1}: ${nameList.join(
-              ", "
-            )}`}</li>
-          ))}
-        </ul>
       </div>
       {debug === true && (
         <div className='bg-gray-200 p-4 rounded-lg'>
