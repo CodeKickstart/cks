@@ -74,7 +74,7 @@ export function fnTag(rootObj: JsonObjectType) {
   }
 
   let currentBaseId = "";
-  function _fnPostProcess(
+  function _fnPrefixTagWithBaseID(
     currentObj: JsonObjectType,
     parentObj: JsonObjectType | null = null
   ): {
@@ -108,7 +108,7 @@ export function fnTag(rootObj: JsonObjectType) {
       if (currentObj.hasOwnProperty(key)) {
         const thisObject = currentObj[key];
         if (typeof thisObject === "object" && thisObject !== null) {
-          const { error, processedQueries } = _fnPostProcess(
+          const { error, processedQueries } = _fnPrefixTagWithBaseID(
             thisObject as JsonObjectType,
             currentObj
           );
@@ -135,7 +135,7 @@ export function fnTag(rootObj: JsonObjectType) {
     return { error: "processedQueries is null", processedQueries: {} };
   }
 
-  ({ error, processedQueries } = _fnPostProcess(processedQueries));
+  ({ error, processedQueries } = _fnPrefixTagWithBaseID(processedQueries));
 
   return { error, processedQueries };
 }
