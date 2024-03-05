@@ -21,36 +21,41 @@ export function TreeOrderMgr() {
     obj: JsonObjectType,
     indent: number = 0
   ): { error: Str; prefixOrderList: string[] | null } {
-    const keys = Object.keys(obj);
-    const validSids = [];
-    if (keys.includes(KEY_SID)) {
-      for (const [k, v] of Object.entries(obj)) {
-        if (
-          k === KEY_KIND &&
-          (v === OP_TEXT ||
-            v === OP_INT ||
-            v === OP_DEC ||
-            v === OP_BOOLEAN ||
-            v === OP_PICKONE ||
-            v === OP_PICKMANY)
-        ) {
-          const sid = obj[KEY_SID];
-          validSids.push(sid);
-        }
-      }
-    }
-
-    if (keys.includes(KEY_SID)) {
-      for (const [k, valSid] of Object.entries(obj)) {
-        if (k === KEY_SID && typeof valSid === "string") {
-          if (validSids.includes(valSid)) {
-            const val = `${ASIS_pre}.${valSid}`;
-            prefixOrderList.push(val);
+    const _fnMakeSidList = (obj: JsonObjectType) => {
+      const keys = Object.keys(obj);
+      const validSids: string[] = [];
+      if (keys.includes(KEY_SID)) {
+        for (const [k, v] of Object.entries(obj)) {
+          if (
+            k === KEY_KIND &&
+            (v === OP_TEXT ||
+              v === OP_INT ||
+              v === OP_DEC ||
+              v === OP_BOOLEAN ||
+              v === OP_PICKONE ||
+              v === OP_PICKMANY)
+          ) {
+            const sid: string = obj[KEY_SID] as string;
+            validSids.push(sid);
           }
         }
       }
-    }
 
+      if (keys.includes(KEY_SID)) {
+        for (const [k, valSid] of Object.entries(obj)) {
+          if (k === KEY_SID && typeof valSid === "string") {
+            if (validSids.includes(valSid)) {
+              const val = `${ASIS_pre}.${valSid}`;
+              prefixOrderList.push(val);
+            }
+          }
+        }
+      }
+      return validSids;
+    };
+
+    const sidList: string[] = _fnMakeSidList(obj);
+    prefixOrderList.push(...sidList);
     for (const [key, value] of Object.entries(obj)) {
       // Recursively print nested objects
       if (typeof value === "object" && value !== null) {

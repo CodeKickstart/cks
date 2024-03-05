@@ -59,16 +59,6 @@ export const fnPackQuery = (
     return { error: attrError, prepackQuery: null };
   }
 
-  const { fnGetOpsMgr } = OpsDictMgr();
-  const opsMgr = fnGetOpsMgr(kind);
-  if (!opsMgr) {
-    return {
-      error: `collectionName ${collectionName}" contains an unknown "${KEY_KIND}" key `,
-      prepackQuery: null,
-    };
-  }
-
-  console.log("id", queryItem[KEY_ID]);
   const { fnAddCollectionNameToSid, fnGetPrefixList, fnGetPostfixList } =
     TreeOrderMgr();
 
@@ -91,6 +81,15 @@ export const fnPackQuery = (
     return { error: errorPostfix, prepackQuery: null };
   }
   console.log("postfixOrderList", postfixOrderList);
+
+  const { fnGetOpsMgr } = OpsDictMgr();
+  const opsMgr = fnGetOpsMgr(kind);
+  if (!opsMgr) {
+    return {
+      error: `collectionName ${collectionName}" contains an unknown "${KEY_KIND}" key `,
+      prepackQuery: null,
+    };
+  }
 
   const { fnSetup } = opsMgr(queryItem);
   const { error, processedQuery } = fnSetup();
