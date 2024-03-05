@@ -26,6 +26,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cancelClicked, setCancelClicked] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     try {
@@ -122,7 +123,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   // const submitDisabled = false;
 
   return (
-    <>
+    <div className={`p-4 ${isOpen ? "block" : "hidden"}`}>
       {cancelClicked && <Finish />}
       {isLoading && <div>Loading...</div>}
       <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
@@ -132,11 +133,12 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
           className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 `}
           onClick={() => {
             setCancelClicked(true);
+            setIsOpen(false);
           }}>
           {CANCEL_BUTTON}
         </button>
       </div>
-    </>
+    </div>
   );
 };
 
