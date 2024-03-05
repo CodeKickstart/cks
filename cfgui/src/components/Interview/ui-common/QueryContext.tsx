@@ -3,7 +3,6 @@ import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   examine?: boolean;
-  // queryTree: JsonObjectType | null;
 }
 
 const QueryContext: React.FC<Props> = ({ examine: debug = false }: Props) => {

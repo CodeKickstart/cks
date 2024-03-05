@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Finish from "./Finish";
-// import Finish from "./Finish";
 
 export function InterviewSummary() {
   const [isOpen, setIsOpen] = useState(true);
