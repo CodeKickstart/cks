@@ -73,6 +73,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   let inputComponent;
   const queryObject = fnRetrieveQueryObject();
   if (!queryObject) {
+    // onResponse();
     return null;
   }
 

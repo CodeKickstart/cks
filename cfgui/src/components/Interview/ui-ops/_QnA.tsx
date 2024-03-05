@@ -18,6 +18,7 @@ import { InputType } from "../defs/types/UITypes";
 import Input from "../ui-common/Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
+import { fnNoMoreResponsesNeeded } from "../state-mgt/cursor/cursor";
 // import { valtioStore } from "../defs/types/ValtioTypes";
 
 const QnA: React.FC = () => {
@@ -105,7 +106,7 @@ const QnA: React.FC = () => {
       case KIND_ERROR:
         return <Err />;
       case KIND_FINISH:
-        return <Finish />;
+        return <div>Finish from QnA !!!</div>;
       default:
         return <Err />;
     }
@@ -116,6 +117,7 @@ const QnA: React.FC = () => {
       {!interviewStarted && <Welcome onStart={handleStartInterview} />}
       {interviewStarted && !interviewFinished && _fnRenderCore()}
       {interviewFinished && <Finish />}
+      {fnNoMoreResponsesNeeded() && <div>Question phase ended !!!</div>}
     </div>
 
     // Function to render response component based on selectedResponseComponent

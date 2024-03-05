@@ -58,3 +58,10 @@ export const fnSetLastQuestionIndex = (index: number | null) => {
 export const fnIsItTheLastQuestion = (): boolean => {
   return valtioStore.currentIndex === valtioStore.lastQuestionIndex;
 };
+
+export const fnNoMoreResponsesNeeded = (): boolean => {
+  if (valtioStore.currentIndex === null) {
+    return false;
+  }
+  return valtioStore.currentIndex - 1 === valtioStore.maxOrderIndex;
+};
