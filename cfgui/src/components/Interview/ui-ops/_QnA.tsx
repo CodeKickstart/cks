@@ -19,7 +19,7 @@ import Input from "../ui-common/Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import { fnNoMoreResponsesNeeded } from "../state-mgt/cursor/cursor";
-import InterviewSummary from "../ui-common/InterviewSummary";
+import { InterviewSummary } from "../ui-common/InterviewSummary";
 
 // import { valtioStore } from "../defs/types/ValtioTypes";
 
