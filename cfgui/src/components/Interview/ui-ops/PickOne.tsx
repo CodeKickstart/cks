@@ -80,9 +80,9 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
         value={answer !== null ? answer : ""}
         onChange={(e) => setAnswer(parseInt(e.target.value))}>
         <option value=''>Select an option...</option>
-        {listOfdescendantNames.map((fruit, index) => (
+        {listOfdescendantNames.map((descendantName, index) => (
           <option key={index} value={index}>
-            {fruit}
+            {descendantName}
           </option>
         ))}
       </select>

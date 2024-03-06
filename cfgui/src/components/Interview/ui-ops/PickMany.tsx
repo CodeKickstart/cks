@@ -93,7 +93,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     <div className='flex flex-col'>
       <h2 className='font-semibold mb-4'>Select one or more options:</h2>
       <ul className='space-y-1 flex-grow'>
-        {listOfdescendantNames.map((option, index) => (
+        {listOfdescendantNames.map((descendantName, index) => (
           <li key={index}>
             <label className='flex items-center'>
               <input
@@ -102,7 +102,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
                 onChange={() => handleCheckboxChange(index)}
                 className='mr-2'
               />
-              {option}
+              {descendantName}
             </label>
           </li>
         ))}
