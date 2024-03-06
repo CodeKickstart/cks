@@ -6,11 +6,16 @@ import {
 } from "../../../shared/defs/constants";
 import { JsonObjectType } from "../../../shared/defs/types";
 
-import { fnCursorInitForInterview, fnGetCurrentCursor } from "./cursor/cursor";
+import {
+  fnCursorInitForInterview,
+  fnGetAllPreOrderCursors,
+  fnGetCurrentCursor,
+} from "./cursor/cursor";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { fnPostfixTraversal } from "./treeTraversal/postTraversal";
 import { fnGatherOrderSequences } from "./treeWorkers/orderList";
 import { fnSplitCursor } from "./dataAccess/hiLevelAccess";
+import { fnDispatchOp } from "../utils/opsDispatcher";
 
 export const fnSetupForInterview = () => {
   function _fnLogArrayInfo(orderList: string[], startWith: string) {
@@ -22,6 +27,20 @@ export const fnSetupForInterview = () => {
     console.log(`>>> fnSetupForInterview: orderList`, startWith);
   }
   console.log("***************** GatherOrderSequences");
+
+  const _fnPreProcess = () => {
+    for (const cursor of fnGetAllPreOrderCursors()) {
+      console.log(cursor);
+      if (!cursor) {
+        return { error: "fnSetupForResponse: cursor is null" };
+      }
+      const { error } = fnDispatchOp(cursor);
+      if (error) {
+        return { error };
+      }
+    }
+    return { error: null };
+  };
 
   const { error: errOrderSequences, retList: orderList } =
     fnPostfixTraversal<string>(
@@ -46,7 +65,12 @@ export const fnSetupForInterview = () => {
   );
   _fnLogArrayInfo(orderList, ASIS_post);
 
-  // valtioStore.orderSequences = retList;
+  // run it through every cursor ***
+  const { error: errPreProcess } = _fnPreProcess();
+  if (errPreProcess) {
+    return { error: errPreProcess };
+  }
+
   fnCursorInitForInterview();
   const cursor = fnGetCurrentCursor();
   if (cursor === null || cursor === undefined) {

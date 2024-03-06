@@ -2,7 +2,7 @@ import { OP_PICKONE } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassUserResponses } from "../../../misc/interviewBypass";
-import { fnRetrieveQueryObject } from "../../../state-mgt/dataAccess/hiLevelAccess";
+import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
 
@@ -14,9 +14,9 @@ export const opsClient = () => {
     error: Str;
     nextSidCursor: Str;
   } => {
-    const queryObject = fnRetrieveQueryObject();
-    if (!queryObject) {
-      throw new Error("Failed to retrieve query object");
+    const { error: errorQuery, queryObject } = fnGetQueryObject(sidCursor);
+    if (errorQuery) {
+      return { error: errorQuery, nextSidCursor: null };
     }
     const { error: errorFinddescendantNames, descendantNames } =
       fnFindAndStoreDescendantNames(queryObject);

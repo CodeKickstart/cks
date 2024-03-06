@@ -18,7 +18,6 @@ export const fnFindDescendantNames = (
     return { error, descendantNames: [] };
   }
   const { children, sid } = fnDestructureJsonObj(parentQueryObj, keyNames);
-  // const { children, sid } = fnDestructureJsonObj(parentQueryObj);
   if (!children || !sid) {
     const error = `fnFindAndStoreDescendantNames: children or sidCursor is invalid`;
     return { error, descendantNames: [] };
