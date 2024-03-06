@@ -1,0 +1,25 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_cars",
+      "kind": "pickone",
+      "defval": "ev",
+      "children": {
+        "gas": {
+          "prompt": "gas mileage in mpg",
+          "kind": "dec",
+          "max": 99.9,
+          "defval": 35.0,
+          "override": 40.0
+        },
+        "ev": {
+          "prompt": "vehicle range in miles",
+          "kind": "int",
+          "min": 50,
+          "max": 1000,
+          "defval": 350
+        }
+      }
+    }
+  ]
+}
