@@ -37,22 +37,63 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
   }, [answer, onResponse, sidCursor, queryObject]);
 
+  // useEffect(() => {
+  //   interface ObjTemplate {
+  //     defval?: number[];
+  //     sid?: string;
+  //     // Other properties as needed
+  //   }
+  //   const { defval, sid } = queryObject as ObjTemplate;
+
+  //   setSidCursor(sid as string);
+
+  //   if (Array.isArray(defval)) {
+  //     setAnswer(defval as number[]);
+  //   }
+
+  //   // Set loading state to false after fetching data
+  // }, [queryObject]);
+
   useEffect(() => {
     interface ObjTemplate {
-      defval?: number[];
+      defval?: number[] | string[];
       sid?: string;
-      // Other properties as needed
     }
-    const { defval, sid } = queryObject as ObjTemplate;
+
+    const { defval, sid } = (queryObject || {}) as ObjTemplate;
+
+    if (!listOfDescendantNames || !Array.isArray(listOfDescendantNames)) {
+      const error = "Failed to retrieve query object";
+      console.error(error);
+      return;
+    }
 
     setSidCursor(sid as string);
 
-    if (Array.isArray(defval)) {
-      setAnswer(defval as number[]);
+    if (defval !== undefined) {
+      if (
+        Array.isArray(defval) &&
+        defval.every((element) => typeof element === "string")
+      ) {
+        const ansArray: number[] = [];
+        for (let i = 0; i < listOfDescendantNames.length; i++) {
+          if (listOfDescendantNames[i] === defval[0]) {
+            ansArray.push(i);
+          }
+        }
+        setAnswer(ansArray);
+      } else {
+        if (
+          Array.isArray(defval) &&
+          defval.every((element) => typeof element === "number")
+        ) {
+          setAnswer(defval as number[]);
+        }
+      }
     }
 
     // Set loading state to false after fetching data
-  }, [queryObject]);
+  }, [queryObject, listOfDescendantNames]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -74,15 +115,15 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
 
     const currentIndex = answer.indexOf(index);
-    const newAnswer = [...answer];
+    const newAnswerSet = [...answer];
 
     if (currentIndex === -1) {
-      newAnswer.push(index);
+      newAnswerSet.push(index);
     } else {
-      newAnswer.splice(currentIndex, 1);
+      newAnswerSet.splice(currentIndex, 1);
     }
 
-    setAnswer(newAnswer);
+    setAnswer(newAnswerSet);
   };
 
   const handleSubmitButtonClick = () => {
