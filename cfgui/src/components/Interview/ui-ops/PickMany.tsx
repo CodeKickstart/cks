@@ -28,10 +28,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   const handleEnter = useCallback(() => {
     if (answer !== null) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer as number[]);
-      const { error: errorBlocker } = fnBlockUnselectedChildren(
-        queryObject,
-        answer as number[]
-      );
+      const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
       if (errorBlocker) {
         console.error(`Error blocking unselected children: ${errorBlocker}`);
       }
