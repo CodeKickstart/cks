@@ -6,18 +6,18 @@
       "defval": "ev",
       "children": {
         "gas": {
-          "prompt": "vehicle dollar price",
+          "prompt": "gas mileage in mpg",
           "kind": "dec",
-          "max": 25000,
-          "defval": 20000.0,
-          "override": 22222
+          "max": 99.9,
+          "defval": 35.0,
+          "override": 40.0
         },
         "ev": {
           "prompt": "vehicle range in miles",
           "kind": "int",
           "min": 50,
-          "max": 400,
-          "defval": 200
+          "max": 1000,
+          "defval": 350
         }
       }
     }
