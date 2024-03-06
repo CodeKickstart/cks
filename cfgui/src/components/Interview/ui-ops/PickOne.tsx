@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
+import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -27,6 +28,13 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   const handleEnter = useCallback(() => {
     if (answer !== null) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
+      const { error: errorBlocker } = fnBlockUnselectedChildren(
+        sidCursor,
+        answer as number
+      );
+      if (errorBlocker) {
+        console.error(`Error blocking unselected children: ${errorBlocker}`);
+      }
       setAnswer(null);
       onResponse();
     }
