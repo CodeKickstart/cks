@@ -69,7 +69,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
 
     // Set loading state to false after fetching data
-  }, [queryObject]);
+  }, [queryObject, listOfDescendantNames]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
