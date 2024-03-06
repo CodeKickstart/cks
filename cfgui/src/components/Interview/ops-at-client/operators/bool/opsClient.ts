@@ -11,7 +11,7 @@ export const opsClient = () => {
     error: Str;
     nextSidCursor: Str;
   } => {
-    console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
+    // console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
     const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 

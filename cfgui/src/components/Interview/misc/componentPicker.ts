@@ -16,11 +16,11 @@ export const fnPickNextKind = (
 
   const { cursor } = fnCursorMove();
 
-  console.log("fnPickNextKind: cursor", cursor);
+  // console.log("fnPickNextKind: cursor", cursor);
   if (cursor === null) {
-    console.log(
-      "*** fnPickNextKind: cursor is null - returning finish component"
-    );
+    // console.log(
+    //   "*** fnPickNextKind: cursor is null - returning finish component"
+    // );
 
     return {
       error: null,

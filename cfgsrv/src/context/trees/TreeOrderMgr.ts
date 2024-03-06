@@ -40,18 +40,18 @@ export function TreeOrderMgr() {
           }
         }
       }
-
+      const newSidList: string[] = [];
       if (keys.includes(KEY_SID)) {
         for (const [k, valSid] of Object.entries(obj)) {
           if (k === KEY_SID && typeof valSid === "string") {
             if (validSids.includes(valSid)) {
               const val = `${ASIS_pre}.${valSid}`;
-              prefixOrderList.push(val);
+              newSidList.push(val);
             }
           }
         }
       }
-      return validSids;
+      return newSidList;
     };
 
     const sidList: string[] = _fnMakeSidList(obj);

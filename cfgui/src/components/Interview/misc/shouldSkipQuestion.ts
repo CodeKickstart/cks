@@ -12,10 +12,10 @@ import {
 } from "../state-mgt/dataAccess/loLevelAccess";
 
 export const fnShouldSkipQuestion = (
-  sidCursor: string,
-  rehersalRound: boolean = false
+  sidCursor: string
+  // rehersalRound: boolean = false
 ): { error: Str; skipQuestion: boolean | null } => {
-  console.log(`fnShouldSkipQuestion: rehersalRound: ${rehersalRound}`);
+  // console.log(`fnShouldSkipQuestion: rehersalRound: ${rehersalRound}`);
   const { error: errorOverride, value: override } = fnGetQueryAttribute(
     sidCursor,
     KEY_OVERRIDE

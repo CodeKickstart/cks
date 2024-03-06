@@ -74,13 +74,13 @@ export const fnPackQuery = (
   if (errorPrefix) {
     return { error: errorPrefix, prepackQuery: null };
   }
-  console.log("prefixOrderList", prefixOrderList);
+  // console.log("prefixOrderList", prefixOrderList);
 
   const { error: errorPostfix, postfixOrderList } = fnGetPostfixList(queryItem);
   if (errorPostfix) {
     return { error: errorPostfix, prepackQuery: null };
   }
-  console.log("postfixOrderList", postfixOrderList);
+  // console.log("postfixOrderList", postfixOrderList);
 
   const { fnGetOpsMgr } = OpsDictMgr();
   const opsMgr = fnGetOpsMgr(kind);
