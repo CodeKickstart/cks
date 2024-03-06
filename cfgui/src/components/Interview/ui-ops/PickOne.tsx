@@ -23,7 +23,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   if (descendantNames === undefined || typeof descendantNames !== "object") {
     throw new Error("Failed to retrieve query object");
   }
-  const listOfdescendantNames = Object.values(descendantNames);
+  const listOfDescendantNames = Object.values(descendantNames);
 
   const handleEnter = useCallback(() => {
     if (answer !== null) {
@@ -39,16 +39,33 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   useEffect(() => {
     interface ObjTemplate {
-      defval?: number;
+      defval?: number | string;
       sid?: string;
     }
 
     const { defval, sid } = (queryObject || {}) as ObjTemplate;
 
+    if (!listOfDescendantNames || !Array.isArray(listOfDescendantNames)) {
+      const error = "Failed to retrieve query object";
+      console.error(error);
+      return;
+    }
+
     setSidCursor(sid as string);
 
     if (defval !== undefined) {
-      setAnswer(defval as number);
+      if (typeof defval === "string") {
+        const index = listOfDescendantNames.indexOf(defval);
+        if (index !== -1) {
+          setAnswer(index);
+        } else {
+          const error = `Failed to find index of defval: ${defval}`;
+          console.error(error);
+          return;
+        }
+      } else {
+        setAnswer(defval as number);
+      }
     }
 
     // Set loading state to false after fetching data
@@ -78,7 +95,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
     <div className='flex flex-col'>
       <div className='mb-4'>
         <h2 className='font-semibold'>Select one an option:</h2>
-        {listOfdescendantNames.map((descendantName, index) => (
+        {listOfDescendantNames.map((descendantName, index) => (
           <label key={index} className='flex items-center mb-2'>
             <input
               type='radio'
