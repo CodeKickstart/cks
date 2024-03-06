@@ -1,7 +1,7 @@
 import { OP_PICKONE } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
-import { fnBypassUserResponses } from "../../../misc/interviewBypass";
+// import { fnBypassUserResponses } from "../../../misc/interviewBypass";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
@@ -25,11 +25,11 @@ export const opsClient = () => {
     }
     console.log(`opsClient::${name}:pre descendantNames: ${descendantNames}`);
 
-    const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
+    // const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
 
     return {
-      error,
-      nextSidCursor,
+      error: null,
+      nextSidCursor: null,
     };
   };
 

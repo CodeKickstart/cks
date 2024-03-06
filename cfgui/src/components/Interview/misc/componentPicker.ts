@@ -1,13 +1,10 @@
-import { fnDispatchOp } from "../utils/opsDispatcher";
 import { KIND_ERROR, KIND_FINISH } from "../defs/constants/ComponentNames";
-// import { fnCursorMove } from "../storeLogic/cursor/cursor";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
-import {
-  // fnCursorInitForResponse,
-  fnCursorMove,
-} from "../state-mgt/cursor/cursor";
+import { fnCursorMove } from "../state-mgt/cursor/cursor";
 import { Str } from "../defs/types/Str";
+import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
+import { fnBypassUserResponses } from "./interviewBypass";
 
 export const fnPickNextKind = (
   currentComponent: Str
@@ -18,17 +15,16 @@ export const fnPickNextKind = (
 
   // console.log("fnPickNextKind: cursor", cursor);
   if (cursor === null) {
-    // console.log(
-    //   "*** fnPickNextKind: cursor is null - returning finish component"
-    // );
-
     return {
       error: null,
       nextKind: KIND_FINISH,
     };
   }
 
-  const { error, nextSidCursor } = fnDispatchOp(cursor);
+  const { sidCursor } = fnSplitCursor(cursor);
+
+  const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
+
   if (error) {
     return { error, nextKind: KIND_ERROR };
   }

@@ -4,7 +4,6 @@
       "id": "id_cars",
       "kind": "pickone",
       "defval": "gas",
-      "override": "ev",
       "children": {
         "gas": {
           "kind": "obj",

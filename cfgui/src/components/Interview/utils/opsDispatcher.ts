@@ -10,14 +10,12 @@ export const fnDispatchOp = (
   cursor: string
 ): {
   error: Str;
-  nextSidCursor: Str;
-  // queryObject?: string | number | boolean | JsonObjectType | null;
 } => {
   const { phase, sidCursor } = fnSplitCursor(cursor);
 
   const { error, value: kind } = fnGetQueryAttributeString(sidCursor, KEY_KIND);
   if (error || !kind) {
-    return { error, nextSidCursor: null };
+    return { error };
   }
 
   const { fnGetOpsMgr } = opsMap();
@@ -25,30 +23,29 @@ export const fnDispatchOp = (
   if (!clientOps) {
     return {
       error: `fnDispatchOp: kind: ${kind} not found`,
-      nextSidCursor: null,
     };
   }
 
   const { fnPreProcess, fnPostProcess } = clientOps();
   if (phase === ASIS_pre) {
-    const { error, nextSidCursor } = fnPreProcess(sidCursor);
+    const { error } = fnPreProcess(sidCursor);
 
     if (error) {
       console.log(error);
-      return { error, nextSidCursor: null };
+      return { error };
     }
-    return { error: null, nextSidCursor };
+    return { error: null };
   } else {
     if (phase === ASIS_post) {
-      const { error, nextSidCursor } = fnPostProcess(sidCursor);
+      const { error } = fnPostProcess(sidCursor);
       if (error) {
         console.log(error);
-        return { error, nextSidCursor: null };
+        return { error };
       }
-      return { error: null, nextSidCursor };
+      return { error: null };
     } else {
       console.log(`fnDispatchOp: phase: ${phase} not found`);
-      return { error: null, nextSidCursor: null };
+      return { error: null };
     }
   }
 };

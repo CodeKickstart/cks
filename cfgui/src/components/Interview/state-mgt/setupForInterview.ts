@@ -28,7 +28,7 @@ export const fnSetupForInterview = () => {
   }
   console.log("***************** GatherOrderSequences");
 
-  const _fnPreProcess = () => {
+  const _fnPreProcessIterator = () => {
     for (const cursor of fnGetAllPreOrderCursors()) {
       console.log(cursor);
       if (!cursor) {
@@ -66,7 +66,7 @@ export const fnSetupForInterview = () => {
   _fnLogArrayInfo(orderList, ASIS_post);
 
   // run it through every cursor ***
-  const { error: errPreProcess } = _fnPreProcess();
+  const { error: errPreProcess } = _fnPreProcessIterator();
   if (errPreProcess) {
     return { error: errPreProcess };
   }
