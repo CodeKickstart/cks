@@ -75,21 +75,26 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   };
 
   return (
-    <div className='flex'>
-      <select
-        value={answer !== null ? answer : ""}
-        onChange={(e) => setAnswer(parseInt(e.target.value))}>
-        <option value=''>Select an option...</option>
+    <div className='flex flex-col'>
+      <div className='mb-4'>
+        <h2 className='font-semibold'>Select one an option:</h2>
         {listOfdescendantNames.map((descendantName, index) => (
-          <option key={index} value={index}>
+          <label key={index} className='flex items-center mb-2'>
+            <input
+              type='radio'
+              value={index}
+              checked={answer === index}
+              onChange={() => setAnswer(index)}
+              className='mr-2'
+            />
             {descendantName}
-          </option>
+          </label>
         ))}
-      </select>
+      </div>
       <div className='flex-grow'></div>
-      <div>
+      <div className='flex justify-end'>
         <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2 ${
             answer === null ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handleSubmitButtonClick}
