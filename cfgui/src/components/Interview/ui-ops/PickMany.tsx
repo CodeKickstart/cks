@@ -29,7 +29,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     if (answer !== null) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer as number[]);
       const { error: errorBlocker } = fnBlockUnselectedChildren(
-        sidCursor,
+        queryObject,
         answer as number[]
       );
       if (errorBlocker) {
@@ -38,7 +38,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       setAnswer([]);
       onResponse();
     }
-  }, [answer, onResponse, sidCursor]);
+  }, [answer, onResponse, sidCursor, queryObject]);
 
   useEffect(() => {
     interface ObjTemplate {

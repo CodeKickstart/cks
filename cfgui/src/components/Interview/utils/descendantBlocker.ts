@@ -1,10 +1,11 @@
+import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../defs/types/Str";
 
 export const fnBlockUnselectedChildren = (
-  sidCursor: string,
+  queryObject: JsonObjectType,
   answer: number[] | number
 ): { error: Str } => {
-  console.log(`Blocking unselected children for sidCursor: ${sidCursor}`);
+  console.log(`Query object: ${queryObject}`);
   console.log(`Selected children: ${answer}`);
 
   return { error: null };
