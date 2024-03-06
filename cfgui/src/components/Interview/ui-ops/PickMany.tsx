@@ -13,7 +13,7 @@ const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 
 const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
-  const [answer, setAnswer] = useState<number[] | null>(null); // Updated state name to 'answer'
+  const [answer, setAnswer] = useState<number[]>([]); // Updated state name to 'answer'
   const [sidCursor, setSidCursor] = useState<string>("");
 
   interface ObjTemplate {
@@ -26,7 +26,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   const listOfDescendantNames = Object.values(descendantNames);
 
   const handleEnter = useCallback(() => {
-    if (answer !== null) {
+    if (answer.length > 0) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer as number[]);
       const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
       if (errorBlocker) {
@@ -36,23 +36,6 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       onResponse();
     }
   }, [answer, onResponse, sidCursor, queryObject]);
-
-  // useEffect(() => {
-  //   interface ObjTemplate {
-  //     defval?: number[];
-  //     sid?: string;
-  //     // Other properties as needed
-  //   }
-  //   const { defval, sid } = queryObject as ObjTemplate;
-
-  //   setSidCursor(sid as string);
-
-  //   if (Array.isArray(defval)) {
-  //     setAnswer(defval as number[]);
-  //   }
-
-  //   // Set loading state to false after fetching data
-  // }, [queryObject]);
 
   useEffect(() => {
     interface ObjTemplate {
@@ -110,20 +93,13 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   }, [handleEnter, sidCursor]);
 
   const handleCheckboxChange = (index: number) => {
-    if (answer === null) {
-      return;
-    }
-
-    const currentIndex = answer.indexOf(index);
-    const newAnswerSet = [...answer];
-
-    if (currentIndex === -1) {
-      newAnswerSet.push(index);
+    const isChecked = answer.includes(index);
+    if (isChecked) {
+      const newAnswerSet = answer.filter((item) => item !== index);
+      setAnswer(newAnswerSet);
     } else {
-      newAnswerSet.splice(currentIndex, 1);
+      setAnswer([...answer, index]);
     }
-
-    setAnswer(newAnswerSet);
   };
 
   const handleSubmitButtonClick = () => {
