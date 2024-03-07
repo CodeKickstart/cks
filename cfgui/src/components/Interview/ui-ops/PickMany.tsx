@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
-import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
+import {
+  fnGetQueryAttribute,
+  fnSetQueryAttribute,
+} from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
+import { fnConvertDefvalToVal } from "../utils/defval2val";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -14,7 +18,8 @@ const ENTER_BUTTON_LABEL = "Enter";
 
 const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number[]>([]); // Updated state name to 'answer'
-  const [sidCursor, setSidCursor] = useState<string>("");
+  // const [sidCursor, setSidCursor] = useState<string>("");
+  const [sid, setSid] = useState<string>("");
 
   interface ObjTemplate {
     descendantNames?: { [key: string]: string };
@@ -26,16 +31,21 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   const listOfDescendantNames = Object.values(descendantNames);
 
   const handleEnter = useCallback(() => {
-    if (answer.length > 0) {
-      fnSetQueryAttribute(sidCursor, KEY_VAL, answer as number[]);
-      const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
-      if (errorBlocker) {
-        console.error(`Error blocking unselected children: ${errorBlocker}`);
-      }
-      setAnswer([]);
-      onResponse();
+    interface ObjTemplate {
+      sid?: string;
     }
-  }, [answer, onResponse, sidCursor, queryObject]);
+    const { sid } = queryObject as ObjTemplate;
+    if (sid === undefined) {
+      throw new Error("Failed to retrieve query object");
+    }
+    fnSetQueryAttribute(sid, KEY_VAL, answer as number[]);
+    const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
+    if (errorBlocker) {
+      console.error(`Error blocking unselected children: ${errorBlocker}`);
+    }
+    setAnswer([]);
+    onResponse();
+  }, [answer, onResponse, queryObject]);
 
   useEffect(() => {
     interface ObjTemplate {
@@ -51,31 +61,28 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       return;
     }
 
-    setSidCursor(sid as string);
+    if (sid === undefined) {
+      const error = "Failed to retrieve query object";
+      console.error(error);
+      return;
+    }
+    setSid(sid);
 
-    if (defval !== undefined) {
-      if (
-        Array.isArray(defval) &&
-        defval.every((element) => typeof element === "string")
-      ) {
-        const ansArray: number[] = [];
-        for (let i = 0; i < listOfDescendantNames.length; i++) {
-          if (listOfDescendantNames[i] === defval[0]) {
-            ansArray.push(i);
-          }
-        }
-        setAnswer(ansArray);
-      } else {
-        if (
-          Array.isArray(defval) &&
-          defval.every((element) => typeof element === "number")
-        ) {
-          setAnswer(defval as number[]);
-        }
-      }
+    if (!defval) {
+      return;
     }
 
-    // Set loading state to false after fetching data
+    const { val } = fnConvertDefvalToVal(listOfDescendantNames, defval);
+
+    const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
+    if (errorSetValue) {
+      console.error(`Error setting query attribute: ${errorSetValue}`);
+      return;
+    }
+
+    if (val.length > 0) {
+      setAnswer(val);
+    }
   }, [queryObject, listOfDescendantNames]);
 
   useEffect(() => {
@@ -90,32 +97,34 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [handleEnter, sidCursor]);
+  }, [handleEnter]);
 
-  // const handleCheckboxChange = (index: number) => {
-  //   const isChecked = answer.includes(index);
-  //   if (isChecked) {
-  //     const newAnswerSet = answer.filter((item) => item !== index);
-  //     setAnswer(newAnswerSet);
-  //   } else {
-  //     setAnswer([...answer, index]);
-  //   }
-  // };
   const handleCheckboxChange = (index: number) => {
     if (answer === null) {
       return;
     }
 
     const currentIndex = answer.indexOf(index);
-    const newAnswer = [...answer];
 
-    if (currentIndex === -1) {
-      newAnswer.push(index);
-    } else {
-      newAnswer.splice(currentIndex, 1);
+    const { error, value: val } = fnGetQueryAttribute(sid, KEY_VAL);
+    if (error) {
+      console.error(`Error getting query attribute: ${error}`);
+      return;
     }
 
-    setAnswer(newAnswer);
+    const newVal: number[] = [...(val as number[])];
+
+    if (currentIndex === -1) {
+      newVal.push(index);
+    } else {
+      newVal.splice(currentIndex, 1);
+    }
+
+    const { error: errorSet } = fnSetQueryAttribute(sid, KEY_VAL, newVal);
+    if (errorSet) {
+      console.error(`Error setting query attribute: ${errorSet}`);
+      return;
+    }
   };
 
   const handleSubmitButtonClick = () => {
