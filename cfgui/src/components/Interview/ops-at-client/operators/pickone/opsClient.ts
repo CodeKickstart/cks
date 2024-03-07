@@ -74,7 +74,7 @@ export const opsClient = () => {
       for (const [key, value] of Object.entries(children as object)) {
         console.log(`fnPostProcessPickOne: children: ${key} => ${value}`);
       }
-      const { error } = fnProcessGrandChildren(children);
+      const { error } = fnProcessGrandChildren(sid, children);
       return { error };
     }
   };
