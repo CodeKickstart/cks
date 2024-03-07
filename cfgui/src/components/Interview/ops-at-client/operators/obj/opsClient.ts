@@ -14,10 +14,10 @@ export const opsClient = () => {
   } => {
     console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
-    const { error } = fnBypassUserResponses(sidCursor);
+    // const { error } = fnBypassUserResponses(sidCursor);
 
     return {
-      error,
+      error: null,
     };
   };
 
