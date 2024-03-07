@@ -107,7 +107,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       return;
     }
 
-    const newVal: number[] = [...(val as number[])];
+    const newVal = [...(val as number[])];
     if (newVal.includes(index)) {
       const currentIndex = newVal.indexOf(index);
       newVal.splice(currentIndex, 1);
