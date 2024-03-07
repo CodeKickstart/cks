@@ -5,10 +5,8 @@ import { Str } from "../../../defs/types/Str";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
-import {
-  fnProcessGrandChildren,
-  fnProcessLiteralChildren,
-} from "./postProcess";
+import { fnProcessGrandChildren } from "../_helper/pick";
+import { fnProcessLiteralChildren } from "./postProcess";
 
 const name = OP_PICKONE;
 export const opsClient = () => {
