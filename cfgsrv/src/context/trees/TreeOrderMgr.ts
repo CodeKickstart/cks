@@ -6,6 +6,7 @@ import {
   OP_BOOLEAN,
   OP_DEC,
   OP_INT,
+  OP_LITERAL,
   OP_PICKMANY,
   OP_PICKONE,
   OP_TEXT,

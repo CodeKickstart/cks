@@ -18,6 +18,13 @@
           "min": 50,
           "max": 1000,
           "defval": 350
+        },
+        "hybrid": {
+          "prompt": "average miles between fill-ups",
+          "kind": "dec",
+          "min": 0,
+          "max": 1000,
+          "defval": 123
         }
       }
     }
