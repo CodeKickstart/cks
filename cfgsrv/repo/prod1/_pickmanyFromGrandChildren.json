@@ -17,7 +17,7 @@
           "kind": "int",
           "min": 50,
           "max": 1000,
-          "defval": 350
+          "defval": 336
         }
       }
     }

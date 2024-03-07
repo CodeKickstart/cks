@@ -1,0 +1,14 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_port",
+      "kind": "pickone",
+      "prompt": "enter ...",
+      "defval": 1,
+      "children": {
+        "kind": "literal",
+        "override": ["3200", "3201", "3202", "3203"]
+      }
+    }
+  ]
+}
