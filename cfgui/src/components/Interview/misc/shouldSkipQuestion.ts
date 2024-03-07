@@ -13,9 +13,7 @@ import {
 
 export const fnShouldSkipQuestion = (
   sidCursor: string
-  // rehersalRound: boolean = false
 ): { error: Str; skipQuestion: boolean | null } => {
-  // console.log(`fnShouldSkipQuestion: rehersalRound: ${rehersalRound}`);
   const { error: errorOverride, value: override } = fnGetQueryAttribute(
     sidCursor,
     KEY_OVERRIDE
@@ -38,7 +36,7 @@ export const fnShouldSkipQuestion = (
     return { error: errorBlocked, skipQuestion: null };
   }
 
-  if (override && !blocked) {
+  if (override || blocked) {
     return { error: null, skipQuestion: true };
   }
   return { error: null, skipQuestion: false };
