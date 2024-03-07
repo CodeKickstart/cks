@@ -1,4 +1,4 @@
-export const fnConvertDefvalToVal = (
+export const fnConverListDefvalToVal = (
   listOfDescendantNames: string[],
   defVal: string[] | number[]
 ): { val: number[] } => {
@@ -28,4 +28,27 @@ export const fnConvertDefvalToVal = (
     return { val: ansArray };
   }
   return { val: [] };
+};
+
+export const fnConverSingleDefvalToVal = (
+  listOfDescendantNames: string[],
+  defVal: string | number
+): { val: number } => {
+  if (!defVal) {
+    return { val: -1 };
+  }
+
+  if (typeof defVal === "number") {
+    return { val: defVal as number };
+  }
+
+  if (typeof defVal === "string") {
+    for (let i = 0; i < listOfDescendantNames.length; i++) {
+      if (listOfDescendantNames[i] === defVal) {
+        return { val: i };
+      }
+    }
+    return { val: -1 };
+  }
+  return { val: -1 };
 };

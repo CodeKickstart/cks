@@ -6,7 +6,7 @@ import {
 } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
-import { fnConvertDefvalToVal } from "../utils/defval2val";
+import { fnConverListDefvalToVal } from "../utils/defval2val";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -72,7 +72,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       return;
     }
 
-    const { val } = fnConvertDefvalToVal(listOfDescendantNames, defval);
+    const { val } = fnConverListDefvalToVal(listOfDescendantNames, defval);
 
     const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
     if (errorSetValue) {
