@@ -37,16 +37,20 @@ export const fnFindDescendantInfo = (sidCursor: string) => {
     val?: number[];
   }
 
-  const { children, sid, val: indices } = (queryObject || {}) as ObjTemplate;
+  const {
+    children,
+    sid: childrenSid,
+    val: childrenIndices,
+  } = (queryObject || {}) as ObjTemplate;
   if (!children) {
     return { error: "No children found" };
   }
-  if (typeof sid !== "string") {
+  if (typeof childrenSid !== "string") {
     return { error: "sid is not a string" };
   }
   if (
-    !Array.isArray(indices) ||
-    indices.some((index) => typeof index !== "number")
+    !Array.isArray(childrenIndices) ||
+    childrenIndices.some((index) => typeof index !== "number")
   ) {
     return { error: "index is not a number[]" };
   }
@@ -60,6 +64,11 @@ export const fnFindDescendantInfo = (sidCursor: string) => {
 
   return {
     error: null,
-    descendantInfo: { sid, indices, childrenKind, childrenVal },
+    descendantInfo: {
+      childrenSid,
+      indices: childrenIndices,
+      childrenKind,
+      childrenVal,
+    },
   };
 };

@@ -56,7 +56,7 @@ export const opsClient = () => {
     const {
       children,
       sid: childrenSid,
-      val: indices,
+      val: childrenIndices,
     } = (queryObject || {}) as ObjTemplate;
     if (!children) {
       return { error: "No children found" };
@@ -65,8 +65,8 @@ export const opsClient = () => {
       return { error: "sid is not a string" };
     }
     if (
-      !Array.isArray(indices) ||
-      indices.some((index) => typeof index !== "number")
+      !Array.isArray(childrenIndices) ||
+      childrenIndices.some((index) => typeof index !== "number")
     ) {
       return { error: "index is not a number[]" };
     }
@@ -80,7 +80,7 @@ export const opsClient = () => {
     if (childrenKind === OP_LITERAL) {
       const { error } = fnProcessLiteralChildrenM(
         childrenSid,
-        indices,
+        childrenIndices,
         childrenVal
       );
       return { error };
