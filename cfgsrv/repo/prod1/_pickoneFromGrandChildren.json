@@ -24,7 +24,7 @@
           "kind": "dec",
           "min": 0,
           "max": 1000,
-          "defval": 123
+          "defval": 523
         }
       }
     }
