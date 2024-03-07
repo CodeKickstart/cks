@@ -53,11 +53,15 @@ export const opsClient = () => {
       val?: number[];
     }
 
-    const { children, sid, val: indices } = (queryObject || {}) as ObjTemplate;
+    const {
+      children,
+      sid: childrenSid,
+      val: indices,
+    } = (queryObject || {}) as ObjTemplate;
     if (!children) {
       return { error: "No children found" };
     }
-    if (typeof sid !== "string") {
+    if (typeof childrenSid !== "string") {
       return { error: "sid is not a string" };
     }
     if (
@@ -70,19 +74,22 @@ export const opsClient = () => {
     interface ObjTemplateChildren {
       kind?: string;
       val?: string[] | number[] | boolean[] | undefined;
-      sid?: string;
     }
     const { kind: childrenKind, val: childrenVal } =
       children as ObjTemplateChildren;
     if (childrenKind === OP_LITERAL) {
-      const { error } = fnProcessLiteralChildrenM(sid, indices, childrenVal);
+      const { error } = fnProcessLiteralChildrenM(
+        childrenSid,
+        indices,
+        childrenVal
+      );
       return { error };
     } else {
       // pick the only unblocked child
       for (const [key, value] of Object.entries(children as object)) {
         console.log(`fnPostProcessPickOne: children: ${key} => ${value}`);
       }
-      const { error } = fnProcessGrandChildren(sid, children);
+      const { error } = fnProcessGrandChildren(childrenSid, children);
       return { error };
     }
   };
