@@ -9,15 +9,13 @@ export const opsClient = () => {
     sidCursor: string
   ): {
     error: Str;
-    nextSidCursor: Str;
   } => {
     // console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
-    const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
+    const { error } = fnBypassUserResponses(sidCursor);
 
     return {
       error,
-      nextSidCursor,
     };
   };
 
@@ -25,10 +23,9 @@ export const opsClient = () => {
     sidCursor: string
   ): {
     error: Str;
-    nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
-    return { error: null, nextSidCursor: null };
+    return { error: null };
   };
 
   return { fnPreProcess, fnPostProcess };

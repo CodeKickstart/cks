@@ -11,23 +11,21 @@ export const opsClient = () => {
     sidCursor: string
   ): {
     error: Str;
-    nextSidCursor: Str;
   } => {
     const { error: errorQuery, queryObject } = fnGetQueryObject(sidCursor);
     if (errorQuery) {
-      return { error: errorQuery, nextSidCursor: null };
+      return { error: errorQuery };
     }
 
     const { error: errorFinddescendantNames, descendantNames } =
       fnFindAndStoreDescendantNames(queryObject);
     if (errorFinddescendantNames) {
-      return { error: errorFinddescendantNames, nextSidCursor: null };
+      return { error: errorFinddescendantNames };
     }
     console.log(`opsClient::${name}:pre descendantNames: ${descendantNames}`);
 
     return {
       error: null,
-      nextSidCursor: null,
     };
   };
 
@@ -35,10 +33,9 @@ export const opsClient = () => {
     sidCursor: string
   ): {
     error: Str;
-    nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
-    return { error: null, nextSidCursor: null };
+    return { error: null };
   };
 
   return { fnPreProcess, fnPostProcess };

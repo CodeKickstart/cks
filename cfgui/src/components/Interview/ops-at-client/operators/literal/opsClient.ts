@@ -17,36 +17,13 @@ export const opsClient = () => {
     sidCursor: string
   ): {
     error: Str;
-    nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
-    const { error: errorOverride, value: override } = fnGetQueryAttribute(
-      sidCursor,
-      KEY_OVERRIDE
-    );
-    if (errorOverride) {
-      return { error: errorOverride, nextSidCursor: null };
-    }
 
-    if (override !== undefined) {
-      const error = `fnPreProcess: defval is not undefined in {name} with sidCursor: ${sidCursor}`;
-      return { error, nextSidCursor: null };
-    }
-
-    const { error: errorSetValue } = fnSetQueryAttribute(
-      sidCursor,
-      KEY_VAL,
-      override
-    );
-    if (errorSetValue) {
-      return { error: errorSetValue, nextSidCursor: null };
-    }
-
-    const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
+    const { error } = fnBypassUserResponses(sidCursor);
 
     return {
       error,
-      nextSidCursor,
     };
   };
 
@@ -54,10 +31,23 @@ export const opsClient = () => {
     sidCursor: string
   ): {
     error: Str;
-    nextSidCursor: Str;
   } => {
-    console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
-    return { error: null, nextSidCursor: null };
+    const { error: errorOverride, value: override } = fnGetQueryAttribute(
+      sidCursor,
+      KEY_OVERRIDE
+    );
+    if (errorOverride) {
+      return { error: errorOverride };
+    }
+    const { error: errorSetValue } = fnSetQueryAttribute(
+      sidCursor,
+      KEY_VAL,
+      override
+    );
+    if (errorSetValue) {
+      return { error: errorSetValue };
+    }
+    return { error: null };
   };
 
   return { fnPreProcess, fnPostProcess };

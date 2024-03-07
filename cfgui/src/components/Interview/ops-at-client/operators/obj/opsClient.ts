@@ -11,15 +11,13 @@ export const opsClient = () => {
     sidCursor: string
   ): {
     error: Str;
-    nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
-    const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
+    const { error } = fnBypassUserResponses(sidCursor);
 
     return {
       error,
-      nextSidCursor,
     };
   };
 
@@ -27,14 +25,12 @@ export const opsClient = () => {
     sidCursor: string
   ): {
     error: Str;
-    nextSidCursor: Str;
   } => {
     console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
-    // const descendantNames = fnFindChildrenNamesFromSid(sidCursor);
-    // console.log(`opsClient::${name}:post descendantNames: ${descendantNames}`);
+
     const { error } = fnPostProcessObj(sidCursor);
 
-    return { error, nextSidCursor: null };
+    return { error };
   };
 
   return { fnPreProcess, fnPostProcess };
