@@ -4,7 +4,7 @@ import { Str } from "../../../defs/types/Str";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
-import { fnProcessGrandChildren } from "../_helper/pick";
+import { fnFindDescendantInfo, fnProcessGrandChildren } from "../_helper/pick";
 import { fnProcessLiteralChildrenM } from "./postProcess";
 
 const name = OP_PICKMANY;
@@ -36,6 +36,13 @@ export const opsClient = () => {
   ): {
     error: Str;
   } => {
+    const { error: errorDescendantInfo, descendantInfo } =
+      fnFindDescendantInfo(sidCursor);
+    if (errorDescendantInfo) {
+      return { error: errorDescendantInfo };
+    }
+    console.log(`opsClient::${name}:post descendantInfo: ${descendantInfo}`);
+
     const { error, queryObject } = fnGetQueryObject(sidCursor);
     if (error) {
       return { error };

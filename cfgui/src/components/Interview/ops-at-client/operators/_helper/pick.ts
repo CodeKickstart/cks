@@ -37,19 +37,18 @@ export const fnFindDescendantInfo = (sidCursor: string) => {
     val?: number[];
   }
 
-  const {
-    children,
-    sid: parentSid,
-    val: derivedIndices,
-  } = (queryObject || {}) as ObjTemplate;
+  const { children, sid, val: indices } = (queryObject || {}) as ObjTemplate;
   if (!children) {
-    return { error: "No children found", descendantInfo: null };
+    return { error: "No children found" };
   }
-  if (typeof parentSid !== "string") {
+  if (typeof sid !== "string") {
     return { error: "sid is not a string" };
   }
-  if (!Array.isArray(derivedIndices)) {
-    return { error: "improper indices", descendantInfo: null };
+  if (
+    !Array.isArray(indices) ||
+    indices.some((index) => typeof index !== "number")
+  ) {
+    return { error: "index is not a number[]" };
   }
 
   interface ObjTemplateChildren {
@@ -61,6 +60,6 @@ export const fnFindDescendantInfo = (sidCursor: string) => {
 
   return {
     error: null,
-    descendantInfo: { parentSid, derivedIndices, childrenKind, childrenVal },
+    descendantInfo: { sid, indices, childrenKind, childrenVal },
   };
 };
