@@ -4,10 +4,8 @@ import { Str } from "../../../defs/types/Str";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
-import {
-  fnProcessGrandChildrenM,
-  fnProcessLiteralChildrenM,
-} from "./postProcess";
+import { fnProcessGrandChildren } from "../_helper/pick";
+import { fnProcessLiteralChildrenM } from "./postProcess";
 
 const name = OP_PICKMANY;
 export const opsClient = () => {
@@ -77,7 +75,7 @@ export const opsClient = () => {
       for (const [key, value] of Object.entries(children as object)) {
         console.log(`fnPostProcessPickOne: children: ${key} => ${value}`);
       }
-      const { error } = fnProcessGrandChildrenM(sid, children);
+      const { error } = fnProcessGrandChildren(sid, children);
       return { error };
     }
   };
