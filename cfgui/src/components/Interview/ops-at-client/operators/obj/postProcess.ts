@@ -10,8 +10,6 @@ import { Str } from "../../../defs/types/Str";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 import { fnDestructureJsonObj } from "../../../utils/destructureObj";
 
-// const fnIsPrimitive = (kind: string): boolean => {
-// }
 export const fnPostProcessObj = (sid: string): { error: Str } => {
   const { error, queryObject } = fnGetQueryObject(sid);
   if (error) {
@@ -26,7 +24,6 @@ export const fnPostProcessObj = (sid: string): { error: Str } => {
   }
 
   const { children } = fnDestructureJsonObj(queryObject, [KEY_CHILDREN]);
-  // const { children, sid } = fnDestructureJsonObj(parentQueryObj);
   if (!children) {
     return { error: `fnPostProcessObj: children is invalid` };
   }
