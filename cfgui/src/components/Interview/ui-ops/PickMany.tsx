@@ -83,7 +83,8 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     if (val.length > 0) {
       setAnswer(val);
     }
-  }, [queryObject, listOfDescendantNames]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -100,12 +101,6 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   }, [handleEnter]);
 
   const handleCheckboxChange = (index: number) => {
-    if (answer === null) {
-      return;
-    }
-
-    const currentIndex = answer.indexOf(index);
-
     const { error, value: val } = fnGetQueryAttribute(sid, KEY_VAL);
     if (error) {
       console.error(`Error getting query attribute: ${error}`);
@@ -113,11 +108,11 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
 
     const newVal: number[] = [...(val as number[])];
-
-    if (currentIndex === -1) {
-      newVal.push(index);
-    } else {
+    if (newVal.includes(index)) {
+      const currentIndex = newVal.indexOf(index);
       newVal.splice(currentIndex, 1);
+    } else {
+      newVal.push(index);
     }
 
     const { error: errorSet } = fnSetQueryAttribute(sid, KEY_VAL, newVal);
@@ -125,6 +120,8 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       console.error(`Error setting query attribute: ${errorSet}`);
       return;
     }
+
+    setAnswer(newVal);
   };
 
   const handleSubmitButtonClick = () => {
