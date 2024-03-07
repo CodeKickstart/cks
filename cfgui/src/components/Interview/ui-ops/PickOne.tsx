@@ -3,6 +3,7 @@ import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
+import { fnConverSingleDefvalToVal } from "../utils/defval2val";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -14,7 +15,7 @@ const ENTER_BUTTON_LABEL = "Enter";
 
 const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null); // Updated state name to 'answer'
-  const [sidCursor, setSidCursor] = useState<string>("");
+  const [sid, setSid] = useState<string>("");
 
   interface ObjTemplate {
     descendantNames?: { [key: string]: string };
@@ -27,7 +28,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   const handleEnter = useCallback(() => {
     if (answer !== null) {
-      fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
+      fnSetQueryAttribute(sid, KEY_VAL, answer);
       const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
       if (errorBlocker) {
         console.error(`Error blocking unselected children: ${errorBlocker}`);
@@ -35,7 +36,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
       setAnswer(null);
       onResponse();
     }
-  }, [answer, onResponse, sidCursor, queryObject]);
+  }, [answer, onResponse, sid, queryObject]);
 
   useEffect(() => {
     interface ObjTemplate {
@@ -43,33 +44,44 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
       sid?: string;
     }
 
-    const { defval, sid } = (queryObject || {}) as ObjTemplate;
-
     if (!listOfDescendantNames || !Array.isArray(listOfDescendantNames)) {
       const error = "Failed to retrieve query object";
       console.error(error);
       return;
     }
 
-    setSidCursor(sid as string);
+    const { defval, sid } = (queryObject || {}) as ObjTemplate;
+    if (!sid) {
+      throw new Error("Failed to retrieve query object");
+    }
+    setSid(sid);
 
-    if (defval !== undefined) {
-      if (typeof defval === "string") {
-        const index = listOfDescendantNames.indexOf(defval);
-        if (index !== -1) {
-          setAnswer(index);
-        } else {
-          const error = `Failed to find index of defval: ${defval}`;
-          console.error(error);
-          return;
-        }
-      } else {
-        setAnswer(defval as number);
-      }
+    if (!defval) {
+      return;
     }
 
-    // Set loading state to false after fetching data
-  }, [queryObject, listOfDescendantNames]);
+    const { val } = fnConverSingleDefvalToVal(listOfDescendantNames, defval);
+
+    const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
+    if (errorSetValue) {
+      console.error(`Error setting query attribute: ${errorSetValue}`);
+      return;
+    }
+
+    setAnswer(val);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = (index: number) => {
+    const { error: errorSet } = fnSetQueryAttribute(sid, KEY_VAL, index);
+    if (errorSet) {
+      console.error(`Error setting query attribute: ${errorSet}`);
+      return;
+    }
+
+    setAnswer(index);
+  };
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -83,7 +95,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [handleEnter, sidCursor]);
+  }, [handleEnter, sid]);
 
   const handleSubmitButtonClick = () => {
     if (answer !== null) {
@@ -101,7 +113,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
               type='radio'
               value={index}
               checked={answer === index}
-              onChange={() => setAnswer(index)}
+              onChange={() => handleChange(index)}
               className='mr-2'
             />
             {descendantName}
