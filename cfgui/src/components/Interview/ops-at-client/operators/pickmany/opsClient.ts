@@ -6,7 +6,7 @@ import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
 import {
   fnFindChildrenInfo,
-  fnProcessGrandChildren,
+  fnPickPostForGrandchildren,
 } from "../_helper/childrenProcessor";
 import { fnPickManyPostForLiteralChildren } from "./postProcess";
 
@@ -72,7 +72,7 @@ export const opsClient = () => {
       for (const [key, value] of Object.entries(children as object)) {
         console.log(`fnPostProcessPickOne: children: ${key} => ${value}`);
       }
-      const { error } = fnProcessGrandChildren(childrenSid, children);
+      const { error } = fnPickPostForGrandchildren(childrenSid, children);
       return { error };
     }
   };

@@ -4,7 +4,10 @@ import {
   fnSetQueryAttribute,
 } from "../../../state-mgt/dataAccess/loLevelAccess";
 
-export const fnProcessGrandChildren = (parentSid: string, children: object) => {
+export const fnPickPostForGrandchildren = (
+  parentSid: string,
+  children: object
+) => {
   for (const [key, value] of Object.entries(children as object)) {
     interface ObjTemplate {
       blocked?: boolean;

@@ -1,59 +1,70 @@
-import {
-  KEY_CHILDREN,
-  KEY_KIND,
-  KEY_SID,
-  KEY_VAL,
-  OP_LITERAL,
-} from "../../../../../shared/defs/constants";
+import { KEY_VAL } from "../../../../../shared/defs/constants";
+import { JsonObjectType } from "../../../../../shared/defs/types";
+import { fnSetQueryAttribute } from "../../../state-mgt/dataAccess/loLevelAccess";
 
-import { Str } from "../../../defs/types/Str";
-import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
-import { fnDestructureJsonObj } from "../../../utils/destructureObj";
-
-export const fnPostProcessObj = (sid: string): { error: Str } => {
-  const { error, queryObject } = fnGetQueryObject(sid);
-  if (error) {
-    return { error };
-  }
-  if (
-    !queryObject ||
-    typeof queryObject !== "object" ||
-    Array.isArray(queryObject)
-  ) {
-    return { error: `fnPostProcessObj: queryObject is an array` };
+export const fnObjPostForLiteralChildren = (
+  parentSid: string,
+  parentIndices: number[],
+  childrenVal: (string | number | boolean)[] | undefined
+) => {
+  if (childrenVal === undefined) {
+    return { error: "No value defined for literal" };
   }
 
-  const { children } = fnDestructureJsonObj(queryObject, [KEY_CHILDREN]);
-  if (!children) {
-    return { error: `fnPostProcessObj: children is invalid` };
-  }
-  const childrenKeys = Object.keys(children);
-  if (childrenKeys.includes(KEY_KIND)) {
-    const { childKind, val, childSid } = fnDestructureJsonObj(queryObject, [
-      KEY_KIND,
-      KEY_VAL,
-      KEY_SID,
-    ]);
-    if (childKind !== OP_LITERAL) {
-      if (!val || Array.isArray(val)) {
-        const error = `fnPostProcessObj: val is not an array for childSid: ${childSid}`;
-        return { error };
-      }
-      return { error: null };
+  const parentValues: (string | number | boolean)[] = [];
+  for (const index of parentIndices) {
+    if (
+      index >= childrenVal.length ||
+      index < 0 ||
+      childrenVal[index] === undefined ||
+      childrenVal[index] === null
+    ) {
+      return { error: "Index out of bounds or no value defined for literal" };
+    }
+    const parentVal = childrenVal[index];
+    if (
+      typeof parentVal === "string" ||
+      typeof parentVal === "number" ||
+      typeof parentVal === "boolean"
+    ) {
+      parentValues.push(parentVal);
     } else {
-      console.log(`fnPostProcessObj: childKind: ${childKind}`);
+      return { error: "Invalid type for parent value" };
     }
   }
 
-  for (const [k, v] of Object.entries(children)) {
-    console.log(`fnPostProcessObj: children: ${k} => ${v}`);
-    if (k) {
-      // return { error: `fnPostProcessObj: children value is not a string` };
+  const { error: errorSetValue } = fnSetQueryAttribute(
+    parentSid,
+    KEY_VAL,
+    parentValues
+  );
+  if (errorSetValue) {
+    return { error: errorSetValue };
+  }
+  return { error: null };
+};
+
+export const fnObjPostForGrandchildren = (
+  parentSid: string,
+  children: object
+) => {
+  for (const [key, value] of Object.entries(children as object)) {
+    interface ObjTemplate {
+      blocked?: boolean;
+      val?: string | number | boolean | object | null;
+    }
+    const { blocked, val } = (value || {}) as ObjTemplate;
+    if (blocked === false) {
+      const newVal = { [key]: val };
+      const { error: errorSetValue } = fnSetQueryAttribute(
+        parentSid,
+        key,
+        newVal as JsonObjectType
+      );
+      if (errorSetValue) {
+        return { error: errorSetValue };
+      }
     }
   }
-
-  //   const { kind, val} = fnDestructureJsonObj(queryObject, [KEY_KIND, KEY_SID, KEY_CHILDREN]);
-  //     if
-
   return { error: null };
 };
