@@ -39,49 +39,61 @@ export const opsClient = () => {
   ): {
     error: Str;
   } => {
+    // const { error, queryObject } = fnGetQueryObject(sidCursor);
+    // if (error) {
+    //   return { error };
+    // }
+    // interface ObjTemplate {
+    //   children?: object;
+    //   sid?: string;
+    //   val?: number[];
+    // }
+
+    // const {
+    //   children,
+    //   sid: childrenSid,
+    //   val: childrenIndices,
+    // } = (queryObject || {}) as ObjTemplate;
+    // if (!children) {
+    //   return { error: "No children found" };
+    // }
+    // if (typeof childrenSid !== "string") {
+    //   return { error: "sid is not a string" };
+    // }
+    // if (
+    //   !Array.isArray(childrenIndices) ||
+    //   childrenIndices.some((index) => typeof index !== "number")
+    // ) {
+    //   return { error: "index is not a number[]" };
+    // }
+
+    // interface ObjTemplateChildren {
+    //   kind?: string;
+    //   val?: string[] | number[] | boolean[] | undefined;
+    // }
+    // const { kind: childrenKind, val: childrenVal } =
+    //   children as ObjTemplateChildren;
+
     const { error: errorDescendantInfo, descendantInfo } =
       fnFindChildrenInfo(sidCursor);
     if (errorDescendantInfo) {
       return { error: errorDescendantInfo };
     }
     console.log(`opsClient::${name}:post descendantInfo: ${descendantInfo}`);
-
-    const { error, queryObject } = fnGetQueryObject(sidCursor);
-    if (error) {
-      return { error };
-    }
-    interface ObjTemplate {
-      children?: object;
-      sid?: string;
-      val?: number[];
-    }
-
     const {
       children,
-      sid: childrenSid,
-      val: childrenIndices,
-    } = (queryObject || {}) as ObjTemplate;
-    if (!children) {
-      return { error: "No children found" };
-    }
-    if (typeof childrenSid !== "string") {
-      return { error: "sid is not a string" };
-    }
-    if (
-      !Array.isArray(childrenIndices) ||
-      childrenIndices.some((index) => typeof index !== "number")
-    ) {
-      return { error: "index is not a number[]" };
-    }
+      childrenSid,
+      childrenIndices,
+      childrenKind,
+      childrenVal,
+    } = descendantInfo as {
+      children: object;
+      childrenSid: string;
+      childrenIndices: number[];
+      childrenKind: string;
+      childrenVal: (string | number | boolean)[] | undefined;
+    };
 
-    interface ObjTemplateChildren {
-      kind?: string;
-      val?: string[] | number[] | boolean[] | undefined;
-    }
-    const { kind: childrenKind, val: childrenVal } =
-      children as ObjTemplateChildren;
-
-    // destructuring descendantInfo
     if (childrenKind === OP_LITERAL) {
       const { error } = fnProcessLiteralChildrenM(
         childrenSid,

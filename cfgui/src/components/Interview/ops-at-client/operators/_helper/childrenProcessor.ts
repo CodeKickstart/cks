@@ -70,6 +70,7 @@ export const fnFindChildrenInfo = (sidCursor: string) => {
   return {
     error: null,
     descendantInfo: {
+      children,
       childrenSid,
       childrenIndices,
       childrenKind,
