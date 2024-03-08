@@ -69,6 +69,10 @@ const _Interview = ({
   );
 
   useEffect(() => {
+    sendData(apiUrl);
+  }, []);
+
+  useEffect(() => {
     // Set initial height
     handleResize();
 
@@ -80,8 +84,6 @@ const _Interview = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  sendData(apiUrl);
 
   const { data, isLoading, isError } = useQuery("data", () =>
     fetchData(apiUrl)
