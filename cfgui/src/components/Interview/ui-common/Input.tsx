@@ -34,6 +34,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       const queryObject = fnRetrieveQueryObject();
       if (!queryObject) {
         setErrorMessage("Error: Query object is empty.");
+        setActiveTab("Error");
         return;
       }
       interface ObjTemplate {
@@ -48,6 +49,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
     } catch (error) {
       console.error("Error retrieving query object:", error);
       setErrorMessage("Error: Failed to retrieve data");
+      setActiveTab("Error");
       setIsLoading(false);
     }
   }, []);
@@ -66,6 +68,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       ].includes(inputType)
     ) {
       setErrorMessage(`Invalid inputType: ${inputType}`);
+      setActiveTab("Error");
     } else {
       setErrorMessage(null);
     }
@@ -148,13 +151,12 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         </div>
       </div>
 
-      <div
-        className={`p-4 ${
-          activeTab === "Error" ? "block bg-gray-100" : "hidden"
-        }`}>
-        <h3 className='text-red-500 font-bold'>Error:</h3>
-        <p>{errorMessage}</p>
-      </div>
+      {errorMessage && (
+        <div className={`p-4 ${activeTab === "Error" ? "block" : "hidden"}`}>
+          <h3 className='text-red-500 font-bold'>Error:</h3>
+          <p>{errorMessage}</p>
+        </div>
+      )}
 
       <div
         className={`p-4 ${
@@ -165,19 +167,21 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
       <div className='ml-auto w-1/4'>
         <ul className='flex flex-col space-y-2'>
+          {errorMessage && (
+            <li
+              className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
+                activeTab === "Error" ? "bg-gray-100" : ""
+              }`}
+              onClick={() => setActiveTab("Error")}>
+              Error
+            </li>
+          )}
           <li
             className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
               activeTab === "Display" ? "bg-gray-100" : ""
             }`}
             onClick={() => setActiveTab("Display")}>
             Display
-          </li>
-          <li
-            className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
-              activeTab === "Error" ? "bg-gray-100" : ""
-            }`}
-            onClick={() => setActiveTab("Error")}>
-            Error
           </li>
           <li
             className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
