@@ -128,28 +128,50 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
   return (
     <div className='flex flex-col'>
-      <div className='flex-grow'>
-        <div
-          id='idDisplay'
-          className={`p-4 ${
-            activeTab === "Display" ? "block bg-gray-100" : "hidden"
-          }`}>
-          {cancelClicked && <Finish />}
-          {isLoading && <div>Loading...</div>}
-          <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
-          <div className='p-4 border rounded-md shadow-md'>
-            {inputComponent}
-          </div>
-          <div>
+      <div className='flex justify-between p-4'>
+        <div className='flex'>
+          {errorMessage && (
             <button
-              className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
-              onClick={() => {
-                setCancelClicked(true);
-              }}>
-              {CANCEL_BUTTON}
+              className={`cursor-pointer p-2 border rounded-t-md ${
+                activeTab === "Error" ? "bg-gray-200" : ""
+              }`}
+              onClick={() => setActiveTab("Error")}>
+              Error
             </button>
-          </div>
+          )}
+          <button
+            className={`cursor-pointer p-2 border rounded-t-md ${
+              activeTab === "Display" ? "bg-gray-200" : ""
+            }`}
+            onClick={() => setActiveTab("Display")}>
+            Display
+          </button>
+          <button
+            className={`cursor-pointer p-2 border rounded-t-md ${
+              activeTab === "Diagnostics" ? "bg-gray-200" : ""
+            }`}
+            onClick={() => setActiveTab("Diagnostics")}>
+            Diagnostics
+          </button>
         </div>
+        <button
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
+          onClick={() => {
+            setCancelClicked(true);
+          }}>
+          {CANCEL_BUTTON}
+        </button>
+      </div>
+
+      <div
+        id='idDisplay'
+        className={`p-4 ${
+          activeTab === "Display" ? "block bg-gray-100" : "hidden"
+        }`}>
+        {cancelClicked && <Finish />}
+        {isLoading && <div>Loading...</div>}
+        <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
+        <div className='p-4 border rounded-md shadow-md'>{inputComponent}</div>
       </div>
 
       {errorMessage && (
@@ -168,37 +190,6 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         }`}>
         <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
         <InterviewSummary />
-      </div>
-
-      <div className='flex justify-end'>
-        <ul className='flex flex-col space-y-2'>
-          {errorMessage && (
-            <li
-              className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
-                activeTab === "Error" ? "bg-gray-100" : ""
-              }`}
-              onClick={() => setActiveTab("Error")}
-              style={{ width: "100px" }}>
-              Error
-            </li>
-          )}
-          <li
-            className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
-              activeTab === "Display" ? "bg-gray-100" : ""
-            }`}
-            onClick={() => setActiveTab("Display")}
-            style={{ width: "100px" }}>
-            Display
-          </li>
-          <li
-            className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
-              activeTab === "Diagnostics" ? "bg-gray-100" : ""
-            }`}
-            onClick={() => setActiveTab("Diagnostics")}
-            style={{ width: "100px" }}>
-            Diagnostics
-          </li>
-        </ul>
       </div>
     </div>
   );
