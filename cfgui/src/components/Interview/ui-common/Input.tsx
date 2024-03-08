@@ -166,22 +166,22 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       <div className='ml-auto w-1/4'>
         <ul className='flex flex-col space-y-2'>
           <li
-            className={`cursor-pointer p-2 border rounded-md text-gray-600 ${
-              activeTab === "Display" ? "bg-gray-200" : ""
+            className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
+              activeTab === "Display" ? "bg-gray-100" : ""
             }`}
             onClick={() => setActiveTab("Display")}>
             Display
           </li>
           <li
-            className={`cursor-pointer p-2 border rounded-md text-gray-600 ${
-              activeTab === "Error" ? "bg-gray-200" : ""
+            className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
+              activeTab === "Error" ? "bg-gray-100" : ""
             }`}
             onClick={() => setActiveTab("Error")}>
             Error
           </li>
           <li
-            className={`cursor-pointer p-2 border rounded-md text-gray-600 ${
-              activeTab === "Diagnostics" ? "bg-gray-200" : ""
+            className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
+              activeTab === "Diagnostics" ? "bg-gray-100" : ""
             }`}
             onClick={() => setActiveTab("Diagnostics")}>
             Diagnostics
