@@ -5,7 +5,10 @@ import { Str } from "../../../defs/types/Str";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
-import { fnProcessGrandChildren } from "../_helper/childrenProcessor";
+import {
+  fnFindChildrenInfo,
+  fnProcessGrandChildren,
+} from "../_helper/childrenProcessor";
 import { fnProcessLiteralChildren } from "./postProcess";
 
 const name = OP_PICKONE;
@@ -36,43 +39,40 @@ export const opsClient = () => {
   ): {
     error: Str;
   } => {
-    const { error, queryObject } = fnGetQueryObject(sidCursor);
-    if (error) {
-      return { error };
-    }
-    interface ObjTemplate {
-      children?: object;
-      sid?: string;
-      val?: number;
-    }
+    const { error: errorDescendantInfo, descendantInfo } =
+      fnFindChildrenInfo<number>(sidCursor);
 
-    const { children, sid, val: index } = (queryObject || {}) as ObjTemplate;
-    if (!children) {
-      return { error: "No children found" };
+    if (errorDescendantInfo) {
+      return { error: errorDescendantInfo };
     }
-    if (typeof sid !== "string") {
-      return { error: "sid is not a string" };
-    }
-    if (typeof index !== "number") {
-      return { error: "index is not a number" };
-    }
+    console.log(`opsClient::${name}:post descendantInfo: ${descendantInfo}`);
+    const {
+      children,
+      childrenSid,
+      childrenIndices,
+      childrenKind,
+      childrenVal,
+    } = descendantInfo as {
+      children: object;
+      childrenSid: string;
+      childrenIndices: number;
+      childrenKind: string;
+      childrenVal: (string | number | boolean)[] | undefined;
+    };
 
-    interface ObjTemplateChildren {
-      kind?: string;
-      val?: string[] | number[] | boolean[] | undefined;
-      sid?: string;
-    }
-    const { kind: childrenKind, val: childrenVal } =
-      children as ObjTemplateChildren;
     if (childrenKind === OP_LITERAL) {
-      const { error } = fnProcessLiteralChildren(sid, index, childrenVal);
+      const { error } = fnProcessLiteralChildren(
+        childrenSid,
+        childrenIndices,
+        childrenVal
+      );
       return { error };
     } else {
       // pick the only unblocked child
       for (const [key, value] of Object.entries(children as object)) {
         console.log(`fnPostProcessPickOne: children: ${key} => ${value}`);
       }
-      const { error } = fnProcessGrandChildren(sid, children);
+      const { error } = fnProcessGrandChildren(childrenSid, children);
       return { error };
     }
   };

@@ -4,7 +4,7 @@ import { fnSetQueryAttribute } from "../../../state-mgt/dataAccess/loLevelAccess
 export const fnProcessLiteralChildren = (
   parentSid: string,
   parentIndex: number,
-  childrenVal: string[] | number[] | boolean[] | undefined
+  childrenVal: (string | number | boolean)[] | undefined
 ) => {
   if (childrenVal === undefined) {
     return { error: "No value defined for literal" };
