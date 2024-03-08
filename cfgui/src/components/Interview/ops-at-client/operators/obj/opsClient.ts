@@ -1,7 +1,7 @@
 import { OP_OBJ } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 import { fnFindChildrenInfo } from "../_helper/postProcChildrenInfo";
-import { fnObjPostForGrandchildren } from "./postProcess";
+import { fnPostProcPickForSkippedDescendants } from "../_helper/postProcSkippedDescedants";
 
 const name = OP_OBJ;
 export const opsClient = () => {
@@ -31,29 +31,18 @@ export const opsClient = () => {
       return { error: errorDescendantInfo };
     }
     console.log(`opsClient::${name}:post descendantInfo: ${descendantInfo}`);
-    const {
-      children,
-      childrenSid,
-      childrenIndices,
-      childrenKind,
-      childrenVal,
-    } = descendantInfo as {
+    const { children, childrenKind } = descendantInfo as {
       children: object;
-      childrenSid: string;
-      childrenIndices: number[];
       childrenKind: string;
-      childrenVal: (string | number | boolean)[] | undefined;
     };
-
-    console.log(
-      `fnPostProcessObj: children: ${children} childrenSid: ${childrenSid} childrenIndices: ${childrenIndices} childrenVal: ${childrenVal} childrenKind: ${childrenKind}`
-    );
 
     if (childrenKind !== undefined) {
       const error = "childrenKind should be undefined";
       return { error };
     }
-    const { error } = fnObjPostForGrandchildren(childrenSid, children);
+
+    // there will be no skipped descendants for OP_OBJ as no children will be blocked
+    const { error } = fnPostProcPickForSkippedDescendants(sidCursor, children);
     return { error };
   };
 
