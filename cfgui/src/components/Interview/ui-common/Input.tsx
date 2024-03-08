@@ -126,7 +126,9 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
     <div className='flex'>
       <div
         id='idDisplay'
-        className={`p-4 ${activeTab === "Display" ? "block" : "hidden"}`}>
+        className={`p-4 ${
+          activeTab === "Display" ? "block bg-gray-100" : "hidden"
+        }`}>
         {cancelClicked && <Finish />}
         {isLoading && <div>Loading...</div>}
         <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
@@ -143,16 +145,16 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       </div>
 
       <div
-        className={`p-4 border rounded-md shadow-md ${
-          activeTab === "Error" ? "block" : "hidden"
+        className={`p-4 ${
+          activeTab === "Error" ? "block bg-gray-100" : "hidden"
         }`}>
         <h3 className='text-red-500 font-bold'>Error:</h3>
         <p>{errorMessage}</p>
       </div>
 
       <div
-        className={`p-4 border rounded-md shadow-md ${
-          activeTab === "Diagnostics" ? "block" : "hidden"
+        className={`p-4 ${
+          activeTab === "Diagnostics" ? "block bg-gray-100" : "hidden"
         }`}>
         <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
       </div>
@@ -160,22 +162,22 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       <div className='ml-auto w-1/4'>
         <ul className='flex flex-col space-y-2'>
           <li
-            className={`cursor-pointer p-2 border rounded-md ${
-              activeTab === "Display" ? "bg-blue-500 text-white" : ""
+            className={`cursor-pointer p-2 border rounded-md text-gray-600 ${
+              activeTab === "Display" ? "bg-gray-200" : ""
             }`}
             onClick={() => setActiveTab("Display")}>
             Display
           </li>
           <li
-            className={`cursor-pointer p-2 border rounded-md ${
-              activeTab === "Error" ? "bg-red-500 text-white" : ""
+            className={`cursor-pointer p-2 border rounded-md text-gray-600 ${
+              activeTab === "Error" ? "bg-gray-200" : ""
             }`}
             onClick={() => setActiveTab("Error")}>
             Error
           </li>
           <li
-            className={`cursor-pointer p-2 border rounded-md ${
-              activeTab === "Diagnostics" ? "bg-blue-500 text-white" : ""
+            className={`cursor-pointer p-2 border rounded-md text-gray-600 ${
+              activeTab === "Diagnostics" ? "bg-gray-200" : ""
             }`}
             onClick={() => setActiveTab("Diagnostics")}>
             Diagnostics
