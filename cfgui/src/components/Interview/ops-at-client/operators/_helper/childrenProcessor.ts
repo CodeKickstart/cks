@@ -48,18 +48,12 @@ export const fnFindChildrenInfo = <T>(sidCursor: string) => {
   if (!children) {
     return { error: "No children found" };
   }
-  if (!childrenIndices) {
-    return { error: "No indices found" };
-  }
+  // if (!childrenIndices) {
+  //   return { error: "No indices found" };
+  // }
   if (typeof childrenSid !== "string") {
     return { error: "sid is not a string" };
   }
-  // if (
-  //   !Array.isArray(childrenIndices) ||
-  //   childrenIndices.some((index) => typeof index !== "number")
-  // ) {
-
-  // }
 
   interface ObjTemplateChildren {
     kind?: string;
