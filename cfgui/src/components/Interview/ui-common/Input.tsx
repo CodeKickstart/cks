@@ -133,7 +133,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
           {errorMessage && (
             <button
               className={`cursor-pointer p-2 border rounded-t-md ${
-                activeTab === "Error" ? "bg-gray-200" : ""
+                activeTab === "Error" ? "bg-gray-100" : ""
               }`}
               onClick={() => setActiveTab("Error")}>
               Error
@@ -141,14 +141,14 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
           )}
           <button
             className={`cursor-pointer p-2 border rounded-t-md ${
-              activeTab === "Display" ? "bg-gray-200" : ""
+              activeTab === "Display" ? "bg-gray-100" : ""
             }`}
             onClick={() => setActiveTab("Display")}>
             Display
           </button>
           <button
             className={`cursor-pointer p-2 border rounded-t-md ${
-              activeTab === "Diagnostics" ? "bg-gray-200" : ""
+              activeTab === "Diagnostics" ? "bg-gray-100" : ""
             }`}
             onClick={() => setActiveTab("Diagnostics")}>
             Diagnostics
