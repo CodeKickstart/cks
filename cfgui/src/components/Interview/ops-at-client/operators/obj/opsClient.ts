@@ -1,10 +1,7 @@
-import { OP_LITERAL, OP_OBJ } from "../../../../../shared/defs/constants";
+import { OP_OBJ } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 import { fnFindChildrenInfo } from "../_helper/childrenProcessor";
-import {
-  fnObjPostForGrandchildren,
-  fnObjPostForLiteralChildren,
-} from "./postProcess";
+import { fnObjPostForGrandchildren } from "./postProcess";
 
 const name = OP_OBJ;
 export const opsClient = () => {
@@ -52,23 +49,12 @@ export const opsClient = () => {
       `fnPostProcessObj: children: ${children} childrenSid: ${childrenSid} childrenIndices: ${childrenIndices} childrenVal: ${childrenVal} childrenKind: ${childrenKind}`
     );
 
-    if (childrenKind === OP_LITERAL) {
-      const { error } = fnObjPostForLiteralChildren(
-        childrenSid,
-        childrenIndices,
-        childrenVal
-      );
-      return { error };
-    } else {
-      // pick the only unblocked child
-      for (const [key, value] of Object.entries(children as object)) {
-        console.log(`fnPostProcessPickOne: children: ${key} => ${value}`);
-      }
-      const { error } = fnObjPostForGrandchildren(childrenSid, children);
+    if (childrenKind !== undefined) {
+      const error = "childrenKind should be undefined";
       return { error };
     }
-
-    return { error: null };
+    const { error } = fnObjPostForGrandchildren(childrenSid, children);
+    return { error };
   };
 
   return { fnPreProcess, fnPostProcess };
