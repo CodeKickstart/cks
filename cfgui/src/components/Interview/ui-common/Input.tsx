@@ -26,8 +26,9 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cancelClicked, setCancelClicked] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState(true);
+  // const [isOpen, setIsOpen] = useState(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // New state for error message
+  const [activeTab, setActiveTab] = useState<string>("Display");
 
   useEffect(() => {
     try {
@@ -125,7 +126,10 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
   return (
     <div className='flex'>
-      <div id='idDisplay' className={`p-4 ${isOpen ? "block" : "hidden"}`}>
+      {/* Display Tab */}
+      <div
+        id='idDisplay'
+        className={`p-4 ${activeTab === "Display" ? "block" : "hidden"}`}>
         {cancelClicked && <Finish />}
         {isLoading && <div>Loading...</div>}
         <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
@@ -135,19 +139,57 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
             className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
             onClick={() => {
               setCancelClicked(true);
-              setIsOpen(false);
+              // setIsOpen(false);
             }}>
             {CANCEL_BUTTON}
           </button>
         </div>
       </div>
+
       {/* Error Message Tab */}
-      {errorMessage && (
-        <div className='p-4 border rounded-md shadow-md'>
-          <h3 className='text-red-500 font-bold'>Error:</h3>
-          <p>{errorMessage}</p>
-        </div>
-      )}
+      <div
+        className={`p-4 border rounded-md shadow-md ${
+          activeTab === "Error" ? "block" : "hidden"
+        }`}>
+        <h3 className='text-red-500 font-bold'>Error:</h3>
+        <p>{errorMessage}</p>
+      </div>
+
+      {/* Diagnostics Tab */}
+      <div
+        className={`p-4 border rounded-md shadow-md ${
+          activeTab === "Diagnostics" ? "block" : "hidden"
+        }`}>
+        <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
+        {/* Add diagnostics content here */}
+      </div>
+
+      {/* Tabs */}
+      <div className='w-1/4'>
+        <ul className='flex flex-col space-y-2'>
+          <li
+            className={`cursor-pointer p-2 border rounded-md ${
+              activeTab === "Display" ? "bg-blue-500 text-white" : ""
+            }`}
+            onClick={() => setActiveTab("Display")}>
+            Display
+          </li>
+          <li
+            className={`cursor-pointer p-2 border rounded-md ${
+              activeTab === "Error" ? "bg-red-500 text-white" : ""
+            }`}
+            onClick={() => setActiveTab("Error")}>
+            Error
+          </li>
+          <li
+            className={`cursor-pointer p-2 border rounded-md ${
+              activeTab === "Diagnostics" ? "bg-blue-500 text-white" : ""
+            }`}
+            onClick={() => setActiveTab("Diagnostics")}>
+            Diagnostics
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
