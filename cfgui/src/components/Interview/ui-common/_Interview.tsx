@@ -7,6 +7,7 @@ import QnA from "../ui-ops/_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
 import Finish from "./Finish";
+import { sendData } from "../misc/expt/sendData";
 
 interface InterviewProps {
   baseUrl: string;
@@ -79,6 +80,8 @@ const _Interview = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  sendData(apiUrl);
 
   const { data, isLoading, isError } = useQuery("data", () =>
     fetchData(apiUrl)

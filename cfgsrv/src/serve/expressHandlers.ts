@@ -16,3 +16,9 @@ export const handleFetchQuery = (req: Request, res: Response) => {
 
   res.status(200).json(queryBundle);
 };
+
+export const fnPostData = (req: Request, res: Response) => {
+  const data = req.body;
+  console.log(`Data received: ${data}`);
+  res.status(200).json({ message: "Data received" });
+};
