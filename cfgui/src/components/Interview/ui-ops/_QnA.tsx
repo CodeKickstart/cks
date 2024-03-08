@@ -108,7 +108,7 @@ const QnA: React.FC = () => {
       case KIND_ERROR:
         return <Err />;
       case KIND_FINISH:
-        return <div>Finish from QnA !!!</div>;
+        return <div>Interview Finished</div>;
       default:
         return <Err />;
     }
