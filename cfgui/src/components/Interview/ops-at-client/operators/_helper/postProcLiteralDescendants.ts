@@ -4,7 +4,8 @@ import { fnSetQueryAttribute } from "../../../state-mgt/dataAccess/loLevelAccess
 export const fnPostProcPickForLiteralDescendants = (
   parentSid: string,
   parentIndices: number[],
-  childrenVal: (string | number | boolean)[] | undefined
+  childrenVal: (string | number | boolean)[] | undefined,
+  scalarOutput: boolean
 ) => {
   if (childrenVal === undefined) {
     return { error: "No value defined for literal" };
@@ -32,13 +33,28 @@ export const fnPostProcPickForLiteralDescendants = (
     }
   }
 
-  const { error: errorSetValue } = fnSetQueryAttribute(
-    parentSid,
-    KEY_VAL,
-    parentValues
-  );
-  if (errorSetValue) {
-    return { error: errorSetValue };
+  if (scalarOutput === true) {
+    if (parentValues.length !== 1) {
+      return { error: "Scalar output but multiple values found" };
+    }
+    const { error: errorSetValue } = fnSetQueryAttribute(
+      parentSid,
+      KEY_VAL,
+      parentValues[0]
+    );
+    if (errorSetValue) {
+      return { error: errorSetValue };
+    }
+    return { error: null };
+  } else {
+    const { error: errorSetValue } = fnSetQueryAttribute(
+      parentSid,
+      KEY_VAL,
+      parentValues
+    );
+    if (errorSetValue) {
+      return { error: errorSetValue };
+    }
+    return { error: null };
   }
-  return { error: null };
 };

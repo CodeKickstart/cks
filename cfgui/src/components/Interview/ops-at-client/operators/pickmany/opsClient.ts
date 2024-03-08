@@ -62,7 +62,8 @@ export const opsClient = () => {
       const { error } = fnPostProcPickForLiteralDescendants(
         childrenSid,
         childrenIndices,
-        childrenVal
+        childrenVal,
+        false
       );
       return { error };
     } else {
