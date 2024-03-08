@@ -26,15 +26,14 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cancelClicked, setCancelClicked] = useState<boolean>(false);
-  // const [isOpen, setIsOpen] = useState(true);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // New state for error message
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>("Display");
 
   useEffect(() => {
     try {
       const queryObject = fnRetrieveQueryObject();
       if (!queryObject) {
-        setErrorMessage("Error: Query object is empty."); // Set error message if query object is empty
+        setErrorMessage("Error: Query object is empty.");
         return;
       }
       interface ObjTemplate {
@@ -48,13 +47,12 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       setIsLoading(false);
     } catch (error) {
       console.error("Error retrieving query object:", error);
-      setErrorMessage("Error: Failed to retrieve data"); // Set error message for any other error during retrieval
+      setErrorMessage("Error: Failed to retrieve data");
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    // This effect will run whenever `inputType` changes
     if (
       inputType &&
       ![
@@ -67,9 +65,9 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         INPUT_LITERAL,
       ].includes(inputType)
     ) {
-      setErrorMessage(`Invalid inputType: ${inputType}`); // Set error message for invalid inputType
+      setErrorMessage(`Invalid inputType: ${inputType}`);
     } else {
-      setErrorMessage(null); // Clear error message if inputType is valid
+      setErrorMessage(null);
     }
   }, [inputType]);
 
@@ -126,7 +124,6 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
   return (
     <div className='flex'>
-      {/* Display Tab */}
       <div
         id='idDisplay'
         className={`p-4 ${activeTab === "Display" ? "block" : "hidden"}`}>
@@ -139,14 +136,12 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
             className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
             onClick={() => {
               setCancelClicked(true);
-              // setIsOpen(false);
             }}>
             {CANCEL_BUTTON}
           </button>
         </div>
       </div>
 
-      {/* Error Message Tab */}
       <div
         className={`p-4 border rounded-md shadow-md ${
           activeTab === "Error" ? "block" : "hidden"
@@ -155,7 +150,6 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         <p>{errorMessage}</p>
       </div>
 
-      {/* Diagnostics Tab */}
       <div
         className={`p-4 border rounded-md shadow-md ${
           activeTab === "Diagnostics" ? "block" : "hidden"
@@ -164,7 +158,6 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         {/* Add diagnostics content here */}
       </div>
 
-      {/* Tabs */}
       <div className='w-1/4'>
         <ul className='flex flex-col space-y-2'>
           <li
