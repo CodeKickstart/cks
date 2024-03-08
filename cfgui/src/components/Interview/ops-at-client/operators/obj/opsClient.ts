@@ -1,6 +1,6 @@
 import { OP_OBJ } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
-import { fnFindChildrenInfo } from "../_helper/childrenProcessor";
+import { fnFindChildrenInfo } from "../_helper/postProcChildrenInfo";
 import { fnObjPostForGrandchildren } from "./postProcess";
 
 const name = OP_OBJ;
