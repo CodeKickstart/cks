@@ -127,8 +127,8 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   }
 
   return (
-    <div className='flex'>
-      <div className='bg-gray-100 w-full'>
+    <div className='flex flex-col'>
+      <div className='flex-grow'>
         <div
           id='idDisplay'
           className={`p-4 ${
@@ -153,7 +153,10 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       </div>
 
       {errorMessage && (
-        <div className={`p-4 ${activeTab === "Error" ? "block" : "hidden"}`}>
+        <div
+          className={`p-4 ${
+            activeTab === "Error" ? "block bg-gray-100" : "hidden"
+          }`}>
           <h3 className='text-red-500 font-bold'>Error:</h3>
           <p>{errorMessage}</p>
         </div>
@@ -167,14 +170,15 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         <InterviewSummary />
       </div>
 
-      <div className='ml-auto w-1/4'>
+      <div className='flex justify-end'>
         <ul className='flex flex-col space-y-2'>
           {errorMessage && (
             <li
               className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
                 activeTab === "Error" ? "bg-gray-100" : ""
               }`}
-              onClick={() => setActiveTab("Error")}>
+              onClick={() => setActiveTab("Error")}
+              style={{ width: "100px" }}>
               Error
             </li>
           )}
@@ -182,14 +186,16 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
             className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
               activeTab === "Display" ? "bg-gray-100" : ""
             }`}
-            onClick={() => setActiveTab("Display")}>
+            onClick={() => setActiveTab("Display")}
+            style={{ width: "100px" }}>
             Display
           </li>
           <li
             className={`cursor-pointer p-2 border-b-0 rounded-tr-md rounded-br-md text-gray-600 ${
               activeTab === "Diagnostics" ? "bg-gray-100" : ""
             }`}
-            onClick={() => setActiveTab("Diagnostics")}>
+            onClick={() => setActiveTab("Diagnostics")}
+            style={{ width: "100px" }}>
             Diagnostics
           </li>
         </ul>
