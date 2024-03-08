@@ -5,11 +5,9 @@ import { Str } from "../../../defs/types/Str";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
-import {
-  fnFindChildrenInfo,
-  fnPostProcPickForSkippedDescendants,
-} from "../_helper/postProcChildrenInfo";
-import { fnPostProcPickForLiteralDescendants } from "../_helper/postProcPicksLiteralDescendants";
+import { fnFindChildrenInfo } from "../_helper/postProcChildrenInfo";
+import { fnPostProcPickForLiteralDescendants } from "../_helper/postProcLiteralDescendants";
+import { fnPostProcPickForSkippedDescendants } from "../_helper/postProcSkippedDescedants";
 
 const name = OP_PICKONE;
 export const opsClient = () => {
