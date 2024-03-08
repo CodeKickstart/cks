@@ -128,11 +128,11 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
   return (
     <div className='flex flex-col'>
-      <div className='flex justify-between p-4'>
+      <div className='flex justify-between px-4'>
         <div className='flex'>
           {errorMessage && (
             <button
-              className={`cursor-pointer p-2 border rounded-t-md ${
+              className={`cursor-pointer p-2 rounded-t-md ${
                 activeTab === "Error" ? "bg-gray-100" : ""
               }`}
               onClick={() => setActiveTab("Error")}>
@@ -140,14 +140,14 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
             </button>
           )}
           <button
-            className={`cursor-pointer p-2 border rounded-t-md ${
+            className={`cursor-pointer p-2 rounded-t-md ${
               activeTab === "Display" ? "bg-gray-100" : ""
             }`}
             onClick={() => setActiveTab("Display")}>
             Display
           </button>
           <button
-            className={`cursor-pointer p-2 border rounded-t-md ${
+            className={`cursor-pointer p-2 rounded-t-md ${
               activeTab === "Diagnostics" ? "bg-gray-100" : ""
             }`}
             onClick={() => setActiveTab("Diagnostics")}>
