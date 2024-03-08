@@ -26,7 +26,7 @@ export const fnProcessGrandChildren = (parentSid: string, children: object) => {
   return { error: null };
 };
 
-export const fnFindChildrenInfo = (sidCursor: string) => {
+export const fnFindChildrenInfo = <T>(sidCursor: string) => {
   const { error, queryObject } = fnGetQueryObject(sidCursor);
   if (error) {
     return { error };
@@ -34,7 +34,7 @@ export const fnFindChildrenInfo = (sidCursor: string) => {
   interface ObjTemplate {
     children?: object;
     sid?: string;
-    val?: number[];
+    val?: T;
   }
 
   const {
@@ -48,16 +48,15 @@ export const fnFindChildrenInfo = (sidCursor: string) => {
   if (!childrenIndices) {
     return { error: "No indices found" };
   }
-
   if (typeof childrenSid !== "string") {
     return { error: "sid is not a string" };
   }
-  if (
-    !Array.isArray(childrenIndices) ||
-    childrenIndices.some((index) => typeof index !== "number")
-  ) {
-    return { error: "index is not a number[]" };
-  }
+  // if (
+  //   !Array.isArray(childrenIndices) ||
+  //   childrenIndices.some((index) => typeof index !== "number")
+  // ) {
+
+  // }
 
   interface ObjTemplateChildren {
     kind?: string;
