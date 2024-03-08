@@ -155,10 +155,9 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
           activeTab === "Diagnostics" ? "block" : "hidden"
         }`}>
         <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
-        {/* Add diagnostics content here */}
       </div>
 
-      <div className='w-1/4'>
+      <div className='ml-auto w-1/4'>
         <ul className='flex flex-col space-y-2'>
           <li
             className={`cursor-pointer p-2 border rounded-md ${
