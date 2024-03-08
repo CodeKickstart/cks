@@ -1,4 +1,4 @@
-export const sendData = (url: string) => async () => {
+export const fnSendData = (url: string) => async () => {
   const postData = { name: "John", age: 30 }; // Sample JSON data to send // URL of your Express server endpoint
 
   async function postDataAsync() {

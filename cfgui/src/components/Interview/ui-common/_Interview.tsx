@@ -7,7 +7,7 @@ import QnA from "../ui-ops/_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
 import Finish from "./Finish";
-import { sendData } from "../misc/expt/sendData";
+import { fnSendData } from "../misc/expt/sendData";
 
 interface InterviewProps {
   baseUrl: string;
@@ -69,8 +69,8 @@ const _Interview = ({
   );
 
   useEffect(() => {
-    sendData(apiUrl);
-  }, []);
+    fnSendData(apiUrl);
+  }, [apiUrl]);
 
   useEffect(() => {
     // Set initial height
