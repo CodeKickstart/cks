@@ -124,23 +124,27 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
   return (
     <div className='flex'>
-      <div
-        id='idDisplay'
-        className={`p-4 ${
-          activeTab === "Display" ? "block bg-gray-100" : "hidden"
-        }`}>
-        {cancelClicked && <Finish />}
-        {isLoading && <div>Loading...</div>}
-        <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
-        <div className='p-4 border rounded-md shadow-md'>{inputComponent}</div>
-        <div>
-          <button
-            className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
-            onClick={() => {
-              setCancelClicked(true);
-            }}>
-            {CANCEL_BUTTON}
-          </button>
+      <div className='bg-gray-100 w-full'>
+        <div
+          id='idDisplay'
+          className={`p-4 ${
+            activeTab === "Display" ? "block bg-gray-100" : "hidden"
+          }`}>
+          {cancelClicked && <Finish />}
+          {isLoading && <div>Loading...</div>}
+          <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
+          <div className='p-4 border rounded-md shadow-md'>
+            {inputComponent}
+          </div>
+          <div>
+            <button
+              className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
+              onClick={() => {
+                setCancelClicked(true);
+              }}>
+              {CANCEL_BUTTON}
+            </button>
+          </div>
         </div>
       </div>
 
