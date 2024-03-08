@@ -5,7 +5,7 @@ import { Str } from "../../../defs/types/Str";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
-import { fnProcessGrandChildren } from "../_helper/pick";
+import { fnProcessGrandChildren } from "../_helper/childrenProcessor";
 import { fnProcessLiteralChildren } from "./postProcess";
 
 const name = OP_PICKONE;
@@ -19,10 +19,10 @@ export const opsClient = () => {
     if (errorQuery) {
       return { error: errorQuery };
     }
-    const { error: errorFinddescendantNames, descendantNames } =
+    const { error: errorFindDescendantNames, descendantNames } =
       fnFindAndStoreDescendantNames(queryObject);
-    if (errorFinddescendantNames) {
-      return { error: errorFinddescendantNames };
+    if (errorFindDescendantNames) {
+      return { error: errorFindDescendantNames };
     }
     console.log(`opsClient::${name}:pre descendantNames: ${descendantNames}`);
 

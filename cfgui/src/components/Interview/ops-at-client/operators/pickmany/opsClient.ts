@@ -4,7 +4,10 @@ import { Str } from "../../../defs/types/Str";
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
 
 import { fnFindAndStoreDescendantNames } from "../../../utils/descendantSearch";
-import { fnFindDescendantInfo, fnProcessGrandChildren } from "../_helper/pick";
+import {
+  fnFindChildrenInfo,
+  fnProcessGrandChildren,
+} from "../_helper/childrenProcessor";
 import { fnProcessLiteralChildrenM } from "./postProcess";
 
 const name = OP_PICKMANY;
@@ -19,10 +22,10 @@ export const opsClient = () => {
       return { error: errorQuery };
     }
 
-    const { error: errorFinddescendantNames, descendantNames } =
+    const { error: errorFindDescendantNames, descendantNames } =
       fnFindAndStoreDescendantNames(queryObject);
-    if (errorFinddescendantNames) {
-      return { error: errorFinddescendantNames };
+    if (errorFindDescendantNames) {
+      return { error: errorFindDescendantNames };
     }
     console.log(`opsClient::${name}:pre descendantNames: ${descendantNames}`);
 
@@ -37,7 +40,7 @@ export const opsClient = () => {
     error: Str;
   } => {
     const { error: errorDescendantInfo, descendantInfo } =
-      fnFindDescendantInfo(sidCursor);
+      fnFindChildrenInfo(sidCursor);
     if (errorDescendantInfo) {
       return { error: errorDescendantInfo };
     }
@@ -77,6 +80,8 @@ export const opsClient = () => {
     }
     const { kind: childrenKind, val: childrenVal } =
       children as ObjTemplateChildren;
+
+    // destructuring descendantInfo
     if (childrenKind === OP_LITERAL) {
       const { error } = fnProcessLiteralChildrenM(
         childrenSid,
