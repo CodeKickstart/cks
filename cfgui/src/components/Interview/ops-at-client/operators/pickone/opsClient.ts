@@ -9,7 +9,7 @@ import {
   fnFindChildrenInfo,
   fnProcessGrandChildren,
 } from "../_helper/childrenProcessor";
-import { fnProcessLiteralChildren } from "./postProcess";
+import { fnPIckOnePostForLiteralChildren } from "./postProcess";
 
 const name = OP_PICKONE;
 export const opsClient = () => {
@@ -61,7 +61,7 @@ export const opsClient = () => {
     };
 
     if (childrenKind === OP_LITERAL) {
-      const { error } = fnProcessLiteralChildren(
+      const { error } = fnPIckOnePostForLiteralChildren(
         childrenSid,
         childrenIndices,
         childrenVal

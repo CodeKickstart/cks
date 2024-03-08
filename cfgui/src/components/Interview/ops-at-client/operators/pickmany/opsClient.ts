@@ -8,7 +8,7 @@ import {
   fnFindChildrenInfo,
   fnProcessGrandChildren,
 } from "../_helper/childrenProcessor";
-import { fnProcessLiteralChildrenM } from "./postProcess";
+import { fnPickManyPostForLiteralChildren } from "./postProcess";
 
 const name = OP_PICKMANY;
 export const opsClient = () => {
@@ -61,7 +61,7 @@ export const opsClient = () => {
     };
 
     if (childrenKind === OP_LITERAL) {
-      const { error } = fnProcessLiteralChildrenM(
+      const { error } = fnPickManyPostForLiteralChildren(
         childrenSid,
         childrenIndices,
         childrenVal

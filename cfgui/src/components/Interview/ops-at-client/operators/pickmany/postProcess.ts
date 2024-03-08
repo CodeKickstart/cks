@@ -1,7 +1,7 @@
 import { KEY_VAL } from "../../../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../../../state-mgt/dataAccess/loLevelAccess";
 
-export const fnProcessLiteralChildrenM = (
+export const fnPickManyPostForLiteralChildren = (
   parentSid: string,
   parentIndices: number[],
   childrenVal: (string | number | boolean)[] | undefined
