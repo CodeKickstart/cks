@@ -19,6 +19,7 @@ import PickOne from "../ui-ops/PickOne";
 import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Finish from "./Finish";
+import { InterviewSummary } from "./InterviewSummary";
 
 const CANCEL_BUTTON = "Cancel";
 
@@ -163,6 +164,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
           activeTab === "Diagnostics" ? "block bg-gray-100" : "hidden"
         }`}>
         <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
+        <InterviewSummary />
       </div>
 
       <div className='ml-auto w-1/4'>
