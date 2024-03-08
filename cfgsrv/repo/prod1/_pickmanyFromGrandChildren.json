@@ -9,8 +9,7 @@
           "prompt": "gas mileage in mpg",
           "kind": "dec",
           "max": 99.9,
-          "defval": 35.0,
-          "override": 40.0
+          "defval": 35.0
         },
         "ev": {
           "prompt": "vehicle range in miles",

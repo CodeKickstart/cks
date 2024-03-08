@@ -1,8 +1,6 @@
 import { OP_OBJ } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
-import { fnBypassUserResponses } from "../../../misc/interviewBypass";
-
 import { fnPostProcessObj } from "./postProcess";
 
 const name = OP_OBJ;
