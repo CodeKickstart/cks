@@ -1,0 +1,57 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_select_1",
+      "kind": "pickmany",
+      "prompt": "enter one or more from off-road/commute/transport : ",
+      "defval": ["commute", "off-road"],
+      "children": {
+        "off-road": {
+          "hp": {
+            "kind": "dec",
+            "min": 100,
+            "prompt": "enter the horse power of the vehicle - cannot be lower than 100 hp : ",
+            "value": 120.01
+          }
+        },
+        "commute": {
+          "kind": "pickone",
+          "prompt": "enter text 2: ",
+          "defval": "kids",
+          "children": {
+            "adults": {
+              "kind": "int",
+              "max": 20,
+              "prompt": "enter the number of adults -cannot exceed 20 : ",
+              "value": 2
+            },
+            "kids": {
+              "kind": "obj",
+              "children": {
+                "num_kids": {
+                  "kind": "int",
+                  "max": 30,
+                  "prompt": "enter the number of kids : ",
+                  "value": 3
+                },
+                "booster seat needed": {
+                  "kind": "bool",
+                  "prompt": "enter if booster seats needed for the kids: ",
+                  "value": false
+                }
+              }
+            }
+          }
+        },
+        "transport": {
+          "load": {
+            "kind": "int",
+            "max": 5,
+            "prompt": "enter the load of the vehicle in tons : ",
+            "value": 4
+          }
+        }
+      }
+    }
+  ]
+}
