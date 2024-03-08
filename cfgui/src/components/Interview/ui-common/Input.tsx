@@ -27,11 +27,13 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cancelClicked, setCancelClicked] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); // New state for error message
 
   useEffect(() => {
     try {
       const queryObject = fnRetrieveQueryObject();
       if (!queryObject) {
+        setErrorMessage("Error: Query object is empty."); // Set error message if query object is empty
         return;
       }
       interface ObjTemplate {
@@ -45,8 +47,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       setIsLoading(false);
     } catch (error) {
       console.error("Error retrieving query object:", error);
-      // Handle the error state accordingly, e.g., display an error message
-      setPrompt("Error: Failed to retrieve data");
+      setErrorMessage("Error: Failed to retrieve data"); // Set error message for any other error during retrieval
       setIsLoading(false);
     }
   }, []);
@@ -65,14 +66,15 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         INPUT_LITERAL,
       ].includes(inputType)
     ) {
-      console.log(`Input: Invalid inputType: ${inputType}`);
+      setErrorMessage(`Invalid inputType: ${inputType}`); // Set error message for invalid inputType
+    } else {
+      setErrorMessage(null); // Clear error message if inputType is valid
     }
   }, [inputType]);
 
   let inputComponent;
   const queryObject = fnRetrieveQueryObject();
   if (!queryObject) {
-    // onResponse();
     return null;
   }
 
@@ -120,24 +122,32 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
     default:
       inputComponent = null;
   }
-  // const submitDisabled = false;
 
   return (
-    <div id='idDisplay' className={`p-4 ${isOpen ? "block" : "hidden"}`}>
-      {cancelClicked && <Finish />}
-      {isLoading && <div>Loading...</div>}
-      <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
-      <div className='p-4 border rounded-md shadow-md'>{inputComponent}</div>
-      <div>
-        <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
-          onClick={() => {
-            setCancelClicked(true);
-            setIsOpen(false);
-          }}>
-          {CANCEL_BUTTON}
-        </button>
+    <div className='flex'>
+      <div id='idDisplay' className={`p-4 ${isOpen ? "block" : "hidden"}`}>
+        {cancelClicked && <Finish />}
+        {isLoading && <div>Loading...</div>}
+        <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
+        <div className='p-4 border rounded-md shadow-md'>{inputComponent}</div>
+        <div>
+          <button
+            className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
+            onClick={() => {
+              setCancelClicked(true);
+              setIsOpen(false);
+            }}>
+            {CANCEL_BUTTON}
+          </button>
+        </div>
       </div>
+      {/* Error Message Tab */}
+      {errorMessage && (
+        <div className='p-4 border rounded-md shadow-md'>
+          <h3 className='text-red-500 font-bold'>Error:</h3>
+          <p>{errorMessage}</p>
+        </div>
+      )}
     </div>
   );
 };
