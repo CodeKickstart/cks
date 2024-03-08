@@ -3,7 +3,7 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import dotenv from "dotenv";
-import { fnPostData, handleFetchQuery } from "../expressHandlers";
+import { fnHandlePostData, fnHandleFetchQuery } from "../expressHandlers";
 
 dotenv.config();
 
@@ -24,9 +24,9 @@ const fnSetupExpress = (expressPort: string | undefined) => {
 
   console.log(`Client origin: ${client_origin}`);
 
-  app.get("/api/queryDataSrc", handleFetchQuery);
+  app.get("/api/queryDataSrc", fnHandleFetchQuery);
 
-  app.post("/api/data", fnPostData);
+  app.post("/api/queryDataSrc", fnHandlePostData);
 
   app.listen(expressPort, () => {
     console.log(`Express Server is running on port ${expressPort}`);

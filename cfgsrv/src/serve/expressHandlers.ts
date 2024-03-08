@@ -3,7 +3,7 @@ import { resolve } from "path";
 
 import { fnBundleQuery } from "../context/_queryContextMaker";
 
-export const handleFetchQuery = (req: Request, res: Response) => {
+export const fnHandleFetchQuery = (req: Request, res: Response) => {
   const libAddress = req.query.libAddress as string;
   const prodPath = req.query.relProdPath as string;
   const directoryPath = resolve(libAddress, prodPath);
@@ -17,7 +17,7 @@ export const handleFetchQuery = (req: Request, res: Response) => {
   res.status(200).json(queryBundle);
 };
 
-export const fnPostData = (req: Request, res: Response) => {
+export const fnHandlePostData = (req: Request, res: Response) => {
   const data = req.body;
   console.log(`Data received: ${data}`);
   res.status(200).json({ message: "Data received" });
