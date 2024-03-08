@@ -44,23 +44,17 @@ export const opsClient = () => {
       return { error: errorDescendantInfo };
     }
     console.log(`opsClient::${name}:post descendantInfo: ${descendantInfo}`);
-    const {
-      children,
-      childrenSid,
-      childrenIndices,
-      childrenKind,
-      childrenVal,
-    } = descendantInfo as {
-      children: object;
-      childrenSid: string;
-      childrenIndices: number;
-      childrenKind: string;
-      childrenVal: (string | number | boolean)[] | undefined;
-    };
+    const { children, childrenIndices, childrenKind, childrenVal } =
+      descendantInfo as {
+        children: object;
+        childrenIndices: number;
+        childrenKind: string;
+        childrenVal: (string | number | boolean)[] | undefined;
+      };
 
     if (childrenKind === OP_LITERAL) {
       const { error } = fnPostProcPickForLiteralDescendants(
-        childrenSid,
+        sidCursor,
         [childrenIndices],
         childrenVal,
         true
@@ -72,7 +66,7 @@ export const opsClient = () => {
         console.log(`fnPostProcessPickOne: children: ${key} => ${value}`);
       }
       const { error } = fnPostProcPickForSkippedDescendants(
-        childrenSid,
+        sidCursor,
         children
       );
       return { error };

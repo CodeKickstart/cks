@@ -11,19 +11,9 @@ export const fnFindChildrenInfo = <T>(sidCursor: string) => {
     val?: T;
   }
 
-  const {
-    children,
-    sid: childrenSid,
-    val: childrenIndices,
-  } = (queryObject || {}) as ObjTemplate;
+  const { children, val: childrenIndices } = (queryObject || {}) as ObjTemplate;
   if (!children) {
     return { error: "No children found" };
-  }
-  // if (!childrenIndices) {
-  //   return { error: "No indices found" };
-  // }
-  if (typeof childrenSid !== "string") {
-    return { error: "sid is not a string" };
   }
 
   interface ObjTemplateChildren {
@@ -38,7 +28,6 @@ export const fnFindChildrenInfo = <T>(sidCursor: string) => {
     error: null,
     descendantInfo: {
       children,
-      childrenSid,
       childrenIndices,
       childrenKind,
       childrenVal,
