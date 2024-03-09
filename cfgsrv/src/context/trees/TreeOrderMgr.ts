@@ -3,7 +3,7 @@ import {
   ASIS_pre,
   KEY_KIND,
   KEY_SID,
-  OP_BOOLEAN,
+  OP_BOOL,
   OP_DEC,
   OP_INT,
   OP_LITERAL,
@@ -32,7 +32,7 @@ export function TreeOrderMgr() {
             (v === OP_TEXT ||
               v === OP_INT ||
               v === OP_DEC ||
-              v === OP_BOOLEAN ||
+              v === OP_BOOL ||
               v === OP_PICKONE ||
               v === OP_PICKMANY)
           ) {

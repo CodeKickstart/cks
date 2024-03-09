@@ -22,7 +22,7 @@ import {
   OP_DEC,
   OP_INT,
   OP_TEXT,
-  OP_BOOLEAN,
+  OP_BOOL,
   OP_LITERAL,
   OP_PICKMANY,
   OP_PICKONE,
@@ -73,7 +73,7 @@ export const fnValidateValues = (jsonObj: JsonObjectType): Str => {
           return error;
         }
         break;
-      case OP_BOOLEAN:
+      case OP_BOOL:
         if (!isBoolean(val)) {
           error = _fnGenerateError(kind, sidStr, key);
           return error;
@@ -105,7 +105,7 @@ export const fnValidateValues = (jsonObj: JsonObjectType): Str => {
           return error;
         }
         break;
-      case OP_BOOLEAN:
+      case OP_BOOL:
         if (!isBoolean(val)) {
           error = _fnGenerateError(kind, sidStr, key);
           return error;

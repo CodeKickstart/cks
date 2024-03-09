@@ -21,7 +21,7 @@ export const OP_LITERAL = "literal";
 export const OP_TEXT = "text";
 export const OP_INT = "int";
 export const OP_DEC = "dec";
-export const OP_BOOLEAN = "boolean";
+export const OP_BOOL = "bool";
 export const OP_OBJ = "obj";
 export const OP_REPEAT = "repeat";
 

@@ -1,7 +1,7 @@
 {
   "__CONTENT": [
     {
-      "id": "id_name2a",
+      "id": "id_text",
       "kind": "text",
       "prompt": "Hi - whats your name 2:",
       "defval": "Magic Johnson"

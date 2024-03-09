@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
@@ -11,22 +11,18 @@ interface Props {
 
 const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
-const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
-  const [answer, setAnswer] = useState<boolean | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [sidCursor, setSidCursor] = useState<string>("");
 
-  const fnIsValidAnswer = (answer: boolean | null) => {
-    return answer !== null;
-  };
+const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
+  const [value, setValue] = useState<boolean | undefined>(undefined);
+  const [sidCursor, setSidCursor] = useState<string>("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   const handleEnter = useCallback(() => {
-    if (answer !== null) {
-      fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
-      setAnswer(null);
+    if (value !== undefined) {
+      fnSetQueryAttribute(sidCursor, KEY_VAL, value);
       onResponse();
     }
-  }, [answer, onResponse, sidCursor]);
+  }, [value, onResponse, sidCursor]);
 
   useEffect(() => {
     interface ObjTemplate {
@@ -35,21 +31,18 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
 
     const { defval, sid } = (queryObject || {}) as ObjTemplate;
-
     setSidCursor(sid as string);
 
-    if (defval !== undefined && typeof defval === "boolean") {
-      setAnswer(defval as boolean);
+    if (defval !== undefined) {
+      setValue(defval);
+      setIsButtonDisabled(false);
+    } else {
+      setValue(undefined);
+      setIsButtonDisabled(true);
     }
-
-    // Set loading state to false after fetching data
   }, [queryObject]);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === ENTER_KEY) {
         handleEnter();
@@ -61,50 +54,44 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [handleEnter, sidCursor]);
+  }, [handleEnter]);
 
-  const handleSubmitButtonClick = () => {
-    if (fnIsValidAnswer(answer)) {
-      handleEnter();
-    }
+  const handleInputChange = (newValue: boolean) => {
+    setValue(newValue);
+    setIsButtonDisabled(false);
   };
 
   return (
     <div className='flex items-center'>
-      <div className='flex items-center mb-4'>
-        <label className='inline-flex items-center mr-4'>
-          <input
-            ref={inputRef}
-            type='radio'
-            className='form-radio'
-            value='true'
-            checked={answer === true}
-            onChange={() => setAnswer(true)}
-          />
-          <span className='ml-2'>True</span>
-        </label>
-        <label className='inline-flex items-center'>
-          <input
-            type='radio'
-            className='form-radio'
-            value='false'
-            checked={answer === false}
-            onChange={() => setAnswer(false)}
-          />
-          <span className='ml-2'>False</span>
-        </label>
-      </div>
+      <label className='mr-2'>
+        <input
+          type='radio'
+          name='boolRadio'
+          value='true'
+          checked={value === true}
+          onChange={() => handleInputChange(true)}
+        />
+        True
+      </label>
+      <label>
+        <input
+          type='radio'
+          name='boolRadio'
+          value='false'
+          checked={value === false}
+          onChange={() => handleInputChange(false)}
+        />
+        False
+      </label>
       <div className='flex-grow' />
-      <div>
-        <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          onClick={handleSubmitButtonClick}
-          disabled={!fnIsValidAnswer(answer)}>
-          {ENTER_BUTTON_LABEL}
-        </button>
-      </div>
+      <button
+        className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+          isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+        }`}
+        onClick={handleEnter}
+        disabled={isButtonDisabled}>
+        {ENTER_BUTTON_LABEL}
+      </button>
     </div>
   );
 };

@@ -21,7 +21,7 @@ export const OP_LITERAL = "literal";
 export const OP_TEXT = "text";
 export const OP_INT = "int";
 export const OP_DEC = "dec";
-export const OP_BOOLEAN = "boolean";
+export const OP_BOOL = "bool";
 
 export const KEY_SID = "sid";
 export const KEY_PARENT_UID = "puid";
