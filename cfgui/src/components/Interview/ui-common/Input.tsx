@@ -154,13 +154,6 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
             Diagnostics
           </button>
         </div>
-        <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2 mt-4`}
-          onClick={() => {
-            setCancelClicked(true);
-          }}>
-          {CANCEL_BUTTON}
-        </button>
       </div>
 
       <div
@@ -190,6 +183,17 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         }`}>
         <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
         <InterviewSummary />
+      </div>
+
+      {/* Cancel button div */}
+      <div className='flex justify-start p-4'>
+        <button
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2`}
+          onClick={() => {
+            setCancelClicked(true);
+          }}>
+          {CANCEL_BUTTON}
+        </button>
       </div>
     </div>
   );
