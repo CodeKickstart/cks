@@ -4,7 +4,8 @@
       "id": "id_int",
       "kind": "int",
       "prompt": "enter int:",
-      "defval": 99
+      "defval": 99,
+      "max": 100
     }
   ]
 }

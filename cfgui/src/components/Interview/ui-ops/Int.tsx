@@ -18,8 +18,8 @@ const MIN = -10000000;
 const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
-  const [min] = useState<number | undefined>(undefined);
-  const [max] = useState<number | undefined>(undefined);
+  const [min, setmin] = useState<number | undefined>(undefined);
+  const [max, setmax] = useState<number | undefined>(undefined);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [inputColor, setInputColor] = useState<string>("");
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
@@ -50,9 +50,13 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     interface ObjTemplate {
       defval?: number;
       sid?: string;
+      min?: number;
+      max?: number;
     }
 
-    const { defval, sid } = (queryObject || {}) as ObjTemplate;
+    const { defval, sid, min, max } = (queryObject || {}) as ObjTemplate;
+    setmin(min);
+    setmax(max);
 
     setSidCursor(sid as string);
 
