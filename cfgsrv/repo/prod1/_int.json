@@ -5,7 +5,7 @@
       "kind": "int",
       "max": 5,
       "prompt": "enter the load of the vehicle in tons : ",
-      "defval": ""
+      "defval": 3
     }
   ]
 }
