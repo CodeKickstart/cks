@@ -3,7 +3,7 @@
     {
       "id": "id_select_1",
       "kind": "pickone",
-      "prompt": "enter one or more from off-road/commute/transport : ",
+      "prompt": "choose from off-road/commute/transport : 2 : ",
       "children": {
         "off-road": {
           "kind": "dec",

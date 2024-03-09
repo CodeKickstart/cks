@@ -3,12 +3,12 @@
     {
       "id": "id_select_1",
       "kind": "pickone",
-      "prompt": "enter one or more from off-road/commute/transport : ",
+      "prompt": " : 4: ",
       "defval": "off-road",
       "children": {
         "off-road": {
           "kind": "dec",
-          "min": 100.0,
+          "min": 100,
           "prompt": "enter the horse power of the vehicle - cannot be lower than 100 hp : ",
           "defval": 120.01
         },

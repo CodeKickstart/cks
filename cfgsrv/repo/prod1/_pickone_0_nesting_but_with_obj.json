@@ -1,15 +1,16 @@
 {
   "__CONTENT": [
     {
+      "id": "id_pickone",
       "kind": "pickone",
-      "prompt": "enter text 2: ",
+      "prompt": "pick kids or adults: ",
       "defval": "kids",
       "children": {
         "adults": {
           "kind": "int",
           "max": 20,
-          "prompt": "enter the number of adults -cannot exceed 20 : ",
-          "defval": 2
+          "prompt": "the number of adults -cannot exceed 20 : ",
+          "defval": 7
         },
         "kids": {
           "kind": "obj",
@@ -17,12 +18,12 @@
             "num_kids": {
               "kind": "int",
               "max": 30,
-              "prompt": "enter the number of kids : ",
+              "prompt": "the number of kids : ",
               "override": 3
             },
             "booster seat needed": {
               "kind": "bool",
-              "prompt": "enter if booster seats needed for the kids: ",
+              "prompt": "are booster seats needed for the kids: ",
               "defval": false
             }
           }

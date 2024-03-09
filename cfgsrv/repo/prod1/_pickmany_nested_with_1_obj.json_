@@ -2,8 +2,8 @@
   "__CONTENT": [
     {
       "id": "id_select_1",
-      "kind": "pickone",
-      "prompt": "enter one or more from off-road/commute/transport : ",
+      "kind": "pickmany",
+      "prompt": "enter one or more from off-road/commute/transport 5 : ",
       "children": {
         "commute": {
           "kind": "pickone",
