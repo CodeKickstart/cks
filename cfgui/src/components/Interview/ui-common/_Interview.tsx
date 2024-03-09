@@ -3,7 +3,7 @@ import QueryContext from "./QueryContext";
 
 import ResponseContext from "./ResponseContext";
 import { useQuery } from "react-query";
-import QnA from "../ui-ops/_QnA";
+import QnA from "./_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
 import Finish from "./Finish";
