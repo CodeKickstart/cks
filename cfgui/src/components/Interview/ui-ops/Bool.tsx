@@ -63,26 +63,28 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   return (
     <div className='flex items-center'>
-      <label className='mr-2'>
-        <input
-          type='radio'
-          name='boolRadio'
-          value='true'
-          checked={value === true}
-          onChange={() => handleInputChange(true)}
-        />
-        True
-      </label>
-      <label>
-        <input
-          type='radio'
-          name='boolRadio'
-          value='false'
-          checked={value === false}
-          onChange={() => handleInputChange(false)}
-        />
-        False
-      </label>
+      <div className='flex flex-col'>
+        <label>
+          <input
+            type='radio'
+            name='boolRadio'
+            value='true'
+            checked={value === true}
+            onChange={() => handleInputChange(true)}
+          />
+          True
+        </label>
+        <label>
+          <input
+            type='radio'
+            name='boolRadio'
+            value='false'
+            checked={value === false}
+            onChange={() => handleInputChange(false)}
+          />
+          False
+        </label>
+      </div>
       <div className='flex-grow' />
       <button
         className={`bg-blue-500 text-white px-4 py-2 rounded-md ${

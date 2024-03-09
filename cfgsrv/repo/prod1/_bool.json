@@ -3,8 +3,7 @@
     {
       "id": "id_bool",
       "kind": "bool",
-      "prompt": "enter bool:",
-      "defval": true
+      "prompt": "enter bool:"
     }
   ]
 }
