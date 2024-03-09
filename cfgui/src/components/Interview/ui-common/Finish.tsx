@@ -31,16 +31,19 @@ const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
   }
 
   return (
-    <>
+    <div className='flex-1 overflow-y-auto'>
       {debug === true && (
         <div className='bg-gray-200 p-4 rounded-lg'>
           <h1 className='text-xl font-bold mb-2'>Debug Data</h1>
-          <pre className='whitespace-pre-wrap'>
-            {JSON.stringify(valtioStore.queryContext, null, 2)}
-          </pre>
+          <div id='idDebug' className='overflow-y-auto h-64'>
+            {/* Apply overflow-y-auto and set a fixed height */}
+            <pre className='whitespace-pre-wrap'>
+              {JSON.stringify(valtioStore.queryContext, null, 2)}
+            </pre>
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
