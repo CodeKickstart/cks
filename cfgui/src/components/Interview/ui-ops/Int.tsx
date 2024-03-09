@@ -11,19 +11,20 @@ interface Props {
 
 const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
+
 const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
-  const [answer, setAnswer] = useState<number | null>(null); // Changed to number type
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [answer, setAnswer] = useState<number | null>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [min] = useState<number | null>(0);
+  const [min] = useState<number>(0);
+  const [max] = useState<number>(100);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [inputColor, setInputColor] = useState<string>("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [max] = useState<number | null>(100);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const fnIsValidAnswer = (answer: number | null) => {
-    // Updated for number type
-    return answer !== null && !isNaN(answer);
+  const fnIsValidAnswer = (value: number | null): boolean => {
+    return value !== null && !isNaN(value) && value >= min && value <= max;
   };
 
   const handleEnter = useCallback(() => {
@@ -45,10 +46,8 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     setSidCursor(sid as string);
 
     if (defval !== undefined && typeof defval === "number") {
-      setAnswer(defval as number); // Updated for number type
+      setAnswer(defval as number);
     }
-
-    // Set loading state to false after fetching data
   }, [queryObject]);
 
   useEffect(() => {
@@ -75,23 +74,36 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
   };
 
+  useEffect(() => {
+    if (answer !== null) {
+      if (answer < min || answer > max) {
+        setErrorMessage(`Value must be between ${min} and ${max}`);
+        setInputColor("gray");
+        setIsButtonDisabled(true);
+      } else {
+        setErrorMessage("");
+        setInputColor("");
+        setIsButtonDisabled(false);
+      }
+    }
+  }, [answer, min, max]);
+
   return (
     <div className='flex items-center'>
-      {/* Input for a whole number */}
       <input
         ref={inputRef}
         type='number'
-        className='form-input mr-2'
+        className={`form-input mr-2 ${inputColor}`}
         value={answer !== null ? answer.toString() : ""}
         onChange={(e) => setAnswer(parseInt(e.target.value))}
       />
-      <div className='flex-grow' />
+      <div className='flex-grow text-red-500'>{errorMessage}</div>
       <button
         className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-          !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""
+          isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
         }`}
         onClick={handleSubmitButtonClick}
-        disabled={!fnIsValidAnswer(answer)}>
+        disabled={isButtonDisabled}>
         {ENTER_BUTTON_LABEL}
       </button>
     </div>
