@@ -3,7 +3,7 @@ export function isInteger(num: number): boolean {
 }
 
 export function isFloat(num: number): boolean {
-  return !Number.isInteger(num);
+  return Number.isFinite(num);
 }
 
 export function isString(str: string): boolean {
