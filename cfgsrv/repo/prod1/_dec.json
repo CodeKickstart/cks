@@ -4,7 +4,7 @@
       "id": "id_dec",
       "kind": "dec",
       "prompt": "enter dec:",
-      "defval": 99.99,
+      "defval": -99.99,
       "max": 100.0,
       "min": 50.0
     }

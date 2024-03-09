@@ -30,11 +30,9 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
     (value: string): boolean => {
       const floatValue = parseFloat(value);
       return (
-        (!isNaN(floatValue) &&
-          floatValue >= (min ?? MIN) &&
-          floatValue <= (max ?? MAX) &&
-          value === "") ||
-        /^[+-]?\d+(\.\d{1,2})?$/.test(value)
+        !isNaN(floatValue) &&
+        floatValue >= (min ?? MIN) &&
+        floatValue <= (max ?? MAX)
       );
     },
     [min, max]
@@ -85,6 +83,18 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
     };
   }, [handleEnter, sidCursor]);
 
+  useEffect(() => {
+    if (fnIsValidAnswer(answer)) {
+      setErrorMessage("");
+      setInputColor("");
+      setIsButtonDisabled(false);
+    } else {
+      setErrorMessage(`Value must be between ${min ?? MIN} and ${max ?? MAX}`);
+      setInputColor("gray");
+      setIsButtonDisabled(true);
+    }
+  }, [answer, min, max, fnIsValidAnswer]);
+
   const handleSubmitButtonClick = () => {
     if (fnIsValidAnswer(answer)) {
       handleEnter();
@@ -118,7 +128,7 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
     <div className='flex items-center'>
       <input
         ref={inputRef}
-        type='text'
+        type='float'
         className={`form-input mr-2 ${inputColor}`}
         value={answer}
         onChange={onChangeHandler}

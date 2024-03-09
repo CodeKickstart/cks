@@ -7,12 +7,10 @@
       "defval": ["commute", "off-road"],
       "children": {
         "off-road": {
-          "hp": {
-            "kind": "dec",
-            "min": 100,
-            "prompt": "enter the horse power of the vehicle - cannot be lower than 100 hp : ",
-            "value": 120.01
-          }
+          "kind": "dec",
+          "min": 100.0,
+          "prompt": "enter the horse power of the vehicle - cannot be lower than 100 hp : ",
+          "defval": 120.01
         },
         "commute": {
           "kind": "pickone",
@@ -23,7 +21,7 @@
               "kind": "int",
               "max": 20,
               "prompt": "enter the number of adults -cannot exceed 20 : ",
-              "value": 2
+              "defval": 2
             },
             "kids": {
               "kind": "obj",
@@ -32,12 +30,12 @@
                   "kind": "int",
                   "max": 30,
                   "prompt": "enter the number of kids : ",
-                  "value": 3
+                  "override": 3
                 },
                 "booster seat needed": {
                   "kind": "bool",
                   "prompt": "enter if booster seats needed for the kids: ",
-                  "value": false
+                  "defval": false
                 }
               }
             }
@@ -48,7 +46,7 @@
             "kind": "int",
             "max": 5,
             "prompt": "enter the load of the vehicle in tons : ",
-            "value": 4
+            "defval": 4
           }
         }
       }
