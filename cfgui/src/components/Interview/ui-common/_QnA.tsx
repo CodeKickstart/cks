@@ -19,10 +19,8 @@ import Input from "./Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import { fnNoMoreResponsesNeeded } from "../state-mgt/cursor/cursor";
-// import { InterviewSummary } from "./InterviewSummary";
-import QuestionResponses from "./QuestionResponses";
 
-// import { valtioStore } from "../defs/types/ValtioTypes";
+import QuestionResponses from "./QuestionResponses";
 
 const QnA: React.FC = () => {
   const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
@@ -31,7 +29,6 @@ const QnA: React.FC = () => {
     useState<Str>(COMPONENT_INPUT);
   const [rerenderFlag, setRerenderFlag] = useState<boolean>(false);
   const [inputKind, setInputKind] = useState<InputType>();
-  // const [opEnded, setOpEnded] = useState<boolean>(false);
 
   const handleStartInterview = useCallback(() => {
     const { error: errorInit, sidCursor } = fnSetupForInterview();
@@ -94,9 +91,6 @@ const QnA: React.FC = () => {
   }, [interviewFinished]);
 
   const _fnRenderCore = () => {
-    // if (valtioStore.preOrderComplete) {
-    //   return <Finish />;
-    // }
     switch (selectedResponseComponent) {
       case COMPONENT_INPUT:
         return (
@@ -122,8 +116,6 @@ const QnA: React.FC = () => {
       {interviewFinished && <Finish />}
       {fnNoMoreResponsesNeeded() && <QuestionResponses />}
     </div>
-
-    // Function to render response component based on selectedResponseComponent
   );
 };
 

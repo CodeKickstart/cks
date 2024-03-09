@@ -19,7 +19,6 @@ import PickOne from "../ui-ops/PickOne";
 import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Finish from "./Finish";
-import { InterviewSummary } from "./InterviewSummary";
 
 const CANCEL_BUTTON = "Cancel";
 
@@ -182,10 +181,9 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
           activeTab === "Diagnostics" ? "block bg-gray-100" : "hidden"
         }`}>
         <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
-        <InterviewSummary />
+        <Finish debug={true} />
       </div>
 
-      {/* Cancel button div */}
       <div className='flex justify-start p-4'>
         <button
           className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2`}

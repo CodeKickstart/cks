@@ -1,7 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-import QueryContext from "./QueryContext";
-
-import ResponseContext from "./ResponseContext";
+import { useEffect, useMemo } from "react";
 import { useQuery } from "react-query";
 import QnA from "./_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
@@ -22,8 +19,6 @@ const _Interview = ({
   libAddress,
   relProdPath,
 }: InterviewProps) => {
-  const [contextsHeight, setContextsHeight] = useState("auto");
-
   const queryParams = new URLSearchParams({
     libAddress: libAddress,
     relProdPath: relProdPath,
@@ -31,31 +26,6 @@ const _Interview = ({
 
   const apiUrl = `${baseUrl}${path}?${queryParams}`;
   console.log(apiUrl);
-
-  const handleResize = () => {
-    const windowHeight = document.documentElement.clientHeight; // window.screen.height;
-    const headerHeight = fnGetHeight("idHeader");
-    const footerHeight = fnGetHeight("idFooter");
-    const interviewHeight = fnGetHeight("idInterview");
-
-    let bufferHeight = 320;
-    if (window.innerWidth < 768) bufferHeight = bufferHeight - 32;
-
-    const remainingHeight =
-      windowHeight -
-      headerHeight -
-      footerHeight -
-      interviewHeight -
-      bufferHeight;
-    const contextsHeight = `${remainingHeight}px`;
-    setContextsHeight(contextsHeight);
-
-    function fnGetHeight(id: string) {
-      const idHeader = document.getElementById(id);
-      const headerHeight = idHeader ? idHeader.clientHeight : 0;
-      return headerHeight;
-    }
-  };
 
   const fetchData = useMemo(
     () => async (url: string) => {
@@ -65,25 +35,12 @@ const _Interview = ({
       }
       return response.json();
     },
-    [] // No dependencies, so it will only be created once
+    []
   );
 
   useEffect(() => {
     fnSendData(apiUrl);
   }, [apiUrl]);
-
-  useEffect(() => {
-    // Set initial height
-    handleResize();
-
-    // Add event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Remove event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const { data, isLoading, isError } = useQuery("data", () =>
     fetchData(apiUrl)
@@ -107,15 +64,7 @@ const _Interview = ({
       <QnA></QnA>
       <div
         id='idContexts'
-        className='flex-auto flex flex-col md:flex-row md:space-x-4 md:m-4'
-        style={{ height: contextsHeight }}>
-        <div className='m-2 border-black border md:border-black md:border md:flex-1 md:h-full overflow-y-auto'>
-          <QueryContext examine={true} />
-        </div>
-        <div className='m-2 border-black border md:border-black md:border md:flex-1 md:h-full overflow-y-auto'>
-          <ResponseContext examine={true} />
-        </div>
-      </div>
+        className='flex-auto flex flex-col md:flex-row md:space-x-4 md:m-4'></div>
     </div>
   );
 };
