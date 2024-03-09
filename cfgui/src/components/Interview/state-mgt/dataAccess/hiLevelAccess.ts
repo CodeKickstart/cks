@@ -50,7 +50,7 @@ export const fnGetAllPreOrderAnswers = <T>(
         if (error) {
           return { error, results: null };
         }
-        if (value) {
+        if (value !== null && value !== undefined) {
           results.push(value as T);
         }
       }
