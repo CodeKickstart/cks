@@ -19,7 +19,8 @@ import Input from "./Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import { fnNoMoreResponsesNeeded } from "../state-mgt/cursor/cursor";
-import { InterviewSummary } from "./InterviewSummary";
+// import { InterviewSummary } from "./InterviewSummary";
+import QuestionResponses from "./QuestionResponses";
 
 // import { valtioStore } from "../defs/types/ValtioTypes";
 
@@ -119,7 +120,7 @@ const QnA: React.FC = () => {
       {!interviewStarted && <Welcome onStart={handleStartInterview} />}
       {interviewStarted && !interviewFinished && _fnRenderCore()}
       {interviewFinished && <Finish />}
-      {fnNoMoreResponsesNeeded() && <InterviewSummary />}
+      {fnNoMoreResponsesNeeded() && <QuestionResponses />}
     </div>
 
     // Function to render response component based on selectedResponseComponent

@@ -2,13 +2,8 @@ import React, { useEffect } from "react";
 import { logListingSuccess } from "../state-mgt/setupForResponse";
 import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
-import { valtioStore } from "../defs/types/ValtioTypes";
 
-interface IFinishProps {
-  debug?: boolean;
-}
-
-const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
+const QuestionResponses: React.FC = () => {
   useEffect(() => {
     logListingSuccess();
   }, []); // Run once after initial rendering
@@ -32,16 +27,16 @@ const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
 
   return (
     <>
-      {debug === true && (
-        <div className='bg-gray-200 p-4 rounded-lg'>
-          <h1 className='text-xl font-bold mb-2'>Debug Data</h1>
-          <pre className='whitespace-pre-wrap'>
-            {JSON.stringify(valtioStore.queryContext, null, 2)}
-          </pre>
-        </div>
-      )}
+      <div className='mb-4'>
+        <h3 className='text-lg font-semibold mb-2'>All questions answered!</h3>
+        <ul>
+          {valList.map((answer, index) => (
+            <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 };
 
-export default Finish;
+export default QuestionResponses;
