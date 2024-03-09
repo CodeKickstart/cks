@@ -15,6 +15,11 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null); // Changed to number type
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [min] = useState<number | null>(0);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [max] = useState<number | null>(100);
 
   const fnIsValidAnswer = (answer: number | null) => {
     // Updated for number type

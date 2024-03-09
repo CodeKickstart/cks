@@ -1,0 +1,10 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_int",
+      "kind": "int",
+      "prompt": "enter int:",
+      "defval": 99
+    }
+  ]
+}
