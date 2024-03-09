@@ -61,10 +61,6 @@ export const opsClient = () => {
       );
       return { error };
     } else {
-      // pick the only unblocked child
-      for (const [key, value] of Object.entries(children as object)) {
-        console.log(`fnPostProcessPickOne: children: ${key} => ${value}`);
-      }
       const { error } = fnPostProcPickForSkippedDescendants(
         sidCursor,
         children
