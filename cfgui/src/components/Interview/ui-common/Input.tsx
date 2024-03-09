@@ -188,11 +188,9 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         <Finish debug={true} />
       </div>
 
-      <div className='flex justify-end p-4'>
-        {" "}
-        {/* Moved to the right bottom */}
+      <div className='flex p-4'>
         <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2`}
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2`}
           onClick={() => {
             valtioStore.earlyExit = true;
             setIsVisible(false); // Set isVisible to false to hide the component
