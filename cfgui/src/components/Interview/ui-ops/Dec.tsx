@@ -98,12 +98,10 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
       if (
         parseFloat(value) < (min ?? MIN) ||
         parseFloat(value) > (max ?? MAX) ||
-        !/^[+-]?\d+(\.\d{1,2})?$/.test(value)
+        !/^[+-]?\d+(\.\d+)?$/.test(value)
       ) {
         setErrorMessage(
-          `Value must be between ${min ?? MIN} and ${
-            max ?? MAX
-          } with 2 decimal point precision`
+          `Value must be between ${min ?? MIN} and ${max ?? MAX}`
         );
         setInputColor("gray");
         setIsButtonDisabled(true);
