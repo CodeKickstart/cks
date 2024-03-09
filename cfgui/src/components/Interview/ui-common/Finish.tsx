@@ -35,7 +35,7 @@ const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
       {debug === true && (
         <div className='bg-gray-200 p-4 rounded-lg'>
           <h1 className='text-xl font-bold mb-2'>Debug Data</h1>
-          <div id='idDebug' className='overflow-y-auto h-64'>
+          <div id='idDebug' className='overflow-y-auto h-full'>
             {/* Apply overflow-y-auto and set a fixed height */}
             <pre className='whitespace-pre-wrap'>
               {JSON.stringify(valtioStore.queryContext, null, 2)}
