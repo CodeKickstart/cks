@@ -18,8 +18,8 @@ const MIN = -10000000;
 const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
-  const [min, setmin] = useState<number | undefined>(undefined);
-  const [max, setmax] = useState<number | undefined>(undefined);
+  const [min, setMin] = useState<number | undefined>(undefined);
+  const [max, setMax] = useState<number | undefined>(undefined);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [inputColor, setInputColor] = useState<string>("");
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
@@ -55,8 +55,8 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
 
     const { defval, sid, min, max } = (queryObject || {}) as ObjTemplate;
-    setmin(min);
-    setmax(max);
+    setMin(min);
+    setMax(max);
 
     setSidCursor(sid as string);
 
@@ -83,6 +83,18 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     };
   }, [handleEnter, sidCursor]);
 
+  useEffect(() => {
+    if (fnIsValidAnswer(answer)) {
+      setErrorMessage("");
+      setInputColor("");
+      setIsButtonDisabled(false);
+    } else {
+      setErrorMessage(`Value must be between ${min ?? MIN} and ${max ?? MAX}`);
+      setInputColor("gray");
+      setIsButtonDisabled(true);
+    }
+  }, [answer, min, max, fnIsValidAnswer]);
+
   const handleSubmitButtonClick = () => {
     if (fnIsValidAnswer(answer)) {
       handleEnter();
@@ -91,22 +103,10 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value =
-        e.target.value.trim() === "" ? null : parseInt(e.target.value);
+      const value = parseInt(e.target.value);
       setAnswer(value);
-      if (value === null || value < (min ?? MIN) || value > (max ?? MAX)) {
-        setErrorMessage(
-          `Value must be between ${min ?? MIN} and ${max ?? MAX}`
-        );
-        setInputColor("gray");
-        setIsButtonDisabled(true);
-      } else {
-        setErrorMessage("");
-        setInputColor("");
-        setIsButtonDisabled(false);
-      }
     },
-    [min, max]
+    []
   );
 
   return (
