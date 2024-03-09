@@ -91,9 +91,10 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = parseInt(e.target.value);
+      const value =
+        e.target.value.trim() === "" ? null : parseInt(e.target.value);
       setAnswer(value);
-      if (value < (min ?? MIN) || value > (max ?? MAX)) {
+      if (value === null || value < (min ?? MIN) || value > (max ?? MAX)) {
         setErrorMessage(
           `Value must be between ${min ?? MIN} and ${max ?? MAX}`
         );

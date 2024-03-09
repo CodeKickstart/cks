@@ -2,9 +2,9 @@
   "__CONTENT": [
     {
       "id": "id_select_1",
-      "kind": "pickmany",
+      "kind": "pickone",
       "prompt": "enter one or more from off-road/commute/transport : ",
-      "defval": ["commute", "off-road"],
+      "defval": "off-road",
       "children": {
         "off-road": {
           "kind": "dec",
@@ -42,12 +42,10 @@
           }
         },
         "transport": {
-          "load": {
-            "kind": "int",
-            "max": 5,
-            "prompt": "enter the load of the vehicle in tons : ",
-            "defval": 4
-          }
+          "kind": "int",
+          "max": 5,
+          "prompt": "enter the load of the vehicle in tons : ",
+          "defval": 4
         }
       }
     }

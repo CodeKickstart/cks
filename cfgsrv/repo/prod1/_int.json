@@ -1,0 +1,11 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_int-2",
+      "kind": "int",
+      "max": 5,
+      "prompt": "enter the load of the vehicle in tons : ",
+      "defval": 4
+    }
+  ]
+}
