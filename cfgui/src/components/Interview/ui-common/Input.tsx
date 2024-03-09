@@ -19,15 +19,16 @@ import PickOne from "../ui-ops/PickOne";
 import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Finish from "./Finish";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 const CANCEL_BUTTON = "Cancel";
 
 const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [cancelClicked, setCancelClicked] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>("Display");
+  const [isVisible, setIsVisible] = useState<boolean>(true); // State for visibility
 
   useEffect(() => {
     try {
@@ -125,6 +126,10 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
       inputComponent = null;
   }
 
+  if (!isVisible) {
+    return null; // Hide the component if isVisible is false
+  }
+
   return (
     <div className='flex flex-col'>
       <div className='flex justify-between px-4'>
@@ -160,7 +165,6 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         className={`p-4 ${
           activeTab === "Display" ? "block bg-gray-100" : "hidden"
         }`}>
-        {cancelClicked && <Finish />}
         {isLoading && <div>Loading...</div>}
         <h2 className='text-lg font-bold mb-2'>{prompt}</h2>
         <div className='p-4 border rounded-md shadow-md'>{inputComponent}</div>
@@ -184,11 +188,14 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         <Finish debug={true} />
       </div>
 
-      <div className='flex justify-start p-4'>
+      <div className='flex justify-end p-4'>
+        {" "}
+        {/* Moved to the right bottom */}
         <button
           className={`bg-blue-500 text-white px-4 py-2 rounded-md mr-2`}
           onClick={() => {
-            setCancelClicked(true);
+            valtioStore.earlyExit = true;
+            setIsVisible(false); // Set isVisible to false to hide the component
           }}>
           {CANCEL_BUTTON}
         </button>

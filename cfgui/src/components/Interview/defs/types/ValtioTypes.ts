@@ -19,6 +19,7 @@ const valtioStore = proxy({
   maxOrderIndex: -1,
   lastQuestionIndex: null as number | null,
   preOrderComplete: false,
+  earlyExit: false,
 });
 
 export { valtioStore };
