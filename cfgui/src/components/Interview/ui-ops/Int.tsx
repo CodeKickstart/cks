@@ -12,20 +12,31 @@ interface Props {
 const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 
+const MAX = 10000000;
+const MIN = -10000000;
+
 const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
-  const [min] = useState<number>(0);
-  const [max] = useState<number>(100);
+  const [min] = useState<number | undefined>(undefined);
+  const [max] = useState<number | undefined>(undefined);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [inputColor, setInputColor] = useState<string>("");
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const fnIsValidAnswer = (value: number | null): boolean => {
-    return value !== null && !isNaN(value) && value >= min && value <= max;
-  };
+  const fnIsValidAnswer = useCallback(
+    (value: number | null): boolean => {
+      return (
+        value !== null &&
+        !isNaN(value) &&
+        value >= (min ?? MIN) &&
+        value <= (max || MAX)
+      );
+    },
+    [min, max]
+  );
 
   const handleEnter = useCallback(() => {
     if (answer !== null) {
@@ -74,10 +85,14 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
   };
 
-  useEffect(() => {
-    if (answer !== null) {
-      if (answer < min || answer > max) {
-        setErrorMessage(`Value must be between ${min} and ${max}`);
+  const onChangeHandler = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = parseInt(e.target.value);
+      setAnswer(value);
+      if (value < (min ?? MIN) || value > (max ?? MAX)) {
+        setErrorMessage(
+          `Value must be between ${min ?? MIN} and ${max ?? MAX}`
+        );
         setInputColor("gray");
         setIsButtonDisabled(true);
       } else {
@@ -85,8 +100,9 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
         setInputColor("");
         setIsButtonDisabled(false);
       }
-    }
-  }, [answer, min, max]);
+    },
+    [min, max]
+  );
 
   return (
     <div className='flex items-center'>
@@ -95,7 +111,7 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
         type='number'
         className={`form-input mr-2 ${inputColor}`}
         value={answer !== null ? answer.toString() : ""}
-        onChange={(e) => setAnswer(parseInt(e.target.value))}
+        onChange={onChangeHandler}
       />
       <div className='flex-grow text-red-500'>{errorMessage}</div>
       <button
