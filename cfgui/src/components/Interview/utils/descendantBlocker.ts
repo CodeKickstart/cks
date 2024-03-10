@@ -1,3 +1,4 @@
+import { json } from "stream/consumers";
 import { KEY_BLOCKED } from "../../../shared/defs/constants";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../defs/types/Str";
@@ -35,23 +36,29 @@ export const fnBlockUnselectedChildren = (
     valArray = val;
   }
 
+  const _fnBlockUnselectedChildren = (treeNode: object) => {
+    const value = treeNode as object;
+    if (value !== null && value !== undefined && typeof value === "object") {
+      interface ObjTemplateValue {
+        blocked?: boolean;
+      }
+      const value = treeNode as ObjTemplateValue;
+      value[KEY_BLOCKED] = true;
+      return { error: null };
+    } else {
+      return { error: "No tree node to be block" };
+    }
+  };
+
   const { kind } = children as ObjTemplateChildren;
   if (kind === undefined) {
     let index = 0;
     for (const [k, v] of Object.entries(children as object)) {
       console.log(`Key: ${k}, Value: ${v}`);
       if (!valArray.includes(index)) {
-        const value = v as object;
-        if (
-          value !== null &&
-          value !== undefined &&
-          typeof value === "object"
-        ) {
-          interface ObjTemplateValue {
-            blocked?: boolean;
-          }
-          const value = v as ObjTemplateValue;
-          value[KEY_BLOCKED] = true;
+        const { error } = _fnBlockUnselectedChildren(v);
+        if (error) {
+          return { error };
         }
       }
 
