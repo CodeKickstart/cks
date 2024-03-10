@@ -8,7 +8,7 @@ interface Props {
   onResponse: () => void;
 }
 
-const ENTER_KEY = "Enter";
+// const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 
 const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
@@ -16,10 +16,17 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
-  const handleEnter = useCallback(() => {
+  // const handleEnter = useCallback(() => {
+  //   if (value !== undefined) {
+  //     fnSetQueryAttribute(sidCursor, KEY_VAL, value);
+  //     onResponse();
+  //   }
+  // }, [value, onResponse, sidCursor]);
+
+  const handleEnter = useCallback(async () => {
     if (value !== undefined) {
-      fnSetQueryAttribute(sidCursor, KEY_VAL, value);
-      onResponse();
+      await fnSetQueryAttribute(sidCursor, KEY_VAL, value); // Wait for the asynchronous operation to complete
+      onResponse(); // Trigger the callback after the operation is finished
     }
   }, [value, onResponse, sidCursor]);
 
@@ -40,20 +47,6 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
       setIsButtonDisabled(true);
     }
   }, [queryObject]);
-
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === ENTER_KEY) {
-        handleEnter();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleEnter]);
 
   const handleInputChange = (newValue: boolean) => {
     setValue(newValue);

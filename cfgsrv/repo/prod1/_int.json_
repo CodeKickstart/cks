@@ -6,6 +6,13 @@
       "max": 5,
       "prompt": "enter the load of the vehicle in tons : ",
       "defval": 3
+    },
+    {
+      "id": "id_int-2",
+      "kind": "int",
+      "max": 20,
+      "prompt": "enter the number of adults -cannot exceed 20 : ",
+      "defval": 2
     }
   ]
 }
