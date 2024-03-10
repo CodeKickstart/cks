@@ -1,7 +1,10 @@
 import { KEY_BLOCKED, KEY_OVERRIDE } from "../../../../shared/defs/constants";
+import { JsonObjectType } from "../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 
 import { fnGetAllPreOrderCursors, fnGetCurrentCursor } from "../cursor/cursor";
+import { fnPostfixTraversal } from "../treeTraversal/postTraversal";
+import { fnBlock } from "../treeWorkers/blocker";
 import { fnGetQueryAttribute, fnGetQueryObject } from "./loLevelAccess";
 
 export function fnSplitCursor(str: string): {
@@ -84,4 +87,15 @@ export const fnGetSidCursor = () => {
   }
   const { sidCursor } = fnSplitCursor(cursor);
   return sidCursor;
+};
+
+export const fnBlockSubTree = (treenode: object) => {
+  const { error } = fnPostfixTraversal<string>(
+    fnBlock,
+    treenode as JsonObjectType
+  );
+  if (error) {
+    console.log("!!!fnBlockSubTree", error);
+    return { error };
+  }
 };

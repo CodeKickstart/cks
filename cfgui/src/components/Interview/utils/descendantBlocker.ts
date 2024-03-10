@@ -28,7 +28,6 @@ export const fnBlockUnselectedChildren = (
   }
 
   if (
-    // pickmany literal
     Array.isArray(val) &&
     val.every((element) => typeof element === "number")
   ) {
@@ -41,8 +40,8 @@ export const fnBlockUnselectedChildren = (
       interface ObjTemplateValue {
         blocked?: boolean;
       }
-      const value = treeNode as ObjTemplateValue;
-      value[KEY_BLOCKED] = true;
+      const tNode = treeNode as ObjTemplateValue;
+      tNode[KEY_BLOCKED] = true;
       return { error: null };
     } else {
       return { error: "No tree node to be block" };
