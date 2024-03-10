@@ -98,4 +98,5 @@ export const fnBlockSubTree = (treenode: object) => {
     console.log("!!!fnBlockSubTree", error);
     return { error };
   }
+  return { error: null };
 };

@@ -1,6 +1,7 @@
-import { KEY_BLOCKED } from "../../../shared/defs/constants";
+// import { KEY_BLOCKED } from "../../../shared/defs/constants";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../defs/types/Str";
+import { fnBlockSubTree } from "../state-mgt/dataAccess/hiLevelAccess";
 
 export const fnBlockUnselectedChildren = (
   queryObject: JsonObjectType
@@ -10,7 +11,6 @@ export const fnBlockUnselectedChildren = (
   interface ObjTemplate {
     children?: object;
     val?: number[] | number;
-    // Other properties as needed
   }
   const { children, val } = queryObject as ObjTemplate;
   if (children === undefined || val === undefined) {
@@ -23,7 +23,7 @@ export const fnBlockUnselectedChildren = (
 
   let valArray: number[] = [];
   if (typeof val === "number") {
-    // pickone literal
+    // pickone literal has to be processed as an array - hence the conversion
     valArray = [val];
   }
 
@@ -37,12 +37,14 @@ export const fnBlockUnselectedChildren = (
   const _fnBlockUnselectedChildren = (treeNode: object) => {
     const value = treeNode as object;
     if (value !== null && value !== undefined && typeof value === "object") {
-      interface ObjTemplateValue {
-        blocked?: boolean;
-      }
-      const tNode = treeNode as ObjTemplateValue;
-      tNode[KEY_BLOCKED] = true;
-      return { error: null };
+      // interface ObjTemplateValue {
+      //   blocked?: boolean;
+      // }
+      // const tNode = treeNode as ObjTemplateValue;
+      // tNode[KEY_BLOCKED] = true;
+
+      const { error } = fnBlockSubTree(treeNode as object);
+      return { error };
     } else {
       return { error: "No tree node to be block" };
     }
