@@ -4,16 +4,6 @@
       "id": "id_obj_fed_by_grandchildren",
       "kind": "obj",
       "children": {
-        "int_1": {
-          "kind": "int",
-          "prompt": "enter an integer ",
-          "defval": 1
-        },
-        "str_2": {
-          "kind": "text",
-          "prompt": "enter string: ",
-          "defval": "abc"
-        },
         "bool3": {
           "id": "id_bool1",
           "kind": "bool",
