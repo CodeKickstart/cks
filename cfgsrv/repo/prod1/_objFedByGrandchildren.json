@@ -7,12 +7,18 @@
         "int_1": {
           "kind": "int",
           "prompt": "enter an integer ",
-          "value": 1
+          "defval": 1
         },
         "str_2": {
           "kind": "text",
           "prompt": "enter string: ",
-          "value": "abc"
+          "defval": "abc"
+        },
+        "bool3": {
+          "id": "id_bool1",
+          "kind": "bool",
+          "prompt": "enter if booster seats needed for the kids: ",
+          "defval": false
         }
       }
     }
