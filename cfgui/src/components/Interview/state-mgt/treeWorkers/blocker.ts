@@ -1,13 +1,19 @@
+import { KEY_BLOCKED } from "../../../../shared/defs/constants";
 import { JsonObjectType } from "../../../../shared/defs/types";
 import { FnNodeProcessor } from "./FnNodeProcessor";
 
 export const fnBlock: FnNodeProcessor<null> = (
-  _queryFragment: JsonObjectType,
+  _queryFragment: JsonObjectType, // Update the type of _queryFragment parameter
   key: string,
-  value: JsonObjectType,
-  indent: number = 0
+  value: JsonObjectType
 ) => {
-  const spacing = "  ".repeat(indent);
-  console.log(`${spacing}${key}: ${JSON.stringify(value)}`);
+  console.log(`${key}: ${JSON.stringify(value)}`);
+
+  if (key !== KEY_BLOCKED) {
+    return { error: null };
+  }
+
+  (_queryFragment as { [key: string]: JsonObjectType })[KEY_BLOCKED] = true;
+
   return { error: null };
 };
