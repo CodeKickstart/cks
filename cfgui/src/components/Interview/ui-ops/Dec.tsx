@@ -23,6 +23,7 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [inputColor, setInputColor] = useState<string>("");
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -43,6 +44,7 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
       setAnswer("");
       onResponse();
+      setIsVisible(false);
     }
   }, [answer, onResponse, sidCursor]);
 
@@ -123,6 +125,10 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
     },
     [min, max]
   );
+
+  if (!isVisible) {
+    return null; // Don't render anything if isVisible is false
+  }
 
   return (
     <div className='flex items-center'>

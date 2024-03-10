@@ -23,6 +23,7 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [inputColor, setInputColor] = useState<string>("");
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [isVisible, setIsVisible] = useState<boolean>(true); // New state variable
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -43,8 +44,9 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
       setAnswer(null);
       onResponse();
+      setIsVisible(false); // Hide the component after Enter is pressed
     }
-  }, [answer, onResponse, sidCursor]);
+  }, [answer, onResponse, sidCursor, setIsVisible]);
 
   useEffect(() => {
     interface ObjTemplate {
@@ -108,6 +110,10 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     },
     []
   );
+
+  if (!isVisible) {
+    return null; // Don't render anything if isVisible is false
+  }
 
   return (
     <div className='flex items-center'>

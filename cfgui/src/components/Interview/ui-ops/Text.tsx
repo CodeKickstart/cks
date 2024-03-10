@@ -17,6 +17,7 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<string | null>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   const fnIsValidAnswer = (answer: string) => {
     return answer && answer.trim() !== "";
@@ -27,6 +28,7 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
       setAnswer("");
       onResponse();
+      setIsVisible(false);
     }
   }, [answer, onResponse, sidCursor]);
 
@@ -71,6 +73,9 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
       handleEnter();
     }
   };
+  if (!isVisible) {
+    return null; // Don't render anything if isVisible is false
+  }
 
   return (
     <div className='flex items-center'>

@@ -9,6 +9,12 @@
           "kind": "bool",
           "prompt": "enter if booster seats needed for the kids: ",
           "defval": false
+        },
+        "int4": {
+          "id": "id_int4",
+          "kind": "int",
+          "prompt": "enter number of kids: ",
+          "defval": 4
         }
       }
     }
