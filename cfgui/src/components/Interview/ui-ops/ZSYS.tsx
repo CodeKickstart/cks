@@ -94,7 +94,6 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
 
 export default Zsys;
 
-// import React, { useState, useEffect, useCallback } from "react";
 // import { KEY_VAL } from "../../../shared/defs/constants";
 // import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 // import { JsonObjectType } from "../../../shared/defs/types";
