@@ -7,7 +7,8 @@
         "int4": {
           "id": "id_int4",
           "kind": "int",
-          "prompt": "enter number of kids: "
+          "prompt": "enter number of kids: ",
+          "defval": 1
         },
         "obj": {
           "id": "id_obj_fed_by_children",
@@ -16,9 +17,14 @@
             "int4": {
               "id": "id_int4",
               "kind": "int",
-              "prompt": "enter number of grandkids: "
+              "prompt": "enter number of grandkids: ",
+              "defval": 2
             },
-            "text5": { "kind": "text", "prompt": "enter name of grandkid: " }
+            "text5": {
+              "kind": "text",
+              "prompt": "enter name of grandkid: ",
+              "defval": "Zoe"
+            }
           }
         }
       }
