@@ -18,7 +18,7 @@ import { InputType } from "../defs/types/UITypes";
 import Input from "./Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
-import { fnNoMoreResponsesNeeded } from "../state-mgt/cursor/cursor";
+// import { fnNoMoreResponsesNeeded } from "../state-mgt/cursor/cursor";
 
 import QuestionResponses from "./QuestionResponses";
 
@@ -103,7 +103,7 @@ const QnA: React.FC = () => {
       case KIND_ERROR:
         return <Err />;
       case KIND_FINISH:
-        return <div>Interview Finished</div>;
+        return <QuestionResponses />;
       default:
         return <Err />;
     }
@@ -114,7 +114,7 @@ const QnA: React.FC = () => {
       {!interviewStarted && <Welcome onStart={handleStartInterview} />}
       {interviewStarted && !interviewFinished && _fnRenderCore()}
       {interviewFinished && <Finish />}
-      {fnNoMoreResponsesNeeded() && <QuestionResponses />}
+      {/* {fnNoMoreResponsesNeeded() && <QuestionResponses />} */}
     </div>
   );
 };
