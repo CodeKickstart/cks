@@ -7,6 +7,7 @@ import { opsClient as DecMgr } from "../ops-at-client/operators/dec/opsClient";
 import { opsClient as BoolMgr } from "../ops-at-client/operators/bool/opsClient";
 import { opsClient as ObjMgr } from "../ops-at-client/operators/obj/opsClient";
 import { opsClient as RepeatMgr } from "../ops-at-client/operators/repeat/opsClient";
+import { opsClient as ZsysMgr } from "../ops-at-client/operators/zsys/opsClient";
 import { OpsClient, OpsDictionary } from "../defs/types/OpClientTypes";
 
 export function opsMap() {
@@ -22,6 +23,7 @@ export function opsMap() {
     bool: BoolMgr,
     obj: ObjMgr,
     repeat: RepeatMgr,
+    zsys: ZsysMgr,
   };
 
   function fnGetOpsMgr(kind: string): OpsClient | null {
