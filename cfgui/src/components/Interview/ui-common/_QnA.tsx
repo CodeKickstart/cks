@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Welcome from "./Welcome";
-import Finish from "./Finish";
+// import Finish from "./Finish";
 import { fnPickNextKind } from "../misc/componentPicker";
 import { fnSetupForInterview } from "../state-mgt/setupForInterview";
 import {
@@ -113,7 +113,7 @@ const QnA: React.FC = () => {
     <div className='container mx-auto p-4'>
       {!interviewStarted && <Welcome onStart={handleStartInterview} />}
       {interviewStarted && !interviewFinished && _fnRenderCore()}
-      {interviewFinished && <Finish />}
+      {/* {interviewFinished && <Finish />} */}
       {/* {fnNoMoreResponsesNeeded() && <QuestionResponses />} */}
     </div>
   );

@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import QnA from "./_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
-import Finish from "./Finish";
+// import Finish from "./Finish";
 import { fnSendData } from "../misc/expt/sendData";
 
 interface InterviewProps {
@@ -53,9 +53,9 @@ const _Interview = ({
     return <div>Error fetching data</div>;
   }
 
-  if (valtioStore.preOrderComplete) {
-    return <Finish />;
-  }
+  // if (valtioStore.preOrderComplete) {
+  //   return <Finish />;
+  // }
 
   valtioStore.queryContext = data as JsonObjectType;
 
