@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { logListingSuccess } from "../state-mgt/setupForResponse";
+import React from "react";
+// import { logListingSuccess } from "../state-mgt/setupForResponse";
 import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
 
 const QuestionResponses: React.FC = () => {
-  useEffect(() => {
-    logListingSuccess();
-  }, []); // Run once after initial rendering
+  // useEffect(() => {
+  //   logListingSuccess();
+  // }, []); // Run once after initial rendering
 
   const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
   if (error) {

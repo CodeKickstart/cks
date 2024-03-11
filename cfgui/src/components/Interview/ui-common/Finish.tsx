@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { logListingSuccess } from "../state-mgt/setupForResponse";
+// import { logListingSuccess } from "../state-mgt/setupForResponse";
 import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { valtioStore } from "../defs/types/ValtioTypes";
@@ -9,9 +9,9 @@ interface IFinishProps {
 }
 
 const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
-  useEffect(() => {
-    logListingSuccess();
-  }, []); // Run once after initial rendering
+  // useEffect(() => {
+  //   logListingSuccess();
+  // }, []); // Run once after initial rendering
 
   const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
   if (error) {

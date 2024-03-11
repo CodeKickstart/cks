@@ -32,7 +32,7 @@ export const fnSetupForInterview = () => {
     for (const cursor of fnGetAllPreOrderCursors()) {
       console.log(cursor);
       if (!cursor) {
-        return { error: "fnSetupForResponse: cursor is null" };
+        return { error: "_fnPreProcessIterator: cursor is null" };
       }
       const { error } = fnDispatchOp(cursor);
       if (error) {
