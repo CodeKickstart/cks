@@ -9,7 +9,6 @@ interface Props {
   onResponse: () => void;
 }
 
-const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 
 const MAX = 10000000.0;
@@ -66,24 +65,6 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
       setAnswer(defval.toFixed(2));
     }
   }, [queryObject]);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === ENTER_KEY) {
-        handleEnter();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleEnter, sidCursor]);
 
   useEffect(() => {
     if (fnIsValidAnswer(answer)) {

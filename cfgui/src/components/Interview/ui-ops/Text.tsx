@@ -11,7 +11,6 @@ interface Props {
   onResponse: () => void;
 }
 
-const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<string | null>("");
@@ -49,24 +48,6 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
 
     // Set loading state to false after fetching data
   }, [queryObject]);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === ENTER_KEY) {
-        handleEnter();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleEnter, sidCursor]);
 
   const handleSubmitButtonClick = () => {
     if (answer !== null && fnIsValidAnswer(answer)) {
