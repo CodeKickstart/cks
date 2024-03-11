@@ -6,10 +6,10 @@ import {
   OP_BOOL,
   OP_DEC,
   OP_INT,
-  OP_LITERAL,
   OP_PICKMANY,
   OP_PICKONE,
   OP_TEXT,
+  OP_ZSYS,
 } from "../../shared/defs/constants";
 import { JsonObjectType } from "../../shared/defs/types";
 import { Str } from "../../typeStr";
@@ -34,7 +34,8 @@ export function TreeOrderMgr() {
               v === OP_DEC ||
               v === OP_BOOL ||
               v === OP_PICKONE ||
-              v === OP_PICKMANY)
+              v === OP_PICKMANY ||
+              v === OP_ZSYS)
           ) {
             const sid: string = obj[KEY_SID] as string;
             validSids.push(sid);
