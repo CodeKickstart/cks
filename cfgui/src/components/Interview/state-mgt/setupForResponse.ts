@@ -6,7 +6,6 @@ import {
   fnGetAllPostOrderCursors,
 } from "./cursor/cursor";
 
-const REACT_SECOND_RENDER_COUNT = 2;
 export const fnRunPhase2 = (() => {
   const _fnSetupForResponse = () => {
     // valtioStore.preOrderComplete = true;
@@ -26,15 +25,15 @@ export const fnRunPhase2 = (() => {
     return { error: null };
   };
 
-  let count = 0;
+  let _visited = false;
   return () => {
-    count++;
-    if (count === REACT_SECOND_RENDER_COUNT) {
-      console.log(`Listing out answers successful: count ${count} `);
-      const { error } = _fnSetupForResponse();
-      if (error) {
-        console.error(`fnSetupForResponse: error: ${error}`);
-      }
+    if (_visited === true) {
+      return;
+    }
+    _visited = true;
+    const { error } = _fnSetupForResponse();
+    if (error) {
+      console.error(`fnSetupForResponse: error: ${error}`);
     }
   };
 })();
