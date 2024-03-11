@@ -9,3 +9,4 @@ export const INPUT_DEC = "dec";
 export const INPUT_PICKONE = "pickone";
 export const INPUT_LITERAL = "literal";
 export const INPUT_PICKMANY = "pickmany";
+export const INPUT_ZSYS = "zsys";

@@ -9,6 +9,7 @@ import {
   INPUT_PICKONE,
   INPUT_LITERAL,
   INPUT_PICKMANY,
+  INPUT_ZSYS,
 } from "../defs/constants/ComponentNames";
 
 import Text from "../ui-ops/Text";
@@ -20,6 +21,7 @@ import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Finish from "./Finish";
 import { valtioStore } from "../defs/types/ValtioTypes";
+import Zsys from "../ui-ops/Zsys";
 
 const CANCEL_BUTTON = "Cancel";
 
@@ -66,6 +68,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         INPUT_PICKONE,
         INPUT_PICKMANY,
         INPUT_LITERAL,
+        INPUT_ZSYS,
       ].includes(inputType)
     ) {
       setErrorMessage(`Invalid inputType: ${inputType}`);
@@ -119,6 +122,12 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
     case INPUT_PICKMANY:
       inputComponent = (
         <PickMany queryObject={queryObject} onResponse={onResponse} />
+      );
+      break;
+
+    case INPUT_ZSYS:
+      inputComponent = (
+        <Zsys queryObject={queryObject} onResponse={onResponse} />
       );
       break;
 

@@ -16,4 +16,5 @@ export type InputType =
   | "bool"
   | "int"
   | "dec"
+  | "zsys"
   | null;
