@@ -10,3 +10,6 @@ export const INPUT_PICKONE = "pickone";
 export const INPUT_LITERAL = "literal";
 export const INPUT_PICKMANY = "pickmany";
 export const INPUT_ZSYS = "zsys";
+
+export const ID_ZSYS_1 = "id_zsys_1";
+export const ID_ZSYS_2 = "id_zsys_2";

@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
+import { ID_ZSYS_1 } from "../defs/constants/ComponentNames";
+// import { fnRunPhase2 } from "../state-mgt/setupForResponse";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -15,6 +17,7 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [id] = useState<string>("");
 
   const fnIsValidAnswer = (answer: boolean | null) => {
     return answer !== null;
@@ -23,11 +26,26 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
   const handleEnter = useCallback(() => {
     if (answer !== null) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
+      if (answer === true) {
+        if (id === ID_ZSYS_1) {
+          // fnRunPhase2();
+        }
+      }
       setAnswer(null);
       onResponse();
       setIsVisible(false);
     }
-  }, [answer, onResponse, sidCursor]);
+  }, [answer, onResponse, sidCursor, id]);
+
+  useEffect(() => {
+    interface ObjTemplate {
+      id?: string;
+    }
+    const { id } = queryObject as ObjTemplate;
+    if (!id) {
+      throw new Error("Error: id is missing in for ZSYS");
+    }
+  });
 
   useEffect(() => {
     interface ObjTemplate {
