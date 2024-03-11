@@ -1,0 +1,10 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_phase1",
+      "kind": "zsys",
+      "prompt": "PHASE-1 - Interview Complete",
+      "defval": false
+    }
+  ]
+}

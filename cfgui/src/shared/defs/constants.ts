@@ -24,6 +24,7 @@ export const OP_DEC = "dec";
 export const OP_BOOL = "bool";
 export const OP_OBJ = "obj";
 export const OP_REPEAT = "repeat";
+export const OP_ZSYS = "zsys";
 
 export const KEY_SID = "sid";
 export const KEY_PARENT_UID = "puid";

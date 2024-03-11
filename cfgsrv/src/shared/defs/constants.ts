@@ -22,6 +22,7 @@ export const OP_TEXT = "text";
 export const OP_INT = "int";
 export const OP_DEC = "dec";
 export const OP_BOOL = "bool";
+export const OP_ZSYS = "zsys";
 
 export const KEY_SID = "sid";
 export const KEY_PARENT_UID = "puid";

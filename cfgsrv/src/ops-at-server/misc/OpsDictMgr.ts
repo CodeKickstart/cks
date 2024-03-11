@@ -7,6 +7,7 @@ import { OpsMgr as DecMgr } from "../operators/dec/OpsMgr";
 import { OpsMgr as BoolMgr } from "../operators/bool/OpsMgr";
 import { OpsMgr as ObjMgr } from "../operators/obj/OpsMgr";
 import { OpsMgr as RepeatMgr } from "../operators/repeat/OpsMgr";
+import { OpsMgr as ZsysMgr } from "../operators/zsys/OpsMgr";
 import { OpsServerType } from "./OpsServerType";
 
 export function OpsDictMgr() {
@@ -25,6 +26,7 @@ export function OpsDictMgr() {
     bool: BoolMgr,
     obj: ObjMgr,
     repeat: RepeatMgr,
+    zsys: ZsysMgr,
   };
 
   function fnGetOpsMgr(kind: string): OpsServerType | null {

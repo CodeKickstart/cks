@@ -27,6 +27,7 @@ import {
   OP_PICKMANY,
   OP_PICKONE,
   KEY_UID,
+  OP_ZSYS,
 } from "../../shared/defs/constants";
 import { JsonObjectType } from "../../shared/defs/types";
 import { Str } from "../../typeStr";
@@ -79,6 +80,12 @@ export const fnValidateValues = (jsonObj: JsonObjectType): Str => {
           return error;
         }
         break;
+      case OP_ZSYS:
+        if (!isBoolean(val)) {
+          error = _fnGenerateError(kind, sidStr, key);
+          return error;
+        }
+        break;
     }
     return error;
   }
@@ -113,6 +120,12 @@ export const fnValidateValues = (jsonObj: JsonObjectType): Str => {
         break;
       case OP_LITERAL:
         if (_fnCheckLiteral(kind, key, sidStr, val)) {
+          error = _fnGenerateError(kind, sidStr, key);
+          return error;
+        }
+        break;
+      case OP_ZSYS:
+        if (!isBoolean(val)) {
           error = _fnGenerateError(kind, sidStr, key);
           return error;
         }
