@@ -13,8 +13,7 @@ export const fnPickNextKind = (
 
   const { cursor } = fnCursorMove();
 
-  // console.log("fnPickNextKind: cursor", cursor);
-  if (cursor === null) {
+  if (!cursor) {
     return {
       error: null,
       nextKind: KIND_FINISH,

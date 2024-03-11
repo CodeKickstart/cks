@@ -43,27 +43,7 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
     if (defval !== undefined && typeof defval === "boolean") {
       setAnswer(defval as boolean);
     }
-
-    // Set loading state to false after fetching data
   }, [queryObject]);
-
-  // useEffect(() => {
-  //   if (inputRef.current) {
-  //     inputRef.current.focus();
-  //   }
-
-  //   const handleKeyPress = (e: KeyboardEvent) => {
-  //     if (e.key === ENTER_KEY) {
-  //       handleEnter();
-  //     }
-  //   };
-
-  //   document.addEventListener("keydown", handleKeyPress);
-
-  //   return () => {
-  //     document.removeEventListener("keydown", handleKeyPress);
-  //   };
-  // }, [handleEnter, sidCursor]);
 
   const handleSubmitButtonClick = () => {
     if (fnIsValidAnswer(answer)) {

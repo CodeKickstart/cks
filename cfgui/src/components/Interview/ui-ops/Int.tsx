@@ -9,7 +9,7 @@ interface Props {
   onResponse: () => void;
 }
 
-const ENTER_KEY = "Enter";
+// const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 
 const MAX = 10000000;
@@ -67,23 +67,23 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
   }, [queryObject]);
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+  // useEffect(() => {
+  //   if (inputRef.current) {
+  //     inputRef.current.focus();
+  //   }
 
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === ENTER_KEY) {
-        handleEnter();
-      }
-    };
+  //   const handleKeyPress = (e: KeyboardEvent) => {
+  //     if (e.key === ENTER_KEY) {
+  //       handleEnter();
+  //     }
+  //   };
 
-    document.addEventListener("keydown", handleKeyPress);
+  //   document.addEventListener("keydown", handleKeyPress);
 
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleEnter, sidCursor]);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleKeyPress);
+  //   };
+  // }, [handleEnter, sidCursor]);
 
   useEffect(() => {
     if (fnIsValidAnswer(answer)) {

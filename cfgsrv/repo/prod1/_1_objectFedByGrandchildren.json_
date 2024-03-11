@@ -7,8 +7,7 @@
         "int4": {
           "id": "id_int4",
           "kind": "int",
-          "prompt": "enter number of kids: ",
-          "defval": 4
+          "prompt": "enter number of kids: "
         }
       }
     }
