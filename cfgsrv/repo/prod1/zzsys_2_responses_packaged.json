@@ -3,7 +3,7 @@
     {
       "id": "id_phase2",
       "kind": "zsys",
-      "prompt": "PHASE-3 - Responses to be uploaded to the server",
+      "prompt": "Responses Packaged",
       "defval": true
     }
   ]

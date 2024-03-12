@@ -1,0 +1,10 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_phase2",
+      "kind": "zsys",
+      "prompt": "Responses Packaged",
+      "defval": true
+    }
+  ]
+}

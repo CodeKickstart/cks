@@ -4,7 +4,7 @@ import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { ID_ZSYS_1 } from "../defs/constants/ComponentNames";
-import { fnRunPhase2 } from "../state-mgt/setupForResponse";
+import { fnRunZZ1 } from "../state-mgt/setupForResponse";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -54,7 +54,7 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
       }
       const { id } = (queryObject || {}) as ObjTemplate;
       if (id === ID_ZSYS_1) {
-        const { error } = fnRunPhase2();
+        const { error } = fnRunZZ1();
         if (error) {
           console.log(error);
         }

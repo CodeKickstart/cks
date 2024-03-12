@@ -3,7 +3,7 @@
     {
       "id": "id_zsys_1",
       "kind": "zsys",
-      "prompt": "PHASE-1 - Interview Complete",
+      "prompt": "Interview Complete",
       "defval": true
     }
   ]
