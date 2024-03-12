@@ -1,3 +1,4 @@
+import { KEY_VAL } from "../../../../../shared/defs/constants";
 import { JsonObjectType } from "../../../../../shared/defs/types";
 import { fnSetQueryAttribute } from "../../../state-mgt/dataAccess/loLevelAccess";
 
@@ -15,7 +16,7 @@ export const fnPostProcPickForSkippedDescendants = (
       const newVal = { [key]: val };
       const { error: errorSetValue } = fnSetQueryAttribute(
         parentSid,
-        key,
+        KEY_VAL,
         newVal as JsonObjectType
       );
       if (errorSetValue) {
