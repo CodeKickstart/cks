@@ -21,7 +21,7 @@ import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Finish from "./Finish";
 import { valtioStore } from "../defs/types/ValtioTypes";
-import ZZZ from "../ui-ops/ZZZ";
+import { ZZZ } from "../ui-ops/ZZZ";
 
 const CANCEL_BUTTON = "Cancel";
 
