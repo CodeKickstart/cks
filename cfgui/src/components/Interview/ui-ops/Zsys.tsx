@@ -3,13 +3,14 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
+import { ID_ZSYS_1 } from "../defs/constants/ComponentNames";
+import { fnRunPhase2 } from "../state-mgt/setupForResponse";
 
 interface Props {
   queryObject: JsonObjectType;
   onResponse: () => void;
 }
 
-// const ENTER_KEY = "Enter";
 const ENTER_BUTTON_LABEL = "Enter";
 const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
@@ -54,6 +55,9 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   const handleSubmitButtonClick = () => {
     if (fnIsValidAnswer(answer)) {
+      if (identifier === ID_ZSYS_1) {
+        fnRunPhase2();
+      }
       handleEnter();
     }
   };
