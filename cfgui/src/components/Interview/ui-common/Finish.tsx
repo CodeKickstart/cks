@@ -4,6 +4,9 @@ import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { valtioStore } from "../defs/types/ValtioTypes";
 
+import ReactJson from "react-json-view";
+// import { JsonObjectType } from "../../../shared/defs/types";
+
 interface IFinishProps {
   debug?: boolean;
 }
@@ -31,6 +34,8 @@ const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
   }
 
   return (
+    // Import the JSONViewer component
+
     <div className='flex-1 overflow-y-auto'>
       {debug === true && (
         <div className='bg-gray-200 p-4 rounded-lg'>
@@ -38,7 +43,9 @@ const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
           <div id='idDebug' className='overflow-y-auto h-full'>
             {/* Apply overflow-y-auto and set a fixed height */}
             <pre className='whitespace-pre-wrap'>
-              {JSON.stringify(valtioStore.queryContext, null, 2)}
+              {typeof valtioStore.queryContext === "object" && (
+                <ReactJson src={valtioStore.queryContext as object} />
+              )}
             </pre>
           </div>
         </div>
