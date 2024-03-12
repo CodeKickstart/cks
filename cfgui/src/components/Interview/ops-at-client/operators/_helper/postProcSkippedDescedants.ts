@@ -6,23 +6,25 @@ export const fnPostProcPickForSkippedDescendants = (
   parentSid: string,
   children: object
 ) => {
+  const obj: { [key: string]: unknown } = {};
   for (const [key, value] of Object.entries(children as object)) {
     interface ObjTemplate {
       blocked?: boolean;
       val?: string | number | boolean | object | null;
     }
     const { blocked, val } = (value || {}) as ObjTemplate;
-    if (blocked === false) {
-      const newVal = { [key]: val };
-      const { error: errorSetValue } = fnSetQueryAttribute(
-        parentSid,
-        KEY_VAL,
-        newVal as JsonObjectType
-      );
-      if (errorSetValue) {
-        return { error: errorSetValue };
-      }
+    if (blocked === false && key) {
+      const newVal: { [key: string]: unknown } = { [key]: val };
+      obj[key] = newVal;
     }
+  }
+  const { error: errorSetValue } = fnSetQueryAttribute(
+    parentSid,
+    KEY_VAL,
+    obj as JsonObjectType
+  );
+  if (errorSetValue) {
+    return { error: errorSetValue };
   }
   return { error: null };
 };
