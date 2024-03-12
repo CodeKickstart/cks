@@ -3,7 +3,7 @@
 import { fnDispatchOp } from "../utils/opsDispatcher";
 import { fnGetAllPostOrderCursors } from "./cursor/cursor";
 
-export function fnRunZZ1(): { error: string | null } {
+export function fnRunZZZ1(): { error: string | null } {
   for (const cursor of fnGetAllPostOrderCursors()) {
     console.log(cursor);
     if (!cursor) {

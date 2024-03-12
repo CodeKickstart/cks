@@ -11,5 +11,5 @@ export const INPUT_LITERAL = "literal";
 export const INPUT_PICKMANY = "pickmany";
 export const INPUT_ZZZ = "zzz";
 
-export const ID_ZSYS_1 = "id_zsys_1";
-export const ID_ZSYS_2 = "id_zsys_2";
+export const ID_ZZZ_1 = "id_zzz_1";
+export const ID_ZZZ_2 = "id_zzz_2";

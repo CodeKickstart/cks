@@ -3,8 +3,8 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
-import { ID_ZSYS_1 } from "../defs/constants/ComponentNames";
-import { fnRunZZ1 } from "../state-mgt/setupForResponse";
+import { ID_ZZZ_1 } from "../defs/constants/ComponentNames";
+import { fnRunZZZ1 } from "../state-mgt/setupForResponse";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -52,8 +52,8 @@ const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
         id?: string | null | undefined;
       }
       const { id } = (queryObject || {}) as ObjTemplate;
-      if (id === ID_ZSYS_1) {
-        const { error } = fnRunZZ1();
+      if (id === ID_ZZZ_1) {
+        const { error } = fnRunZZZ1();
         if (error) {
           console.log(error);
         }
