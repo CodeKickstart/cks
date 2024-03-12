@@ -2,7 +2,7 @@
   "__CONTENT": [
     {
       "id": "id_phase2",
-      "kind": "zsys",
+      "kind": "zzz",
       "prompt": "Responses Packaged",
       "defval": true
     }

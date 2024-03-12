@@ -12,12 +12,11 @@ interface Props {
 }
 
 const ENTER_BUTTON_LABEL = "Enter";
-const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
+const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  // const [identifier, setIdentifier] = useState<string>("");
 
   const fnIsValidAnswer = (answer: boolean | null) => {
     return answer !== null;
@@ -105,4 +104,4 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
   );
 };
 
-export default Zsys;
+export default ZZZ;
