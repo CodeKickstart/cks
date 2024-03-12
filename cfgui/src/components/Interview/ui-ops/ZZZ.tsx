@@ -12,7 +12,7 @@ interface Props {
 }
 
 const ENTER_BUTTON_LABEL = "Enter";
-const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
+export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
@@ -103,5 +103,3 @@ const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
     </div>
   );
 };
-
-export default ZZZ;
