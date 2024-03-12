@@ -17,7 +17,7 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [identifier, setIdentifier] = useState<string>("");
+  // const [identifier, setIdentifier] = useState<string>("");
 
   const fnIsValidAnswer = (answer: boolean | null) => {
     return answer !== null;
@@ -36,26 +36,24 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
     interface ObjTemplate {
       defval?: boolean;
       sid?: string;
-      id?: string | null | undefined;
     }
 
-    const { defval, sid, id } = (queryObject || {}) as ObjTemplate;
-
-    if (!id && typeof id === "string") {
-      setIdentifier(id);
-      console.log(identifier);
-    }
+    const { defval, sid } = (queryObject || {}) as ObjTemplate;
 
     setSidCursor(sid as string);
 
     if (defval !== undefined && typeof defval === "boolean") {
       setAnswer(defval as boolean);
     }
-  }, [queryObject, identifier]);
+  }, [queryObject]);
 
   const handleSubmitButtonClick = () => {
     if (fnIsValidAnswer(answer)) {
-      if (identifier === ID_ZSYS_1) {
+      interface ObjTemplate {
+        id?: string | null | undefined;
+      }
+      const { id } = (queryObject || {}) as ObjTemplate;
+      if (id === ID_ZSYS_1) {
         fnRunPhase2();
       }
       handleEnter();
