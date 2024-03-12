@@ -54,7 +54,10 @@ const Zsys: React.FC<Props> = ({ queryObject, onResponse }) => {
       }
       const { id } = (queryObject || {}) as ObjTemplate;
       if (id === ID_ZSYS_1) {
-        fnRunPhase2();
+        const { error } = fnRunPhase2();
+        if (error) {
+          console.log(error);
+        }
       }
       handleEnter();
     }
