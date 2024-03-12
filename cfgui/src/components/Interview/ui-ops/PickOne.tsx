@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { KEY_VAL } from "../../../shared/defs/constants";
+import { KEY_SELECT, KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
@@ -62,7 +62,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
 
     const { val } = fnConverSingleDefvalToVal(listOfDescendantNames, defval);
 
-    const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
+    const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_SELECT, val);
     if (errorSetValue) {
       console.error(`Error setting query attribute: ${errorSetValue}`);
       return;

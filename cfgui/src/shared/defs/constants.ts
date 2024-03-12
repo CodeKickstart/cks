@@ -14,6 +14,7 @@ export const KEY_COMMENTS = "comments";
 export const KEY_MAX = "max";
 export const KEY_MIN = "min";
 export const KEY_OVERRIDE = "override";
+export const KEY_SELECT = "select";
 
 export const OP_PICKONE = "pickone";
 export const OP_PICKMANY = "pickmany";
