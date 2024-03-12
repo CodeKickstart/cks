@@ -86,7 +86,7 @@ export const fnPackQuery = (
   const opsMgr = fnGetOpsMgr(kind);
   if (!opsMgr) {
     return {
-      error: `collectionName ${collectionName}" contains an unknown "${KEY_KIND}" key `,
+      error: `Query Filename: "${collectionName}", Unknown Kind: "${kind}" `,
       prepackQuery: null,
     };
   }

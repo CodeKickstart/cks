@@ -27,7 +27,7 @@ export const fnPrepareQueriesForContext = (
   )) {
     if (queryCollection === null || queryCollection === undefined) {
       return {
-        error: ` collectionName "${collectionName}" is null `,
+        error: `Query File: "${collectionName}",  is null `,
         queryBundle: null,
       };
     }
@@ -35,7 +35,7 @@ export const fnPrepareQueriesForContext = (
     for (const [keyContent, queryList] of Object.entries(queryCollection)) {
       if (keyContent !== KEY_CONTENT) {
         return {
-          error: `collectionName "${collectionName}" is a disallowed key `,
+          error: `Query File: "${collectionName}", ${keyContent} is a disallowed key `,
           queryBundle: null,
         };
       }

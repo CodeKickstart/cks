@@ -1,0 +1,26 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_pickone_fed_by_grandchildren",
+      "kind": "obj",
+      "children": {
+        "extra": {
+          "bool3": {
+            "id": "id_bool1",
+            "kind": "bool",
+            "prompt": "enter if booster seats needed for the kids: ",
+            "defval": false
+          }
+        },
+        "dec1": {
+          "id": "id_dec1",
+          "kind": "dec",
+          "prompt": "amount of luggage in Kgs: ",
+          "min": 0,
+          "max": 10,
+          "defval": 7.6
+        }
+      }
+    }
+  ]
+}

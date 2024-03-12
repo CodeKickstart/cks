@@ -49,13 +49,13 @@ const _Interview = ({
     return <div>Loading...</div>;
   }
 
-  if (isError || !data) {
-    return <div>Error fetching data</div>;
+  if (typeof data === "string") {
+    return <div>`Data Error:: {data}`</div>;
   }
 
-  // if (valtioStore.preOrderComplete) {
-  //   return <Finish />;
-  // }
+  if (isError || !data) {
+    return <div>Network :: fetching data from server</div>;
+  }
 
   valtioStore.queryContext = data as JsonObjectType;
 
