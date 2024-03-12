@@ -14,8 +14,7 @@ export const fnPostProcPickForSkippedDescendants = (
     }
     const { blocked, val } = (value || {}) as ObjTemplate;
     if (blocked === false && key) {
-      const newVal: { [key: string]: unknown } = { [key]: val };
-      obj[key] = newVal;
+      obj[key] = val;
     }
   }
   const { error: errorSetValue } = fnSetQueryAttribute(
