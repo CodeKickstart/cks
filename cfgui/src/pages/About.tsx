@@ -3,9 +3,6 @@ import React from "react";
 const About: React.FC = () => {
   return (
     <div className='flex flex-col h-screen'>
-      <header className='bg-gray-800 text-white py-4 fixed top-0 w-full z-10'>
-        Header
-      </header>
       <main className='flex-1 overflow-y-auto pt-16 pb-16'>
         <div className='container mx-auto px-4 py-8'>
           {/* Add your scrollable content here */}
@@ -28,9 +25,6 @@ const About: React.FC = () => {
           </div>
         </div>
       </main>
-      <footer className='bg-gray-800 text-white py-4 fixed bottom-0 w-full z-10'>
-        Footer
-      </footer>
     </div>
   );
 };
