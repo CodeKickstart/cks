@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import Welcome from "./Welcome";
+import InterviewEnd from "./InterviewBegin";
 // import Diagnostics from "./Diagnostics";
 import { fnPickNextKind } from "../misc/componentPicker";
 import { fnSetupForInterview } from "../state-mgt/setupForInterview";
@@ -111,7 +111,7 @@ const QnA: React.FC = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      {!interviewStarted && <Welcome onStart={handleStartInterview} />}
+      {!interviewStarted && <InterviewEnd onStart={handleStartInterview} />}
       {interviewStarted && !interviewFinished && _fnRenderCore()}
       {/* {interviewFinished && <Diagnostics />} */}
       {/* {fnNoMoreResponsesNeeded() && <QuestionResponses />} */}
