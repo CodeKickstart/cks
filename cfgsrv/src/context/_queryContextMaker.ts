@@ -2,6 +2,7 @@ import { fnReadJsonDirectory } from "./readJsonDirectory";
 import { QueryBundleType } from "../shared/defs/types";
 import { fnPrepareQueriesForContext } from "./queryContextSetup";
 import { Str } from "../typeStr";
+import { fnValidateTreeNodesWithPreTraversal } from "./validation/validateEntireTree";
 
 export function fnBundleQuery(directoryPath: string): {
   error: Str;
@@ -30,6 +31,11 @@ export function fnBundleQuery(directoryPath: string): {
         error: null,
         queryBundle: "JSON data is not an object",
       };
+    }
+
+    const { error } = fnValidateTreeNodesWithPreTraversal(jsonData);
+    if (error) {
+      return { error: null, queryBundle: error };
     }
 
     const { error: error2, queryBundle } = fnPrepareQueriesForContext(jsonData);
