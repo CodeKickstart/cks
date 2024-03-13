@@ -18,8 +18,6 @@ import { InputType } from "../defs/types/UITypes";
 import Input from "./Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
-// import { fnNoMoreResponsesNeeded } from "../state-mgt/cursor/cursor";
-
 import QuestionResponses from "./QuestionResponses";
 
 const QnA: React.FC = () => {
@@ -113,8 +111,6 @@ const QnA: React.FC = () => {
     <div className='container mx-auto p-4'>
       {!interviewStarted && <InterviewEnd onStart={handleStartInterview} />}
       {interviewStarted && !interviewFinished && _fnRenderCore()}
-      {/* {interviewFinished && <Diagnostics />} */}
-      {/* {fnNoMoreResponsesNeeded() && <QuestionResponses />} */}
     </div>
   );
 };
