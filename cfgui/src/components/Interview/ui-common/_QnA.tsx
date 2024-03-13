@@ -17,7 +17,7 @@ import { InputType } from "../defs/types/UITypes";
 import Input from "./Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
-import QuestionResponses from "./QuestionResponses";
+import InterviewEnd from "./InterviewEnd";
 import InterviewBegin from "./InterviewBegin";
 
 const QnA: React.FC = () => {
@@ -101,7 +101,7 @@ const QnA: React.FC = () => {
       case KIND_ERROR:
         return <Err />;
       case KIND_FINISH:
-        return <QuestionResponses />;
+        return <InterviewEnd />;
       default:
         return <Err />;
     }
