@@ -5,17 +5,12 @@ import { KEY_VAL } from "../../../shared/defs/constants";
 import { valtioStore } from "../defs/types/ValtioTypes";
 
 import ReactJson from "react-json-view";
-// import { JsonObjectType } from "../../../shared/defs/types";
 
 interface IFinishProps {
   debug?: boolean;
 }
 
-const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
-  // useEffect(() => {
-  //   logListingSuccess();
-  // }, []); // Run once after initial rendering
-
+const Diagnostics: React.FC<IFinishProps> = ({ debug = true }) => {
   const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
   if (error) {
     return <div className='text-red-500'>{error}</div>;
@@ -54,4 +49,4 @@ const Finish: React.FC<IFinishProps> = ({ debug = true }) => {
   );
 };
 
-export default Finish;
+export default Diagnostics;

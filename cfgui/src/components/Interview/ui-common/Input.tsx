@@ -19,7 +19,7 @@ import Dec from "../ui-ops/Dec";
 import PickOne from "../ui-ops/PickOne";
 import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
-import Finish from "./Finish";
+import Diagnostics from "./Diagnostics";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { ZZZ } from "../ui-ops/ZZZ";
 
@@ -194,7 +194,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
           activeTab === "Diagnostics" ? "block bg-gray-100" : "hidden"
         }`}>
         <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
-        <Finish debug={true} />
+        <Diagnostics debug={true} />
       </div>
 
       <div className='flex p-4'>
