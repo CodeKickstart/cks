@@ -1,28 +1,26 @@
 export default function Header() {
   return (
-    <header className='bg-gray-800 text-white py-4 fixed top-0 w-full z-10'>
-      <div className='ml-4'>Logo</div>
-      <nav className='mr-4'>
+    <header className='bg-gray-800 text-white py-4 fixed top-0 w-full z-10 flex justify-between items-center'>
+      <div className='flex items-center'>
+        <nav>
+          <ul className='flex'>
+            <li className='m-4'>
+              <a href='#'>Home</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      {/* About and Contact */}
+      <nav>
         <ul className='flex'>
-          <li className='mx-2'>About</li>
-          <li className='mx-2'>Contact</li>
+          <li className='m-4'>
+            <a href='#'>About</a>
+          </li>
+          <li className='m-4'>
+            <a href='#'>Contact</a>
+          </li>
         </ul>
       </nav>
-      {/* <ul>
-        <li className='mr-6'>
-          <a href='/' className='text-white'>
-            Home
-          </a>
-        </li>
-        <li className='ml-auto'>
-          <a href='/contact-us' className='text-white mr-4'>
-            Contact
-          </a>
-          <a href='/about-us' className='text-white'>
-            About
-          </a>
-        </li>
-      </ul> */}
     </header>
   );
 }
