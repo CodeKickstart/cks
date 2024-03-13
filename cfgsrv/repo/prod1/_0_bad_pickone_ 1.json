@@ -11,14 +11,6 @@
             "prompt": "enter if booster seats needed for the kids: ",
             "defval": false
           }
-        },
-        "dec1": {
-          "id": "id_dec1",
-          "kind": "dec",
-          "prompt": "amount of luggage in Kgs: ",
-          "min": 0,
-          "max": 10,
-          "defval": 7.6
         }
       }
     }
