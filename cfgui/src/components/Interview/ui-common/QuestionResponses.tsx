@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 // import { logListingSuccess } from "../state-mgt/setupForResponse";
 import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
 
-const QuestionResponses: React.FC = () => {
+interface Props {
+  zzzId?: string;
+}
+
+const QuestionResponses: React.FC<Props> = ({ zzzId }) => {
+  console.log(zzzId);
+  // const [displayQuestionResponses, setDisplayQuestionResponses] =
+  useState<boolean>(false);
+
+  // useEffect(() => {
+  //   if (zzzId) {
+  //     setDisplayQuestionResponses(true);
+  //   }
+  // }, [zzzId]);
+
   const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
   if (error) {
     return <div className='text-red-500'>{error}</div>;
@@ -22,16 +36,14 @@ const QuestionResponses: React.FC = () => {
   }
 
   return (
-    <>
-      <div className='mb-4'>
-        <h3 className='text-lg font-semibold mb-2'>Questions answered!</h3>
-        <ul>
-          {valList.map((answer, index) => (
-            <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <div className='mb-4'>
+      <h3 className='text-lg font-semibold mb-2'>Questions answered!</h3>
+      <ul>
+        {valList.map((answer, index) => (
+          <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

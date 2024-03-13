@@ -16,3 +16,13 @@ export function fnRunZZZ1(): { error: string | null } {
   }
   return { error: null };
 }
+
+export function fnRunZZZ2(): { error: string | null } {
+  console.log("fnRunZZZ2");
+  return { error: null };
+}
+
+export function fnRunZZZ3(): { error: string | null } {
+  console.log("fnRunZZZ3");
+  return { error: null };
+}
