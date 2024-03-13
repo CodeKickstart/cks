@@ -5,6 +5,7 @@ import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { ID_ZZZ_1 } from "../defs/constants/ComponentNames";
 import { fnRunZZZ1 } from "../state-mgt/setupForResponse";
+import QuestionResponses from "../ui-common/QuestionResponses";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -65,41 +66,45 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
     return null; // Don't render anything if isVisible is false
   }
   return (
-    <div className='flex items-center'>
-      <div className='flex items-center mb-4'>
-        <label className='inline-flex items-center mr-4'>
-          <input
-            ref={inputRef}
-            type='radio'
-            className='form-radio'
-            value='true'
-            checked={answer === true}
-            onChange={() => setAnswer(true)}
-          />
-          <span className='ml-2'>True</span>
-        </label>
-        <label className='inline-flex items-center'>
-          <input
-            type='radio'
-            className='form-radio'
-            value='false'
-            checked={answer === false}
-            onChange={() => setAnswer(false)}
-          />
-          <span className='ml-2'>False</span>
-        </label>
+    <>
+      <QuestionResponses />
+      <h3 className='text-lg font-semibold mb-2'>Continue?</h3>
+      <div className='flex items-center'>
+        <div className='flex items-center mb-4'>
+          <label className='inline-flex items-center mr-4'>
+            <input
+              ref={inputRef}
+              type='radio'
+              className='form-radio'
+              value='true'
+              checked={answer === true}
+              onChange={() => setAnswer(true)}
+            />
+            <span className='ml-2'>Yes</span>
+          </label>
+          <label className='inline-flex items-center'>
+            <input
+              type='radio'
+              className='form-radio'
+              value='false'
+              checked={answer === false}
+              onChange={() => setAnswer(false)}
+            />
+            <span className='ml-2'>No</span>
+          </label>
+        </div>
+        <div className='flex-grow' />
+        <div>
+          <button
+            className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+              !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={handleSubmitButtonClick}
+            disabled={!fnIsValidAnswer(answer)}>
+            {ENTER_BUTTON_LABEL}
+          </button>
+        </div>
       </div>
-      <div className='flex-grow' />
-      <div>
-        <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          onClick={handleSubmitButtonClick}
-          disabled={!fnIsValidAnswer(answer)}>
-          {ENTER_BUTTON_LABEL}
-        </button>
-      </div>
-    </div>
+    </>
   );
 };

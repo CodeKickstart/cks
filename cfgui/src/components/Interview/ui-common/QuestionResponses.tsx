@@ -4,10 +4,6 @@ import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
 
 const QuestionResponses: React.FC = () => {
-  // useEffect(() => {
-  //   logListingSuccess();
-  // }, []); // Run once after initial rendering
-
   const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
   if (error) {
     return <div className='text-red-500'>{error}</div>;
@@ -28,7 +24,7 @@ const QuestionResponses: React.FC = () => {
   return (
     <>
       <div className='mb-4'>
-        <h3 className='text-lg font-semibold mb-2'>All questions answered!</h3>
+        <h3 className='text-lg font-semibold mb-2'>Questions answered!</h3>
         <ul>
           {valList.map((answer, index) => (
             <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
