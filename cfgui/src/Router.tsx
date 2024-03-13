@@ -13,7 +13,7 @@ import _Interview from "./components/Interview/ui-common/_Interview";
 export default function Router() {
   const Layout = () => {
     return (
-      <div className='flex flex-col min-h-screen'>
+      <div className='flex-1 overflow-y-auto pt-16 pb-16'>
         <Header />
         <div style={{ flex: 1 }}>
           {" "}
