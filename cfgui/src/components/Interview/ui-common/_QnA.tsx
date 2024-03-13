@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import InterviewEnd from "./InterviewBegin";
-// import Diagnostics from "./Diagnostics";
+
 import { fnPickNextKind } from "../misc/componentPicker";
 import { fnSetupForInterview } from "../state-mgt/setupForInterview";
 import {
@@ -19,6 +18,7 @@ import Input from "./Input";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import QuestionResponses from "./QuestionResponses";
+import InterviewBegin from "./InterviewBegin";
 
 const QnA: React.FC = () => {
   const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
@@ -109,7 +109,7 @@ const QnA: React.FC = () => {
 
   return (
     <div className='container mx-auto p-4'>
-      {!interviewStarted && <InterviewEnd onStart={handleStartInterview} />}
+      {!interviewStarted && <InterviewBegin onStart={handleStartInterview} />}
       {interviewStarted && !interviewFinished && _fnRenderCore()}
     </div>
   );
