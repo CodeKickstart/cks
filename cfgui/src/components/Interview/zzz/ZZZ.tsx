@@ -11,6 +11,7 @@ import {
   ZZZ_STATE_2,
   ZZZ_STATE_3,
 } from "../defs/constants/ComponentNames";
+import { fnUpload } from "./setup2_upload";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -53,7 +54,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
   }, [queryObject]);
 
-  const handleSubmitButtonClick = () => {
+  const handleSubmitButtonClick = async () => {
     if (fnIsValidAnswer(answer)) {
       switch (valtioStore.zzzState) {
         case "ZZZ_STATE_1":
@@ -63,6 +64,13 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
           valtioStore.zzzState = ZZZ_STATE_3;
           break;
         case "ZZZ_STATE_3":
+          try {
+            // Call fnUpload and await its completion
+            const result = await fnUpload();
+            console.log(result); // Log the result
+          } catch (error) {
+            console.error("Error uploading data:", error);
+          }
           valtioStore.zzzState = ZZZ_END;
           break;
         default:
@@ -72,6 +80,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
       handleEnter();
     }
   };
+
   if (!isVisible) {
     return null; // Don't render anything if isVisible is false
   }

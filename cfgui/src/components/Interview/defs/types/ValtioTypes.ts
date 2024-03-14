@@ -22,6 +22,11 @@ const valtioStore = proxy({
   preOrderComplete: false,
   earlyExit: false,
   zzzState: ZZZ_START as string,
+  urlInfo: {
+    baseUrl: "",
+    path: "",
+    queryParams: "",
+  },
 });
 
 export { valtioStore };

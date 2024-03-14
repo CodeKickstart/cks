@@ -25,6 +25,12 @@ const _Interview = ({
   }).toString();
 
   const apiUrl = `${baseUrl}${path}?${queryParams}`;
+  const urlInfo = {
+    baseUrl,
+    path,
+    queryParams,
+  };
+  valtioStore.urlInfo = urlInfo;
   console.log(apiUrl);
 
   const fetchData = useMemo(

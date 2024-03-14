@@ -1,8 +1,15 @@
-export const fnSendData = (url: string) => async () => {
+import { valtioStore } from "../defs/types/ValtioTypes";
+
+export const fnUpload = async () => {
   const postData = { name: "John", age: 30 };
 
   async function postDataAsync() {
     try {
+      let url = "";
+      if (!url) {
+        const urlInfo = valtioStore.urlInfo;
+        url = `${urlInfo.baseUrl}${urlInfo.path}?${urlInfo.queryParams}`;
+      }
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -17,25 +24,12 @@ export const fnSendData = (url: string) => async () => {
 
       const data = await response.json(); // Parse response body as JSON
       console.log("Response:", data); // Log the response data
+      return { data }; // Return response data
     } catch (error) {
-      console.error("Error:", error); // Log any errors
+      return { error }; // Return error if any
     }
   }
 
-  postDataAsync();
+  // Await the asynchronous postDataAsync function
+  return await postDataAsync();
 };
-
-// export const fnUpload = async (data: unknown) => {
-//   const response = await fetch("https://api.example.com/answers", {
-//     method: "POST",
-
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//   });
-//   if (!response.ok) {
-//     throw new Error("Failed to upload answers");
-//   }
-//   return response.json();
-// };
