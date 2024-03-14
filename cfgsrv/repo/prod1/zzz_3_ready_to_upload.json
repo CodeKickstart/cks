@@ -3,7 +3,7 @@
     {
       "id": "id_zzz_3",
       "kind": "zzz",
-      "prompt": "Responses Packaged",
+      "prompt": "Upload Context",
       "defval": true
     }
   ]

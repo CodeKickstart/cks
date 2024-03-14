@@ -1,10 +1,10 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "react-query";
 import QnA from "./_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
-// import Diagnostics from "./Diagnostics";
-import { fnSendData } from "../misc/expt/sendData";
+// import Finish from "./Finish";
+// import { fnSendData } from "../misc/expt/sendData";
 
 interface InterviewProps {
   baseUrl: string;
@@ -38,9 +38,9 @@ const _Interview = ({
     []
   );
 
-  useEffect(() => {
-    fnSendData(apiUrl);
-  }, [apiUrl]);
+  // useEffect(() => {
+  //   fnSendData(apiUrl);
+  // }, [apiUrl]);
 
   const { data, isLoading, isError } = useQuery("data", () =>
     fetchData(apiUrl)
@@ -54,7 +54,7 @@ const _Interview = ({
   }
 
   if (isError || !data) {
-    return <div>Network :: fetching data from server</div>;
+    return <div>Network Error fetching data from server</div>;
   }
 
   valtioStore.queryContext = data as JsonObjectType;
