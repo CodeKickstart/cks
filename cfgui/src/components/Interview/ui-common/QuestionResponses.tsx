@@ -1,22 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 // import { logListingSuccess } from "../state-mgt/setupForResponse";
 import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
+import { ID_ZZZ_1 } from "../defs/constants/ComponentNames";
 
 interface Props {
   zzzId?: string;
 }
 
 const QuestionResponses: React.FC<Props> = ({ zzzId }) => {
-  console.log(zzzId);
-  // const [displayQuestionResponses, setDisplayQuestionResponses] =
-  useState<boolean>(false);
-
-  // useEffect(() => {
-  //   if (zzzId) {
-  //     setDisplayQuestionResponses(true);
-  //   }
-  // }, [zzzId]);
+  if (zzzId !== ID_ZZZ_1) {
+    // Return null if zzzId is not 'abc'
+    return null;
+  }
 
   const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
   if (error) {
