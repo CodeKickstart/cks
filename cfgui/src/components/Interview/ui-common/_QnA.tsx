@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 
 import { fnPickNextKind } from "../misc/componentPicker";
-import { fnSetupForInterview } from "../state-mgt/setupForInterview";
+import { fnSetupForInterview } from "../state-mgt/zzz/setup1_interview";
 import {
   KIND_ERROR,
   KIND_FINISH,

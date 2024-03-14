@@ -3,19 +3,20 @@ import {
   ASIS_post,
   ASIS_postfixOrderList,
   ASIS_prefixOrderList,
-} from "../../../shared/defs/constants";
-import { JsonObjectType } from "../../../shared/defs/types";
+} from "../../../../shared/defs/constants";
+import { JsonObjectType } from "../../../../shared/defs/types";
 
 import {
   fnCursorInitForInterview,
   fnGetAllPreOrderCursors,
   fnGetCurrentCursor,
-} from "./cursor/cursor";
-import { valtioStore } from "../defs/types/ValtioTypes";
-import { fnPostfixTraversal } from "./treeTraversal/postTraversal";
-import { fnGatherOrderSequences } from "./treeWorkers/orderList";
-import { fnSplitCursor } from "./dataAccess/hiLevelAccess";
-import { fnDispatchOp } from "../utils/opsDispatcher";
+} from "../cursor/cursor";
+import { valtioStore } from "../../defs/types/ValtioTypes";
+import { fnPostfixTraversal } from "../treeTraversal/postTraversal";
+import { fnGatherOrderSequences } from "../treeWorkers/orderList";
+import { fnSplitCursor } from "../dataAccess/hiLevelAccess";
+import { fnDispatchOp } from "../../utils/opsDispatcher";
+import { ZZZ_STATE_1 } from "../../defs/constants/ComponentNames";
 
 export const fnSetupForInterview = () => {
   function _fnLogArrayInfo(orderList: string[], startWith: string) {
@@ -79,5 +80,11 @@ export const fnSetupForInterview = () => {
   // console.log(`Text: cursor: ${cursor}`);
   const { sidCursor } = fnSplitCursor(cursor);
 
+  fnInitZZZState();
+
   return { error: null, sidCursor };
 };
+
+function fnInitZZZState() {
+  valtioStore.zzzState = ZZZ_STATE_1;
+}
