@@ -23,14 +23,14 @@ import Diagnostics from "./Diagnostics";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { ZZZ } from "../zzz/ZZZ";
 
-const CANCEL_BUTTON = "Cancel";
+const CANCEL_BUTTON_NAME = "Cancel";
 
 const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>("Display");
-  const [isVisible, setIsVisible] = useState<boolean>(true); // State for visibility
+  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   useEffect(() => {
     try {
@@ -199,12 +199,12 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
       <div className='flex p-4'>
         <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2`}
+          className='bg-green-500 text-white px-4 py-2 rounded-md ml-2'
           onClick={() => {
             valtioStore.earlyExit = true;
-            setIsVisible(false); // Set isVisible to false to hide the component
+            window.location.href = "/";
           }}>
-          {CANCEL_BUTTON}
+          Cancel
         </button>
       </div>
     </div>
