@@ -12,6 +12,7 @@ import {
   ZZZ_STATE_3,
 } from "../defs/constants/ComponentNames";
 import { fnUpload } from "./setup2_upload";
+import { fnGetResponseContext } from "../misc/responseContext";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -65,6 +66,8 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
           break;
         case "ZZZ_STATE_3":
           try {
+            const responseContext = fnGetResponseContext();
+            console.log(responseContext);
             const result = await fnUpload();
             console.log(result); // Log the result
           } catch (error) {
