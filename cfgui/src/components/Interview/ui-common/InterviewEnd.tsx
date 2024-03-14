@@ -6,8 +6,8 @@ const InterviewEnd = () => {
       </h3>
       <div className='text-lg mt-2'>Interview results will be uploaded</div>
       <div className='italic text-lg mt-4 mb-4'>
-        Please click the button below or the Home link above to return to the
-        home display
+        Please click on the Home link above or the Home button below to return
+        to the main display
       </div>
       <button
         className='bg-green-500 text-white px-4 py-2 rounded-md ml-2  mx-auto'
