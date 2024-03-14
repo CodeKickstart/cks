@@ -23,14 +23,11 @@ import Diagnostics from "./Diagnostics";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { ZZZ } from "../zzz/ZZZ";
 
-const CANCEL_BUTTON_NAME = "Cancel";
-
 const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>("Display");
-  const [isVisible, setIsVisible] = useState<boolean>(true);
 
   useEffect(() => {
     try {
@@ -133,10 +130,6 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
     default:
       inputComponent = null;
-  }
-
-  if (!isVisible) {
-    return null; // Hide the component if isVisible is false
   }
 
   return (
