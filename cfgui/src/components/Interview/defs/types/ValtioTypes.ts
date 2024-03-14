@@ -9,7 +9,7 @@ export interface querySelectorType {
 }
 
 const valtioStore = proxy({
-  // answers: [] as string[],
+  answers: {} as JsonObjectType,
   queryContext: {} as JsonObjectType,
   queryList: [] as Array<querySelectorType>,
   currentQueryKey: { contextName: null, id: null } as querySelectorType,

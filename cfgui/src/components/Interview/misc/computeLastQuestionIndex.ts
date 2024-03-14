@@ -16,10 +16,8 @@ export function fnComputeAndStoreLastQuestionIndex(): {
   for (const cursor of fnGetAllPreOrderCursors()) {
     if (cursor !== null) {
       const { sidCursor } = fnSplitCursor(cursor);
-      const { error: errorSkipQuestion, skipQuestion } = fnShouldSkipQuestion(
-        sidCursor,
-        true
-      );
+      const { error: errorSkipQuestion, skipQuestion } =
+        fnShouldSkipQuestion(sidCursor);
       if (errorSkipQuestion) {
         return { error: errorSkipQuestion, lastQuestionIndex: null };
       }

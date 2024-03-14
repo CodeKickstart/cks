@@ -65,7 +65,6 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
           break;
         case "ZZZ_STATE_3":
           try {
-            // Call fnUpload and await its completion
             const result = await fnUpload();
             console.log(result); // Log the result
           } catch (error) {
