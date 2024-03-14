@@ -3,9 +3,14 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
-// import { ID_ZZZ_1, ID_ZZZ_2, ID_ZZZ_3 } from "../defs/constants/ComponentNames";
-// import { fnRunZZZ1, fnRunZZZ2, fnRunZZZ3 } from "../state-mgt/setupForResponse";
 import QuestionResponses from "../ui-common/QuestionResponses";
+import { valtioStore } from "../defs/types/ValtioTypes";
+import {
+  ZZZ_END,
+  ZZZ_STATE_1,
+  ZZZ_STATE_2,
+  ZZZ_STATE_3,
+} from "../defs/constants/ComponentNames";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -50,19 +55,19 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   const handleSubmitButtonClick = () => {
     if (fnIsValidAnswer(answer)) {
-      // interface ObjTemplate {
-      //   id?: string | null | undefined;
-      // }
-      // const { id } = (queryObject || {}) as ObjTemplate;
-      // setZzzId(id as string);
-
-      // if (id === ID_ZZZ_1) {
-      //   fnRunZZZ1();
-      // } else if (id === ID_ZZZ_2) {
-      //   fnRunZZZ2();
-      // } else if (id === ID_ZZZ_3) {
-      //   fnRunZZZ3();
-      // }
+      switch (valtioStore.zzzState) {
+        case "ZZZ_STATE_1":
+          valtioStore.zzzState = ZZZ_STATE_2;
+          break;
+        case "ZZZ_STATE_2":
+          valtioStore.zzzState = ZZZ_STATE_3;
+          break;
+        case "ZZZ_STATE_3":
+          valtioStore.zzzState = ZZZ_END;
+          break;
+        default:
+          break;
+      }
 
       handleEnter();
     }
@@ -72,7 +77,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   }
   return (
     <>
-      {<QuestionResponses />}
+      {valtioStore.zzzState === ZZZ_STATE_1 && <QuestionResponses />}
       <h3 className='text-lg font-semibold mb-2'>Continue?</h3>
       <div className='flex items-center'>
         <div className='flex items-center mb-4'>
