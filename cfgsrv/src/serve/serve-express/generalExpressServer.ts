@@ -26,6 +26,7 @@ const fnSetupExpress = (expressPort: string | undefined) => {
 
   app.get("/api/queryDataSrc", fnHandleFetchQuery);
 
+  app.use(express.json());
   app.post("/api/queryDataSrc", fnHandlePostData);
 
   app.listen(expressPort, () => {

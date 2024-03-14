@@ -1,8 +1,6 @@
 import { valtioStore } from "../defs/types/ValtioTypes";
 
-export const fnUpload = async () => {
-  const postData = { name: "John", age: 30 };
-
+export const fnUpload = async (postData: object) => {
   async function postDataAsync() {
     try {
       let url = "";
@@ -10,12 +8,13 @@ export const fnUpload = async () => {
         const urlInfo = valtioStore.urlInfo;
         url = `${urlInfo.baseUrl}${urlInfo.path}?${urlInfo.queryParams}`;
       }
+      const postDataString = JSON.stringify(postData);
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Specify content type as JSON
         },
-        body: JSON.stringify(postData), // Convert JSON object to string
+        body: postDataString, // Convert JSON object to string
       });
 
       if (!response.ok) {

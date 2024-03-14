@@ -68,7 +68,9 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
           try {
             const responseContext = fnGetResponseContext();
             console.log(responseContext);
-            const result = await fnUpload();
+            const postData = { name: "John", age: 30 };
+
+            const result = await fnUpload(postData);
             console.log(result); // Log the result
           } catch (error) {
             console.error("Error uploading data:", error);
