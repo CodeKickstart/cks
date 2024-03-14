@@ -3,20 +3,20 @@ import {
   ASIS_post,
   ASIS_postfixOrderList,
   ASIS_prefixOrderList,
-} from "../../../../shared/defs/constants";
-import { JsonObjectType } from "../../../../shared/defs/types";
+} from "../../../shared/defs/constants";
+import { JsonObjectType } from "../../../shared/defs/types";
 
 import {
   fnCursorInitForInterview,
   fnGetAllPreOrderCursors,
   fnGetCurrentCursor,
-} from "../cursor/cursor";
-import { valtioStore } from "../../defs/types/ValtioTypes";
-import { fnPostfixTraversal } from "../treeTraversal/postTraversal";
-import { fnGatherOrderSequences } from "../treeWorkers/orderList";
-import { fnSplitCursor } from "../dataAccess/hiLevelAccess";
-import { fnDispatchOp } from "../../utils/opsDispatcher";
-import { ZZZ_STATE_1 } from "../../defs/constants/ComponentNames";
+} from "../state-mgt/cursor/cursor";
+import { valtioStore } from "../defs/types/ValtioTypes";
+import { fnPostfixTraversal } from "../state-mgt/treeTraversal/postTraversal";
+import { fnGatherOrderSequences } from "../state-mgt/treeWorkers/orderList";
+import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
+import { fnDispatchOp } from "../utils/opsDispatcher";
+import { ZZZ_STATE_1 } from "../defs/constants/ComponentNames";
 
 export const fnSetupForInterview = () => {
   function _fnLogArrayInfo(orderList: string[], startWith: string) {

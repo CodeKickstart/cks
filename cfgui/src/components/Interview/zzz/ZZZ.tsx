@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
-import QuestionResponses from "../ui-common/QuestionResponses";
+import QuestionResponses from "./QuestionResponses";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import {
   ZZZ_END,
