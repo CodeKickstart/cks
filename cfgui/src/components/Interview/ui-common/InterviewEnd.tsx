@@ -4,13 +4,13 @@ const InterviewEnd = () => {
       <h3 className='text-lg font-semibold mb-2'>
         Successfully collected your answers
       </h3>
-      <div>Interview results will be uploaded</div>
-      <div>
+      <div className='text-lg mt-2'>Interview results will be uploaded</div>
+      <div className='italic text-lg mt-4 mb-4'>
         Please click the button below or the Home link above to return to the
         home display
       </div>
       <button
-        className='bg-green-500 text-white px-4 py-2 rounded-md ml-2'
+        className='bg-green-500 text-white px-4 py-2 rounded-md ml-2  mx-auto'
         onClick={() => {
           window.location.href = "/";
         }}>
