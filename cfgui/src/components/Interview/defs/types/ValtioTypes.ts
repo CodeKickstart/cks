@@ -1,6 +1,7 @@
 import { proxy } from "valtio";
 import { JsonObjectType } from "../../../../shared/defs/types";
 import { Str } from "./Str";
+import { ZZZ_STATE_1 } from "../constants/ComponentNames";
 
 export interface querySelectorType {
   contextName: Str;
@@ -20,6 +21,7 @@ const valtioStore = proxy({
   lastQuestionIndex: null as number | null,
   preOrderComplete: false,
   earlyExit: false,
+  zzzState: ZZZ_STATE_1 as string,
 });
 
 export { valtioStore };

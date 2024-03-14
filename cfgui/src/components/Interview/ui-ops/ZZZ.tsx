@@ -3,8 +3,8 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
-import { ID_ZZZ_1, ID_ZZZ_2, ID_ZZZ_3 } from "../defs/constants/ComponentNames";
-import { fnRunZZZ1, fnRunZZZ2, fnRunZZZ3 } from "../state-mgt/setupForResponse";
+// import { ID_ZZZ_1, ID_ZZZ_2, ID_ZZZ_3 } from "../defs/constants/ComponentNames";
+// import { fnRunZZZ1, fnRunZZZ2, fnRunZZZ3 } from "../state-mgt/setupForResponse";
 import QuestionResponses from "../ui-common/QuestionResponses";
 
 interface Props {
@@ -18,7 +18,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [zzzId, setZzzId] = useState<string>("");
+  // const [zzzId, setZzzId] = useState<string>("");
 
   const fnIsValidAnswer = (answer: boolean | null) => {
     return answer !== null;
@@ -50,38 +50,19 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   const handleSubmitButtonClick = () => {
     if (fnIsValidAnswer(answer)) {
-      interface ObjTemplate {
-        id?: string | null | undefined;
-      }
-      const { id } = (queryObject || {}) as ObjTemplate;
-      setZzzId(id as string);
+      // interface ObjTemplate {
+      //   id?: string | null | undefined;
+      // }
+      // const { id } = (queryObject || {}) as ObjTemplate;
+      // setZzzId(id as string);
 
-      let error;
-      switch (zzzId) {
-        case ID_ZZZ_1: {
-          ({ error } = fnRunZZZ1());
-          if (error) {
-            console.log(error);
-          }
-          break;
-        }
-        case ID_ZZZ_2: {
-          ({ error } = fnRunZZZ2());
-          if (error) {
-            console.log(error);
-          }
-          break;
-        }
-        case ID_ZZZ_3: {
-          ({ error } = fnRunZZZ3());
-          if (error) {
-            console.log(error);
-          }
-          break;
-        }
-        default:
-          break;
-      }
+      // if (id === ID_ZZZ_1) {
+      //   fnRunZZZ1();
+      // } else if (id === ID_ZZZ_2) {
+      //   fnRunZZZ2();
+      // } else if (id === ID_ZZZ_3) {
+      //   fnRunZZZ3();
+      // }
 
       handleEnter();
     }
@@ -91,7 +72,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   }
   return (
     <>
-      {<QuestionResponses zzzId={zzzId} />}
+      {<QuestionResponses />}
       <h3 className='text-lg font-semibold mb-2'>Continue?</h3>
       <div className='flex items-center'>
         <div className='flex items-center mb-4'>
