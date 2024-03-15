@@ -21,7 +21,7 @@ import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Diagnostics from "./Diagnostics";
 import { valtioStore } from "../defs/types/ValtioTypes";
-import { ZZZ } from "../zzz/ZZZ";
+import { ZZZ } from "../zzzComponent/ZZZ";
 
 const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
