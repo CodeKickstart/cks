@@ -28,7 +28,7 @@ const ResponseContext: React.FC = () => {
         <h1 className='text-xl font-bold mb-2'>Responses</h1>
         <div className='overflow-y-auto h-full'>
           <pre className='whitespace-pre-wrap'>
-            <ReactJson src={responseContextVal as object} />
+            <pre>{JSON.stringify(responseContextVal as object, null, 2)}</pre>
           </pre>
         </div>
       </div>
