@@ -13,6 +13,7 @@ import {
 } from "../defs/constants/ComponentNames";
 import { fnUpload } from "./setup2_upload";
 import { fnGetResponseContext } from "../misc/responseContext";
+import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -60,6 +61,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
       switch (valtioStore.zzzState) {
         case "ZZZ_STATE_1":
           valtioStore.zzzState = ZZZ_STATE_2;
+
           break;
         case "ZZZ_STATE_2":
           valtioStore.zzzState = ZZZ_STATE_3;
@@ -68,7 +70,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
           try {
             const responseContext = fnGetResponseContext();
             console.log(responseContext);
-            const postData = { name: "John", age: 30 };
+            const postData = responseContext as object;
 
             const result = await fnUpload(postData);
             console.log(result); // Log the result

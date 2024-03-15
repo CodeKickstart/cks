@@ -22,3 +22,10 @@ export const fnHandlePostData = (req: Request, res: Response) => {
   console.log(`Data received: ${data}`);
   res.status(200).json({ message: "Data received" });
 };
+
+// export const fnHandlePostData = (req: Request, res: Response) => {
+//   const jsonString = req.body; // Assuming req.body is a stringified JSON
+//   const data = JSON.parse(jsonString);
+//   console.log("Data received:", data); // Log as an object
+//   res.status(200).json({ message: "Data received" });
+// };
