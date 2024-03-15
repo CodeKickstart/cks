@@ -14,8 +14,7 @@ import {
 import { fnUpload } from "./setup3_upload";
 import { fnGetResponseContext } from "../misc/responseContext";
 import AnswerContext from "./ResponseContext";
-
-// import { fnRunPhase2 } from "../state-mgt/cursor/cursor";
+import { fnRunPhase2 } from "./setup2_responseContext";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -61,15 +60,16 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   const handleSubmitButtonClick = async () => {
     if (fnIsValidAnswer(answer)) {
       switch (valtioStore.zzzState) {
-        case "ZZZ_STATE_1":
+        case "ZZZ_STATE_1": {
           valtioStore.zzzState = ZZZ_STATE_2;
 
-          // const { error } = fnRunPhase2();
-          // if (error) {
-          //   console.log(error);
-          // }
+          const { error: errorRun } = fnRunPhase2();
+          if (errorRun) {
+            console.log(errorRun);
+          }
 
           break;
+        }
         case "ZZZ_STATE_2":
           valtioStore.zzzState = ZZZ_STATE_3;
           try {
