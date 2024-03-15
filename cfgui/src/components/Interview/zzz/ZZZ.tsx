@@ -105,7 +105,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   return (
     <>
       {valtioStore.zzzState === ZZZ_STATE_1 && <QuestionResponses />}
-      {valtioStore.zzzState === ZZZ_STATE_2 && <AnswerContext />}
+      {valtioStore.zzzState === ZZZ_STATE_3 && <AnswerContext />}
       <h3 className='text-lg font-semibold mb-2'>Continue?</h3>
       <div className='flex items-center'>
         <div className='flex items-center mb-4'>
