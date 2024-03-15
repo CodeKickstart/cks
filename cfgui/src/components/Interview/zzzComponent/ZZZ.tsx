@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
-import QuestionResponses from "./QuestionResponses";
+import QuestionResponses from "../ui-common/QuestionResponses";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import {
   ZZZ_END,
@@ -13,7 +13,7 @@ import {
 } from "../defs/constants/ComponentNames";
 import { fnUpload } from "./setup3_upload";
 import { fnGetResponseContext } from "../misc/responseContext";
-import AnswerContext from "./ResponseContext";
+import AnswerContext from "../ui-common/ResponseContext";
 import { fnRunPostOrderProcessing } from "./setup2_responseContext";
 
 interface Props {
