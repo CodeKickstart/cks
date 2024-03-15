@@ -3,8 +3,6 @@ import { useQuery } from "react-query";
 import QnA from "./_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
-// import Finish from "./Finish";
-// import { fnSendData } from "../misc/expt/sendData";
 
 interface InterviewProps {
   baseUrl: string;
@@ -43,10 +41,6 @@ const _Interview = ({
     },
     []
   );
-
-  // useEffect(() => {
-  //   fnSendData(apiUrl);
-  // }, [apiUrl]);
 
   const { data, isLoading, isError } = useQuery("data", () =>
     fetchData(apiUrl)

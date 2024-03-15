@@ -1,27 +1,21 @@
 import React from "react";
-// import { logListingSuccess } from "../state-mgt/setupForResponse";
-import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
-import { KEY_VAL } from "../../../shared/defs/constants";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
-const AnswerContext: React.FC = () => {
-  const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
-  if (error) {
-    return <div className='text-red-500'>{error}</div>;
-  }
-  if (valList === null) {
-    return <div className='text-red-500'>Answers not found</div>;
-  }
+import ReactJson from "react-json-view";
 
+const ResponseContext: React.FC = () => {
   return (
-    <div className='mb-4'>
-      <h3 className='text-lg font-semibold mb-2'>Responses</h3>
-      <ul>
-        {valList.map((answer, index) => (
-          <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
-        ))}
-      </ul>
+    <div className='flex-1 overflow-y-auto'>
+      <div className='bg-gray-200 p-4 rounded-lg'>
+        <h1 className='text-xl font-bold mb-2'>Responses</h1>
+        <div className='overflow-y-auto h-full'>
+          <pre className='whitespace-pre-wrap'>
+            <ReactJson src={valtioStore.answers as object} />
+          </pre>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default AnswerContext;
+export default ResponseContext;

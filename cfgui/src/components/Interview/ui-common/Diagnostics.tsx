@@ -1,7 +1,4 @@
 import React from "react";
-// import { logListingSuccess } from "../state-mgt/setupForResponse";
-import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
-import { KEY_VAL } from "../../../shared/defs/constants";
 import { valtioStore } from "../defs/types/ValtioTypes";
 
 import ReactJson from "react-json-view";
@@ -11,23 +8,6 @@ interface IFinishProps {
 }
 
 const Diagnostics: React.FC<IFinishProps> = ({ debug = true }) => {
-  const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
-  if (error) {
-    return <div className='text-red-500'>{error}</div>;
-  }
-  if (valList === null) {
-    return <div className='text-red-500'>Answers not found</div>;
-  }
-
-  const { error: errorNameLists, results: childNameLists } =
-    fnGetAllPreOrderAnswers<string[]>("descendantNames");
-  if (errorNameLists) {
-    return <div className='text-red-500'>{errorNameLists}</div>;
-  }
-  if (childNameLists === null) {
-    return <div className='text-red-500'>Name lists not found</div>;
-  }
-
   return (
     // Import the JSONViewer component
 
