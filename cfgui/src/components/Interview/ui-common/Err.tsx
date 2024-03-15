@@ -1,11 +1,17 @@
-// Error.tsx
-
 import React from "react";
 
-export const Err: React.FC = () => {
+interface IErrProps {
+  msg?: string;
+}
+
+export const Err: React.FC<IErrProps> = ({ msg }) => {
   return (
-    <div>
-      <h3>Error: Invalid component selected</h3>
+    <div
+      className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'
+      role='alert'>
+      <h3 className='font-bold'>
+        {msg ? `Error: ${msg}` : "Error: Invalid component selected"}
+      </h3>
     </div>
   );
 };

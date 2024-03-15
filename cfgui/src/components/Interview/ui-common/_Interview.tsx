@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import QnA from "./_QnA";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
+import { Err } from "./Err";
 
 interface InterviewProps {
   baseUrl: string;
@@ -35,7 +36,8 @@ const _Interview = ({
     () => async (url: string) => {
       const response = await fetch(url);
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        // throw new Error("Network response was not ok");
+        return <Err msg={`Network response was not ok`} />;
       }
       return response.json();
     },
@@ -50,11 +52,13 @@ const _Interview = ({
   }
 
   if (typeof data === "string") {
-    return <div>`Data Error:: {data}`</div>;
+    return <Err msg={`Data Error:: ${data}`} />;
+    //  <div>`Data Error:: {data}`</div>;
   }
 
   if (isError || !data) {
-    return <div>Network Error fetching data from server</div>;
+    return <Err msg={`Network Error fetching data from server`} />;
+    // <div>Network Error fetching data from server</div>;
   }
 
   valtioStore.queryContext = data as JsonObjectType;
