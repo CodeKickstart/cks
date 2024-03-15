@@ -3,7 +3,7 @@ import React from "react";
 import { fnGetAllPreOrderAnswers } from "../state-mgt/dataAccess/hiLevelAccess";
 import { KEY_VAL } from "../../../shared/defs/constants";
 
-const QuestionResponses: React.FC = () => {
+const AnswerContext: React.FC = () => {
   const { error, results: valList } = fnGetAllPreOrderAnswers<string>(KEY_VAL);
   if (error) {
     return <div className='text-red-500'>{error}</div>;
@@ -12,18 +12,9 @@ const QuestionResponses: React.FC = () => {
     return <div className='text-red-500'>Answers not found</div>;
   }
 
-  // const { error: errorNameLists, results: childNameLists } =
-  //   fnGetAllPreOrderAnswers<string[]>("descendantNames");
-  // if (errorNameLists) {
-  //   return <div className='text-red-500'>{errorNameLists}</div>;
-  // }
-  // if (childNameLists === null) {
-  //   return <div className='text-red-500'>Name lists not found</div>;
-  // }
-
   return (
     <div className='mb-4'>
-      <h3 className='text-lg font-semibold mb-2'>Questions answered!</h3>
+      <h3 className='text-lg font-semibold mb-2'>Responses</h3>
       <ul>
         {valList.map((answer, index) => (
           <li key={index}>{`Question ${index + 1}: ${answer}`}</li>
@@ -33,4 +24,4 @@ const QuestionResponses: React.FC = () => {
   );
 };
 
-export default QuestionResponses;
+export default AnswerContext;
