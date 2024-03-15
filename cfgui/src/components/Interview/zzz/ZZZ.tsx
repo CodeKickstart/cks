@@ -13,7 +13,6 @@ import {
 } from "../defs/constants/ComponentNames";
 import { fnUpload } from "./setup2_upload";
 import { fnGetResponseContext } from "../misc/responseContext";
-import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 
 interface Props {
   queryObject: JsonObjectType;
