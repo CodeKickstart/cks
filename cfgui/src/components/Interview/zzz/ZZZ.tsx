@@ -14,7 +14,7 @@ import {
 import { fnUpload } from "./setup3_upload";
 import { fnGetResponseContext } from "../misc/responseContext";
 import AnswerContext from "./ResponseContext";
-import { fnRunPhase2 } from "./setup2_responseContext";
+import { fnRunPostOrderProcessing } from "./setup2_responseContext";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -63,7 +63,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
         case "ZZZ_STATE_1": {
           valtioStore.zzzState = ZZZ_STATE_2;
 
-          const { error: errorRun } = fnRunPhase2();
+          const { error: errorRun } = fnRunPostOrderProcessing();
           if (errorRun) {
             console.log(errorRun);
           }
