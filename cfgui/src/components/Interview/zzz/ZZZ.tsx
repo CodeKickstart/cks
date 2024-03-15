@@ -11,9 +11,11 @@ import {
   ZZZ_STATE_2,
   ZZZ_STATE_3,
 } from "../defs/constants/ComponentNames";
-import { fnUpload } from "./setup2_upload";
+import { fnUpload } from "./setup3_upload";
 import { fnGetResponseContext } from "../misc/responseContext";
 import AnswerContext from "./ResponseContext";
+
+// import { fnRunPhase2 } from "../state-mgt/cursor/cursor";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -61,6 +63,11 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
       switch (valtioStore.zzzState) {
         case "ZZZ_STATE_1":
           valtioStore.zzzState = ZZZ_STATE_2;
+
+          // const { error } = fnRunPhase2();
+          // if (error) {
+          //   console.log(error);
+          // }
 
           break;
         case "ZZZ_STATE_2":
