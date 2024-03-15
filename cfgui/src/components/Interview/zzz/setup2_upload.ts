@@ -1,6 +1,7 @@
+import { JsonObjectType } from "../../../shared/defs/types";
 import { valtioStore } from "../defs/types/ValtioTypes";
 
-export const fnUpload = async (postData: object) => {
+export const fnUpload = async (postData: JsonObjectType) => {
   async function postDataAsync() {
     try {
       let url = "";
