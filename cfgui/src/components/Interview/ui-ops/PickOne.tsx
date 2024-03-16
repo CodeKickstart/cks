@@ -4,6 +4,7 @@ import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
 import { fnConverSingleDefvalToVal } from "../utils/defval2val";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -129,6 +130,14 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
           onClick={handleSubmitButtonClick}
           disabled={answer === null}>
           {ENTER_BUTTON_LABEL}
+        </button>
+        <button
+          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Cancel
         </button>
       </div>
     </div>

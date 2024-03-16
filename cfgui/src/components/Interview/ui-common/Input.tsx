@@ -192,7 +192,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
 
       <div className='flex p-4'>
         <button
-          className='bg-green-500 text-white px-4 py-2 rounded-md ml-2'
+          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
           onClick={() => {
             valtioStore.earlyExit = true;
             window.location.href = "/";

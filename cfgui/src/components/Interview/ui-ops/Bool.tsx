@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -87,6 +88,14 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
           onClick={handleSubmitButtonClick}
           disabled={!fnIsValidAnswer(answer)}>
           {ENTER_BUTTON_LABEL}
+        </button>
+        <button
+          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Cancel
         </button>
       </div>
     </div>

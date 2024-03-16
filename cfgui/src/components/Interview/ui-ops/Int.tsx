@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -106,14 +107,24 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
         onChange={onChangeHandler}
       />
       <div className='flex-grow text-red-500'>{errorMessage}</div>
-      <button
-        className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-          isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-        onClick={handleSubmitButtonClick}
-        disabled={isButtonDisabled}>
-        {ENTER_BUTTON_LABEL}
-      </button>
+      <div>
+        <button
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+            isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          onClick={handleSubmitButtonClick}
+          disabled={isButtonDisabled}>
+          {ENTER_BUTTON_LABEL}
+        </button>
+        <button
+          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Cancel
+        </button>
+      </div>
     </div>
   );
 };

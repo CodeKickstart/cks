@@ -11,7 +11,7 @@ const InterviewBegin: React.FC<WelcomeProps> = ({ onStart }) => {
       <h3 className='text-xl font-bold mb-2'>Begin Interview</h3>
       <p>Welcome to the interview session!</p>
       <button
-        className='bg-green-500 text-white px-4 py-2 rounded-md mt-2'
+        className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
         onClick={onStart}>
         Start
       </button>

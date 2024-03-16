@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -69,14 +70,29 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
         onChange={(e) => setAnswer(e.target.value)}
       />
       <div className='flex-grow' />
-      <button
-        className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-          !answer || answer.trim() === "" ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-        onClick={handleSubmitButtonClick}
-        disabled={!answer || answer.trim() === ""}>
-        {ENTER_BUTTON_LABEL}
-      </button>
+      <div className='flex justify-end'>
+        <button
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+            !answer || answer.trim() === ""
+              ? "opacity-50 cursor-not-allowed"
+              : ""
+          }`}
+          onClick={handleSubmitButtonClick}
+          disabled={!answer || answer.trim() === ""}>
+          {ENTER_BUTTON_LABEL}
+        </button>
+        <div>
+          {" "}
+          <button
+            className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+            onClick={() => {
+              valtioStore.earlyExit = true;
+              window.location.href = "/";
+            }}>
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

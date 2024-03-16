@@ -105,17 +105,24 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
       {valtioStore.zzzState === ZZZ_STATE_1 && <QuestionResponses />}
       {valtioStore.zzzState === ZZZ_STATE_3 && <AnswerContext />}
       <h3 className='text-lg font-semibold mb-2'>Continue?</h3>
-      <div className='flex items-center'>
-        <div>
-          <button
-            className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-              !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            onClick={handleSubmitButtonClick}
-            disabled={!fnIsValidAnswer(answer)}>
-            {ENTER_BUTTON_LABEL}
-          </button>
-        </div>
+
+      <div className='flex justify-end'>
+        <button
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+            !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          onClick={handleSubmitButtonClick}
+          disabled={!fnIsValidAnswer(answer)}>
+          {ENTER_BUTTON_LABEL}
+        </button>
+        <button
+          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Cancel
+        </button>
       </div>
     </>
   );

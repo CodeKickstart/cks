@@ -7,6 +7,7 @@ import {
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
 import { fnConverListDefvalToVal } from "../utils/defval2val";
+import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -152,6 +153,14 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
           className='bg-blue-500 text-white px-4 py-2 rounded-md'
           onClick={handleSubmitButtonClick}>
           {ENTER_BUTTON_LABEL}
+        </button>
+        <button
+          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Cancel
         </button>
       </div>
     </div>
