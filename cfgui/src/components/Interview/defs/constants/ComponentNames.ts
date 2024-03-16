@@ -18,5 +18,4 @@ export const ID_ZZZ_3 = "id_zzz_3";
 export const ZZZ_START = "ZZZ_START";
 export const ZZZ_STATE_1 = "ZZZ_STATE_1";
 export const ZZZ_STATE_2 = "ZZZ_STATE_2";
-export const ZZZ_STATE_3 = "ZZZ_STATE_3";
 export const ZZZ_END = "ZZZ_END";
