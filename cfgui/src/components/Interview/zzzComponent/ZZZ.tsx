@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import { KEY_VAL } from "../../../shared/defs/constants";
 import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
@@ -24,10 +24,8 @@ interface Props {
 const ENTER_BUTTON_LABEL = "Enter";
 export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  // const [zzzId, setZzzId] = useState<string>("");
 
   const fnIsValidAnswer = (answer: boolean | null) => {
     return answer !== null;
@@ -108,30 +106,6 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
       {valtioStore.zzzState === ZZZ_STATE_3 && <AnswerContext />}
       <h3 className='text-lg font-semibold mb-2'>Continue?</h3>
       <div className='flex items-center'>
-        <div className='flex items-center mb-4'>
-          <label className='inline-flex items-center mr-4'>
-            <input
-              ref={inputRef}
-              type='radio'
-              className='form-radio'
-              value='true'
-              checked={answer === true}
-              onChange={() => setAnswer(true)}
-            />
-            <span className='ml-2'>Yes</span>
-          </label>
-          <label className='inline-flex items-center'>
-            <input
-              type='radio'
-              className='form-radio'
-              value='false'
-              checked={answer === false}
-              onChange={() => setAnswer(false)}
-            />
-            <span className='ml-2'>No</span>
-          </label>
-        </div>
-        <div className='flex-grow' />
         <div>
           <button
             className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
