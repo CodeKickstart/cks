@@ -65,11 +65,6 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
           if (errorRun) {
             console.log(errorRun);
           }
-
-          break;
-        }
-        case "ZZZ_STATE_2":
-          valtioStore.zzzState = ZZZ_STATE_3;
           try {
             const responseContext = fnGetResponseContext();
             console.log(responseContext);
@@ -78,6 +73,11 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
           } catch (error) {
             console.error("Error uploading data:", error);
           }
+
+          break;
+        }
+        case "ZZZ_STATE_2":
+          valtioStore.zzzState = ZZZ_STATE_3;
 
           break;
         case "ZZZ_STATE_3":
