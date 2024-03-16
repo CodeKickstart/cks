@@ -20,7 +20,7 @@ import PickOne from "../ui-ops/PickOne";
 import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Diagnostics from "./Diagnostics";
-import { valtioStore } from "../defs/types/ValtioTypes";
+// import { valtioStore } from "../defs/types/ValtioTypes";
 import { ZZZ } from "../zzzComponent/ZZZ";
 
 const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
@@ -190,7 +190,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
         <Diagnostics debug={true} />
       </div>
 
-      <div className='flex p-4'>
+      {/* <div className='flex p-4'>
         <button
           className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
           onClick={() => {
@@ -199,7 +199,7 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
           }}>
           Cancel
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
