@@ -9,7 +9,6 @@ import {
   ZZZ_END,
   ZZZ_STATE_1,
   ZZZ_STATE_2,
-  ZZZ_STATE_3,
 } from "../defs/constants/ComponentNames";
 import { fnUpload } from "./setup3_upload";
 import { fnGetResponseContext } from "../misc/responseContext";
@@ -58,7 +57,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   const handleSubmitButtonClick = async () => {
     if (fnIsValidAnswer(answer)) {
       switch (valtioStore.zzzState) {
-        case "ZZZ_STATE_1": {
+        case ZZZ_STATE_1: {
           valtioStore.zzzState = ZZZ_STATE_2;
 
           const { error: errorRun } = fnRunPostOrderProcessing();
@@ -76,11 +75,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
 
           break;
         }
-        case "ZZZ_STATE_2":
-          valtioStore.zzzState = ZZZ_STATE_3;
-
-          break;
-        case "ZZZ_STATE_3":
+        case ZZZ_STATE_2:
           try {
             const result = await fnUpload(valtioStore.answers);
             console.log(result); // Log the result
@@ -88,8 +83,6 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
             console.error("Error uploading data:", error);
           }
           valtioStore.zzzState = ZZZ_END;
-          break;
-        default:
           break;
       }
 
@@ -103,7 +96,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   return (
     <>
       {valtioStore.zzzState === ZZZ_STATE_1 && <QuestionResponses />}
-      {valtioStore.zzzState === ZZZ_STATE_3 && <AnswerContext />}
+      {valtioStore.zzzState === ZZZ_STATE_2 && <AnswerContext />}
       <h3 className='text-lg font-semibold mb-2'>Continue?</h3>
 
       <div className='flex justify-end'>
