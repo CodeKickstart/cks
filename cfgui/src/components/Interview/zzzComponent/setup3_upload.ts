@@ -23,7 +23,8 @@ export const fnUpload = async (postData: JsonObjectType) => {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const error = "Network response was not ok";
+        return { error };
       }
 
       const data = await response.json(); // Parse response body as JSON
