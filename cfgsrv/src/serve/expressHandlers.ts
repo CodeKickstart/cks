@@ -18,24 +18,25 @@ export const fnHandleFetchQuery = (req: Request, res: Response) => {
   res.status(200).json(queryBundle);
 };
 
-function fnWrite(data: unknown, filePath: string) {
-  try {
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
-    console.log("Data has been written to file successfully.");
-    return { error: null };
-  } catch (error) {
-    return { error };
-  }
-}
-
 export const fnHandlePostData = (req: Request, res: Response) => {
+  function fnWrite(data: unknown, filePath: string) {
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
+      console.log("Data has been written to file successfully.");
+      return { error: null };
+    } catch (error) {
+      return { error };
+    }
+  }
+
   const data = req.body;
   console.log(`Data received: ${data}`);
 
-  const fileName = "data.json";
-  const dirpath = process.cwd();
-  console.log(`Dirpath: ${dirpath}`);
-  const filePath = resolve(dirpath, fileName);
+  const fileName = "__data.json";
+  const rootDirpath = process.cwd();
+  console.log(`Dirpath: ${rootDirpath}`);
+  const repoDirpath = resolve(rootDirpath, "repo", "prod1");
+  const filePath = resolve(repoDirpath, fileName);
   const { error } = fnWrite(data, filePath);
   if (error) {
     console.log(error);

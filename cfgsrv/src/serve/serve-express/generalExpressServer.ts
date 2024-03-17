@@ -12,9 +12,14 @@ const fnSetupExpress = (expressPort: string | undefined) => {
   const server = http.createServer(app);
 
   // Enable CORS for all routes
-  app.use(cors());
+  app.use(
+    cors({
+      origin: process.env.CLIENT_ORIGIN,
+      credentials: true,
+    })
+  );
 
-  const client_origin = process.env.CLIENT_ORIGIN;
+  const client_origin = ["http://localhost:3502/"];
   const io = new Server(server, {
     cors: {
       origin: client_origin, // Adjust the origin as needed
