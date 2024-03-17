@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { resolve } from "path";
 
 import { fnBundleQuery } from "../context/_queryContextMaker";
+import fs from "fs";
 
 export const fnHandleFetchQuery = (req: Request, res: Response) => {
   const libAddress = req.query.libAddress as string;
@@ -17,8 +18,29 @@ export const fnHandleFetchQuery = (req: Request, res: Response) => {
   res.status(200).json(queryBundle);
 };
 
+function fnWrite(data: unknown, filePath: string) {
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
+    console.log("Data has been written to file successfully.");
+    return { error: null };
+  } catch (error) {
+    return { error };
+  }
+}
+
 export const fnHandlePostData = (req: Request, res: Response) => {
   const data = req.body;
   console.log(`Data received: ${data}`);
+
+  const fileName = "data.json";
+  const dirpath = process.cwd();
+  console.log(`Dirpath: ${dirpath}`);
+  const filePath = resolve(dirpath, fileName);
+  const { error } = fnWrite(data, filePath);
+  if (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error writing data" });
+  }
+
   res.status(200).json({ message: "Data received" });
 };

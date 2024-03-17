@@ -9,10 +9,14 @@ export const fnUpload = async (postData: JsonObjectType) => {
         const urlInfo = valtioStore.urlInfo;
         url = `${urlInfo.baseUrl}${urlInfo.path}?${urlInfo.queryParams}`;
       }
+      const urlInfo = valtioStore.urlInfo; // Import the urlInfo variable from valtioStore
+
       const postDataString = JSON.stringify(postData);
+      const urlPath = urlInfo.baseUrl + urlInfo.path;
       const response = await fetch(url, {
         method: "POST",
         headers: {
+          Origin: urlPath, // Specify the origin
           "Content-Type": "application/json", // Specify content type as JSON
         },
         body: postDataString, // Convert JSON object to string
