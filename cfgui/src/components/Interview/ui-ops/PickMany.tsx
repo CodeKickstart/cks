@@ -131,7 +131,25 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   return (
     <div className='flex flex-col'>
-      <h2 className='font-semibold mb-4'>Select one or more options:</h2>
+      <div className='flex'>
+        <h2 className='font-semibold mb-4'>Select one or more options:</h2>
+        <div className='flex-grow'></div>
+        <div id='idControl' className='self-end'>
+          <button
+            className='bg-blue-500 text-white px-4 py-2 rounded-md'
+            onClick={handleSubmitButtonClick}>
+            {ENTER_BUTTON_LABEL}
+          </button>
+          <button
+            className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+            onClick={() => {
+              valtioStore.earlyExit = true;
+              window.location.href = "/";
+            }}>
+            Cancel
+          </button>
+        </div>
+      </div>
       <ul className='space-y-1 flex-grow'>
         {listOfDescendantNames.map((descendantName, index) => (
           <li key={index}>
@@ -147,22 +165,6 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
           </li>
         ))}
       </ul>
-      <div className='flex-grow'></div>
-      <div className='self-end'>
-        <button
-          className='bg-blue-500 text-white px-4 py-2 rounded-md'
-          onClick={handleSubmitButtonClick}>
-          {ENTER_BUTTON_LABEL}
-        </button>
-        <button
-          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
-          onClick={() => {
-            valtioStore.earlyExit = true;
-            window.location.href = "/";
-          }}>
-          Cancel
-        </button>
-      </div>
     </div>
   );
 };

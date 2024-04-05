@@ -106,40 +106,41 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   return (
     <div className='flex flex-col'>
-      <div className='mb-4'>
+      <div className='flex'>
         <h2 className='font-semibold'>Select one an option:</h2>
-        {listOfDescendantNames.map((descendantName, index) => (
-          <label key={index} className='flex items-center mb-2'>
-            <input
-              type='radio'
-              value={index}
-              checked={answer === index}
-              onChange={() => handleChange(index)}
-              className='mr-2'
-            />
-            {descendantName}
-          </label>
-        ))}
+        <div className='flex-grow'></div>
+        <div className='flex justify-end'>
+          <button
+            className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2 ${
+              answer === null ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={handleSubmitButtonClick}
+            disabled={answer === null}>
+            {ENTER_BUTTON_LABEL}
+          </button>
+          <button
+            className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+            onClick={() => {
+              valtioStore.earlyExit = true;
+              window.location.href = "/";
+            }}>
+            Cancel
+          </button>
+        </div>
       </div>
-      <div className='flex-grow'></div>
-      <div className='flex justify-end'>
-        <button
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2 ${
-            answer === null ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          onClick={handleSubmitButtonClick}
-          disabled={answer === null}>
-          {ENTER_BUTTON_LABEL}
-        </button>
-        <button
-          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
-          onClick={() => {
-            valtioStore.earlyExit = true;
-            window.location.href = "/";
-          }}>
-          Cancel
-        </button>
-      </div>
+
+      {listOfDescendantNames.map((descendantName, index) => (
+        <label key={index} className='flex items-center mb-2'>
+          <input
+            type='radio'
+            value={index}
+            checked={answer === index}
+            onChange={() => handleChange(index)}
+            className='mr-2'
+          />
+          {descendantName}
+        </label>
+      ))}
     </div>
   );
 };
