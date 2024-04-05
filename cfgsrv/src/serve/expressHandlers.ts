@@ -3,6 +3,9 @@ import { resolve } from "path";
 
 import { fnBundleQuery } from "../context/_queryContextMaker";
 import fs from "fs";
+import path from "path";
+
+const OUTPUT = "_OUTPUT";
 
 export const fnHandleFetchQuery = (req: Request, res: Response) => {
   const libAddress = req.query.libAddress as string;
@@ -21,10 +24,22 @@ export const fnHandleFetchQuery = (req: Request, res: Response) => {
 export const fnHandlePostData = (req: Request, res: Response) => {
   function fnWrite(data: unknown, filePath: string) {
     try {
+      const directory = path.dirname(filePath);
+
+      // Create directory if it does not exist
+      if (!fs.existsSync(directory)) {
+        fs.mkdirSync(directory, { recursive: true });
+      }
+
+      // Write data to the specified file path
       fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
+
+      // If successful, log a success message and return an object with no error
       console.log("Data has been written to file successfully.");
       return { error: null };
     } catch (error) {
+      // If an error occurs during the file write operation or directory creation,
+      // return an object with the error
       return { error };
     }
   }
@@ -32,11 +47,11 @@ export const fnHandlePostData = (req: Request, res: Response) => {
   const data = req.body;
   console.log(`Data received: ${data}`);
 
-  const fileName = "__data.json";
+  const FILENAME = "response.json";
   const rootDirpath = process.cwd();
   console.log(`Dirpath: ${rootDirpath}`);
-  const repoDirpath = resolve(rootDirpath, "repo", "prod1");
-  const filePath = resolve(repoDirpath, fileName);
+  const repoDirpath = resolve(rootDirpath, "repo", "prod1", OUTPUT);
+  const filePath = resolve(repoDirpath, FILENAME);
   const { error } = fnWrite(data, filePath);
   if (error) {
     console.log(error);
