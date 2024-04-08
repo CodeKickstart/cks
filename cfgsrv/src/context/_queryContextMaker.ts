@@ -1,7 +1,7 @@
 import { fnReadJsonDirectory } from "./readJsonDirectory";
 import { QueryBundleType } from "../shared/defs/types";
 import { fnPrepareQueriesForContext } from "./queryContextSetup";
-import { Str } from "../typeStr";
+import { Str } from "../defs/types/typeStr";
 import { fnValidateTreeNodesWithPreTraversal } from "./validation/validateEntireTree";
 
 export function fnBundleQuery(directoryPath: string): {

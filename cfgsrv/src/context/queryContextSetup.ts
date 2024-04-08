@@ -6,7 +6,7 @@ import {
   QueryPack,
 } from "../shared/defs/types";
 import { fnPackQuery } from "./queryPacker";
-import { Str } from "../typeStr";
+import { Str } from "../defs/types/typeStr";
 
 export const fnPrepareQueriesForContext = (
   queries: JsonObjectType

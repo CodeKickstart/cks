@@ -99,7 +99,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
       {valtioStore.zzzState === ZZZ_STATE_2 && <AnswerContext />}
       <h3 className='text-lg font-semibold mb-2'>Continue?</h3>
 
-      <div className='flex justify-end'>
+      <div className='flex justify-start'>
         <button
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
             !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""

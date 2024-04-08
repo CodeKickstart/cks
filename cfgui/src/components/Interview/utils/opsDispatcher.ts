@@ -1,7 +1,7 @@
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { ASIS_post, ASIS_pre, KEY_KIND } from "../../../shared/defs/constants";
 
-import { opsMap } from "./opsMap";
+import { opsClientMap } from "./opsClientMap";
 
 import { Str } from "../defs/types/Str";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
@@ -18,7 +18,7 @@ export const fnDispatchOp = (
     return { error };
   }
 
-  const { fnGetOpsMgr } = opsMap();
+  const { fnGetOpsMgr } = opsClientMap();
   const clientOps = fnGetOpsMgr(kind);
   if (!clientOps) {
     return {

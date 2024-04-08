@@ -1,5 +1,5 @@
 import { JsonObjectType, AttrsType } from "../../shared/defs/types";
-import { Str } from "../../typeStr";
+import { Str } from "../../defs/types/typeStr";
 
 export const fnValidateKeys = (
   jsonObj: JsonObjectType,

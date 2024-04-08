@@ -1,0 +1,22 @@
+.{{name}} {
+  margin: var(--size-8) auto;
+  border-radius: 6px;
+  background-color: var(--color-grey-100);
+  width: 90%;
+  max-width: 50rem;
+  padding: var(--size-4);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  font-size: var(--size-6);
+}
+
+.{{name}} h1 {
+  font-size: var(--size-8);
+  margin: var(--size-4) 0;
+  text-align: center;
+}
+
+.{{name}} p {
+  font-size: var(--size-4);
+  margin: var(--size-4) 4;
+  text-align: center;
+}

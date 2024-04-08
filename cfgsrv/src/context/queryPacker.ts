@@ -1,10 +1,9 @@
-import { query } from "express";
-import { OpsDictMgr } from "../ops-at-server/misc/OpsDictMgr";
+import { opsServerMap } from "../ops-at-server/misc/opsServerMap";
 import { KEY_ID, KEY_KIND, KEY_SID } from "../shared/defs/constants";
 import { JsonObjectType, QueryPack } from "../shared/defs/types";
 
 import { TreeOrderMgr } from "./trees/TreeOrderMgr";
-import { Str } from "../typeStr";
+import { Str } from "../defs/types/typeStr";
 
 export const fnPackQuery = (
   collectionName: string,
@@ -82,7 +81,7 @@ export const fnPackQuery = (
   }
   // console.log("postfixOrderList", postfixOrderList);
 
-  const { fnGetOpsMgr } = OpsDictMgr();
+  const { fnGetOpsMgr } = opsServerMap();
   const opsMgr = fnGetOpsMgr(kind);
   if (!opsMgr) {
     return {

@@ -50,7 +50,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   useEffect(() => {
     interface ObjTemplate {
-      defval?: number[] | string[];
+      defval?: number[] | string[] | null | undefined;
       sid?: string;
     }
 
@@ -69,9 +69,9 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
     setSid(sid);
 
-    if (!defval) {
-      return;
-    }
+    // if (!defval) {
+    //   return;
+    // }
 
     const { val } = fnConverListDefvalToVal(listOfDescendantNames, defval);
 

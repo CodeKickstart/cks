@@ -12,7 +12,7 @@ import {
   OP_ZSYS,
 } from "../../shared/defs/constants";
 import { JsonObjectType } from "../../shared/defs/types";
-import { Str } from "../../typeStr";
+import { Str } from "../../defs/types/typeStr";
 
 export function TreeOrderMgr() {
   const prefixOrderList: string[] = [];

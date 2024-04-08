@@ -1,0 +1,24 @@
+{%- set port = val(tokens, "base.id_port") -%}
+
+
+{
+  "name": "nextjs-course",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev -p {{port}}",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "mongodb": "^4.13.0",
+    "next": "^13.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.4",
+    "react-syntax-highlighter": "^15.5.0"
+  }
+}

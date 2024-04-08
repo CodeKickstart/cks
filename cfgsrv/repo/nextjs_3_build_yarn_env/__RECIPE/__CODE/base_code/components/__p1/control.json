@@ -1,0 +1,28 @@
+[
+  {
+	"op": "pick",
+	"directives": {
+	  "token_id": "base.id_fixed_pages",
+	  "define": [
+		{
+		  "movelist": [
+			"contact"
+		  ],
+		  "when": "contact"
+		},
+		{
+		  "movelist": [
+			"posts"
+		  ],
+		  "when": "posts"
+		},
+		{
+		  "movelist": [
+			"about"
+		  ],
+		  "when": "about"
+		}
+	  ]
+	}
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+	"op": "recast",
+	"directives": {
+	  "declare": {
+		"name": "base.id_var_pages",
+		"Name": "base.id_var_pages|capitalize"
+	  }
+	}
+  },
+  {
+	"op": "recast",
+	"directives": {
+	  "declare": {
+		"person": "base.id_name1"
+	  }
+	}
+  },
+  {
+	"op": "transform"
+  }
+]

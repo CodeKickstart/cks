@@ -1,0 +1,27 @@
+[
+    {
+        "id_name1": "Ashwini"
+    },
+    {
+        "id_name2": "Basab"
+    },
+    {
+        "id_closed": "yes"
+    },
+    {
+        "id_port": "3201"
+    },
+    {
+        "id_fixed_pages": [
+            "about",
+            "contact"
+        ]
+    },
+    {
+        "id_var_pages": [
+            "shopping",
+            "attractions",
+            "restaurants"
+        ]
+    }
+]

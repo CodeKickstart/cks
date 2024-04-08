@@ -41,7 +41,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
 
   useEffect(() => {
     interface ObjTemplate {
-      defval?: number | string;
+      defval?: number | string | null | undefined;
       sid?: string;
     }
 
@@ -57,7 +57,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
     setSid(sid);
 
-    if (!defval) {
+    if (defval === null || defval === undefined) {
       return;
     }
 

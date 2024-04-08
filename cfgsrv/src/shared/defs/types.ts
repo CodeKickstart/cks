@@ -1,4 +1,4 @@
-import { Str } from "../../typeStr";
+import { Str } from "../../defs/types/typeStr";
 
 export interface JsonObjectType {
   [key: string]: null | Str | number | boolean | JsonObjectType;
