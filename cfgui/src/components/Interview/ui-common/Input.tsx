@@ -81,14 +81,14 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
     return null;
   }
 
-  const handleResponse = () => {
-    onResponse();
-  };
+  // const handleResponse = () => {
+  //   onResponse();
+  // };
 
   switch (inputType) {
     case INPUT_TEXT:
       inputComponent = (
-        <Text queryObject={queryObject} onResponse={handleResponse} />
+        <Text queryObject={queryObject} onResponse={onResponse} />
       );
       break;
 
