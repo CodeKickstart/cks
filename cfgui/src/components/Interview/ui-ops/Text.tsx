@@ -24,26 +24,28 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
   };
 
   const handleEnter = useCallback(() => {
-    if (answer !== null && fnIsValidAnswer(answer)) {
-      fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
-      setAnswer("");
-      onResponse();
-      setIsVisible(false);
-    }
+    // if (answer !== null && fnIsValidAnswer(answer)) {
+    fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
+    setAnswer("");
+    onResponse();
+    setIsVisible(false);
+    // }
   }, [answer, onResponse, sidCursor]);
 
   useEffect(() => {
-    // const { defval, sid } = queryObject || {};
     interface ObjTemplate {
-      defval?: number;
+      defval?: string;
+      val?: string;
       sid?: string;
     }
 
-    const { defval, sid } = (queryObject || {}) as ObjTemplate;
+    const { defval, sid, val } = (queryObject || {}) as ObjTemplate;
 
     setSidCursor(sid as string);
 
-    if (defval !== undefined && typeof defval === "string") {
+    if (val !== undefined) {
+      setAnswer(val as string);
+    } else if (defval !== undefined) {
       setAnswer(defval as string);
     }
 
