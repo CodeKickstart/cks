@@ -23,7 +23,7 @@ import Diagnostics from "./Diagnostics";
 // import { valtioStore } from "../defs/types/ValtioTypes";
 import { ZZZ } from "../zzzComponent/ZZZ";
 
-const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
+const _RetrieveResponse: React.FC<InputProps> = ({ onResponse, inputType }) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -204,4 +204,4 @@ const Input: React.FC<InputProps> = ({ onResponse, inputType }) => {
   );
 };
 
-export default Input;
+export default _RetrieveResponse;

@@ -22,7 +22,7 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [max, setMax] = useState<number | undefined>(undefined);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [inputColor, setInputColor] = useState<string>("");
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  // const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(true); // New state variable
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -71,11 +71,11 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
     if (fnIsValidAnswer(answer)) {
       setErrorMessage("");
       setInputColor("");
-      setIsButtonDisabled(false);
+      // setIsButtonDisabled(false);
     } else {
       setErrorMessage(`Value must be between ${min ?? MIN} and ${max ?? MAX}`);
       setInputColor("gray");
-      setIsButtonDisabled(true);
+      // setIsButtonDisabled(true);
     }
   }, [answer, min, max, fnIsValidAnswer]);
 
@@ -98,7 +98,7 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
   }
 
   return (
-    <div className='flex items-center'>
+    <div className='flex items-start'>
       <input
         ref={inputRef}
         type='number'
@@ -107,17 +107,28 @@ const Int: React.FC<Props> = ({ queryObject, onResponse }) => {
         onChange={onChangeHandler}
       />
       <div className='flex-grow text-red-500'>{errorMessage}</div>
-      <div>
+      <div className='flex flex-col justify-end'>
         <button
+          id='submit-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+            answer === null ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handleSubmitButtonClick}
-          disabled={isButtonDisabled}>
+          disabled={answer === null}>
           {ENTER_BUTTON_LABEL}
         </button>
         <button
-          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+          id='back-button'
+          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Back
+        </button>
+        <button
+          id='cancel-button'
+          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
           onClick={() => {
             valtioStore.earlyExit = true;
             window.location.href = "/";

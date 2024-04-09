@@ -1,4 +1,4 @@
-export const COMPONENT_INPUT = "Input";
+export const COMPONENT_INPUT = "_RetrieveResponse";
 export const KIND_FINISH = "Diagnostics";
 export const KIND_ERROR = "Error";
 

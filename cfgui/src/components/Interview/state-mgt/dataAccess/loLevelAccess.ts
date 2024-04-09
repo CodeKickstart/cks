@@ -230,7 +230,16 @@ export const fnSetBackPointer = (
       back;
     return null;
   } catch (error) {
-    console.error("Error setting back pointer:", error);
-    return null;
+    return "Error setting back pointer:";
+  }
+};
+
+export const fnGetBackPointer = (current: string): string | null => {
+  try {
+    return (valtioStore.backPointers as { [key: string]: string | null })[
+      current
+    ];
+  } catch (error) {
+    return "Error getting back pointer:";
   }
 };

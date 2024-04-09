@@ -14,13 +14,13 @@ import { Str } from "../defs/types/Str";
 import { fnComputeAndStoreLastQuestionIndex } from "../misc/computeLastQuestionIndex";
 
 import { InputType } from "../defs/types/UITypes";
-import Input from "./Input";
+import _RetrieveResponse from "./_RetrieveResponse";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import InterviewEnd from "./InterviewEnd";
 import InterviewBegin from "./InterviewBegin";
 
-const QnA: React.FC = () => {
+const _PrepareForResponse: React.FC = () => {
   const [interviewStarted, setInterviewStarted] = useState<boolean>(false);
   const [interviewFinished] = useState<boolean>(false);
   const [selectedResponseComponent, setSelectedResponseComponent] =
@@ -92,7 +92,7 @@ const QnA: React.FC = () => {
     switch (selectedResponseComponent) {
       case COMPONENT_INPUT:
         return (
-          <Input
+          <_RetrieveResponse
             onResponse={handleNext}
             inputType={inputKind as InputType}
             key={rerenderFlag ? "text-1" : "text-2"}
@@ -115,4 +115,4 @@ const QnA: React.FC = () => {
   );
 };
 
-export default QnA;
+export default _PrepareForResponse;

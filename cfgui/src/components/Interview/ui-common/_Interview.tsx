@@ -1,9 +1,10 @@
 import { useMemo } from "react";
 import { useQuery } from "react-query";
-import QnA from "./_QnA";
+
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { Err } from "./Err";
+import _PrepareForResponse from "./_PrepareForResponse";
 
 interface InterviewProps {
   baseUrl: string;
@@ -56,14 +57,13 @@ const _Interview = ({
 
   if (isError || !data) {
     return <Err msg={`Network Error fetching data from server`} />;
-    // <div>Network Error fetching data from server</div>;
   }
 
   valtioStore.queryContext = data as JsonObjectType;
 
   return (
     <div className='flex-col h-full w-full'>
-      <QnA></QnA>
+      <_PrepareForResponse></_PrepareForResponse>
       <div
         id='idContexts'
         className='flex-auto flex flex-col md:flex-row md:space-x-4 md:m-4'></div>
