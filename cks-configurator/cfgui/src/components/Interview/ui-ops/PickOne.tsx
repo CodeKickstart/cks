@@ -12,7 +12,7 @@ interface Props {
 }
 
 const ENTER_KEY = "Enter";
-const ENTER_BUTTON_LABEL = "Enter";
+const NEXT_BUTTON_LABEL = "Next";
 
 const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null); // Updated state name to 'answer'
@@ -98,7 +98,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
     };
   }, [handleEnter, sid]);
 
-  const handleSubmitButtonClick = () => {
+  const handleNextClick = () => {
     if (answer !== null) {
       handleEnter();
     }
@@ -125,13 +125,13 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
         <div className='flex-grow'></div>
         <div className='flex flex-col justify-start'>
           <button
-            id='submit-button'
+            id='next-button'
             className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
               answer === null ? "opacity-50 cursor-not-allowed" : ""
             }`}
-            onClick={handleSubmitButtonClick}
+            onClick={handleNextClick}
             disabled={answer === null}>
-            {ENTER_BUTTON_LABEL}
+            {NEXT_BUTTON_LABEL}
           </button>
           <button
             id='back-button'

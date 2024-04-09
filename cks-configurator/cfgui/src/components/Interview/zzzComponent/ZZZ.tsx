@@ -20,7 +20,7 @@ interface Props {
   onResponse: () => void;
 }
 
-const ENTER_BUTTON_LABEL = "Enter";
+const NEXT_BUTTON_LABEL = "Next";
 export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
@@ -54,7 +54,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
   }, [queryObject]);
 
-  const handleSubmitButtonClick = async () => {
+  const handleNextClick = async () => {
     if (fnIsValidAnswer(answer)) {
       switch (valtioStore.zzzState) {
         case ZZZ_STATE_1: {
@@ -104,9 +104,9 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
             !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""
           }`}
-          onClick={handleSubmitButtonClick}
+          onClick={handleNextClick}
           disabled={!fnIsValidAnswer(answer)}>
-          {ENTER_BUTTON_LABEL}
+          {NEXT_BUTTON_LABEL}
         </button>
         <button
           className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'

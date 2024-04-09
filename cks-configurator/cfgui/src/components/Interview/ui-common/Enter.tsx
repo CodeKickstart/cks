@@ -3,15 +3,15 @@ import React from "react";
 interface Props {
   answer: string | null;
   fnIsValidAnswer: (answer: string) => boolean;
-  handleSubmitButtonClick: () => void;
-  ENTER_BUTTON_LABEL: string;
+  handleNextClick: () => void;
+  NEXT_BUTTON_LABEL: string;
 }
 
 const EnterComponent: React.FC<Props> = ({
   answer,
   fnIsValidAnswer,
-  handleSubmitButtonClick,
-  ENTER_BUTTON_LABEL,
+  handleNextClick,
+  NEXT_BUTTON_LABEL,
 }) => {
   return (
     <div id='Enter'>
@@ -23,9 +23,9 @@ const EnterComponent: React.FC<Props> = ({
               ? "opacity-50 cursor-not-allowed"
               : ""
           }`}
-          onClick={handleSubmitButtonClick}
+          onClick={handleNextClick}
           disabled={!fnIsValidAnswer(answer ?? "")}>
-          {ENTER_BUTTON_LABEL}
+          {NEXT_BUTTON_LABEL}
         </button>
       </div>
     </div>

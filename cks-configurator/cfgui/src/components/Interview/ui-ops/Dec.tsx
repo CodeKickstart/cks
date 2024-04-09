@@ -10,7 +10,7 @@ interface Props {
   onResponse: () => void;
 }
 
-const ENTER_BUTTON_LABEL = "Enter";
+const NEXT_BUTTON_LABEL = "Next";
 
 const MAX = 10000000.0;
 const MIN = -10000000.0;
@@ -76,7 +76,7 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
     }
   }, [answer, min, max, fnIsValidAnswer]);
 
-  const handleSubmitButtonClick = () => {
+  const handleNextClick = () => {
     if (fnIsValidAnswer(answer)) {
       handleEnter();
     }
@@ -119,13 +119,13 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
       <div className='flex-grow text-red-500'>{errorMessage}</div>
       <div className='flex flex-col justify-end'>
         <button
-          id='submit-button'
+          id='next-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
             answer === null ? "opacity-50 cursor-not-allowed" : ""
           }`}
-          onClick={handleSubmitButtonClick}
+          onClick={handleNextClick}
           disabled={answer === null}>
-          {ENTER_BUTTON_LABEL}
+          {NEXT_BUTTON_LABEL}
         </button>
         <button
           id='back-button'

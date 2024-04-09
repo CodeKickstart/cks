@@ -12,7 +12,7 @@ interface Props {
   onResponse: () => void;
 }
 
-const ENTER_BUTTON_LABEL = "Enter";
+const NEXT_BUTTON_LABEL = "Next";
 const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<string | null>("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -52,7 +52,7 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
     // Set loading state to false after fetching data
   }, [queryObject]);
 
-  const handleSubmitButtonClick = () => {
+  const handleNextClick = () => {
     if (answer !== null && fnIsValidAnswer(answer)) {
       handleEnter();
     }
@@ -74,15 +74,15 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
       <div className='flex-grow' />
       <div className='flex flex-col justify-end'>
         <button
-          id='submit-button'
+          id='next-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
             answer === null || answer === ""
               ? "opacity-50 cursor-not-allowed"
               : ""
           }`}
-          onClick={handleSubmitButtonClick}
+          onClick={handleNextClick}
           disabled={answer === null}>
-          {ENTER_BUTTON_LABEL}
+          {NEXT_BUTTON_LABEL}
         </button>
         <button
           id='back-button'

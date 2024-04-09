@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ENTER_KEY = "Enter";
-const ENTER_BUTTON_LABEL = "Enter";
+const NEXT_BUTTON_LABEL = "Next";
 
 const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   const [answer, setAnswer] = useState<number[]>([]); // Updated state name to 'answer'
@@ -125,7 +125,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
     setAnswer(newVal);
   };
 
-  const handleSubmitButtonClick = () => {
+  const handleNextClick = () => {
     handleEnter();
   };
 
@@ -153,13 +153,13 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
         <div className='flex-grow'></div>
         <div className='flex flex-col justify-start'>
           <button
-            id='submit-button'
+            id='next-button'
             className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
               answer === null ? "opacity-50 cursor-not-allowed" : ""
             }`}
-            onClick={handleSubmitButtonClick}
+            onClick={handleNextClick}
             disabled={answer === null}>
-            {ENTER_BUTTON_LABEL}
+            {NEXT_BUTTON_LABEL}
           </button>
           <button
             id='back-button'
