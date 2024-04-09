@@ -3,6 +3,7 @@ import { fnCursorMove } from "../state-mgt/cursor/cursor";
 import { Str } from "../defs/types/Str";
 import { fnShouldSkipQuestion } from "./shouldSkipQuestion";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
+import { fnSetBackPointer } from "../state-mgt/dataAccess/loLevelAccess";
 
 export const fnBypassUserResponses = (
   sidCursor: string
@@ -38,8 +39,8 @@ export const fnBypassUserResponses = (
       nextSidCursor,
     };
   };
-  let currentSidCursor: Str = sidCursor;
-  const error = null;
+
+  let currentSidCursor: string | null = sidCursor;
   do {
     const { error: err, nextSidCursor: newSidCursor } =
       _fnBypassUserResponse(currentSidCursor);
@@ -51,5 +52,11 @@ export const fnBypassUserResponses = (
     }
     currentSidCursor = newSidCursor;
   } while (currentSidCursor !== null);
-  return { error, nextSidCursor: currentSidCursor };
+
+  if (currentSidCursor === null) {
+    return { error: null, nextSidCursor: null };
+  }
+
+  const err = fnSetBackPointer(currentSidCursor, sidCursor);
+  return { error: err, nextSidCursor: currentSidCursor };
 };

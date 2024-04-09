@@ -221,15 +221,16 @@ export const fnSetQueryAttribute = (
   return { error: null };
 };
 
-export const fnSetBackPointer = (current: string, back: string): void => {
-  if (
-    typeof current !== "string" ||
-    typeof back !== "string" ||
-    valtioStore.backPointers === null ||
-    valtioStore.backPointers === undefined
-  ) {
-    return;
+export const fnSetBackPointer = (
+  current: string,
+  back: string | null
+): string | null => {
+  try {
+    (valtioStore.backPointers as { [key: string]: string | null })[current] =
+      back;
+    return null;
+  } catch (error) {
+    console.error("Error setting back pointer:", error);
+    return null;
   }
-
-  valtioStore.backPointers[current] = back;
 };
