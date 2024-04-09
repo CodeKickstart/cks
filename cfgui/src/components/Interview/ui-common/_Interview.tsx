@@ -36,7 +36,6 @@ const _Interview = ({
     () => async (url: string) => {
       const response = await fetch(url);
       if (!response.ok) {
-        // throw new Error("Network response was not ok");
         return <Err msg={`Network response was not ok`} />;
       }
       return response.json();
@@ -53,7 +52,6 @@ const _Interview = ({
 
   if (typeof data === "string") {
     return <Err msg={`Data Error:: ${data}`} />;
-    //  <div>`Data Error:: {data}`</div>;
   }
 
   if (isError || !data) {
