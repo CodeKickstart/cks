@@ -86,7 +86,11 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
         </button>
         <button
           id='back-button'
-          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md mt-2 ${
+            answer === null || answer === ""
+              ? "opacity-50 cursor-not-allowed"
+              : ""
+          }`}
           onClick={() => {
             valtioStore.earlyExit = true;
             window.location.href = "/";
