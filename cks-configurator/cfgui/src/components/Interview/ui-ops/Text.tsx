@@ -23,7 +23,7 @@ const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     return answer && answer.trim() !== "";
   };
 
-  const handleEnter = useCallback(() => {
+  const handleNextResponse = useCallback(() => {
     // if (answer !== null && fnIsValidAnswer(answer)) {
     fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
     setAnswer("");
@@ -54,7 +54,7 @@ const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
 
   const handleNextClick = () => {
     if (answer !== null && fnIsValidAnswer(answer)) {
-      handleEnter();
+      handleNextResponse();
     }
   };
   if (!isVisible) {

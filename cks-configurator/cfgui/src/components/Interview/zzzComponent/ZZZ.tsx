@@ -30,7 +30,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     return answer !== null;
   };
 
-  const handleEnter = useCallback(() => {
+  const handleNextResponse = useCallback(() => {
     if (answer !== null) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
       setAnswer(null);
@@ -86,7 +86,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onNextResponse }) => {
           break;
       }
 
-      handleEnter();
+      handleNextResponse();
     }
   };
 

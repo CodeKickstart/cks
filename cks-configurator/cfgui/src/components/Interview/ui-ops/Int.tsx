@@ -39,7 +39,7 @@ const Int: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     [min, max]
   );
 
-  const handleEnter = useCallback(() => {
+  const handleNextResponse = useCallback(() => {
     if (answer !== null) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
       setAnswer(null);
@@ -81,7 +81,7 @@ const Int: React.FC<Props> = ({ queryObject, onNextResponse }) => {
 
   const handleNextClick = () => {
     if (fnIsValidAnswer(answer)) {
-      handleEnter();
+      handleNextResponse();
     }
   };
 

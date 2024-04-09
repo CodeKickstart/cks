@@ -21,7 +21,7 @@ const Bool: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     return answer !== null;
   };
 
-  const handleEnter = useCallback(() => {
+  const handleNextResponse = useCallback(() => {
     if (answer !== null) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
       setAnswer(null);
@@ -47,7 +47,7 @@ const Bool: React.FC<Props> = ({ queryObject, onNextResponse }) => {
 
   const handleNextClick = () => {
     if (fnIsValidAnswer(answer)) {
-      handleEnter();
+      handleNextResponse();
     }
   };
   if (!isVisible) {

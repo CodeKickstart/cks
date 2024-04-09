@@ -27,7 +27,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   }
   const listOfDescendantNames = Object.values(descendantNames);
 
-  const handleEnter = useCallback(() => {
+  const handleNextResponse = useCallback(() => {
     if (answer !== null) {
       fnSetQueryAttribute(sid, KEY_VAL, answer);
       const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
@@ -87,7 +87,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === ENTER_KEY) {
-        handleEnter();
+        handleNextResponse();
       }
     };
 
@@ -96,11 +96,11 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [handleEnter, sid]);
+  }, [handleNextResponse, sid]);
 
   const handleNextClick = () => {
     if (answer !== null) {
-      handleEnter();
+      handleNextResponse();
     }
   };
 

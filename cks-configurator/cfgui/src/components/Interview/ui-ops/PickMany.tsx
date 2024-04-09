@@ -31,7 +31,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   }
   const listOfDescendantNames = Object.values(descendantNames);
 
-  const handleEnter = useCallback(() => {
+  const handleNextResponse = useCallback(() => {
     interface ObjTemplate {
       sid?: string;
     }
@@ -90,7 +90,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === ENTER_KEY) {
-        handleEnter();
+        handleNextResponse();
       }
     };
 
@@ -99,7 +99,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [handleEnter]);
+  }, [handleNextResponse]);
 
   const handleCheckboxChange = (index: number) => {
     const { error, value: val } = fnGetQueryAttribute(sid, KEY_VAL);
@@ -126,7 +126,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   };
 
   const handleNextClick = () => {
-    handleEnter();
+    handleNextResponse();
   };
 
   return (
