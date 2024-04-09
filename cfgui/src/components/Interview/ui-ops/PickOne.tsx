@@ -107,9 +107,23 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
   return (
     <div className='flex flex-col'>
       <div className='flex'>
-        <h2 className='font-semibold'>Select one an option:</h2>
+        <div>
+          <h2 className='font-semibold'>Select one an option:</h2>
+          {listOfDescendantNames.map((descendantName, index) => (
+            <label key={index} className='flex items-center mb-2'>
+              <input
+                type='radio'
+                value={index}
+                checked={answer === index}
+                onChange={() => handleChange(index)}
+                className='mr-2'
+              />
+              {descendantName}
+            </label>
+          ))}
+        </div>
         <div className='flex-grow'></div>
-        <div className='flex flex-col justify-end'>
+        <div className='flex flex-col justify-start'>
           <button
             id='submit-button'
             className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
@@ -139,19 +153,6 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
           </button>
         </div>
       </div>
-
-      {listOfDescendantNames.map((descendantName, index) => (
-        <label key={index} className='flex items-center mb-2'>
-          <input
-            type='radio'
-            value={index}
-            checked={answer === index}
-            onChange={() => handleChange(index)}
-            className='mr-2'
-          />
-          {descendantName}
-        </label>
-      ))}
     </div>
   );
 };
