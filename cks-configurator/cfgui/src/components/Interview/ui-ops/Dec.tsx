@@ -7,7 +7,7 @@ import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   queryObject: JsonObjectType;
-  onResponse: () => void;
+  onNextResponse: () => void;
 }
 
 const NEXT_BUTTON_LABEL = "Next";
@@ -15,7 +15,7 @@ const NEXT_BUTTON_LABEL = "Next";
 const MAX = 10000000.0;
 const MIN = -10000000.0;
 
-const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
+const Dec: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   const [answer, setAnswer] = useState<string>("");
   const [sidCursor, setSidCursor] = useState<string>("");
   const [min, setMin] = useState<number | undefined>(undefined);
@@ -42,10 +42,10 @@ const Dec: React.FC<Props> = ({ queryObject, onResponse }) => {
     if (answer !== "") {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
       setAnswer("");
-      onResponse();
+      onNextResponse();
       setIsVisible(false);
     }
-  }, [answer, onResponse, sidCursor]);
+  }, [answer, onNextResponse, sidCursor]);
 
   useEffect(() => {
     interface ObjTemplate {

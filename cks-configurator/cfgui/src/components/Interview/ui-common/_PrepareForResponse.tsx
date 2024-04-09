@@ -93,7 +93,7 @@ const _PrepareForResponse: React.FC = () => {
       case COMPONENT_INPUT:
         return (
           <_RetrieveResponse
-            onResponse={handleNext}
+            onNextResponse={handleNext}
             inputType={inputKind as InputType}
             key={rerenderFlag ? "text-1" : "text-2"}
           />

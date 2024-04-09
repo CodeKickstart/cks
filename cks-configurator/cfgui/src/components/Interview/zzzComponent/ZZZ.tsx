@@ -17,11 +17,11 @@ import { fnRunPostOrderProcessing } from "./setup2_responseContext";
 
 interface Props {
   queryObject: JsonObjectType;
-  onResponse: () => void;
+  onNextResponse: () => void;
 }
 
 const NEXT_BUTTON_LABEL = "Next";
-export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
+export const ZZZ: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
@@ -34,10 +34,10 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onResponse }) => {
     if (answer !== null) {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
       setAnswer(null);
-      onResponse();
+      onNextResponse();
       setIsVisible(false);
     }
-  }, [answer, onResponse, sidCursor]);
+  }, [answer, onNextResponse, sidCursor]);
 
   useEffect(() => {
     interface ObjTemplate {

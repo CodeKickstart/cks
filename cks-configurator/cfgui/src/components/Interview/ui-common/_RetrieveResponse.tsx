@@ -23,7 +23,10 @@ import Diagnostics from "./Diagnostics";
 // import { valtioStore } from "../defs/types/ValtioTypes";
 import { ZZZ } from "../zzzComponent/ZZZ";
 
-const _RetrieveResponse: React.FC<InputProps> = ({ onResponse, inputType }) => {
+const _RetrieveResponse: React.FC<InputProps> = ({
+  onNextResponse,
+  inputType,
+}) => {
   const [prompt, setPrompt] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -81,50 +84,46 @@ const _RetrieveResponse: React.FC<InputProps> = ({ onResponse, inputType }) => {
     return null;
   }
 
-  // const handleResponse = () => {
-  //   onResponse();
-  // };
-
   switch (inputType) {
     case INPUT_TEXT:
       inputComponent = (
-        <Text queryObject={queryObject} onResponse={onResponse} />
+        <Text queryObject={queryObject} onNextResponse={onNextResponse} />
       );
       break;
 
     case INPUT_BOOL:
       inputComponent = (
-        <Bool queryObject={queryObject} onResponse={onResponse} />
+        <Bool queryObject={queryObject} onNextResponse={onNextResponse} />
       );
       break;
 
     case INPUT_INT:
       inputComponent = (
-        <Int queryObject={queryObject} onResponse={onResponse} />
+        <Int queryObject={queryObject} onNextResponse={onNextResponse} />
       );
       break;
 
     case INPUT_DEC:
       inputComponent = (
-        <Dec queryObject={queryObject} onResponse={onResponse} />
+        <Dec queryObject={queryObject} onNextResponse={onNextResponse} />
       );
       break;
 
     case INPUT_PICKONE:
       inputComponent = (
-        <PickOne queryObject={queryObject} onResponse={onResponse} />
+        <PickOne queryObject={queryObject} onNextResponse={onNextResponse} />
       );
       break;
 
     case INPUT_PICKMANY:
       inputComponent = (
-        <PickMany queryObject={queryObject} onResponse={onResponse} />
+        <PickMany queryObject={queryObject} onNextResponse={onNextResponse} />
       );
       break;
 
     case INPUT_ZZZ:
       inputComponent = (
-        <ZZZ queryObject={queryObject} onResponse={onResponse} />
+        <ZZZ queryObject={queryObject} onNextResponse={onNextResponse} />
       );
       break;
 

@@ -4,7 +4,7 @@ export interface Option {
 }
 
 export interface InputProps {
-  onResponse: () => void;
+  onNextResponse: () => void;
   inputType: InputType;
   pickOneProps?: { options: Option[] };
 }

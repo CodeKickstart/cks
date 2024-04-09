@@ -11,13 +11,13 @@ import { valtioStore } from "../defs/types/ValtioTypes";
 
 interface Props {
   queryObject: JsonObjectType;
-  onResponse: () => void;
+  onNextResponse: () => void;
 }
 
 const ENTER_KEY = "Enter";
 const NEXT_BUTTON_LABEL = "Next";
 
-const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
+const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   const [answer, setAnswer] = useState<number[]>([]); // Updated state name to 'answer'
   // const [sidCursor, setSidCursor] = useState<string>("");
   const [sid, setSid] = useState<string>("");
@@ -45,8 +45,8 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
       console.error(`Error blocking unselected children: ${errorBlocker}`);
     }
     setAnswer([]);
-    onResponse();
-  }, [answer, onResponse, queryObject]);
+    onNextResponse();
+  }, [answer, onNextResponse, queryObject]);
 
   useEffect(() => {
     interface ObjTemplate {
