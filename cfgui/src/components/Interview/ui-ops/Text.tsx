@@ -60,7 +60,7 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
   }
 
   return (
-    <div className='flex items-center'>
+    <div className='flex items-start'>
       <input
         ref={inputRef}
         type='text'
@@ -70,28 +70,34 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
         onChange={(e) => setAnswer(e.target.value)}
       />
       <div className='flex-grow' />
-      <div className='flex justify-end'>
+      <div className='flex flex-col justify-end'>
         <button
+          id='submit-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            !answer || answer.trim() === ""
-              ? "opacity-50 cursor-not-allowed"
-              : ""
+            answer === null ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handleSubmitButtonClick}
-          disabled={!answer || answer.trim() === ""}>
+          disabled={answer === null}>
           {ENTER_BUTTON_LABEL}
         </button>
-        <div>
-          {" "}
-          <button
-            className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
-            onClick={() => {
-              valtioStore.earlyExit = true;
-              window.location.href = "/";
-            }}>
-            Cancel
-          </button>
-        </div>
+        <button
+          id='back-button'
+          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Back
+        </button>
+        <button
+          id='cancel-button'
+          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Cancel
+        </button>
       </div>
     </div>
   );

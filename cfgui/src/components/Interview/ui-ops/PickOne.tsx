@@ -109,9 +109,10 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
       <div className='flex'>
         <h2 className='font-semibold'>Select one an option:</h2>
         <div className='flex-grow'></div>
-        <div className='flex justify-end'>
+        <div className='flex flex-col justify-end'>
           <button
-            className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2 ${
+            id='submit-button'
+            className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
               answer === null ? "opacity-50 cursor-not-allowed" : ""
             }`}
             onClick={handleSubmitButtonClick}
@@ -119,7 +120,17 @@ const PickOne: React.FC<Props> = ({ queryObject, onResponse }) => {
             {ENTER_BUTTON_LABEL}
           </button>
           <button
-            className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+            id='back-button'
+            className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+            onClick={() => {
+              valtioStore.earlyExit = true;
+              window.location.href = "/";
+            }}>
+            Back
+          </button>
+          <button
+            id='cancel-button'
+            className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
             onClick={() => {
               valtioStore.earlyExit = true;
               window.location.href = "/";

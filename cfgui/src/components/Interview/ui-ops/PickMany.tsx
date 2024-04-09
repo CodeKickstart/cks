@@ -132,16 +132,47 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
   return (
     <div className='flex flex-col'>
       <div className='flex'>
-        <h2 className='font-semibold mb-4'>Select one or more options:</h2>
+        <div>
+          <h2 className='font-semibold mb-4'>Select one or more options:</h2>
+          <ul className='space-y-1 flex-grow'>
+            {listOfDescendantNames.map((descendantName, index) => (
+              <li key={index}>
+                <label className='flex items-center'>
+                  <input
+                    type='checkbox'
+                    checked={answer !== null && answer.includes(index)}
+                    onChange={() => handleCheckboxChange(index)}
+                    className='mr-2'
+                  />
+                  {descendantName}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div className='flex-grow'></div>
-        <div id='idControl' className='self-end'>
+        <div className='flex flex-col justify-start'>
           <button
-            className='bg-blue-500 text-white px-4 py-2 rounded-md'
-            onClick={handleSubmitButtonClick}>
+            id='submit-button'
+            className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+              answer === null ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={handleSubmitButtonClick}
+            disabled={answer === null}>
             {ENTER_BUTTON_LABEL}
           </button>
           <button
-            className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+            id='back-button'
+            className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+            onClick={() => {
+              valtioStore.earlyExit = true;
+              window.location.href = "/";
+            }}>
+            Back
+          </button>
+          <button
+            id='cancel-button'
+            className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
             onClick={() => {
               valtioStore.earlyExit = true;
               window.location.href = "/";
@@ -150,21 +181,6 @@ const PickMany: React.FC<Props> = ({ queryObject, onResponse }) => {
           </button>
         </div>
       </div>
-      <ul className='space-y-1 flex-grow'>
-        {listOfDescendantNames.map((descendantName, index) => (
-          <li key={index}>
-            <label className='flex items-center'>
-              <input
-                type='checkbox'
-                checked={answer !== null && answer.includes(index)}
-                onChange={() => handleCheckboxChange(index)}
-                className='mr-2'
-              />
-              {descendantName}
-            </label>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };

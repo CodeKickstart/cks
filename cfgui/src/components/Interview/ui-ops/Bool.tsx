@@ -56,7 +56,7 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
   }
   return (
     <div className='flex items-center'>
-      <div className='flex items-center mb-4'>
+      <div className='flex items-start'>
         <label className='inline-flex items-center mr-4'>
           <input
             ref={inputRef}
@@ -80,17 +80,28 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
         </label>
       </div>
       <div className='flex-grow' />
-      <div>
+      <div className='flex flex-col justify-end'>
         <button
+          id='submit-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            !fnIsValidAnswer(answer) ? "opacity-50 cursor-not-allowed" : ""
+            answer === null ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handleSubmitButtonClick}
-          disabled={!fnIsValidAnswer(answer)}>
+          disabled={answer === null}>
           {ENTER_BUTTON_LABEL}
         </button>
         <button
-          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
+          id='back-button'
+          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+          onClick={() => {
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
+          }}>
+          Back
+        </button>
+        <button
+          id='cancel-button'
+          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
           onClick={() => {
             valtioStore.earlyExit = true;
             window.location.href = "/";
