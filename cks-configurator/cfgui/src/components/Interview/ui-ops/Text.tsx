@@ -3,7 +3,11 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 import { KEY_VAL } from "../../../shared/defs/constants";
-import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
+import {
+  fnBackSidExists,
+  fnGetBackSid,
+  fnSetQueryAttribute,
+} from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { valtioStore } from "../defs/types/ValtioTypes";
 
@@ -18,6 +22,7 @@ const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
+  const [backSidExist, setBackSidExist] = useState<boolean>(false);
 
   const fnIsValidAnswer = (answer: string) => {
     return answer && answer.trim() !== "";
@@ -49,7 +54,7 @@ const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
       setAnswer(defval as string);
     }
 
-    // Set loading state to false after fetching data
+    setBackSidExist(fnBackSidExists(sid));
   }, [queryObject]);
 
   const handleNextClick = () => {
@@ -87,9 +92,7 @@ const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
         <button
           id='back-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md mt-2 ${
-            answer === null || answer === ""
-              ? "opacity-50 cursor-not-allowed"
-              : ""
+            backSidExist ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={() => {
             valtioStore.earlyExit = true;

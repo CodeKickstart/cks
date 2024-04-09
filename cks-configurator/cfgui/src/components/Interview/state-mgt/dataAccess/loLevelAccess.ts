@@ -234,12 +234,24 @@ export const fnSetBackPointer = (
   }
 };
 
-export const fnGetBackPointer = (current: string): string | null => {
+export const fnGetBackSid = (currentSid: string): string | null => {
   try {
     return (valtioStore.backPointers as { [key: string]: string | null })[
-      current
+      currentSid
     ];
   } catch (error) {
     return "Error getting back pointer:";
+  }
+};
+
+export const fnBackSidExists = (currentSid: string): boolean => {
+  try {
+    return (
+      (valtioStore.backPointers as { [key: string]: string | null })[
+        currentSid
+      ] !== undefined
+    );
+  } catch (error) {
+    return false;
   }
 };
