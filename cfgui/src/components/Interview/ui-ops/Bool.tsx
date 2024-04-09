@@ -55,7 +55,7 @@ const Bool: React.FC<Props> = ({ queryObject, onResponse }) => {
     return null; // Don't render anything if isVisible is false
   }
   return (
-    <div className='flex items-center'>
+    <div className='flex items-start'>
       <div className='flex items-start'>
         <label className='inline-flex items-center mr-4'>
           <input

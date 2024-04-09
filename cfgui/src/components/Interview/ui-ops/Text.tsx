@@ -76,7 +76,9 @@ const Text: React.FC<Props> = ({ queryObject, onResponse }) => {
         <button
           id='submit-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            answer === null ? "opacity-50 cursor-not-allowed" : ""
+            answer === null || answer === ""
+              ? "opacity-50 cursor-not-allowed"
+              : ""
           }`}
           onClick={handleSubmitButtonClick}
           disabled={answer === null}>
