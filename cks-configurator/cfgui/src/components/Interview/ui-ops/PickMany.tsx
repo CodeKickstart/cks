@@ -13,12 +13,16 @@ import { valtioStore } from "../defs/types/ValtioTypes";
 interface Props {
   queryObject: JsonObjectType;
   onNextResponse: () => void;
+  onBackResponse: () => void;
 }
 
-const ENTER_KEY = "Enter";
 const NEXT_BUTTON_LABEL = "Next";
 
-const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
+const PickMany: React.FC<Props> = ({
+  queryObject,
+  onNextResponse,
+  onBackResponse,
+}) => {
   const [answer, setAnswer] = useState<number[]>([]); // Updated state name to 'answer'
 
   const [sid, setSid] = useState<string>("");
@@ -69,35 +73,33 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
       console.error(error);
       return;
     }
-    setSid(sid);
-    setBackSidExist(fnBackSidExists(sid));
-    const { val } = fnConverListDefvalToVal(listOfDescendantNames, defval);
 
-    const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
-    if (errorSetValue) {
-      console.error(`Error setting query attribute: ${errorSetValue}`);
-      return;
+    const { error, value } = fnGetQueryAttribute(sid, KEY_VAL);
+    if (!error) {
+      if (
+        Array.isArray(value) &&
+        value.every((item) => typeof item === "number")
+      ) {
+        setAnswer(value as number[]);
+      } else {
+        setSid(sid);
+        setBackSidExist(fnBackSidExists(sid));
+        const { val } = fnConverListDefvalToVal(listOfDescendantNames, defval);
+
+        const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
+        if (errorSetValue) {
+          console.error(`Error setting query attribute: ${errorSetValue}`);
+          return;
+        }
+
+        if (val.length > 0) {
+          setAnswer(val);
+        }
+      }
     }
 
-    if (val.length > 0) {
-      setAnswer(val);
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === ENTER_KEY) {
-        handleNextResponse();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleNextResponse]);
 
   const handleCheckboxChange = (index: number) => {
     const { error, value: val } = fnGetQueryAttribute(sid, KEY_VAL);
@@ -166,8 +168,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
             }`}
             disabled={!backSidExist}
             onClick={() => {
-              valtioStore.earlyExit = true;
-              window.location.href = "/";
+              onBackResponse();
             }}>
             Back
           </button>

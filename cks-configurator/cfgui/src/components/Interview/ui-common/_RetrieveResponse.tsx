@@ -85,10 +85,6 @@ const _RetrieveResponse: React.FC<InputProps> = ({
     return null;
   }
 
-  // const handleBackResponse = () => {
-  //   const backedNewCursor = fnCursorMoveBack();
-  //   console.log("backedNewCursor: ", backedNewCursor);
-  // };
 
   switch (inputType) {
     case INPUT_TEXT:
@@ -131,7 +127,11 @@ const _RetrieveResponse: React.FC<InputProps> = ({
 
     case INPUT_PICKMANY:
       inputComponent = (
-        <PickMany queryObject={queryObject} onNextResponse={onNextResponse} />
+        <PickMany
+          queryObject={queryObject}
+          onNextResponse={onNextResponse}
+          onBackResponse={onBackResponse}
+        />
       );
       break;
 
