@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import {
-  fnBackSidExists,
   fnGetQueryAttribute,
   fnSetQueryAttribute,
 } from "../state-mgt/dataAccess/loLevelAccess";
@@ -22,7 +21,6 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   const [answer, setAnswer] = useState<number[]>([]); // Updated state name to 'answer'
   // const [sidCursor, setSidCursor] = useState<string>("");
   const [sid, setSid] = useState<string>("");
-  const [backSidExist, setBackSidExist] = useState<boolean>(false);
 
   interface ObjTemplate {
     descendantNames?: { [key: string]: string };
@@ -86,8 +84,8 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     if (val.length > 0) {
       setAnswer(val);
     }
-    setBackSidExist(fnBackSidExists(sid));
-  }, [queryObject, listOfDescendantNames]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -165,9 +163,7 @@ const PickMany: React.FC<Props> = ({ queryObject, onNextResponse }) => {
           </button>
           <button
             id='back-button'
-            className={`bg-blue-500 text-white px-4 py-2 rounded-md mt-2 ${
-              !backSidExist ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
             onClick={() => {
               valtioStore.earlyExit = true;
               window.location.href = "/";
