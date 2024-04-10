@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
-import {
-  fnBackSidExists,
-  fnSetQueryAttribute,
-} from "../state-mgt/dataAccess/loLevelAccess";
+import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
 import { fnConverSingleDefvalToVal } from "../utils/defval2val";
@@ -14,12 +11,12 @@ interface Props {
   onNextResponse: () => void;
 }
 
+const ENTER_KEY = "Enter";
 const NEXT_BUTTON_LABEL = "Next";
 
 const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null); // Updated state name to 'answer'
   const [sid, setSid] = useState<string>("");
-  const [backSidExist, setBackSidExist] = useState<boolean>(false);
 
   interface ObjTemplate {
     descendantNames?: { [key: string]: string };
@@ -60,16 +57,11 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     }
     setSid(sid);
 
-    const { val } = fnConverSingleDefvalToVal(listOfDescendantNames, defval);
-
-    if (
-      val === null ||
-      val === undefined ||
-      val < 0 ||
-      val >= listOfDescendantNames.length
-    ) {
+    if (defval === null || defval === undefined) {
       return;
     }
+
+    const { val } = fnConverSingleDefvalToVal(listOfDescendantNames, defval);
 
     const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
     if (errorSetValue) {
@@ -79,8 +71,8 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
 
     setAnswer(val);
 
-    setBackSidExist(fnBackSidExists(sid));
-  }, [queryObject, listOfDescendantNames]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (index: number) => {
     const { error: errorSet } = fnSetQueryAttribute(sid, KEY_VAL, index);
@@ -91,6 +83,20 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
 
     setAnswer(index);
   };
+
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === ENTER_KEY) {
+        handleNextResponse();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleNextResponse, sid]);
 
   const handleNextClick = () => {
     if (answer !== null) {
@@ -129,9 +135,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
           </button>
           <button
             id='back-button'
-            className={`bg-blue-500 text-white px-4 py-2 rounded-md mt-2 ${
-              !backSidExist ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
             onClick={() => {
               valtioStore.earlyExit = true;
               window.location.href = "/";
