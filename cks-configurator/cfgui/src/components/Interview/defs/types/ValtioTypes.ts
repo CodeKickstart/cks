@@ -15,7 +15,7 @@ const valtioStore = proxy({
   queryContext: {} as JsonObjectType,
   queryList: [] as Array<querySelectorType>,
   currentQueryKey: { contextName: null, id: null } as querySelectorType,
-  sidIndex: null as number | null,
+  // sidIndex: null as number | null,
   preOrderList: [] as string[],
   postOrderList: [] as string[],
   currentIndex: null as number | null,
