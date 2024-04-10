@@ -13,11 +13,15 @@ import { valtioStore } from "../defs/types/ValtioTypes";
 interface Props {
   queryObject: JsonObjectType;
   onNextResponse: () => void;
-  // onBackResponse: () => void;
+  onBackResponse: () => void;
 }
 
 const NEXT_BUTTON_LABEL = "Next";
-const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
+const Text: React.FC<Props> = ({
+  queryObject,
+  onNextResponse,
+  onBackResponse,
+}) => {
   const [answer, setAnswer] = useState<string | null>("");
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
@@ -96,8 +100,7 @@ const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
           }`}
           disabled={!backSidExist}
           onClick={() => {
-            valtioStore.earlyExit = true;
-            window.location.href = "/";
+            onBackResponse();
           }}>
           Back
         </button>

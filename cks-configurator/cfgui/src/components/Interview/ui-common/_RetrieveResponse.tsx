@@ -20,7 +20,6 @@ import PickOne from "../ui-ops/PickOne";
 import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Diagnostics from "./Diagnostics";
-// import { valtioStore } from "../defs/types/ValtioTypes";
 import { ZZZ } from "../zzzComponent/ZZZ";
 
 const _RetrieveResponse: React.FC<InputProps> = ({
@@ -84,10 +83,18 @@ const _RetrieveResponse: React.FC<InputProps> = ({
     return null;
   }
 
+  const handleBackResponse = () => {
+    window.location.href = "/";
+  };
+
   switch (inputType) {
     case INPUT_TEXT:
       inputComponent = (
-        <Text queryObject={queryObject} onNextResponse={onNextResponse} />
+        <Text
+          queryObject={queryObject}
+          onNextResponse={onNextResponse}
+          onBackResponse={handleBackResponse}
+        />
       );
       break;
 

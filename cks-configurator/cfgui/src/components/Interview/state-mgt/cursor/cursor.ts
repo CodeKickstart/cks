@@ -14,7 +14,20 @@ export const fnCursorMove = (): { cursor: string | null } => {
 
   const cursor = valtioStore.preOrderList[valtioStore.currentIndex];
 
-  // const reachedEnd = valtioStore.currentIndex === valtioStore.maxOrderIndex;
+  return { cursor };
+};
+
+export const fnCursorMoveBack = (): { cursor: string | null } => {
+  if (valtioStore.currentIndex === null) {
+    return { cursor: null };
+  }
+
+  valtioStore.currentIndex = valtioStore.currentIndex - 1;
+  if (valtioStore.currentIndex < 0) {
+    return { cursor: null };
+  }
+
+  const cursor = valtioStore.preOrderList[valtioStore.currentIndex];
 
   return { cursor };
 };
@@ -58,10 +71,3 @@ export const fnSetLastQuestionIndex = (index: number | null) => {
 export const fnIsItTheLastQuestion = (): boolean => {
   return valtioStore.currentIndex === valtioStore.lastQuestionIndex;
 };
-
-// export const fnNoMoreResponsesNeeded = (): boolean => {
-//   if (valtioStore.currentIndex === null) {
-//     return false;
-//   }
-//   return valtioStore.currentIndex - 1 === valtioStore.maxOrderIndex;
-// };
