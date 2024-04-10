@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
-import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
+import {
+  fnBackSidExists,
+  fnSetQueryAttribute,
+} from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
 import { fnConverSingleDefvalToVal } from "../utils/defval2val";
@@ -17,6 +20,7 @@ const NEXT_BUTTON_LABEL = "Next";
 const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   const [answer, setAnswer] = useState<number | null>(null); // Updated state name to 'answer'
   const [sid, setSid] = useState<string>("");
+  const [backSidExist, setBackSidExist] = useState<boolean>(false);
 
   interface ObjTemplate {
     descendantNames?: { [key: string]: string };
@@ -71,8 +75,8 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
 
     setAnswer(val);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setBackSidExist(fnBackSidExists(sid));
+  }, [queryObject, listOfDescendantNames]);
 
   const handleChange = (index: number) => {
     const { error: errorSet } = fnSetQueryAttribute(sid, KEY_VAL, index);
@@ -135,7 +139,9 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
           </button>
           <button
             id='back-button'
-            className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+            className={`bg-blue-500 text-white px-4 py-2 rounded-md mt-2 ${
+              !backSidExist ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             onClick={() => {
               valtioStore.earlyExit = true;
               window.location.href = "/";
