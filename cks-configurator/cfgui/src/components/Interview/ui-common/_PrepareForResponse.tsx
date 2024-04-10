@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 
-import { fnPickNextKind } from "../misc/componentPicker";
+import { fnMoveToNext } from "../misc/componentPicker";
 import { fnSetupForInterview } from "../zzzComponent/setup1_interview";
 import {
   KIND_ERROR,
@@ -77,7 +77,7 @@ const _PrepareForResponse: React.FC = () => {
   }, [setSelectedResponseComponent]);
 
   const handleNext = useCallback(() => {
-    const { error, nextKind } = fnPickNextKind(selectedResponseComponent);
+    const { error, nextKind } = fnMoveToNext(selectedResponseComponent);
     if (error) {
       setSelectedResponseComponent(KIND_ERROR);
     } else {

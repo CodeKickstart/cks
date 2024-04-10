@@ -9,10 +9,10 @@ import { Str } from "../defs/types/Str";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 import { fnBypassUserResponses } from "./interviewBypass";
 
-export const fnPickNextKind = (
+export const fnMoveToNext = (
   currentComponent: Str
 ): { error: Str; nextKind: Str } => {
-  console.log("fnPickNextKind: current component", currentComponent);
+  console.log("fnMoveToNext: current component", currentComponent);
 
   const { cursor } = fnCursorMove();
 
