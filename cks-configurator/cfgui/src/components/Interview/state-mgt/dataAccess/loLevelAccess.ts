@@ -257,11 +257,9 @@ export const fnBackSidExists = (
     if (!currentSid) {
       return false;
     }
-    return (
-      (valtioStore.backSidMap as { [key: string]: string | null })[
-        currentSid
-      ] !== undefined
-    );
+    const doesExist = valtioStore.backSidMap[currentSid] !== null;
+
+    return doesExist;
   } catch (error) {
     return false;
   }

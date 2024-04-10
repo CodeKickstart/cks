@@ -64,7 +64,7 @@ const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   if (!isVisible) {
     return null; // Don't render anything if isVisible is false
   }
-
+  console.log("backSidExist: ", backSidExist);
   return (
     <div className='flex items-start'>
       <input
@@ -91,7 +91,7 @@ const Text: React.FC<Props> = ({ queryObject, onNextResponse }) => {
         <button
           id='back-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md mt-2 ${
-            backSidExist ? "opacity-50 cursor-not-allowed" : ""
+            !backSidExist ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={() => {
             valtioStore.earlyExit = true;
