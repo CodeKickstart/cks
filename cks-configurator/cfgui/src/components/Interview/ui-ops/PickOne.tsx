@@ -12,11 +12,16 @@ import { valtioStore } from "../defs/types/ValtioTypes";
 interface Props {
   queryObject: JsonObjectType;
   onNextResponse: () => void;
+  onBackResponse: () => void;
 }
 
 const NEXT_BUTTON_LABEL = "Next";
 
-const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
+const PickOne: React.FC<Props> = ({
+  queryObject,
+  onNextResponse,
+  onBackResponse,
+}) => {
   const [answer, setAnswer] = useState<number | null>(null); // Updated state name to 'answer'
   const [sid, setSid] = useState<string>("");
   const [backSidExist, setBackSidExist] = useState<boolean>(false);
@@ -129,8 +134,7 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
             }`}
             disabled={!backSidExist}
             onClick={() => {
-              valtioStore.earlyExit = true;
-              window.location.href = "/";
+              onBackResponse();
             }}>
             Back
           </button>

@@ -121,7 +121,11 @@ const _RetrieveResponse: React.FC<InputProps> = ({
 
     case INPUT_PICKONE:
       inputComponent = (
-        <PickOne queryObject={queryObject} onNextResponse={onNextResponse} />
+        <PickOne
+          queryObject={queryObject}
+          onNextResponse={onNextResponse}
+          onBackResponse={onBackResponse}
+        />
       );
       break;
 
@@ -198,17 +202,6 @@ const _RetrieveResponse: React.FC<InputProps> = ({
         <h3 className='text-blue-500 font-bold'>Diagnostics:</h3>
         <Diagnostics debug={true} />
       </div>
-
-      {/* <div className='flex p-4'>
-        <button
-          className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
-          onClick={() => {
-            valtioStore.earlyExit = true;
-            window.location.href = "/";
-          }}>
-          Cancel
-        </button>
-      </div> */}
     </div>
   );
 };

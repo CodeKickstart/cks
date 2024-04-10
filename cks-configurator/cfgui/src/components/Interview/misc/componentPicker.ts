@@ -53,29 +53,6 @@ export const fnMoveBack = (): { error: Str; nextKind: Str } => {
   }
   const { sidCursor } = fnSplitCursor(cursor);
 
-  // if (!cursor) {
-  //   return {
-  //     error: null,
-  //     nextKind: KIND_FINISH,
-  //   };
-  // }
-
-  // const { sidCursor } = fnSplitCursor(cursor);
-
-  // const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
-  // if (error) {
-  //   return { error, nextKind: KIND_ERROR };
-  // }
-
-  // const errSetBackPointer = fnSetBackSid(nextSidCursor as string);
-  // if (errSetBackPointer) {
-  //   return { error: errSetBackPointer, nextKind: KIND_ERROR };
-  // }
-
-  // if (!nextSidCursor || nextSidCursor === null) {
-  //   //end of the interview
-  //   return { error: null, nextKind: null };
-  // }
   const { error: errorGettingKind, value: kind } = fnGetQueryAttributeString(
     sidCursor,
     KEY_KIND

@@ -33,12 +33,10 @@ const Text: React.FC<Props> = ({
   };
 
   const handleNextResponse = useCallback(() => {
-    // if (answer !== null && fnIsValidAnswer(answer)) {
     fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
     setAnswer("");
     onNextResponse();
     setIsVisible(false);
-    // }
   }, [answer, onNextResponse, sidCursor]);
 
   useEffect(() => {
