@@ -5,7 +5,6 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import {
   fnBackSidExists,
-  fnGetBackSid,
   fnSetQueryAttribute,
 } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";

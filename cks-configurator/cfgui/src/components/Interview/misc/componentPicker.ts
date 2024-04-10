@@ -1,5 +1,8 @@
 import { KIND_ERROR, KIND_FINISH } from "../defs/constants/ComponentNames";
-import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
+import {
+  fnGetQueryAttributeString,
+  fnSetBackSid,
+} from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import { fnCursorMove } from "../state-mgt/cursor/cursor";
 import { Str } from "../defs/types/Str";
@@ -23,10 +26,18 @@ export const fnPickNextKind = (
   const { sidCursor } = fnSplitCursor(cursor);
 
   const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
-
   if (error) {
     return { error, nextKind: KIND_ERROR };
   }
+
+  const errSetBackPointer = fnSetBackSid(nextSidCursor as string);
+  if (errSetBackPointer) {
+    return { error: errSetBackPointer, nextKind: KIND_ERROR };
+  }
+  // setPrevSidCursor(nextSidCursor);
+  // if (errSetBackPointer) {
+  //   return { error: errSetBackPointer, nextSidCursor: null };
+  // }
 
   if (!nextSidCursor || nextSidCursor === null) {
     //end of the interview

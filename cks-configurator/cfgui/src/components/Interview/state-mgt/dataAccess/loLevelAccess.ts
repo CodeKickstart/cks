@@ -221,22 +221,28 @@ export const fnSetQueryAttribute = (
   return { error: null };
 };
 
-export const fnSetBackPointer = (
-  current: string,
-  back: string | null
-): string | null => {
+export const fnSetBackSid = (sidCursor: string): string | null => {
   try {
-    (valtioStore.backPointers as { [key: string]: string | null })[current] =
-      back;
+    if (valtioStore.prevSid === undefined) {
+      (valtioStore.backSidMap as { [key: string]: string | null })[sidCursor] =
+        null;
+      valtioStore.prevSid = sidCursor;
+      return null;
+    }
+
+    (valtioStore.backSidMap as { [key: string]: string | null })[sidCursor] =
+      valtioStore.prevSid;
+    valtioStore.prevSid = sidCursor;
+
     return null;
   } catch (error) {
-    return "Error setting back pointer:";
+    return "Error setting backSidMap";
   }
 };
 
 export const fnGetBackSid = (currentSid: string): string | null => {
   try {
-    return (valtioStore.backPointers as { [key: string]: string | null })[
+    return (valtioStore.backSidMap as { [key: string]: string | null })[
       currentSid
     ];
   } catch (error) {
@@ -244,10 +250,15 @@ export const fnGetBackSid = (currentSid: string): string | null => {
   }
 };
 
-export const fnBackSidExists = (currentSid: string): boolean => {
+export const fnBackSidExists = (
+  currentSid: string | null | undefined
+): boolean => {
   try {
+    if (!currentSid) {
+      return false;
+    }
     return (
-      (valtioStore.backPointers as { [key: string]: string | null })[
+      (valtioStore.backSidMap as { [key: string]: string | null })[
         currentSid
       ] !== undefined
     );
