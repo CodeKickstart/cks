@@ -11,7 +11,6 @@ interface Props {
   onNextResponse: () => void;
 }
 
-const ENTER_KEY = "Enter";
 const NEXT_BUTTON_LABEL = "Next";
 
 const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
@@ -83,20 +82,6 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
 
     setAnswer(index);
   };
-
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === ENTER_KEY) {
-        handleNextResponse();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleNextResponse, sid]);
 
   const handleNextClick = () => {
     if (answer !== null) {
