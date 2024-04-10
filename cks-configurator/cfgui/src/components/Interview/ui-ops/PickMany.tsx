@@ -81,21 +81,23 @@ const PickMany: React.FC<Props> = ({
         value.every((item) => typeof item === "number")
       ) {
         setAnswer(value as number[]);
-      } else {
-        setSid(sid);
         setBackSidExist(fnBackSidExists(sid));
-        const { val } = fnConverListDefvalToVal(listOfDescendantNames, defval);
-
-        const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
-        if (errorSetValue) {
-          console.error(`Error setting query attribute: ${errorSetValue}`);
-          return;
-        }
-
-        if (val.length > 0) {
-          setAnswer(val);
-        }
+        return;
       }
+    }
+
+    setSid(sid);
+    setBackSidExist(fnBackSidExists(sid));
+    const { val } = fnConverListDefvalToVal(listOfDescendantNames, defval);
+
+    const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
+    if (errorSetValue) {
+      console.error(`Error setting query attribute: ${errorSetValue}`);
+      return;
+    }
+
+    if (val.length > 0) {
+      setAnswer(val);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
