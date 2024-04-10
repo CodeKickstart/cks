@@ -60,11 +60,16 @@ const PickOne: React.FC<Props> = ({ queryObject, onNextResponse }) => {
     }
     setSid(sid);
 
-    if (defval === null || defval === undefined) {
+    const { val } = fnConverSingleDefvalToVal(listOfDescendantNames, defval);
+
+    if (
+      val === null ||
+      val === undefined ||
+      val < 0 ||
+      val >= listOfDescendantNames.length
+    ) {
       return;
     }
-
-    const { val } = fnConverSingleDefvalToVal(listOfDescendantNames, defval);
 
     const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
     if (errorSetValue) {
