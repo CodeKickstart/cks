@@ -79,8 +79,7 @@ const PickOne: React.FC<Props> = ({
 
     setAnswer(val);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [queryObject, listOfDescendantNames]);
 
   const handleChange = (index: number) => {
     const { error: errorSet } = fnSetQueryAttribute(sid, KEY_VAL, index);
