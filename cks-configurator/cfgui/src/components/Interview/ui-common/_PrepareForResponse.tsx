@@ -77,7 +77,7 @@ const _PrepareForResponse: React.FC = () => {
   }, [setSelectedResponseComponent]);
 
   const handleNext = useCallback(() => {
-    const { error, nextKind } = fnMoveToNext(selectedResponseComponent);
+    const { error, nextKind } = fnMoveToNext();
     if (error) {
       setSelectedResponseComponent(KIND_ERROR);
     } else {
@@ -90,7 +90,7 @@ const _PrepareForResponse: React.FC = () => {
 
       setRerenderFlag((prev) => !prev); // Toggle rerenderFlag to force a re-render
     }
-  }, [selectedResponseComponent]);
+  }, []);
 
   useEffect(() => {
     // Logic to handle actions when interviewFinished changes
