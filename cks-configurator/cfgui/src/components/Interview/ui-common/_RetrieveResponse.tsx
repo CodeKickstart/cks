@@ -21,9 +21,11 @@ import PickMany from "../ui-ops/PickMany";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Diagnostics from "./Diagnostics";
 import { ZZZ } from "../zzzComponent/ZZZ";
+// import { fnCursorMoveBack } from "../state-mgt/cursor/cursor";
 
 const _RetrieveResponse: React.FC<InputProps> = ({
   onNextResponse,
+  onBackResponse,
   inputType,
 }) => {
   const [prompt, setPrompt] = useState<string>("");
@@ -83,9 +85,10 @@ const _RetrieveResponse: React.FC<InputProps> = ({
     return null;
   }
 
-  const handleBackResponse = () => {
-    window.location.href = "/";
-  };
+  // const handleBackResponse = () => {
+  //   const backedNewCursor = fnCursorMoveBack();
+  //   console.log("backedNewCursor: ", backedNewCursor);
+  // };
 
   switch (inputType) {
     case INPUT_TEXT:
@@ -93,7 +96,7 @@ const _RetrieveResponse: React.FC<InputProps> = ({
         <Text
           queryObject={queryObject}
           onNextResponse={onNextResponse}
-          onBackResponse={handleBackResponse}
+          onBackResponse={onBackResponse}
         />
       );
       break;

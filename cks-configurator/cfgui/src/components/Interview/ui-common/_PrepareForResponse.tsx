@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 
-import { fnMoveToNext } from "../misc/componentPicker";
+import { fnMoveBack, fnMoveToNext } from "../misc/componentPicker";
 import { fnSetupForInterview } from "../zzzComponent/setup1_interview";
 import {
   KIND_ERROR,
@@ -91,6 +91,22 @@ const _PrepareForResponse: React.FC = () => {
     }
   }, []);
 
+  const handleBack = useCallback(() => {
+    const { error, nextKind } = fnMoveBack();
+    if (error) {
+      setSelectedResponseComponent(KIND_ERROR);
+    } else {
+      if (nextKind === KIND_FINISH) {
+        setSelectedResponseComponent(KIND_FINISH);
+      } else {
+        setInputKind(nextKind as InputType);
+        setSelectedResponseComponent(COMPONENT_INPUT);
+      }
+
+      setRerenderFlag((prev) => !prev); // Toggle rerenderFlag to force a re-render
+    }
+  }, []);
+
   useEffect(() => {
     // Logic to handle actions when interviewFinished changes
     if (interviewFinished) {
@@ -104,6 +120,7 @@ const _PrepareForResponse: React.FC = () => {
         return (
           <_RetrieveResponse
             onNextResponse={handleNext}
+            onBackResponse={handleBack}
             inputType={inputKind as InputType}
             key={rerenderFlag ? "text-1" : "text-2"}
           />
