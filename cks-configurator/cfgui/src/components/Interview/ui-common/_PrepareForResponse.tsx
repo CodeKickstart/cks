@@ -30,7 +30,6 @@ const _PrepareForResponse: React.FC = () => {
     useState<Str>(COMPONENT_INPUT);
   const [rerenderFlag, setRerenderFlag] = useState<boolean>(false);
   const [inputKind, setInputKind] = useState<InputType>();
-  // const [prevSidCursor, setPrevSidCursor] = useState<Str | null>(null);
 
   const handleStartInterview = useCallback(() => {
     const { error: errorInit, sidCursor } = fnSetupForInterview();
