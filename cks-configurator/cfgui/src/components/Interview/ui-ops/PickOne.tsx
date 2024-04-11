@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
-import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
+import {
+  fnGetQueryAttribute,
+  fnSetQueryAttribute,
+} from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
 import { fnConverSingleDefvalToVal } from "../utils/defval2val";
@@ -62,7 +65,16 @@ const PickOne: React.FC<Props> = ({
       throw new Error("Failed to retrieve query object");
     }
     setSid(sid);
+
     setBackSidExist(!fnIsItTheFirstQuestion());
+
+    const { error, value } = fnGetQueryAttribute(sid, KEY_VAL);
+    if (!error) {
+      if (typeof value === "number") {
+        setAnswer(value as number);
+        return;
+      }
+    }
     if (defval === null || defval === undefined) {
       return;
     }
