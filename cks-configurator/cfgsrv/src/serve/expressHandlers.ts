@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { resolve } from "path";
 
-import { fnBundleQuery } from "../context/_queryContextMaker";
+import { fnBundleQuery, fnFetchRawQuery } from "../context/_queryContextMaker";
 import fs from "fs";
 import path from "path";
 
@@ -11,6 +11,13 @@ export const fnHandleFetchQuery = (req: Request, res: Response) => {
   const libAddress = req.query.libAddress as string;
   const prodPath = req.query.relProdPath as string;
   const directoryPath = resolve(libAddress, prodPath);
+
+  const { error: errorFetchingData, jsonObject } =
+    fnFetchRawQuery(directoryPath);
+  if (errorFetchingData) {
+    console.log(errorFetchingData);
+    return res.status(500).json({ message: "Error fetching query" });
+  }
 
   const { error, queryBundle } = fnBundleQuery(directoryPath);
   if (error) {
