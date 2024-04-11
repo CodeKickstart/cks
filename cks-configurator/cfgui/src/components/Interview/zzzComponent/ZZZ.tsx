@@ -22,7 +22,7 @@ interface Props {
   onBackResponse: () => void;
 }
 
-const NEXT_BUTTON_LABEL = "Next";
+const OK_BUTTON_LABEL = "OK";
 export const ZZZ: React.FC<Props> = ({
   queryObject,
   onNextResponse,
@@ -113,7 +113,7 @@ export const ZZZ: React.FC<Props> = ({
           }`}
           onClick={handleNextClick}
           disabled={!fnIsValidAnswer(answer)}>
-          {NEXT_BUTTON_LABEL}
+          {OK_BUTTON_LABEL}
         </button>
         {valtioStore.zzzState === ZZZ_STATE_1 && (
           <button
