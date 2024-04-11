@@ -38,42 +38,19 @@ export const fnFetchRawQuery = (
 };
 
 export const fnBundleQuery = (
-  directoryPath: string
+  jsonObject: JsonObjectType
 ): {
   error: Str;
   queryBundle: QueryBundleType | string;
 } => {
   try {
-    const retJsonData = fnReadJsonDirectory(directoryPath);
-    if (retJsonData.error) {
-      return {
-        error: null,
-        queryBundle: "error: reading directory",
-      };
-    }
-
-    const jsonObject = retJsonData.jsonData;
-
-    if (!jsonObject) {
-      return {
-        error: null,
-        queryBundle: "No JSON data",
-      };
-    }
-
-    if (typeof jsonObject !== "object") {
-      return {
-        error: null,
-        queryBundle: "JSON data is not an object",
-      };
-    }
-
     const { error } = fnValidateTreeNodesWithPreTraversal(jsonObject);
     if (error) {
       return { error: null, queryBundle: error };
     }
 
-    const { error: error2, queryBundle } = fnPrepareQueriesForContext(jsonObject);
+    const { error: error2, queryBundle } =
+      fnPrepareQueriesForContext(jsonObject);
     if (error2) {
       return { error: null, queryBundle: error2 };
     }

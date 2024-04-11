@@ -14,12 +14,12 @@ export const fnHandleFetchQuery = (req: Request, res: Response) => {
 
   const { error: errorFetchingData, jsonObject } =
     fnFetchRawQuery(directoryPath);
-  if (errorFetchingData) {
+  if (errorFetchingData || !jsonObject) {
     console.log(errorFetchingData);
     return res.status(500).json({ message: "Error fetching query" });
   }
 
-  const { error, queryBundle } = fnBundleQuery(directoryPath);
+  const { error, queryBundle } = fnBundleQuery(jsonObject);
   if (error) {
     console.log(error);
     return { error, queryBundle: null };
