@@ -1,7 +1,6 @@
 import { KIND_ERROR, KIND_FINISH } from "../defs/constants/ComponentNames";
 import {
-  fnGetQueryAttributeString,
-  fnSetBackSid,
+  fnGetQueryAttributeString
 } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import { fnCursorMove, fnCursorMoveBack } from "../state-mgt/cursor/cursor";
@@ -26,10 +25,6 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
     return { error, nextKind: KIND_ERROR };
   }
 
-  const errSetBackPointer = fnSetBackSid(nextSidCursor as string);
-  if (errSetBackPointer) {
-    return { error: errSetBackPointer, nextKind: KIND_ERROR };
-  }
 
   if (!nextSidCursor || nextSidCursor === null) {
     //end of the interview

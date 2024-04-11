@@ -220,33 +220,3 @@ export const fnSetQueryAttribute = (
 
   return { error: null };
 };
-
-export const fnSetBackSid = (sidCursor: string): string | null => {
-  try {
-    if (valtioStore.prevSid === undefined) {
-      (valtioStore.backSidMap as { [key: string]: string | null })[sidCursor] =
-        null;
-      valtioStore.prevSid = sidCursor;
-      return null;
-    }
-
-    (valtioStore.backSidMap as { [key: string]: string | null })[sidCursor] =
-      valtioStore.prevSid;
-    valtioStore.prevSid = sidCursor;
-
-    return null;
-  } catch (error) {
-    return "Error setting backSidMap";
-  }
-};
-
-export const fnGetBackSid = (currentSid: string): string | null => {
-  try {
-    return (valtioStore.backSidMap as { [key: string]: string | null })[
-      currentSid
-    ];
-  } catch (error) {
-    return "Error getting back pointer:";
-  }
-};
-

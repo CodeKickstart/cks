@@ -3,7 +3,6 @@ import { fnCursorMove } from "../state-mgt/cursor/cursor";
 import { Str } from "../defs/types/Str";
 import { fnShouldSkipQuestion } from "./shouldSkipQuestion";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
-// import { fnSetBackSid } from "../state-mgt/dataAccess/loLevelAccess";
 
 export const fnBypassUserResponses = (
   sidCursor: string

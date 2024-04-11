@@ -15,10 +15,7 @@ import { fnComputeAndStoreLastQuestionIndex } from "../misc/computeLastQuestionI
 
 import { InputType } from "../defs/types/UITypes";
 import _RetrieveResponse from "./_RetrieveResponse";
-import {
-  fnGetQueryAttributeString,
-  fnSetBackSid,
-} from "../state-mgt/dataAccess/loLevelAccess";
+import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import InterviewEnd from "./InterviewEnd";
 import InterviewBegin from "./InterviewBegin";
@@ -56,12 +53,6 @@ const _PrepareForResponse: React.FC = () => {
     if (error || !nextSidCursor) {
       console.log(error);
       return;
-    }
-
-    const errSetBackPointer = fnSetBackSid(nextSidCursor);
-    // setPrevSidCursor(nextSidCursor);
-    if (errSetBackPointer) {
-      return { error: errSetBackPointer, nextSidCursor: null };
     }
 
     const { error: errorKind, value: kind } = fnGetQueryAttributeString(
