@@ -6,7 +6,7 @@ import { JsonObjectType } from "../../../shared/defs/types";
 
 const ResponseContext: React.FC = () => {
   const _fnGetInfo = () => {
-    const response = valtioStore.answers as { [key: string]: JsonObjectType };
+    const response = valtioStore.repoonses as { [key: string]: JsonObjectType };
     if (response) {
       for (const key of Object.keys(response)) {
         console.log(key);

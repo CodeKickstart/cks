@@ -68,7 +68,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onNextResponse }) => {
             const responseContext = fnGetResponseContext();
             console.log(responseContext);
             const postData = responseContext as JsonObjectType;
-            valtioStore.answers = postData;
+            valtioStore.repoonses = postData;
           } catch (error) {
             console.error("Error uploading data:", error);
           }
@@ -77,7 +77,7 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onNextResponse }) => {
         }
         case ZZZ_STATE_2:
           try {
-            const result = await fnUpload(valtioStore.answers);
+            const result = await fnUpload(valtioStore.repoonses);
             console.log(result); // Log the result
           } catch (error) {
             console.error("Error uploading data:", error);

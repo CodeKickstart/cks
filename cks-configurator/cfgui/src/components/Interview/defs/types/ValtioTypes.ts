@@ -9,13 +9,10 @@ export interface querySelectorType {
 }
 
 const valtioStore = proxy({
-  prevSid: undefined as string | undefined,
-  backSidMap: {} as { [key: string]: string | null },
-  answers: {} as JsonObjectType,
+  repoonses: {} as JsonObjectType,
   queryContext: {} as JsonObjectType,
   queryList: [] as Array<querySelectorType>,
   currentQueryKey: { contextName: null, id: null } as querySelectorType,
-  // sidIndex: null as number | null,
   preOrderList: [] as string[],
   postOrderList: [] as string[],
   currentIndex: null as number | null,
