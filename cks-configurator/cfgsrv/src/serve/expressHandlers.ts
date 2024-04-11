@@ -12,14 +12,28 @@ export const fnHandleFetchQuery = (req: Request, res: Response) => {
   const prodPath = req.query.relProdPath as string;
   const directoryPath = resolve(libAddress, prodPath);
 
-  const { error: errorFetchingData, jsonObject } =
+  const { error: errorFetchingData, jsonObject: usrData } =
     fnFetchRawQuery(directoryPath);
-  if (errorFetchingData || !jsonObject) {
+  if (errorFetchingData || !usrData) {
     console.log(errorFetchingData);
     return res.status(500).json({ message: "Error fetching query" });
   }
 
-  const { error, queryBundle } = fnBundleQuery(jsonObject);
+  // get current dir path
+  const currentDir = process.cwd();
+  // console.log(`Current directory: ${currentDir}`);
+
+  const zzzDirpath = resolve(currentDir, "src/zzz-data");
+  const { error: errorFetchingDataZZZ, jsonObject: zzzData } =
+    fnFetchRawQuery(zzzDirpath);
+  if (errorFetchingDataZZZ || zzzData == null) {
+    console.log(errorFetchingDataZZZ);
+  }
+
+  const totalQueryContext = { ...usrData, ...zzzData };
+  console.log(totalQueryContext);
+
+  const { error, queryBundle } = fnBundleQuery(totalQueryContext);
   if (error) {
     console.log(error);
     return { error, queryBundle: null };
