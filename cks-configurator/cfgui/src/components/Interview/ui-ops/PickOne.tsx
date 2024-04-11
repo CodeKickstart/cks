@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import {
-  fnBackSidExists,
   fnSetQueryAttribute,
 } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
 import { fnConverSingleDefvalToVal } from "../utils/defval2val";
 import { valtioStore } from "../defs/types/ValtioTypes";
+import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -64,7 +64,7 @@ const PickOne: React.FC<Props> = ({
       throw new Error("Failed to retrieve query object");
     }
     setSid(sid);
-    setBackSidExist(fnBackSidExists(sid));
+    setBackSidExist(!fnIsItTheFirstQuestion());
     if (defval === null || defval === undefined) {
       return;
     }

@@ -3,12 +3,10 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 import { KEY_VAL } from "../../../shared/defs/constants";
-import {
-  fnBackSidExists,
-  fnSetQueryAttribute,
-} from "../state-mgt/dataAccess/loLevelAccess";
+import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { valtioStore } from "../defs/types/ValtioTypes";
+import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -56,7 +54,7 @@ const Text: React.FC<Props> = ({
       setAnswer(defval as string);
     }
 
-    setBackSidExist(fnBackSidExists(sid));
+    setBackSidExist(!fnIsItTheFirstQuestion());
   }, [queryObject]);
 
   const handleNextClick = () => {

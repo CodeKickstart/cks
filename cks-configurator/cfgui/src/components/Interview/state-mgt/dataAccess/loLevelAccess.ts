@@ -250,17 +250,3 @@ export const fnGetBackSid = (currentSid: string): string | null => {
   }
 };
 
-export const fnBackSidExists = (
-  currentSid: string | null | undefined
-): boolean => {
-  try {
-    if (!currentSid) {
-      return false;
-    }
-    const doesExist = valtioStore.backSidMap[currentSid] !== null;
-
-    return doesExist;
-  } catch (error) {
-    return false;
-  }
-};

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import {
-  fnBackSidExists,
   fnGetQueryAttribute,
   fnSetQueryAttribute,
 } from "../state-mgt/dataAccess/loLevelAccess";
@@ -9,6 +8,7 @@ import { JsonObjectType } from "../../../shared/defs/types";
 import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
 import { fnConverListDefvalToVal } from "../utils/defval2val";
 import { valtioStore } from "../defs/types/ValtioTypes";
+import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -81,13 +81,13 @@ const PickMany: React.FC<Props> = ({
         value.every((item) => typeof item === "number")
       ) {
         setAnswer(value as number[]);
-        setBackSidExist(fnBackSidExists(sid));
+        setBackSidExist(!fnIsItTheFirstQuestion());
         return;
       }
     }
 
     setSid(sid);
-    setBackSidExist(fnBackSidExists(sid));
+    setBackSidExist(!fnIsItTheFirstQuestion());
     const { val } = fnConverListDefvalToVal(listOfDescendantNames, defval);
 
     const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
@@ -99,9 +99,7 @@ const PickMany: React.FC<Props> = ({
     if (val.length > 0) {
       setAnswer(val);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [queryObject, listOfDescendantNames]);
 
   const handleCheckboxChange = (index: number) => {
     const { error, value: val } = fnGetQueryAttribute(sid, KEY_VAL);

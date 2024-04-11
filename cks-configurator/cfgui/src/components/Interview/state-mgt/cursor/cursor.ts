@@ -71,3 +71,9 @@ export const fnSetLastQuestionIndex = (index: number | null) => {
 export const fnIsItTheLastQuestion = (): boolean => {
   return valtioStore.currentIndex === valtioStore.lastQuestionIndex;
 };
+
+export const fnIsItTheFirstQuestion = (): boolean => {
+  return valtioStore.currentIndex === 0;
+};
+
+
