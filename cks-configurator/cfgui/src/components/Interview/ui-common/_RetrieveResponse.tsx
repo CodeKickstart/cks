@@ -99,19 +99,31 @@ const _RetrieveResponse: React.FC<InputProps> = ({
 
     case INPUT_BOOL:
       inputComponent = (
-        <Bool queryObject={queryObject} onNextResponse={onNextResponse} />
+        <Bool
+          queryObject={queryObject}
+          onNextResponse={onNextResponse}
+          onBackResponse={onBackResponse}
+        />
       );
       break;
 
     case INPUT_INT:
       inputComponent = (
-        <Int queryObject={queryObject} onNextResponse={onNextResponse} />
+        <Int
+          queryObject={queryObject}
+          onNextResponse={onNextResponse}
+          onBackResponse={onBackResponse}
+        />
       );
       break;
 
     case INPUT_DEC:
       inputComponent = (
-        <Dec queryObject={queryObject} onNextResponse={onNextResponse} />
+        <Dec
+          queryObject={queryObject}
+          onNextResponse={onNextResponse}
+          onBackResponse={onBackResponse}
+        />
       );
       break;
 
@@ -137,7 +149,7 @@ const _RetrieveResponse: React.FC<InputProps> = ({
 
     case INPUT_ZZZ:
       inputComponent = (
-        <ZZZ queryObject={queryObject} onNextResponse={onNextResponse} />
+        <ZZZ queryObject={queryObject} onNextResponse={onNextResponse} onBackResponse={onBackResponse} />
       );
       break;
 

@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
 import { KEY_VAL } from "../../../shared/defs/constants";
-import {
-  fnSetQueryAttribute,
-} from "../state-mgt/dataAccess/loLevelAccess";
+import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
@@ -11,10 +9,15 @@ import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
 interface Props {
   queryObject: JsonObjectType;
   onNextResponse: () => void;
+  onBackResponse: () => void;
 }
 
 const NEXT_BUTTON_LABEL = "Next";
-const Bool: React.FC<Props> = ({ queryObject, onNextResponse }) => {
+const Bool: React.FC<Props> = ({
+  queryObject,
+  onNextResponse,
+  onBackResponse,
+}) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
@@ -101,19 +104,18 @@ const Bool: React.FC<Props> = ({ queryObject, onNextResponse }) => {
           }`}
           disabled={!backSidExist}
           onClick={() => {
-            valtioStore.earlyExit = true;
-            window.location.href = "/";
+            onBackResponse();
           }}>
           Back
         </button>
         <button
-          id='cancel-button'
+          id='reset-button'
           className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
           onClick={() => {
             valtioStore.earlyExit = true;
             window.location.href = "/";
           }}>
-          Cancel
+          Reset
         </button>
       </div>
     </div>
