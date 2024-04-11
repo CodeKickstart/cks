@@ -73,6 +73,9 @@ const PickMany: React.FC<Props> = ({
       console.error(error);
       return;
     }
+    setSid(sid);
+
+    setBackSidExist(!fnIsItTheFirstQuestion());
 
     const { error, value } = fnGetQueryAttribute(sid, KEY_VAL);
     if (!error) {
@@ -81,13 +84,10 @@ const PickMany: React.FC<Props> = ({
         value.every((item) => typeof item === "number")
       ) {
         setAnswer(value as number[]);
-        setBackSidExist(!fnIsItTheFirstQuestion());
         return;
       }
     }
 
-    setSid(sid);
-    setBackSidExist(!fnIsItTheFirstQuestion());
     const { val } = fnConverListDefvalToVal(listOfDescendantNames, defval);
 
     const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
