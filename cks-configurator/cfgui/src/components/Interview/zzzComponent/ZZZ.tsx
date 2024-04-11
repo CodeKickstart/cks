@@ -23,11 +23,15 @@ interface Props {
 }
 
 const NEXT_BUTTON_LABEL = "Next";
-export const ZZZ: React.FC<Props> = ({ queryObject, onNextResponse,   onBackResponse, }) => {
+export const ZZZ: React.FC<Props> = ({
+  queryObject,
+  onNextResponse,
+  onBackResponse,
+}) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
-    const [backSidExist, setBackSidExist] = useState<boolean>(false);
+  const [backSidExist, setBackSidExist] = useState<boolean>(false);
 
   const fnIsValidAnswer = (answer: boolean | null) => {
     return answer !== null;
@@ -111,17 +115,19 @@ export const ZZZ: React.FC<Props> = ({ queryObject, onNextResponse,   onBackResp
           disabled={!fnIsValidAnswer(answer)}>
           {NEXT_BUTTON_LABEL}
         </button>
-        <button
-          id='back-button'
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2 ${
-            !backSidExist ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          disabled={!backSidExist}
-          onClick={() => {
-            onBackResponse();
-          }}>
-          Back
-        </button>
+        {valtioStore.zzzState === ZZZ_STATE_1 && (
+          <button
+            id='back-button'
+            className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2 ${
+              !backSidExist ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={!backSidExist}
+            onClick={() => {
+              onBackResponse();
+            }}>
+            Back
+          </button>
+        )}
         <button
           className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
           onClick={() => {
