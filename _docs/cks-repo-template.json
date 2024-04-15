@@ -1,0 +1,18 @@
+{
+  "prod": {
+    "id": "user-id",
+    "author": "author name",
+    "title": "prod title",
+    "description": "prod details...",
+    "tags": ["mongodb", "travel", "nextjs"]
+  },
+  "versions": [
+    {
+      "id": "v1",
+      "author": "author name",
+      "title": "version title",
+      "description": "version details...",
+      "tags": ["mongodb", "travel", "nextjs"]
+    }
+  ]
+}
