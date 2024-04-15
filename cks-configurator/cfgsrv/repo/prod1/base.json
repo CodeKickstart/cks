@@ -3,7 +3,7 @@
     {
       "id": "id_name1",
       "kind": "text",
-      "prompt": "please enter your name:",
+      "prompt": "please DO enter your name:",
       "defval": "Ashwini"
     },
     {

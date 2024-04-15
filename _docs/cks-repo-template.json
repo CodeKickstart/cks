@@ -1,6 +1,6 @@
 {
   "prod": {
-    "id": "user-id",
+    "id": "prod-id",
     "author": "author name",
     "title": "prod title",
     "description": "prod details...",
