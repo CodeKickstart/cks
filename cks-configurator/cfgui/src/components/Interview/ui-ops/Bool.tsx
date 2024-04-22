@@ -48,6 +48,7 @@ const Bool: React.FC<Props> = ({
 
     setSidCursor(sid as string);
 
+    setAnswer(null);
     if (val !== undefined && typeof val === "boolean") {
       setAnswer(val as boolean);
     } else if (defval !== undefined && typeof defval === "boolean") {
@@ -75,7 +76,7 @@ const Bool: React.FC<Props> = ({
             className='form-radio'
             value='true'
             checked={answer === true}
-            onChange={() => setAnswer(true)}
+            onChange={() => setAnswer(answer === true ? null : true)}
           />
           <span className='ml-2'>True</span>
         </label>
@@ -84,8 +85,8 @@ const Bool: React.FC<Props> = ({
             type='radio'
             className='form-radio'
             value='false'
-            checked={answer !== true}
-            onChange={() => setAnswer(false)}
+            checked={answer === false}
+            onChange={() => setAnswer(answer !== true ? null : false)}
           />
           <span className='ml-2'>False</span>
         </label>
