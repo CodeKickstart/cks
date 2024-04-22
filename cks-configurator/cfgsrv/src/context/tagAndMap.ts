@@ -19,6 +19,7 @@ export function fnTag(rootObj: JsonObjectType) {
     parentObj: JsonObjectType | null = null
   ): {
     error: Str;
+    processedQueries: JsonObjectType;
   } {
     let keys = Object.keys(currentObj);
     if (keys.includes(KEY_KIND)) {
@@ -107,7 +108,7 @@ export function fnTag(rootObj: JsonObjectType) {
       if (currentObj.hasOwnProperty(key)) {
         const thisObject = currentObj[key];
         if (typeof thisObject === "object" && thisObject !== null) {
-          const { error, processedQueries } = _fnPrefixTagWithBaseID(
+          const { error } = _fnPrefixTagWithBaseID(
             thisObject as JsonObjectType,
             currentObj
           );
