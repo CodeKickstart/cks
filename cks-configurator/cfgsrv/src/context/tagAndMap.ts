@@ -1,6 +1,5 @@
 import {
   KEY_BLOCKED,
-  KEY_CONTENT,
   KEY_ID,
   KEY_KIND,
   KEY_PARENT_UID,
