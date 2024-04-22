@@ -1,0 +1,62 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_name1",
+      "kind": "text",
+      "prompt": "please DO enter your name:",
+      "defval": "Ashwini"
+    },
+    {
+      "id": "id_name2",
+      "kind": "text",
+      "prompt": "please enter your friend's name:",
+      "defval": "Basab"
+    },
+    {
+      "id": "id_closed",
+      "kind": "pickone",
+      "prompt": "do Monday closings make a significant dent in revenues? ",
+      "defval": 0,
+      "children": {
+        "kind": "literal",
+        "override": ["yes", "no"]
+      }
+    },
+    {
+      "id": "id_port",
+      "kind": "pickone",
+      "prompt": "enter port number",
+      "children": {
+        "kind": "literal",
+        "override": ["3201", "3201", "3202", "3203", "3204", "3205"]
+      }
+    },
+    {
+      "id": "id_fixed_pages",
+      "kind": "pickmany",
+      "prompt": "enter ...",
+
+      "children": {
+        "kind": "literal",
+        "override": ["contact", "about", "posts"]
+      }
+    },
+    {
+      "id": "id_var_pages",
+      "kind": "pickmany",
+      "prompt": "enter ...",
+      "defval": [4, 2, 1],
+      "children": {
+        "kind": "literal",
+        "override": [
+          "hotels",
+          "restaurants",
+          "attractions",
+          "events",
+          "shopping",
+          "nightlife"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_bool2",
+      "kind": "bool",
+      "prompt": "enter bool:",
+      "defval": false
+    }
+  ]
+}
