@@ -40,16 +40,20 @@ const Bool: React.FC<Props> = ({
   useEffect(() => {
     interface ObjTemplate {
       defval?: boolean;
+      val?: string;
       sid?: string;
     }
 
-    const { defval, sid } = (queryObject || {}) as ObjTemplate;
+    const { defval, sid, val } = (queryObject || {}) as ObjTemplate;
 
     setSidCursor(sid as string);
 
-    if (defval !== undefined && typeof defval === "boolean") {
+    if (val !== undefined && typeof val === "boolean") {
+      setAnswer(val as boolean);
+    } else if (defval !== undefined && typeof defval === "boolean") {
       setAnswer(defval as boolean);
     }
+
     setBackSidExist(!fnIsItTheFirstQuestion());
   }, [queryObject]);
 
@@ -80,7 +84,7 @@ const Bool: React.FC<Props> = ({
             type='radio'
             className='form-radio'
             value='false'
-            checked={answer === false}
+            checked={answer !== true}
             onChange={() => setAnswer(false)}
           />
           <span className='ml-2'>False</span>
