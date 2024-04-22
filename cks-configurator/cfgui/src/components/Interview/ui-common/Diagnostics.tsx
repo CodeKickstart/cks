@@ -18,8 +18,8 @@ const Diagnostics: React.FC<IFinishProps> = ({ debug = true }) => {
           <div id='idDebug' className='overflow-y-auto h-full'>
             {/* Apply overflow-y-auto and set a fixed height */}
             <pre className='whitespace-pre-wrap'>
-              {typeof valtioStore.queryContext === "object" && (
-                <ReactJson src={valtioStore.queryContext as object} />
+              {typeof valtioStore === "object" && (
+                <ReactJson src={valtioStore as object} />
               )}
             </pre>
           </div>
