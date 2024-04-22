@@ -19,7 +19,6 @@ export function fnTag(rootObj: JsonObjectType) {
     parentObj: JsonObjectType | null = null
   ): {
     error: Str;
-    processedQueries: JsonObjectType;
   } {
     let keys = Object.keys(currentObj);
     if (keys.includes(KEY_KIND)) {
@@ -56,7 +55,7 @@ export function fnTag(rootObj: JsonObjectType) {
             parentObjToUse = currentObj;
           }
 
-          const { error, processedQueries } = _fnTagQueries(
+          const { error } = _fnTagQueries(
             thisObject as JsonObjectType,
             parentObjToUse
           );

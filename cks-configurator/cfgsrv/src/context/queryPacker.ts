@@ -42,7 +42,7 @@ export const fnPackQuery = (
     }
     if (!keys.includes(KEY_SID)) {
       return {
-        error: `collectionName ${collectionName}" does not contain a "SUD" attribute `,
+        error: `collectionName ${collectionName}" does not contain a "SID" attribute `,
         kind: "",
       };
     }
