@@ -58,7 +58,7 @@ export const fnValidateTreeNodesWithPreTraversal = (
       _fnIsKeyCustom(parentKey)
     ) {
       return {
-        error: `Cannot have a custom node (${key}) under another custom node (${parentKey})`,
+        error: `Cannot have a custom node (${key}) under another custom node (${parentKey})`
       };
     }
     const allKeys = Object.keys(obj);

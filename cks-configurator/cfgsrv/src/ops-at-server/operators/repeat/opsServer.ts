@@ -10,6 +10,9 @@ import {
   KEY_UID,
   KEY_PARENT_UID,
   KEY_BLOCKED,
+  KEY_PROMPT,
+  KEY_MAX,
+  KEY_MIN,
 } from "../../../shared/defs/constants";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../../../defs/types/typeStr";
@@ -18,7 +21,16 @@ import { OpsServer } from "../../../defs/types/OpsServer";
 export const opsServer: OpsServer = (jsonObj: JsonObjectType) => {
   const validAttributes = {
     required: [KEY_KIND, KEY_CHILDREN, KEY_SID, KEY_BLOCKED],
-    optional: [KEY_ID, KEY_INFO, KEY_COMMENTS, KEY_UID, KEY_PARENT_UID],
+    optional: [
+      KEY_ID,
+      KEY_INFO,
+      KEY_COMMENTS,
+      KEY_UID,
+      KEY_PARENT_UID,
+      KEY_PROMPT,
+      KEY_MAX,
+      KEY_MIN,
+    ],
   };
 
   const fnSetup = (): {
