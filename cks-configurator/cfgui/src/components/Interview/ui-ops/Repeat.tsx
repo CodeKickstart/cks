@@ -73,6 +73,11 @@ const Repeat: React.FC<Props> = ({
     setSelectedValue(false);
   };
 
+  const handleClearAll = () => {
+    console.log("Clear All clicked");
+    setSelectedValue(null);
+  };
+
   if (!isVisible) {
     return null; // Don't render anything if isVisible is false
   }
@@ -113,6 +118,12 @@ const Repeat: React.FC<Props> = ({
       </div>
       <div className='flex-grow' />
       <div className='flex flex-col justify-end'>
+        <button
+          id='clear-all-button'
+          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
+          onClick={handleClearAll}>
+          Clear All
+        </button>
         <button
           id='next-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
