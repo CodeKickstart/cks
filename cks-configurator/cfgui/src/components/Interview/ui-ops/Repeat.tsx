@@ -79,7 +79,7 @@ const Repeat: React.FC<Props> = ({
 
   return (
     <div className='flex items-start'>
-      <div className='flex items-start'>
+      <div className='flex items-center'>
         <label className='inline-flex items-center mr-4'>
           <input
             ref={inputRef}
