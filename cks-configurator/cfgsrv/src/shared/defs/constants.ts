@@ -14,6 +14,7 @@ export const KEY_COMMENTS = "comments";
 export const KEY_MAX = "max";
 export const KEY_MIN = "min";
 export const KEY_OVERRIDE = "override";
+export const KEY_SELECT = "select";
 
 export const OP_PICKONE = "pickone";
 export const OP_PICKMANY = "pickmany";
@@ -22,6 +23,8 @@ export const OP_TEXT = "text";
 export const OP_INT = "int";
 export const OP_DEC = "dec";
 export const OP_BOOL = "bool";
+export const OP_OBJ = "obj";
+export const OP_REPEAT = "repeat";
 export const OP_ZSYS = "zzz";
 
 export const KEY_SID = "sid";

@@ -10,6 +10,7 @@ import {
   INPUT_LITERAL,
   INPUT_PICKMANY,
   INPUT_ZZZ,
+  INPUT_REPEAT,
 } from "../defs/constants/ComponentNames";
 
 import Text from "../ui-ops/Text";
@@ -69,6 +70,7 @@ const _RetrieveResponse: React.FC<InputProps> = ({
         INPUT_PICKONE,
         INPUT_PICKMANY,
         INPUT_LITERAL,
+        INPUT_REPEAT,
         INPUT_ZZZ,
       ].includes(inputType)
     ) {

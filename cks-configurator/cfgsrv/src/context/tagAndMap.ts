@@ -24,7 +24,7 @@ export function fnTag(rootObj: JsonObjectType) {
     if (keys.includes(KEY_KIND)) {
       // tag with uid
       currentObj[KEY_UID] = uidCount;
-      // objDict[uidCount] = currentObj;
+
       uidCount++;
 
       // tag with puid

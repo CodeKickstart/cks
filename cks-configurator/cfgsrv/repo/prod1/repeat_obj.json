@@ -3,7 +3,7 @@
     {
       "id": "id_repeat",
       "kind": "repeat",
-      "prompt": "enter a number of times",
+      "prompt": "do continue?",
       "children": {
         "kind": "obj",
         "children": {

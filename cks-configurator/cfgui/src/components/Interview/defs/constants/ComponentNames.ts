@@ -9,6 +9,8 @@ export const INPUT_DEC = "dec";
 export const INPUT_PICKONE = "pickone";
 export const INPUT_LITERAL = "literal";
 export const INPUT_PICKMANY = "pickmany";
+export const INPUT_REPEAT = "repeat";
+
 export const INPUT_ZZZ = "zzz";
 
 export const ID_ZZZ_1 = "id_zzz_1";

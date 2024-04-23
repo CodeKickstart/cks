@@ -8,6 +8,7 @@ import {
   OP_INT,
   OP_PICKMANY,
   OP_PICKONE,
+  OP_REPEAT,
   OP_TEXT,
   OP_ZSYS,
 } from "../../shared/defs/constants";
@@ -33,6 +34,7 @@ export function TreeOrderMgr() {
               v === OP_INT ||
               v === OP_DEC ||
               v === OP_BOOL ||
+              v === OP_REPEAT ||
               v === OP_PICKONE ||
               v === OP_PICKMANY ||
               v === OP_ZSYS)
