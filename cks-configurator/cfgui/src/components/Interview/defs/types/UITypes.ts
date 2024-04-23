@@ -17,5 +17,7 @@ export type InputType =
   | "bool"
   | "int"
   | "dec"
+  | "literal"
+  | "repeat"
   | "zzz"
   | null;

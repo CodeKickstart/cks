@@ -19,6 +19,7 @@ import Int from "../ui-ops/Int";
 import Dec from "../ui-ops/Dec";
 import PickOne from "../ui-ops/PickOne";
 import PickMany from "../ui-ops/PickMany";
+import Repeat from "../ui-ops/Repeat";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Diagnostics from "./Diagnostics";
 import { ZZZ } from "../zzzComponent/ZZZ";
@@ -87,7 +88,6 @@ const _RetrieveResponse: React.FC<InputProps> = ({
     return null;
   }
 
-
   switch (inputType) {
     case INPUT_TEXT:
       inputComponent = (
@@ -149,9 +149,23 @@ const _RetrieveResponse: React.FC<InputProps> = ({
       );
       break;
 
+    case INPUT_REPEAT:
+      inputComponent = (
+        <Repeat
+          queryObject={queryObject}
+          onNextResponse={onNextResponse}
+          onBackResponse={onBackResponse}
+        />
+      );
+      break;
+
     case INPUT_ZZZ:
       inputComponent = (
-        <ZZZ queryObject={queryObject} onNextResponse={onNextResponse} onBackResponse={onBackResponse} />
+        <ZZZ
+          queryObject={queryObject}
+          onNextResponse={onNextResponse}
+          onBackResponse={onBackResponse}
+        />
       );
       break;
 
