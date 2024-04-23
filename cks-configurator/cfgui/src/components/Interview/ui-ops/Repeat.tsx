@@ -84,46 +84,50 @@ const Repeat: React.FC<Props> = ({
 
   return (
     <div className='flex items-start'>
-      <div className='flex items-center'>
-        <label className='inline-flex items-center mr-4'>
-          <input
-            ref={inputRef}
-            type='radio'
-            className='form-radio'
-            value='true'
-            checked={selectedValue === true}
-            onChange={handleTrueChange}
-          />
-          <span className='ml-2'>True</span>
-        </label>
-        <label className='inline-flex items-center'>
-          <input
-            type='radio'
-            className='form-radio'
-            value='false'
-            checked={selectedValue === false}
-            onChange={handleFalseChange}
-          />
-          <span className='ml-2'>False</span>
-        </label>
-        <button
-          id='ok-button'
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-4 ${
-            selectedValue === null ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          onClick={handleNextClick}
-          disabled={selectedValue === null}>
-          OK
-        </button>
+      <div className='flex flex-col items-start'>
+        <div id='top-row' className='flex items-center'>
+          <label className='inline-flex items-center mr-4'>
+            <input
+              ref={inputRef}
+              type='radio'
+              className='form-radio'
+              value='true'
+              checked={selectedValue === true}
+              onChange={handleTrueChange}
+            />
+            <span className='ml-2'>True</span>
+          </label>
+          <label className='inline-flex items-center'>
+            <input
+              type='radio'
+              className='form-radio'
+              value='false'
+              checked={selectedValue === false}
+              onChange={handleFalseChange}
+            />
+            <span className='ml-2'>False</span>
+          </label>
+          <button
+            id='ok-button'
+            className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-4 ${
+              selectedValue === null ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={handleNextClick}
+            disabled={selectedValue === null}>
+            OK
+          </button>
+        </div>
+        <div className='flex items-center'>
+          <button
+            id='clear-all-button'
+            className='bg-blue-500 text-white px-4 py-2 rounded-md ml-4'
+            onClick={handleClearAll}>
+            Clear All
+          </button>
+        </div>
       </div>
       <div className='flex-grow' />
       <div className='flex flex-col justify-end'>
-        <button
-          id='clear-all-button'
-          className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
-          onClick={handleClearAll}>
-          Clear All
-        </button>
         <button
           id='next-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
