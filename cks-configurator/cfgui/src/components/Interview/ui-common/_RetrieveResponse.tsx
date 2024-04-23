@@ -9,8 +9,8 @@ import {
   INPUT_PICKONE,
   INPUT_LITERAL,
   INPUT_PICKMANY,
-  INPUT_ZZZ,
   INPUT_REPEAT,
+  INPUT_ZZZ,
 } from "../defs/constants/ComponentNames";
 
 import Text from "../ui-ops/Text";
