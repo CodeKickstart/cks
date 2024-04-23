@@ -24,6 +24,9 @@ const Repeat: React.FC<Props> = ({
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [backSidExist, setBackSidExist] = useState<boolean>(false);
+  const [repeatCount, setRepeatCount] = useState<number>(0);
+  const [minCount, setMinCount] = useState<number>(0);
+  const [maxCount, setMaxCount] = useState<number>(0);
 
   const handleNextResponse = useCallback(() => {
     if (selectedValue !== null) {
@@ -43,9 +46,33 @@ const Repeat: React.FC<Props> = ({
       defval?: boolean;
       val?: string;
       sid?: string;
+      min?: number;
+      max?: number;
     }
 
-    const { defval, sid, val } = (queryObject || {}) as ObjTemplate;
+    const { defval, sid, val, min, max } = (queryObject || {}) as ObjTemplate;
+
+    if (min === undefined || min < 0) {
+      setMinCount(0);
+    } else {
+      setMinCount(min);
+    }
+
+    if (max === undefined || max < 0 || max < minCount) {
+      setMaxCount(minCount);
+    } else {
+      setMaxCount(max);
+    }
+    setRepeatCount(0);
+
+    console.log(
+      "useEffect: minCount: ",
+      minCount,
+      " maxCount: ",
+      maxCount,
+      " repeatCount: ",
+      repeatCount
+    );
 
     setSidCursor(sid as string);
 
@@ -57,7 +84,7 @@ const Repeat: React.FC<Props> = ({
     }
 
     setBackSidExist(!fnIsItTheFirstQuestion());
-  }, [queryObject]);
+  }, [queryObject, minCount, maxCount]);
 
   const handleNextClick = () => {
     if (selectedValue !== null) {
@@ -81,6 +108,20 @@ const Repeat: React.FC<Props> = ({
   if (!isVisible) {
     return null; // Don't render anything if isVisible is false
   }
+
+  const handleOkClick = () => {
+    if (selectedValue !== null) {
+      setRepeatCount((c) => c + 1);
+    }
+    console.log(
+      "handleOkClick: minCount: ",
+      minCount,
+      " maxCount: ",
+      maxCount,
+      " repeatCount: ",
+      repeatCount
+    );
+  };
 
   return (
     <div className='flex items-start'>
@@ -113,9 +154,11 @@ const Repeat: React.FC<Props> = ({
             <button
               id='ok-button'
               className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-                selectedValue === null ? "opacity-50 cursor-not-allowed" : ""
+                selectedValue === null || repeatCount > maxCount || repeatCount < minCount
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
               }`}
-              onClick={handleNextClick}
+              onClick={handleOkClick}
               disabled={selectedValue === null}>
               OK
             </button>
