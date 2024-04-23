@@ -78,7 +78,7 @@ const Repeat: React.FC<Props> = ({
             checked={answer === true}
             onChange={() => setAnswer(answer === true ? null : true)}
           />
-          <span className='ml-2'>Yes</span>
+          <span className='ml-2'>True</span>
         </label>
         <label className='inline-flex items-center'>
           <input
@@ -88,7 +88,7 @@ const Repeat: React.FC<Props> = ({
             checked={answer === false}
             onChange={() => setAnswer(answer !== true ? null : false)}
           />
-          <span className='ml-2'>No</span>
+          <span className='ml-2'>False</span>
         </label>
       </div>
       <div className='flex-grow' />
