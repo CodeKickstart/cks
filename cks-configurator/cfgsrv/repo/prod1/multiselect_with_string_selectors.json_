@@ -1,0 +1,28 @@
+{
+  "__CONTENT": [
+    {
+      "id": "id_select_1",
+      "kind": "pickmany",
+      "prompt": "enter one or more from off-road/commute/transport : ",
+      "defval": ["choice2", "choice1"],
+      "info": "usage of the vehicle",
+      "children": {
+        "choice1": {
+          "one": {
+            "kind": "dec",
+            "min": -1.12,
+            "prompt": "1-dec"
+          }
+        },
+        "choice2": {
+          "two": {
+            "kind": "int",
+            "max": 100,
+            "defval": 21,
+            "prompt": "2-int"
+          }
+        }
+      }
+    }
+  ]
+}
