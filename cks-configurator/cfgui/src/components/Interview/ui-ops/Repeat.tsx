@@ -13,29 +13,30 @@ interface Props {
 }
 
 const NEXT_BUTTON_LABEL = "Next";
+
 const Repeat: React.FC<Props> = ({
   queryObject,
   onNextResponse,
   onBackResponse,
 }) => {
-  const [answer, setAnswer] = useState<boolean | null>(null);
+  const [selectedValue, setSelectedValue] = useState<boolean | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [backSidExist, setBackSidExist] = useState<boolean>(false);
 
-  const fnIsValidAnswer = (answer: boolean | null) => {
-    return answer !== null;
-  };
-
   const handleNextResponse = useCallback(() => {
-    if (answer !== null) {
-      fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
-      setAnswer(null);
+    if (selectedValue !== null) {
+      fnSetQueryAttribute(sidCursor, KEY_VAL, selectedValue);
+      setSelectedValue(null);
       onNextResponse();
       setIsVisible(false);
     }
-  }, [answer, onNextResponse, sidCursor]);
+  }, [onNextResponse, selectedValue, sidCursor]);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   useEffect(() => {
     interface ObjTemplate {
@@ -48,24 +49,34 @@ const Repeat: React.FC<Props> = ({
 
     setSidCursor(sid as string);
 
-    setAnswer(null);
+    setSelectedValue(null);
     if (val !== undefined && typeof val === "boolean") {
-      setAnswer(val as boolean);
+      setSelectedValue(val as boolean);
     } else if (defval !== undefined && typeof defval === "boolean") {
-      setAnswer(defval as boolean);
+      setSelectedValue(defval as boolean);
     }
 
     setBackSidExist(!fnIsItTheFirstQuestion());
   }, [queryObject]);
 
   const handleNextClick = () => {
-    if (fnIsValidAnswer(answer)) {
+    if (selectedValue !== null) {
       handleNextResponse();
     }
   };
+
+  const handleTrueChange = () => {
+    setSelectedValue(true);
+  };
+
+  const handleFalseChange = () => {
+    setSelectedValue(false);
+  };
+
   if (!isVisible) {
     return null; // Don't render anything if isVisible is false
   }
+
   return (
     <div className='flex items-start'>
       <div className='flex items-start'>
@@ -75,8 +86,8 @@ const Repeat: React.FC<Props> = ({
             type='radio'
             className='form-radio'
             value='true'
-            checked={answer === true}
-            onChange={() => setAnswer(answer === true ? null : true)}
+            checked={selectedValue === true}
+            onChange={handleTrueChange}
           />
           <span className='ml-2'>True</span>
         </label>
@@ -85,21 +96,30 @@ const Repeat: React.FC<Props> = ({
             type='radio'
             className='form-radio'
             value='false'
-            checked={answer === false}
-            onChange={() => setAnswer(answer !== true ? null : false)}
+            checked={selectedValue === false}
+            onChange={handleFalseChange}
           />
           <span className='ml-2'>False</span>
         </label>
+        <button
+          id='ok-button'
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-4 ${
+            selectedValue === null ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+          onClick={handleNextClick}
+          disabled={selectedValue === null}>
+          OK
+        </button>
       </div>
       <div className='flex-grow' />
       <div className='flex flex-col justify-end'>
         <button
           id='next-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            answer === null ? "opacity-50 cursor-not-allowed" : ""
+            selectedValue === null ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={handleNextClick}
-          disabled={answer === null}>
+          disabled={selectedValue === null}>
           {NEXT_BUTTON_LABEL}
         </button>
         <button
