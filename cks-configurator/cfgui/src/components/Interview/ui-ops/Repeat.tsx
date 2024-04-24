@@ -126,6 +126,14 @@ const Repeat: React.FC<Props> = ({
   return (
     <div className='flex items-start'>
       <div className='flex flex-col items-start mr-2'>
+        <div className='flex items-center justify-between w-full mb-2'>
+          <span className='bg-gray-200 px-2 py-1 rounded-md'>
+            Repeat Count: {repeatCount}
+          </span>
+          <span className='bg-gray-200 px-2 py-1 rounded-md'>
+            Min Count: {minCount}, Max Count: {maxCount}
+          </span>
+        </div>
         <div id='top-row' className='flex items-center justify-between w-full'>
           <div className='flex items-center'>
             <label className='inline-flex items-center mr-4'>
@@ -154,7 +162,9 @@ const Repeat: React.FC<Props> = ({
             <button
               id='ok-button'
               className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-                selectedValue === null || repeatCount > maxCount || repeatCount < minCount
+                selectedValue === null ||
+                repeatCount > maxCount ||
+                repeatCount < minCount
                   ? "opacity-50 cursor-not-allowed"
                   : ""
               }`}
