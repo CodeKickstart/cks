@@ -50,7 +50,7 @@ const Repeat: React.FC<Props> = ({
       max?: number;
     }
 
-    const { defval, sid, val, min, max } = (queryObject || {}) as ObjTemplate;
+    const {  sid,  min, max } = (queryObject || {}) as ObjTemplate;
 
     if (min === undefined || min < 0) {
       setMinCount(0);
@@ -67,12 +67,12 @@ const Repeat: React.FC<Props> = ({
 
     setSidCursor(sid as string);
 
-    setSelectedValue(null);
-    if (val !== undefined && typeof val === "boolean") {
-      setSelectedValue(val as boolean);
-    } else if (defval !== undefined && typeof defval === "boolean") {
-      setSelectedValue(defval as boolean);
-    }
+    // setSelectedValue(null);
+    // if (val !== undefined && typeof val === "boolean") {
+    //   setSelectedValue(val as boolean);
+    // } else if (defval !== undefined && typeof defval === "boolean") {
+    //   setSelectedValue(defval as boolean);
+    // }
 
     setBackSidExist(!fnIsItTheFirstQuestion());
   }, [queryObject, minCount, maxCount]);
@@ -93,7 +93,7 @@ const Repeat: React.FC<Props> = ({
 
   const handleClearAll = () => {
     console.log("Clear All clicked");
-    setSelectedValue(null);
+    setSelectedValue(true);
   };
 
   if (!isVisible) {
@@ -142,7 +142,6 @@ const Repeat: React.FC<Props> = ({
             <button
               id='ok-button'
               className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-                selectedValue === null ||
                 repeatCount > maxCount ||
                 repeatCount < minCount
                   ? "opacity-50 cursor-not-allowed"
