@@ -169,7 +169,7 @@ const Repeat: React.FC<Props> = ({
                   : ""
               }`}
               onClick={handleOkClick}
-              disabled={selectedValue === null}>
+              disabled={repeatCount > maxCount || repeatCount < minCount}>
               OK
             </button>
           </div>
