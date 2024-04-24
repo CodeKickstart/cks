@@ -104,7 +104,6 @@ const Repeat: React.FC<Props> = ({
     if (selectedValue !== null) {
       setRepeatCount((c) => c + 1);
     }
-
   };
 
   return (
@@ -112,10 +111,7 @@ const Repeat: React.FC<Props> = ({
       <div className='flex flex-col items-start mr-2'>
         <div className='flex items-center justify-between w-full mb-2'>
           <span className='bg-gray-200 px-2 py-1 rounded-md'>
-            Repeat Count: {repeatCount}
-          </span>
-          <span className='bg-gray-200 px-2 py-1 rounded-md'>
-            Min Count: {minCount}, Max Count: {maxCount}
+            <div className='font-bold'> Repeat Count: {repeatCount}</div>
           </span>
         </div>
         <div id='top-row' className='flex items-center justify-between w-full'>
