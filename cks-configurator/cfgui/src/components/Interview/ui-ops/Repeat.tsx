@@ -113,14 +113,7 @@ const Repeat: React.FC<Props> = ({
     if (selectedValue !== null) {
       setRepeatCount((c) => c + 1);
     }
-    console.log(
-      "handleOkClick: minCount: ",
-      minCount,
-      " maxCount: ",
-      maxCount,
-      " repeatCount: ",
-      repeatCount
-    );
+
   };
 
   return (
