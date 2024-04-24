@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import { JsonObjectType } from "../../../shared/defs/types";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
+import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
+import { KEY_VAL } from "../../../shared/defs/constants";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -25,10 +27,6 @@ const Repeat: React.FC<Props> = ({
   const [minCount, setMinCount] = useState<number>(0);
   const [maxCount, setMaxCount] = useState<number>(0);
 
-  const handleNextResponse = useCallback(() => {
-    onNextResponse();
-    setIsVisible(false);
-  }, [onNextResponse]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -36,14 +34,13 @@ const Repeat: React.FC<Props> = ({
 
   useEffect(() => {
     interface ObjTemplate {
-      defval?: boolean;
-      val?: string;
+      val?: number;
       sid?: string;
       min?: number;
       max?: number;
     }
 
-    const { sid, min, max } = (queryObject || {}) as ObjTemplate;
+    const { sid, min, max, val } = (queryObject || {}) as ObjTemplate;
     console.log("sidCursor: ", sidCursor);
 
     if (min === undefined || min < 0) {
@@ -57,7 +54,11 @@ const Repeat: React.FC<Props> = ({
     } else {
       setMaxCount(max);
     }
-    setRepeatCount(0);
+    if (val !== undefined || val === null) {
+      setRepeatCount(val as number);
+    } else {
+      setRepeatCount(0);
+    }
 
     setSidCursor(sid as string);
 
@@ -65,7 +66,9 @@ const Repeat: React.FC<Props> = ({
   }, [queryObject, minCount, maxCount]);
 
   const handleNextClick = () => {
-    handleNextResponse();
+    onNextResponse();
+    setIsVisible(false);
+    fnSetQueryAttribute(sidCursor, KEY_VAL, repeatCount);
   };
 
   const handleClearAll = () => {
@@ -98,8 +101,7 @@ const Repeat: React.FC<Props> = ({
                   : ""
               }`}
               disabled={repeatCount > maxCount || repeatCount < minCount}
-              onClick={handleRepeatClick}
-              >
+              onClick={handleRepeatClick}>
               Repeat
             </button>
             <button
