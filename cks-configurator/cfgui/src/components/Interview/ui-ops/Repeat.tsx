@@ -37,9 +37,11 @@ const Repeat: React.FC<Props> = ({
       sid?: string;
       min?: number;
       max?: number;
+      children?: JsonObjectType[];
     }
 
-    const { sid, min, max, val } = (queryObject || {}) as ObjTemplate;
+    const { sid, min, max, val, children } = (queryObject || {}) as ObjTemplate;
+    console.log("children: ", children);
     console.log("sidCursor: ", sidCursor);
 
     if (min === undefined || min < 0) {
@@ -65,7 +67,7 @@ const Repeat: React.FC<Props> = ({
   }, [minCount, queryObject, sidCursor]);
 
   const handleNextClick = () => {
-    
+
 
     onNextResponse();
     setIsVisible(false);
