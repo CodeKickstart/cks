@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
-import { KEY_VAL } from "../../../shared/defs/constants";
-import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
+// import { KEY_VAL } from "../../../shared/defs/constants";
+// import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
@@ -19,8 +19,8 @@ const Repeat: React.FC<Props> = ({
   onNextResponse,
   onBackResponse,
 }) => {
-  const [selectedValue, setSelectedValue] = useState<boolean | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  // const [selectedValue, setSelectedValue] = useState<boolean | null>(null);
+  // const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [backSidExist, setBackSidExist] = useState<boolean>(false);
@@ -29,13 +29,9 @@ const Repeat: React.FC<Props> = ({
   const [maxCount, setMaxCount] = useState<number>(0);
 
   const handleNextResponse = useCallback(() => {
-    if (selectedValue !== null) {
-      fnSetQueryAttribute(sidCursor, KEY_VAL, selectedValue);
-      setSelectedValue(null);
-      onNextResponse();
-      setIsVisible(false);
-    }
-  }, [onNextResponse, selectedValue, sidCursor]);
+    onNextResponse();
+    setIsVisible(false);
+  }, [onNextResponse]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -50,7 +46,8 @@ const Repeat: React.FC<Props> = ({
       max?: number;
     }
 
-    const {  sid,  min, max } = (queryObject || {}) as ObjTemplate;
+    const { sid, min, max } = (queryObject || {}) as ObjTemplate;
+    console.log("sidCursor: ", sidCursor);
 
     if (min === undefined || min < 0) {
       setMinCount(0);
@@ -67,33 +64,15 @@ const Repeat: React.FC<Props> = ({
 
     setSidCursor(sid as string);
 
-    // setSelectedValue(null);
-    // if (val !== undefined && typeof val === "boolean") {
-    //   setSelectedValue(val as boolean);
-    // } else if (defval !== undefined && typeof defval === "boolean") {
-    //   setSelectedValue(defval as boolean);
-    // }
-
     setBackSidExist(!fnIsItTheFirstQuestion());
   }, [queryObject, minCount, maxCount]);
 
   const handleNextClick = () => {
-    if (selectedValue !== null) {
-      handleNextResponse();
-    }
-  };
-
-  const handleTrueChange = () => {
-    setSelectedValue(true);
-  };
-
-  const handleFalseChange = () => {
-    setSelectedValue(false);
+    handleNextResponse();
   };
 
   const handleClearAll = () => {
     console.log("Clear All clicked");
-    setSelectedValue(true);
   };
 
   if (!isVisible) {
@@ -101,9 +80,7 @@ const Repeat: React.FC<Props> = ({
   }
 
   const handleOkClick = () => {
-    if (selectedValue !== null) {
-      setRepeatCount((c) => c + 1);
-    }
+    setRepeatCount((c) => c + 1);
   };
 
   return (
@@ -115,35 +92,11 @@ const Repeat: React.FC<Props> = ({
           </span>
         </div>
         <div id='top-row' className='flex items-center justify-between w-full'>
-          <div className='flex items-center'>
-            <label className='inline-flex items-center mr-4'>
-              <input
-                ref={inputRef}
-                type='radio'
-                className='form-radio'
-                value='true'
-                checked={selectedValue === true}
-                onChange={handleTrueChange}
-              />
-              <span className='ml-2'>True</span>
-            </label>
-            <label className='inline-flex items-center'>
-              <input
-                type='radio'
-                className='form-radio'
-                value='false'
-                checked={selectedValue === false}
-                onChange={handleFalseChange}
-              />
-              <span className='ml-2'>False</span>
-            </label>
-          </div>
           <div className='flex items-center ml-2'>
             <button
               id='ok-button'
               className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-                repeatCount > maxCount ||
-                repeatCount < minCount
+                repeatCount > maxCount || repeatCount < minCount
                   ? "opacity-50 cursor-not-allowed"
                   : ""
               }`}
@@ -167,10 +120,12 @@ const Repeat: React.FC<Props> = ({
         <button
           id='next-button'
           className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            selectedValue === null ? "opacity-50 cursor-not-allowed" : ""
+            repeatCount > maxCount || repeatCount < minCount
+              ? "opacity-50 cursor-not-allowed"
+              : ""
           }`}
           onClick={handleNextClick}
-          disabled={selectedValue === null}>
+          disabled={repeatCount > maxCount || repeatCount < minCount}>
           {NEXT_BUTTON_LABEL}
         </button>
         <button
