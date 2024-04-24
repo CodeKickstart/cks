@@ -65,6 +65,8 @@ const Repeat: React.FC<Props> = ({
   }, [minCount, queryObject, sidCursor]);
 
   const handleNextClick = () => {
+    
+
     onNextResponse();
     setIsVisible(false);
     fnSetQueryAttribute(sidCursor, KEY_VAL, repeatCount);
