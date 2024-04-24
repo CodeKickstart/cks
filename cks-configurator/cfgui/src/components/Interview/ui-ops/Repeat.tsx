@@ -27,7 +27,6 @@ const Repeat: React.FC<Props> = ({
   const [minCount, setMinCount] = useState<number>(0);
   const [maxCount, setMaxCount] = useState<number>(0);
 
-
   useEffect(() => {
     setIsVisible(true);
   }, []);
@@ -63,7 +62,7 @@ const Repeat: React.FC<Props> = ({
     setSidCursor(sid as string);
 
     setBackSidExist(!fnIsItTheFirstQuestion());
-  }, [queryObject, minCount, maxCount]);
+  }, [minCount, queryObject, sidCursor]);
 
   const handleNextClick = () => {
     onNextResponse();
