@@ -65,15 +65,6 @@ const Repeat: React.FC<Props> = ({
     }
     setRepeatCount(0);
 
-    console.log(
-      "useEffect: minCount: ",
-      minCount,
-      " maxCount: ",
-      maxCount,
-      " repeatCount: ",
-      repeatCount
-    );
-
     setSidCursor(sid as string);
 
     setSelectedValue(null);
