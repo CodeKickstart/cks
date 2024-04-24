@@ -17,6 +17,7 @@ const Repeat: React.FC<Props> = ({
   onNextResponse,
   onBackResponse,
 }) => {
+  const DEFAULT_MAX_COUNT = 100;
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [backSidExist, setBackSidExist] = useState<boolean>(false);
@@ -52,7 +53,7 @@ const Repeat: React.FC<Props> = ({
     }
 
     if (max === undefined || max < 0 || max < minCount) {
-      setMaxCount(minCount);
+      setMaxCount(DEFAULT_MAX_COUNT);
     } else {
       setMaxCount(max);
     }
@@ -92,7 +93,7 @@ const Repeat: React.FC<Props> = ({
             <button
               id='repeat-button'
               className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-                repeatCount > maxCount || repeatCount < minCount
+                repeatCount >= maxCount || repeatCount < minCount
                   ? "opacity-50 cursor-not-allowed"
                   : ""
               }`}

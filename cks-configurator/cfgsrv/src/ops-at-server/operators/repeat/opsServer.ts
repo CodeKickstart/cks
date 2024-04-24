@@ -13,6 +13,7 @@ import {
   KEY_PROMPT,
   KEY_MAX,
   KEY_MIN,
+  KEY_OVERRIDE,
 } from "../../../shared/defs/constants";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../../../defs/types/typeStr";
@@ -24,12 +25,12 @@ export const opsServer: OpsServer = (jsonObj: JsonObjectType) => {
     optional: [
       KEY_ID,
       KEY_INFO,
-      KEY_COMMENTS,
       KEY_UID,
       KEY_PARENT_UID,
       KEY_PROMPT,
       KEY_MAX,
       KEY_MIN,
+      KEY_OVERRIDE,
     ],
   };
 

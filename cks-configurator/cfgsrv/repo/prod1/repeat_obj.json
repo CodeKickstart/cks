@@ -3,7 +3,8 @@
     {
       "id": "id_repeat",
       "kind": "repeat",
-      "prompt": "do continue?",
+      "prompt": "create vehicle info list",
+      "max": 2,
       "children": {
         "kind": "obj",
         "children": {
