@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-// import { KEY_VAL } from "../../../shared/defs/constants";
-// import { fnSetQueryAttribute } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
@@ -19,8 +17,6 @@ const Repeat: React.FC<Props> = ({
   onNextResponse,
   onBackResponse,
 }) => {
-  // const [selectedValue, setSelectedValue] = useState<boolean | null>(null);
-  // const inputRef = useRef<HTMLInputElement>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
   const [backSidExist, setBackSidExist] = useState<boolean>(false);
@@ -79,7 +75,7 @@ const Repeat: React.FC<Props> = ({
     return null; // Don't render anything if isVisible is false
   }
 
-  const handleOkClick = () => {
+  const handleRepeatClick = () => {
     setRepeatCount((c) => c + 1);
   };
 
@@ -92,27 +88,25 @@ const Repeat: React.FC<Props> = ({
           </span>
         </div>
         <div id='top-row' className='flex items-center justify-between w-full'>
-          <div className='flex items-center ml-2'>
+          <div className='flex mt-2'>
             <button
-              id='ok-button'
+              id='repeat-button'
               className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
                 repeatCount > maxCount || repeatCount < minCount
                   ? "opacity-50 cursor-not-allowed"
                   : ""
               }`}
-              onClick={handleOkClick}
-              disabled={repeatCount > maxCount || repeatCount < minCount}>
-              OK
+              onClick={handleRepeatClick}
+              >
+              Repeat
+            </button>
+            <button
+              id='clear-all-button'
+              className='bg-blue-500 text-white px-4 py-2 ml-2 rounded-md w-full'
+              onClick={handleClearAll}>
+              Clear All
             </button>
           </div>
-        </div>
-        <div className='w-full mt-2'>
-          <button
-            id='clear-all-button'
-            className='bg-blue-500 text-white px-4 py-2 rounded-md w-full'
-            onClick={handleClearAll}>
-            Clear All
-          </button>
         </div>
       </div>
       <div className='flex-grow' />
@@ -124,8 +118,7 @@ const Repeat: React.FC<Props> = ({
               ? "opacity-50 cursor-not-allowed"
               : ""
           }`}
-          onClick={handleNextClick}
-          disabled={repeatCount > maxCount || repeatCount < minCount}>
+          onClick={handleNextClick}>
           {NEXT_BUTTON_LABEL}
         </button>
         <button
