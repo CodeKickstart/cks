@@ -96,6 +96,7 @@ const Repeat: React.FC<Props> = ({
                   ? "opacity-50 cursor-not-allowed"
                   : ""
               }`}
+              disabled={repeatCount > maxCount || repeatCount < minCount}
               onClick={handleRepeatClick}
               >
               Repeat
@@ -113,11 +114,7 @@ const Repeat: React.FC<Props> = ({
       <div className='flex flex-col justify-end'>
         <button
           id='next-button'
-          className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
-            repeatCount > maxCount || repeatCount < minCount
-              ? "opacity-50 cursor-not-allowed"
-              : ""
-          }`}
+          className={`bg-blue-500 text-white px-4 py-2 rounded-md `}
           onClick={handleNextClick}>
           {NEXT_BUTTON_LABEL}
         </button>
