@@ -9,6 +9,11 @@ export interface querySelectorType {
 }
 
 const valtioStore = proxy({
+  shaker_previous_key: null as string | null, 
+  shaker_current_key: null as string | null,
+  shaker_nextKeyMap: {} as { [key: string]: string  },
+  shaker_previousKeyMap: {} as { [key: string]: string },
+
   repoonses: {} as JsonObjectType,
   queryContext: {} as JsonObjectType,
   queryList: [] as Array<querySelectorType>,

@@ -17,8 +17,8 @@ import { fnGatherOrderSequences } from "../state-mgt/treeWorkers/orderList";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 import { fnDispatchOp } from "../utils/opsDispatcher";
 import { ZZZ_STATE_1 } from "../defs/constants/ComponentNames";
-import { treeShaker } from "../state-mgt/treeTraversal/treeShaker";
-
+// import { treeShaker } from "../state-mgt/treeTraversal/treeShaker";
+// 
 export const fnSetupForInterview = () => {
   function _fnLogArrayInfo(orderList: string[], startWith: string) {
     const seqList = orderList.filter((item) => item.startsWith(startWith));
@@ -30,23 +30,40 @@ export const fnSetupForInterview = () => {
   }
   console.log("***************** GatherOrderSequences");
 
-  const jsonData = {
-    a: {
-      b: {
-        c: {},
-        d: {},
-      },
-      e: {},
-    },
-    f: {},
-  };
+  // const jsonData = {
+  //   a: {
+  //     b: {
+  //       c: {},
+  //       d: {},
+  //     },
+  //     e: {},
+  //   },
+  //   f: {},
+  // };
 
-  const { fnTreeTraverser } = treeShaker();
-  const { error } = fnTreeTraverser(jsonData);
-  if (error) {
-    console.error(error);
-  }
+  // const { fnTreeTraverser } = treeShaker();
+  // const { error } = fnTreeTraverser(jsonData);
+  // if (error) {
+  //   console.error(error);
+  // }
 
+  // const { fnGetNextNode } = treeShaker(jsonData);
+  // console.log("fnGetNextNode", fnGetNextNode);
+
+  // // Get the root node
+  // const rootNode = fnGetRootNode(jsonData);
+  // if (rootNode !== null) {
+  //   console.log("Root node:", rootNode); // Output: Root node: a
+
+  //   // Get the next node
+  //   let currentNode: string | null = rootNode;
+  //   while (typeof currentNode === "string") {
+  //     console.log("Current node:", currentNode);
+  //     currentNode = fnGetNextNode(jsonData, currentNode);
+  //   }
+  // } else {
+  //   console.log("Root node not found");
+  // }
   const _fnPreProcessIterator = () => {
     for (const cursor of fnGetAllPreOrderCursors()) {
       console.log(cursor);
@@ -106,3 +123,4 @@ export const fnSetupForInterview = () => {
 function fnInitZZZState() {
   valtioStore.zzzState = ZZZ_STATE_1;
 }
+

@@ -1,36 +1,89 @@
 import { JsonObjectType } from "../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
+import { valtioStore } from "../../defs/types/ValtioTypes";
 
-export function treeShaker(): {
-  fnTreeTraverser: (
+export function treeShaker(
+  queryFragment:
+    | string
+    | number
+    | boolean
+    | { [key: string]: JsonObjectType }
+    | JsonObjectType[]
+    | object[]
+    | null
+    | undefined
+): {
+  // fnGetRootNode: (queryFragment: JsonObjectType) => string | null;
+  fnGetNextNode: (
     queryFragment: JsonObjectType,
-    indent?: number
-  ) => { error: Str };
-  fnGetRootNode: (queryFragment: JsonObjectType) => string;
+    currentKey: string
+  ) => string | null;
+  fnReset: () => void;
 } {
   interface ObjTemplate {
     [key: string]: JsonObjectType;
   }
 
-function fnGetRootNode(queryFragment: JsonObjectType): string {
-  if (typeof queryFragment === "object" && queryFragment !== null) {
-    const keys = Object.keys(queryFragment);
-    return keys.length > 0 ? keys[0] : "";
+  _fnTreeTraverser(queryFragment);
+
+  // function fnGetRootNode(queryFragment: JsonObjectType): string | null {
+  //   if (typeof queryFragment === "object" && queryFragment !== null) {
+  //     const keys = Object.keys(queryFragment);
+  //     return keys.length > 0 ? keys[0] : null;
+  //   }
+  //   return null;
+  // }
+
+  function fnGetNextNode(
+    queryFragment: JsonObjectType,
+    currentKey: string
+  ): string | null {
+    if (typeof queryFragment === "object" && queryFragment !== null) {
+      const keys = Object.keys(queryFragment);
+      const currentIndex = keys.indexOf(currentKey);
+      if (currentIndex !== -1 && currentIndex < keys.length - 1) {
+        return keys[currentIndex + 1];
+      }
+    }
+    return null;
   }
-  return "";
-}
 
+  function fnReset() {
+    valtioStore.shaker_previous_key = null;
+    valtioStore.shaker_current_key = null;
+    valtioStore.shaker_nextKeyMap = {};
+    valtioStore.shaker_previousKeyMap = {};
+  }
 
-  function fnTreeTraverser(
+  function _fnTreeTraverser(
     queryFragment: JsonObjectType,
     indent: number = 0
   ): { error: Str } {
     try {
+      const _fnRecordKey = (key: string) => {
+        console.log(`${"  ".repeat(indent)}${key}`);
+        valtioStore.shaker_current_key = key;
+
+        // only add non-null values to the map
+        if (
+          valtioStore.shaker_previous_key !== null &&
+          valtioStore.shaker_current_key !== null
+        ) {
+          valtioStore.shaker_nextKeyMap[valtioStore.shaker_previous_key] =
+            valtioStore.shaker_current_key;
+
+          valtioStore.shaker_previousKeyMap[valtioStore.shaker_previous_key] =
+            valtioStore.shaker_current_key;
+        }
+        valtioStore.shaker_previous_key = valtioStore.shaker_current_key;
+      };
+
       const queryObj = queryFragment as ObjTemplate;
       const keys = Object.keys(queryObj);
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
-        console.log(`${"  ".repeat(indent)}${key}`);
+
+        _fnRecordKey(key);
       }
 
       // Check if queryObj is not empty
@@ -39,7 +92,7 @@ function fnGetRootNode(queryFragment: JsonObjectType): string {
           if (Object.prototype.hasOwnProperty.call(queryFragment, k)) {
             const value = queryObj[k];
             if (typeof value === "object" && value !== null) {
-              const { error } = fnTreeTraverser(
+              const { error } = _fnTreeTraverser(
                 value as JsonObjectType,
                 indent + 1
               );
@@ -58,5 +111,5 @@ function fnGetRootNode(queryFragment: JsonObjectType): string {
     return { error: null };
   }
 
-  return { fnTreeTraverser, fnGetRootNode };
+  return { fnReset, fnGetNextNode };
 }
