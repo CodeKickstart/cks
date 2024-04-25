@@ -17,10 +17,9 @@ import { fnGatherOrderSequences } from "../state-mgt/treeWorkers/orderList";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 import { fnDispatchOp } from "../utils/opsDispatcher";
 import { ZZZ_STATE_1 } from "../defs/constants/ComponentNames";
+import { treeShaker } from "../state-mgt/treeTraversal/treeShaker";
 
 export const fnSetupForInterview = () => {
-  
-
   function _fnLogArrayInfo(orderList: string[], startWith: string) {
     const seqList = orderList.filter((item) => item.startsWith(startWith));
     console.log(`<<< fnSetupForInterview: orderList`, startWith);
@@ -30,6 +29,23 @@ export const fnSetupForInterview = () => {
     console.log(`>>> fnSetupForInterview: orderList`, startWith);
   }
   console.log("***************** GatherOrderSequences");
+
+  const jsonData = {
+    a: {
+      b: {
+        c: {},
+        d: {},
+      },
+      e: {},
+    },
+    f: {},
+  };
+
+  const { fnTreeTraverser } = treeShaker();
+  const { error } = fnTreeTraverser(jsonData);
+  if (error) {
+    console.error(error);
+  }
 
   const _fnPreProcessIterator = () => {
     for (const cursor of fnGetAllPreOrderCursors()) {

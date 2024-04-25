@@ -1,15 +1,25 @@
 import { JsonObjectType } from "../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 
-export function preorderTreeMgt(): {
+export function treeShaker(): {
   fnTreeTraverser: (
     queryFragment: JsonObjectType,
     indent?: number
   ) => { error: Str };
+  fnGetRootNode: (queryFragment: JsonObjectType) => string;
 } {
   interface ObjTemplate {
     [key: string]: JsonObjectType;
   }
+
+function fnGetRootNode(queryFragment: JsonObjectType): string {
+  if (typeof queryFragment === "object" && queryFragment !== null) {
+    const keys = Object.keys(queryFragment);
+    return keys.length > 0 ? keys[0] : "";
+  }
+  return "";
+}
+
 
   function fnTreeTraverser(
     queryFragment: JsonObjectType,
@@ -18,20 +28,25 @@ export function preorderTreeMgt(): {
     try {
       const queryObj = queryFragment as ObjTemplate;
       const keys = Object.keys(queryObj);
+      for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        console.log(`${"  ".repeat(indent)}${key}`);
+      }
 
-      // Print the current node
-      console.log(`${"  ".repeat(indent)}${keys[0]}`);
-
-      // Recursively traverse the child nodes
-      for (const key of keys) {
-        const value = queryObj[key];
-        if (typeof value === "object" && value !== null) {
-          const { error } = fnTreeTraverser(
-            value as JsonObjectType,
-            indent + 1
-          );
-          if (error) {
-            return { error };
+      // Check if queryObj is not empty
+      if (keys.length > 0) {
+        for (const k in queryObj) {
+          if (Object.prototype.hasOwnProperty.call(queryFragment, k)) {
+            const value = queryObj[k];
+            if (typeof value === "object" && value !== null) {
+              const { error } = fnTreeTraverser(
+                value as JsonObjectType,
+                indent + 1
+              );
+              if (error) {
+                return { error };
+              }
+            }
           }
         }
       }
@@ -43,5 +58,5 @@ export function preorderTreeMgt(): {
     return { error: null };
   }
 
-  return { fnTreeTraverser };
+  return { fnTreeTraverser, fnGetRootNode };
 }
