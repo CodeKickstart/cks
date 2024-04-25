@@ -17,10 +17,6 @@ export const fnBlockUnselectedChildren = (
     return { error: "Failed to retrieve children or answer from query object" };
   }
 
-  interface ObjTemplateChildren {
-    kind?: string;
-  }
-
   let valArray: number[] = [];
   if (typeof val === "number") {
     // pickone literal has to be processed as an array - hence the conversion
@@ -37,18 +33,16 @@ export const fnBlockUnselectedChildren = (
   const _fnBlockUnselectedChildren = (treeNode: object) => {
     const value = treeNode as object;
     if (value !== null && value !== undefined && typeof value === "object") {
-      // interface ObjTemplateValue {
-      //   blocked?: boolean;
-      // }
-      // const tNode = treeNode as ObjTemplateValue;
-      // tNode[KEY_BLOCKED] = true;
-
       const { error } = fnBlockSubTree(treeNode as object);
       return { error };
     } else {
       return { error: "No tree node to be block" };
     }
   };
+
+  interface ObjTemplateChildren {
+    kind?: string;
+  }
 
   const { kind } = children as ObjTemplateChildren;
   if (kind === undefined) {
