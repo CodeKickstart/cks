@@ -2,7 +2,7 @@
   "__CONTENT": [
     {
       "id": "id_pickone_fed_by_grandchildren",
-      "kind": "obj",
+      "kind": "pickone",
       "children": {
         "bool3": {
           "id": "id_bool1",

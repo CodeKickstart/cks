@@ -5,7 +5,10 @@ import {
   fnSetQueryAttribute,
 } from "../state-mgt/dataAccess/loLevelAccess";
 import { JsonObjectType } from "../../../shared/defs/types";
-import { fnBlockUnselectedChildren } from "../utils/descendantBlocker";
+import {
+  fnBlockUnselectedChildren,
+  fnFindUnblockedChildren,
+} from "../utils/descendantBlocker";
 import { fnConverListDefvalToVal } from "../utils/defval2val";
 import { valtioStore } from "../defs/types/ValtioTypes";
 import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
@@ -77,6 +80,10 @@ const PickMany: React.FC<Props> = ({
 
     setBackSidExist(!fnIsItTheFirstQuestion());
 
+    const { unblockedChildrenIndices } = fnFindUnblockedChildren(queryObject);
+
+    console.log(`Unblocked children indices: ${unblockedChildrenIndices}`);
+
     const { error, value } = fnGetQueryAttribute(sid, KEY_VAL);
     if (!error) {
       if (
@@ -99,12 +106,16 @@ const PickMany: React.FC<Props> = ({
     if (val.length > 0) {
       setAnswer(val);
     }
-  }, [queryObject, listOfDescendantNames]);
+  }, []);
 
   const handleCheckboxChange = (index: number) => {
     const { error, value: val } = fnGetQueryAttribute(sid, KEY_VAL);
     if (error) {
       console.error(`Error getting query attribute: ${error}`);
+      return;
+    }
+    if (val === null || val === undefined) {
+      console.error(`Failed to retrieve query attribute`);
       return;
     }
 
