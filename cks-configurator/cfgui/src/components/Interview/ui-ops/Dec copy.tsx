@@ -16,14 +16,13 @@ const NEXT_BUTTON_LABEL = "Next";
 
 const MAX = 10000000.0;
 const MIN = -10000000.0;
-const STEP = 0.01;
 
-const Dec: React.FC<Props> = ({
+const CopyDec: React.FC<Props> = ({
   queryObject,
   onNextResponse,
   onBackResponse,
 }) => {
-  const [answer, setAnswer] = useState<number | null>(null);
+  const [answer, setAnswer] = useState<string>("");
   const [sidCursor, setSidCursor] = useState<string>("");
   const [min, setMin] = useState<number | undefined>(undefined);
   const [max, setMax] = useState<number | undefined>(undefined);
@@ -35,25 +34,25 @@ const Dec: React.FC<Props> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const fnIsValidAnswer = useCallback(
-    (value: number | null): boolean => {
+    (value: string): boolean => {
+      const floatValue = parseFloat(value);
       return (
-        value !== null &&
-        !isNaN(value) &&
-        value >= (min ?? MIN) &&
-        value <= (max || MAX)
+        !isNaN(floatValue) &&
+        floatValue >= (min ?? MIN) &&
+        floatValue <= (max ?? MAX)
       );
     },
     [min, max]
   );
 
   const handleNextResponse = useCallback(() => {
-    if (answer !== null) {
+    if (answer !== "") {
       fnSetQueryAttribute(sidCursor, KEY_VAL, answer);
-      setAnswer(null);
+      setAnswer("");
       onNextResponse();
       setIsVisible(false);
     }
-  }, [answer, onNextResponse, sidCursor, setIsVisible]);
+  }, [answer, onNextResponse, sidCursor]);
 
   useEffect(() => {
     interface ObjTemplate {
@@ -70,7 +69,7 @@ const Dec: React.FC<Props> = ({
     setSidCursor(sid as string);
 
     if (defval !== undefined && typeof defval === "number") {
-      setAnswer(defval as number);
+      setAnswer(defval.toFixed(2));
     }
     setBackSidExist(!fnIsItTheFirstQuestion());
   }, [queryObject]);
@@ -93,24 +92,36 @@ const Dec: React.FC<Props> = ({
 
   const onChangeHandler = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = parseFloat(e.target.value);
+      const { value } = e.target;
       setAnswer(value);
+      if (
+        parseFloat(value) < (min ?? MIN) ||
+        parseFloat(value) > (max ?? MAX) ||
+        !/^[+-]?\d+(\.\d+)?$/.test(value)
+      ) {
+        setErrorMessage(
+          `Value must be between ${min ?? MIN} and ${max ?? MAX}`
+        );
+        setInputColor("gray");
+      } else {
+        setErrorMessage("");
+        setInputColor("");
+      }
     },
-    []
+    [min, max]
   );
 
   if (!isVisible) {
-    return null;
+    return null; // Don't render anything if isVisible is false
   }
 
   return (
     <div className='flex items-start'>
       <input
         ref={inputRef}
-        type='number'
-        step={STEP}
+        type='float'
         className={`form-input mr-2 ${inputColor}`}
-        value={answer !== null ? answer.toString() : ""}
+        value={answer}
         onChange={onChangeHandler}
       />
       <div className='flex-grow text-red-500'>{errorMessage}</div>
@@ -131,7 +142,8 @@ const Dec: React.FC<Props> = ({
           }`}
           disabled={!backSidExist}
           onClick={() => {
-            onBackResponse();
+            valtioStore.earlyExit = true;
+            window.location.href = "/";
           }}>
           Back
         </button>
@@ -139,8 +151,7 @@ const Dec: React.FC<Props> = ({
           id='reset-button'
           className='bg-blue-500 text-white px-4 py-2 rounded-md mt-2'
           onClick={() => {
-            valtioStore.earlyExit = true;
-            window.location.href = "/";
+            onBackResponse();
           }}>
           Reset
         </button>
@@ -149,4 +160,4 @@ const Dec: React.FC<Props> = ({
   );
 };
 
-export default Dec;
+export default CopyDec;
