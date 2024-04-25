@@ -9,9 +9,10 @@
       "children": {
         "choice1": {
           "one": {
-            "kind": "dec",
+            "kind": "int",
             "min": -1.12,
-            "prompt": "1-dec"
+            "defval": 3,
+            "prompt": "1-int"
           }
         },
         "choice2": {
