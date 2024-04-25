@@ -57,22 +57,28 @@ const Dec: React.FC<Props> = ({
 
   useEffect(() => {
     interface ObjTemplate {
+      val?: number;
       defval?: number;
       sid?: string;
       min?: number;
       max?: number;
     }
 
-    const { defval, sid, min, max } = (queryObject || {}) as ObjTemplate;
+    const { val, defval, sid, min, max } = (queryObject || {}) as ObjTemplate;
     setMin(min);
     setMax(max);
 
     setSidCursor(sid as string);
 
-    if (defval !== undefined && typeof defval === "number") {
-      setAnswer(defval as number);
-    }
     setBackSidExist(!fnIsItTheFirstQuestion());
+
+    if (val !== undefined && typeof val === "number") {
+      setAnswer(val as number);
+    } else {
+      if (defval !== undefined && typeof defval === "number") {
+        setAnswer(defval as number);
+      }
+    }
   }, [queryObject]);
 
   useEffect(() => {
