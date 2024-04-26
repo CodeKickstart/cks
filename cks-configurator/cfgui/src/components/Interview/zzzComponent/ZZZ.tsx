@@ -14,7 +14,6 @@ import { fnUpload } from "./setup3_upload";
 import { fnGetResponseContext } from "../misc/responseContext";
 import AnswerContext from "../ui-common/ResponseContext";
 import { fnRunPostOrderProcessing } from "./setup2_responseContext";
-import { fnIsItTheFirstQuestion } from "../state-mgt/cursor/cursor";
 
 interface Props {
   queryObject: JsonObjectType;
@@ -23,15 +22,10 @@ interface Props {
 }
 
 const OK_BUTTON_LABEL = "OK";
-export const ZZZ: React.FC<Props> = ({
-  queryObject,
-  onNextResponse,
-  onBackResponse,
-}) => {
+export const ZZZ: React.FC<Props> = ({ queryObject, onNextResponse }) => {
   const [answer, setAnswer] = useState<boolean | null>(null);
   const [sidCursor, setSidCursor] = useState<string>("");
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const [backSidExist, setBackSidExist] = useState<boolean>(false);
 
   const fnIsValidAnswer = (answer: boolean | null) => {
     return answer !== null;
@@ -55,7 +49,6 @@ export const ZZZ: React.FC<Props> = ({
     const { defval, sid } = (queryObject || {}) as ObjTemplate;
 
     setSidCursor(sid as string);
-    setBackSidExist(!fnIsItTheFirstQuestion());
     if (defval !== undefined && typeof defval === "boolean") {
       setAnswer(defval as boolean);
     }
@@ -115,19 +108,7 @@ export const ZZZ: React.FC<Props> = ({
           disabled={!fnIsValidAnswer(answer)}>
           {OK_BUTTON_LABEL}
         </button>
-        {valtioStore.zzzState === ZZZ_STATE_1 && (
-          <button
-            id='back-button'
-            className={`bg-blue-500 text-white px-4 py-2 rounded-md ml-2 ${
-              !backSidExist ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            disabled={!backSidExist}
-            onClick={() => {
-              onBackResponse();
-            }}>
-            Back
-          </button>
-        )}
+
         <button
           className='bg-blue-500 text-white px-4 py-2 rounded-md ml-2'
           onClick={() => {

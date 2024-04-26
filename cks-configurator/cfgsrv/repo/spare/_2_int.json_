@@ -1,0 +1,15 @@
+{
+  "__CONTENT": [
+    {
+      "id": "int1",
+      "kind": "int",
+      "prompt": "Enter a decimal number"
+    },
+    {
+      "id": "int2",
+      "kind": "int",
+      "prompt": "Enter a decimal number",
+      "defval": 22
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "__CONTENT": [
+    {
+      "id": "vehicle",
+      "kind": "pickmany",
+      "defval": ["usage"],
+      "children": {
+        "powered_by": {
+          "kind": "pickone",
+          "defval": "gas",
+          "children": {
+            "gas": {
+              "kind": "obj",
+              "children": {
+                "price": {
+                  "prompt": "vehicle dollar price",
+                  "kind": "dec",
+                  "max": 25000.0,
+                  "defval": 20000.0
+                }
+              }
+            },
+            "ev": {
+              "kind": "obj",
+              "children": {
+                "range": {
+                  "prompt": "vehicle range in miles",
+                  "kind": "int",
+                  "min": 50,
+                  "max": 400,
+                  "defval": 200
+                },
+                "charging_time": {
+                  "prompt": "vehicle charging time in minutes",
+                  "kind": "dec",
+                  "min": 49.99,
+                  "max": 400.01,
+                  "defval": 150.0
+                }
+              }
+            }
+          }
+        },
+        "usage": {
+          "kind": "pickone",
+          "defval": "commute",
+          "children": {
+            "commute": {
+              "kind": "obj",
+              "children": {
+                "passengers": {
+                  "prompt": "number of passengers",
+                  "kind": "int",
+                  "min": 1,
+                  "max": 10
+                },
+                "luxury-options": {
+                  "kind": "pickmany",
+                  "prompt": "select the luxury options: ",
+                  "children": {
+                    "kind": "literal",
+                    "override": [
+                      "leather-interior",
+                      "bullet-proof-windows",
+                      "sunroof",
+                      "alloy-wheels"
+                    ]
+                  }
+                }
+              }
+            },
+            "delivery": {
+              "prompt": "delivery vehicle",
+              "kind": "obj",
+              "children": {
+                "load": {
+                  "kind": "int",
+                  "prompt": "load capacity in tons",
+                  "min": 6,
+                  "max": 10
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
