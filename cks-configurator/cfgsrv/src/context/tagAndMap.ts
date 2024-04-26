@@ -27,7 +27,6 @@ export function fnTag(rootObj: JsonObjectType) {
 
       uidCount++;
 
-      // tag with puid
       if (
         parentObj !== null &&
         parentObj[KEY_UID] !== null &&
@@ -95,6 +94,12 @@ export function fnTag(rootObj: JsonObjectType) {
     }
     if (keys.includes(KEY_SID)) {
       currentObj[KEY_SID] = `${currentBaseId}.${currentObj[KEY_SID]}`;
+    }
+
+    if (keys.includes(KEY_PARENT_UID)) {
+      currentObj[
+        KEY_PARENT_UID
+      ] = `${currentBaseId}.${currentObj[KEY_PARENT_UID]}`;
     }
 
     if (parentObj === null) {

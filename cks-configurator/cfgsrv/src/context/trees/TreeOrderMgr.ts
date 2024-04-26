@@ -2,6 +2,7 @@ import {
   ASIS_post,
   ASIS_pre,
   KEY_KIND,
+  KEY_PARENT_UID,
   KEY_SID,
   OP_BOOL,
   OP_DEC,
@@ -102,6 +103,13 @@ export function TreeOrderMgr() {
     if (keys.includes(KEY_SID)) {
       for (const [k, v] of Object.entries(obj)) {
         if (k === KEY_SID && typeof v === "string") {
+          obj[k] = `${collectionName}.${v}`;
+        }
+      }
+    }
+    if (keys.includes(KEY_PARENT_UID)) {
+      for (const [k, v] of Object.entries(obj)) {
+        if (k === KEY_PARENT_UID && typeof v === "string") {
           obj[k] = `${collectionName}.${v}`;
         }
       }
