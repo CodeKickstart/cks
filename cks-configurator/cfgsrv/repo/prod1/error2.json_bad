@@ -1,0 +1,69 @@
+{
+  "__CONTENT": [
+    {
+      "id": "vehicle",
+      "kind": "pickmany",
+      "children": {
+        "powered_by": {
+          "kind": "pickmany",
+          "defval": [],
+          "children": {
+            "gas": {
+              "kind": "obj",
+              "children": {
+                "price": {
+                  "prompt": "vehicle dollar price",
+                  "kind": "dec",
+                  "max": 25000.0,
+                  "defval": 20000.0
+                }
+              }
+            }
+          }
+        },
+        "usage": {
+          "kind": "pickone",
+          "defval": "commute",
+          "children": {
+            "commute": {
+              "kind": "obj",
+              "children": {
+                "passengers": {
+                  "prompt": "number of passengers",
+                  "kind": "int",
+                  "min": 1,
+                  "max": 10
+                },
+                "luxury-options": {
+                  "kind": "pickmany",
+                  "prompt": "select the luxury options: ",
+                  "children": {
+                    "kind": "literal",
+                    "override": [
+                      "leather-interior",
+                      "bullet-proof-windows",
+                      "sunroof",
+                      "alloy-wheels"
+                    ]
+                  }
+                }
+              }
+            },
+            "delivery": {
+              "prompt": "delivery vehicle",
+              "kind": "obj",
+              "children": {
+                "load": {
+                  "kind": "int",
+                  "prompt": "load capacity in tons",
+                  "min": 6,
+                  "max": 10
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

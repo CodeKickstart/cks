@@ -2,7 +2,7 @@ const InterviewEnd = () => {
   return (
     <>
       <h3 className='text-lg font-semibold mb-2'>
-        Successfully collected your repoonses
+        Successfully collected your responses
       </h3>
       <div className='text-lg mt-2'> CodeKickstart Zipped Package ...</div>
       <div className='italic text-lg mt-4 mb-4'>

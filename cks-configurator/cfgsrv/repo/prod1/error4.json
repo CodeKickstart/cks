@@ -1,0 +1,51 @@
+{
+  "__CONTENT": [
+    {
+      "id": "vehicle",
+      "kind": "pickmany",
+      "children": {
+        "powered_by": {
+          "kind": "pickone",
+          "defval": [],
+          "children": {
+            "gas": {
+              "kind": "obj",
+              "children": {
+                "price": {
+                  "prompt": "vehicle dollar price",
+                  "kind": "dec",
+                  "max": 25000,
+                  "defval": 20000
+                }
+              }
+            }
+          }
+        },
+        "usage": {
+          "kind": "pickone",
+          "defval": "commute",
+          "children": {
+            "commute": {
+              "kind": "obj",
+              "children": {
+                "luxury-options": {
+                  "kind": "pickmany",
+                  "prompt": "select the luxury options: ",
+                  "children": {
+                    "kind": "literal",
+                    "override": [
+                      "leather-interior",
+                      "bullet-proof-windows",
+                      "sunroof",
+                      "alloy-wheels"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

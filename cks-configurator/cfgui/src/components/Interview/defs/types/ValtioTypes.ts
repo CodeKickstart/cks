@@ -14,7 +14,7 @@ const valtioStore = proxy({
   dyntree_nextKeyMap: {} as { [key: string]: string },
   dyntree_prevKeyMap: {} as { [key: string]: string },
 
-  repoonses: {} as JsonObjectType,
+  responses: {} as JsonObjectType,
   queryContext: {} as JsonObjectType,
   queryList: [] as Array<querySelectorType>,
   currentQueryKey: { contextName: null, id: null } as querySelectorType,

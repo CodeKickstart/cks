@@ -1,0 +1,28 @@
+{
+  "__CONTENT": [
+    {
+      "id": "vehicle",
+      "kind": "pickmany",
+      "defval": ["usage"],
+      "children": {
+        "powered_by": {
+          "kind": "pickone",
+          "defval": "gas",
+          "children": {
+            "gas": {
+              "kind": "obj",
+              "children": {
+                "price": {
+                  "prompt": "vehicle dollar price",
+                  "kind": "dec",
+                  "max": 25000.0,
+                  "defval": 20000.0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

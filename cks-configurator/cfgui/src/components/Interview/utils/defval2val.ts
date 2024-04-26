@@ -33,9 +33,9 @@ export const fnConverListDefvalToVal = (
 export const fnConverSingleDefvalToVal = (
   listOfDescendantNames: string[],
   defVal: string | number | null | undefined
-): { val: number } => {
+): { val: number | null } => {
   if (defVal === undefined || defVal === null) {
-    return { val: -1 };
+    return { val: null };
   }
 
   if (typeof defVal === "number") {
@@ -48,7 +48,7 @@ export const fnConverSingleDefvalToVal = (
         return { val: i };
       }
     }
-    return { val: -1 };
+    return { val: null };
   }
-  return { val: -1 };
+  return { val: null };
 };
