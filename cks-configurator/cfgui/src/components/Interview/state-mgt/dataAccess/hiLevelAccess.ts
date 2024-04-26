@@ -100,3 +100,33 @@ export const fnBlockSubTree = (treenode: object) => {
   }
   return { error: null };
 };
+
+
+export const fnGetQueryAttrOfChildren = (
+  queryObject: JsonObjectType,
+  attribute: string
+): { error: Str; value: Array<{ [key: string]: JsonObjectType }> | null } => {
+  if (!queryObject) {
+    const error = `fnGetQueryChildrenAttributeList: queryObject is null`;
+    return { error, value: null };
+  }
+
+  const attrValsOfChildren: JsonObjectType[] =
+    queryObject[attribute as keyof JsonObjectType];
+  for (const [key, value] of Object.entries(fnGetQueryObject)) {
+    const childObject = value as JsonObjectType;
+    const rawValue: JsonObjectType =
+      queryObject[attribute as keyof JsonObjectType];
+
+    const keyValPair = { key, value: rawValue };
+
+    attrValsOfChildren.push(keyValPair);
+
+    console.log(`Key: ${key}, Value: ${JSON.stringify(childObject)}`);
+  }
+
+  return {
+    error: null,
+    value: attrValsOfChildren as Array<{ [key: string]: JsonObjectType }>,
+  };
+};

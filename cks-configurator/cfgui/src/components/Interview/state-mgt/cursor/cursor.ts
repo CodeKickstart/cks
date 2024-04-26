@@ -2,10 +2,9 @@ import { KEY_BLOCKED } from "../../../../shared/defs/constants";
 import { JsonObjectType } from "../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 import { valtioStore } from "../../defs/types/ValtioTypes";
-import {
-  fnGetQueryAttrOfChildren,
-  fnGetQueryObject,
-} from "../dataAccess/loLevelAccess";
+import { fnGetQueryAttrOfChildren } from "../dataAccess/hiLevelAccess";
+
+import { fnGetQueryObject } from "../dataAccess/loLevelAccess";
 
 // returns cursor - null if no more questions
 export const fnCursorMove = (): { cursor: string | null } => {
@@ -65,14 +64,17 @@ export function* fnGetAllPostOrderCursors(): Generator<Str> {
     // if (error) {
     //   return { error };
     // }
-    // const { error: errorChildrenBlocks, attrValsOfChildren } =
-    //   fnGetQueryAttrOfChildren(queryObject, KEY_BLOCKED);
+    // const { error: errorChildrenBlocks, value } = fnGetQueryAttrOfChildren(
+    //   queryObject,
+    //   KEY_BLOCKED
+    // );
     // if (errorChildrenBlocks) {
     //   return { error: errorChildrenBlocks };
     // }
-    // for (const attrVals of attrValsOfChildren as Array<
-    //   [string, JsonObjectType]
-    // >) {
+    // if (!value) {
+    //   return { error: "No children to be blocked" };
+    // }
+    // for (const attrVals of value) {
     //   console.log(`Attr vals of children: ${attrVals}`);
     // }
 
