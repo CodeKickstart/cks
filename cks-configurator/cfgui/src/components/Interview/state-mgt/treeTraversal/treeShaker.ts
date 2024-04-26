@@ -49,10 +49,10 @@ export function treeShaker(
   }
 
   function fnReset() {
-    valtioStore.shaker_previous_key = null;
-    valtioStore.shaker_current_key = null;
-    valtioStore.shaker_nextKeyMap = {};
-    valtioStore.shaker_previousKeyMap = {};
+    valtioStore.dyntree_prev_key = null;
+    valtioStore.dyntree_current_key = null;
+    valtioStore.dyntree_nextKeyMap = {};
+    valtioStore.dyntree_prevKeyMap = {};
   }
 
   function _fnTreeTraverser(
@@ -62,20 +62,20 @@ export function treeShaker(
     try {
       const _fnRecordKey = (key: string) => {
         console.log(`${"  ".repeat(indent)}${key}`);
-        valtioStore.shaker_current_key = key;
+        valtioStore.dyntree_current_key = key;
 
         // only add non-null values to the map
         if (
-          valtioStore.shaker_previous_key !== null &&
-          valtioStore.shaker_current_key !== null
+          valtioStore.dyntree_prev_key !== null &&
+          valtioStore.dyntree_current_key !== null
         ) {
-          valtioStore.shaker_nextKeyMap[valtioStore.shaker_previous_key] =
-            valtioStore.shaker_current_key;
+          valtioStore.dyntree_nextKeyMap[valtioStore.dyntree_prev_key] =
+            valtioStore.dyntree_current_key;
 
-          valtioStore.shaker_previousKeyMap[valtioStore.shaker_previous_key] =
-            valtioStore.shaker_current_key;
+          valtioStore.dyntree_prevKeyMap[valtioStore.dyntree_prev_key] =
+            valtioStore.dyntree_current_key;
         }
-        valtioStore.shaker_previous_key = valtioStore.shaker_current_key;
+        valtioStore.dyntree_prev_key = valtioStore.dyntree_current_key;
       };
 
       const queryObj = queryFragment as ObjTemplate;

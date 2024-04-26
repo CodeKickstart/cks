@@ -9,10 +9,10 @@ export interface querySelectorType {
 }
 
 const valtioStore = proxy({
-  shaker_previous_key: null as string | null, 
-  shaker_current_key: null as string | null,
-  shaker_nextKeyMap: {} as { [key: string]: string  },
-  shaker_previousKeyMap: {} as { [key: string]: string },
+  dyntree_prev_key: null as string | null,
+  dyntree_current_key: null as string | null,
+  dyntree_nextKeyMap: {} as { [key: string]: string },
+  dyntree_prevKeyMap: {} as { [key: string]: string },
 
   repoonses: {} as JsonObjectType,
   queryContext: {} as JsonObjectType,
