@@ -7,7 +7,7 @@ import {
 import { JsonObjectType } from "../../../shared/defs/types";
 import {
   fnBlockUnselectedChildren,
-  // fnFindUnblockedChildren,
+  // _fnFindAllChildrenIndices,
 } from "../utils/descendantBlocker";
 import { fnConverListDefvalToVal } from "../utils/defval2val";
 import { valtioStore } from "../defs/types/ValtioTypes";
@@ -80,7 +80,7 @@ const PickMany: React.FC<Props> = ({
 
     setBackSidExist(!fnIsItTheFirstQuestion());
 
-    // const { unblockedChildrenIndices } = fnFindUnblockedChildren(queryObject);
+    // const { unblockedChildrenIndices } = _fnFindAllChildrenIndices(queryObject);
 
     // console.log(`Unblocked children indices: ${unblockedChildrenIndices}`);
 

@@ -3,10 +3,10 @@ import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../defs/types/Str";
 import { fnBlockSubTree } from "../state-mgt/dataAccess/hiLevelAccess";
 
-export function fnFindUnblockedChildren(queryObject: JsonObjectType): {
+function _fnFindAllChildrenIndices(queryObject: JsonObjectType): {
   error: string | null;
   children: object;
-  unblockedChildrenIndices: number[];
+  childrenIndices: number[];
 } {
   interface ObjTemplate {
     children?: object;
@@ -17,7 +17,7 @@ export function fnFindUnblockedChildren(queryObject: JsonObjectType): {
     return {
       error: "Failed to retrieve children or answer from query object",
       children: {},
-      unblockedChildrenIndices: [],
+      childrenIndices: [],
     };
   }
 
@@ -34,20 +34,25 @@ export function fnFindUnblockedChildren(queryObject: JsonObjectType): {
     return {
       error: "Invalid value type for unblockedChildrenIndices",
       children: {},
-      unblockedChildrenIndices: [],
+      childrenIndices: [],
     };
   }
 
-  return { error: null, children, unblockedChildrenIndices };
+  return { error: null, children, childrenIndices: unblockedChildrenIndices };
 }
+
+
 
 export const fnBlockUnselectedChildren = (
   queryObject: JsonObjectType
 ): { error: Str } => {
   console.log(`Query object: ${queryObject}`);
 
-  const { error, children, unblockedChildrenIndices } =
-    fnFindUnblockedChildren(queryObject);
+  const {
+    error,
+    children,
+    childrenIndices: unblockedChildrenIndices,
+  } = _fnFindAllChildrenIndices(queryObject);
   if (error) {
     return { error };
   }
