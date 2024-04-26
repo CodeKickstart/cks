@@ -2,6 +2,7 @@
 import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../defs/types/Str";
 import { fnBlockSubTree } from "../state-mgt/dataAccess/hiLevelAccess";
+// import { fnGetQueryAttrOfChildren } from "../state-mgt/dataAccess/loLevelAccess";
 
 function _fnFindAllChildrenIndices(queryObject: JsonObjectType): {
   error: string | null;
@@ -56,6 +57,12 @@ export const fnBlockUnselectedChildren = (
   if (error) {
     return { error };
   }
+
+  // const { error: errorChildrenBlocks, attrValsOfChildren } =
+  //   fnGetQueryAttrOfChildren(queryObject, KEY_BLOCKED);
+  // if (errorChildrenBlocks) {
+  //   return { error: errorChildrenBlocks };
+  // }
 
   const _fnBlockUnselectedChildren = (treeNode: object) => {
     const value = treeNode as object;

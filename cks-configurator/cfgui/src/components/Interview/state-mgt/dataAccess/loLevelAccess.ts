@@ -86,6 +86,34 @@ export const fnGetQueryAttribute = (
   return { error: null, value: rawValue };
 };
 
+export const fnGetQueryAttrOfChildren = (
+  queryObject: JsonObjectType,
+  attribute: string
+): { error: Str; value: JsonObjectType[] | null } => {
+
+  if (!queryObject) {
+    const error = `fnGetQueryChildrenAttributeList: queryObject is null`;
+    logError(error); // Log the error
+    return { error, value: null };
+  }
+
+  const attrValsOfChildren: JsonObjectType[] =
+    queryObject[attribute as keyof JsonObjectType];
+  for (const [key, value] of Object.entries(fnGetQueryObject)) {
+    const childObject = value as JsonObjectType;
+    const rawValue: JsonObjectType =
+      queryObject[attribute as keyof JsonObjectType];
+
+    const keyValPair = { key, value: rawValue };
+
+    attrValsOfChildren.push(keyValPair);
+
+    console.log(`Key: ${key}, Value: ${JSON.stringify(childObject)}`);
+  }
+
+  return { error: null, value: attrValsOfChildren as JsonObjectType[] };
+};
+
 export const fnGetQueryAttributeString = (
   sidCursor: string,
   attribute: string
@@ -118,6 +146,29 @@ export const _fnGetQueryAttributeNumber = (
     return { error, value: null };
   }
   return { error: null, value };
+};
+
+export const fnGetQueryAttributeNumberArray = (
+  sidCursor: string,
+  attribute: string
+): { error: string | null; value: number[] | null } => {
+  const { error, value } = fnGetQueryAttribute(sidCursor, attribute);
+  if (error) {
+    const errorMessage = `fnGetQueryAttributeNumberArray: Error getting attribute '${attribute}' for sidCursor '${sidCursor}': ${error}`;
+    logError(errorMessage); // Log the error
+    return { error: errorMessage, value: null };
+  }
+
+  if (
+    !Array.isArray(value) ||
+    !value.every((item) => typeof item === "number")
+  ) {
+    const errorMessage = `fnGetQueryAttributeNumberArray: Attribute '${attribute}' for sidCursor '${sidCursor}' is not an array of numbers or is undefined: ${value}`;
+    logError(errorMessage); // Log the error
+    return { error: errorMessage, value: null };
+  }
+
+  return { error: null, value: value as number[] };
 };
 
 export const fnGetQueryAttributeInteger = (

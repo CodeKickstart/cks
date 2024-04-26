@@ -1,5 +1,11 @@
+import { KEY_BLOCKED } from "../../../../shared/defs/constants";
+import { JsonObjectType } from "../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
 import { valtioStore } from "../../defs/types/ValtioTypes";
+import {
+  fnGetQueryAttrOfChildren,
+  fnGetQueryObject,
+} from "../dataAccess/loLevelAccess";
 
 // returns cursor - null if no more questions
 export const fnCursorMove = (): { cursor: string | null } => {
@@ -53,6 +59,23 @@ export const fnGetCurrentCursor = (): Str => {
 export function* fnGetAllPostOrderCursors(): Generator<Str> {
   const postOrderList = valtioStore.postOrderList;
   for (const cursor of postOrderList) {
+    const sid = cursor.split("post.")[1];
+    console.log(`sid: ${sid}`);
+    // const { error, queryObject } = fnGetQueryObject(sid);
+    // if (error) {
+    //   return { error };
+    // }
+    // const { error: errorChildrenBlocks, attrValsOfChildren } =
+    //   fnGetQueryAttrOfChildren(queryObject, KEY_BLOCKED);
+    // if (errorChildrenBlocks) {
+    //   return { error: errorChildrenBlocks };
+    // }
+    // for (const attrVals of attrValsOfChildren as Array<
+    //   [string, JsonObjectType]
+    // >) {
+    //   console.log(`Attr vals of children: ${attrVals}`);
+    // }
+
     yield cursor;
   }
 }
@@ -75,5 +98,3 @@ export const fnIsItTheLastQuestion = (): boolean => {
 export const fnIsItTheFirstQuestion = (): boolean => {
   return valtioStore.currentIndex === 0;
 };
-
-
