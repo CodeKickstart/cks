@@ -1,10 +1,8 @@
-import { KEY_BLOCKED } from "../../../../shared/defs/constants";
-import { JsonObjectType } from "../../../../shared/defs/types";
+
 import { Str } from "../../defs/types/Str";
 import { valtioStore } from "../../defs/types/ValtioTypes";
-import { fnGetQueryAttrOfChildren } from "../dataAccess/hiLevelAccess";
+import { fnValidPostOrderSids } from "../dataAccess/hiLevelAccess";
 
-import { fnGetQueryObject } from "../dataAccess/loLevelAccess";
 
 // returns cursor - null if no more questions
 export const fnCursorMove = (): { cursor: string | null } => {
@@ -55,29 +53,18 @@ export const fnGetCurrentCursor = (): Str => {
   return valtioStore.preOrderList[valtioStore.currentIndex];
 };
 
-export function* fnGetAllPostOrderCursors(): Generator<Str> {
-  const postOrderList = valtioStore.postOrderList;
-  for (const cursor of postOrderList) {
-    const sid = cursor.split("post.")[1];
-    console.log(`sid: ${sid}`);
-    // const { error, queryObject } = fnGetQueryObject(sid);
-    // if (error) {
-    //   return { error };
-    // }
-    // const { error: errorChildrenBlocks, value } = fnGetQueryAttrOfChildren(
-    //   queryObject,
-    //   KEY_BLOCKED
-    // );
-    // if (errorChildrenBlocks) {
-    //   return { error: errorChildrenBlocks };
-    // }
-    // if (!value) {
-    //   return { error: "No children to be blocked" };
-    // }
-    // for (const attrVals of value) {
-    //   console.log(`Attr vals of children: ${attrVals}`);
-    // }
 
+export function* fnGetAllPostOrderCursors(): Generator<Str> {
+  // fnValidPostOrderSids();
+  const { error,  validSids } = fnValidPostOrderSids()
+  if (error) {
+    console.log(error);
+    return { error };
+  }
+
+
+  for (const sid of validSids) {
+    const cursor = `post.${sid}`;
     yield cursor;
   }
 }

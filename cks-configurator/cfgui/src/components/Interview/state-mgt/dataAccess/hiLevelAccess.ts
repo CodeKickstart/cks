@@ -1,11 +1,12 @@
 import { KEY_BLOCKED, KEY_OVERRIDE } from "../../../../shared/defs/constants";
 import { JsonObjectType } from "../../../../shared/defs/types";
 import { Str } from "../../defs/types/Str";
+import { valtioStore } from "../../defs/types/ValtioTypes";
 
 import { fnGetAllPreOrderCursors, fnGetCurrentCursor } from "../cursor/cursor";
 import { fnPostfixTraversal } from "../treeTraversal/postTraversal";
 import { fnBlock } from "../treeWorkers/blocker";
-import { fnGetQueryAttribute, fnGetQueryObject } from "./loLevelAccess";
+import { fnGetQueryAttribute, fnGetQueryAttributeBoolean, fnGetQueryObject } from "./loLevelAccess";
 
 export function fnSplitCursor(str: string): {
   phase: string;
@@ -101,7 +102,6 @@ export const fnBlockSubTree = (treenode: object) => {
   return { error: null };
 };
 
-
 export const fnGetQueryAttrOfChildren = (
   queryObject: JsonObjectType,
   attribute: string
@@ -129,4 +129,26 @@ export const fnGetQueryAttrOfChildren = (
     error: null,
     value: attrValsOfChildren as Array<{ [key: string]: JsonObjectType }>,
   };
+};
+
+export const fnValidPostOrderSids = (): {error: string | null, validSids: string[]} => {
+  const validSids: string[] = [];
+
+  const postOrderList = valtioStore.postOrderList;
+  for (const cursor of postOrderList) {
+    const sid = cursor.split("post.")[1];
+
+    const { error, value } = fnGetQueryAttributeBoolean(sid, KEY_BLOCKED);
+    if (error) {
+      return { error, validSids };
+    }
+    if (value === null || value === undefined) {
+      validSids.push(sid);
+    }
+    if (value === false) {
+      validSids.push(sid);
+    }
+  }
+
+  return { error: null, validSids };
 };
