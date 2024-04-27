@@ -5,7 +5,7 @@ import {
 } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
-import { fnBypassUserResponses } from "../../../misc/interviewBypass";
+import { fnBypassForward } from "../../../misc/interviewBypass";
 import {
   fnGetQueryAttribute,
   fnSetQueryAttribute,
@@ -20,7 +20,7 @@ export const opsClient = () => {
   } => {
     console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
-    const { error } = fnBypassUserResponses(sidCursor);
+    const { error } = fnBypassForward(sidCursor);
 
     return {
       error,

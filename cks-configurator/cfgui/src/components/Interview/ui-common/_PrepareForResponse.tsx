@@ -8,7 +8,7 @@ import {
   COMPONENT_INPUT,
 } from "../defs/constants/ComponentNames";
 import { Err } from "./Err";
-import { fnBypassUserResponses } from "../misc/interviewBypass";
+import { fnBypassForward } from "../misc/interviewBypass";
 import { Str } from "../defs/types/Str";
 
 import { fnComputeAndStoreLastQuestionIndex } from "../misc/computeLastQuestionIndex";
@@ -49,7 +49,7 @@ const _PrepareForResponse: React.FC = () => {
       return;
     }
 
-    const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
+    const { error, nextSidCursor } = fnBypassForward(sidCursor);
     if (error || !nextSidCursor) {
       console.log(error);
       return;

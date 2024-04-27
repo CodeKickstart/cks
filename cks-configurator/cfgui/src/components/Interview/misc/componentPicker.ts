@@ -1,12 +1,10 @@
 import { KIND_ERROR, KIND_FINISH } from "../defs/constants/ComponentNames";
-import {
-  fnGetQueryAttributeString
-} from "../state-mgt/dataAccess/loLevelAccess";
+import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import { fnCursorMove, fnCursorMoveBack } from "../state-mgt/cursor/cursor";
 import { Str } from "../defs/types/Str";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
-import { fnBypassUserResponses } from "./interviewBypass";
+import { fnBypassForward } from "./interviewBypass";
 
 export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
   const { cursor } = fnCursorMove();
@@ -20,11 +18,10 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
 
   const { sidCursor } = fnSplitCursor(cursor);
 
-  const { error, nextSidCursor } = fnBypassUserResponses(sidCursor);
+  const { error, nextSidCursor } = fnBypassForward(sidCursor);
   if (error) {
     return { error, nextKind: KIND_ERROR };
   }
-
 
   if (!nextSidCursor || nextSidCursor === null) {
     //end of the interview

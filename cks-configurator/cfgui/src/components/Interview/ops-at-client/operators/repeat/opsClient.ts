@@ -1,7 +1,7 @@
 import { OP_REPEAT } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
-import { fnBypassUserResponses } from "../../../misc/interviewBypass";
+import { fnBypassForward } from "../../../misc/interviewBypass";
 
 const name = OP_REPEAT;
 export const opsClient = () => {
@@ -12,7 +12,7 @@ export const opsClient = () => {
   } => {
     console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
-    const { error } = fnBypassUserResponses(sidCursor);
+    const { error } = fnBypassForward(sidCursor);
 
     return {
       error,
