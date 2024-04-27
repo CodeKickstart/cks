@@ -35,7 +35,13 @@ const _Interview = ({
 
   const fetchData = useMemo(
     () => async (url: string) => {
-      const response = await fetch(url);
+      // const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          "Cache-Control": "no-cache",
+        },
+      });
+
       if (!response.ok) {
         return <Err msg={`Network response was not ok`} />;
       }
