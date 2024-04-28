@@ -3,7 +3,6 @@ import { fnDispatchOp } from "../utils/opsDispatcher";
 
 export function fnRunPostOrderProcessing(): { error: string | null } {
   for (const cursor of fnGetAllPostOrderCursors()) {
-    // console.log(cursor);
     if (!cursor) {
       return { error: "_fnSetupForResponse: cursor is null" };
     }

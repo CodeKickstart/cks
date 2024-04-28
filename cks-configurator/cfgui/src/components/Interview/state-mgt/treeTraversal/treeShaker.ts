@@ -61,7 +61,6 @@ export function treeShaker(
   ): { error: Str } {
     try {
       const _fnRecordKey = (key: string) => {
-        // console.log(`${"  ".repeat(indent)}${key}`);
         valtioStore.dyntree_current_key = key;
 
         // only add non-null values to the map

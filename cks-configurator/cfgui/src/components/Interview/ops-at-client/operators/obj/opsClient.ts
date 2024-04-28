@@ -28,7 +28,6 @@ export const opsClient = () => {
     if (errorDescendantInfo) {
       return { error: errorDescendantInfo };
     }
-    // console.log(`opsClient::${name}:post descendantInfo: ${descendantInfo}`);
     const { children, childrenKind } = descendantInfo as {
       children: object;
       childrenKind: string;

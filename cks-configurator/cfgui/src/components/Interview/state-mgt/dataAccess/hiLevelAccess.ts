@@ -112,15 +112,12 @@ export const fnGetQueryAttrOfChildren = (
   const attrValsOfChildren: JsonObjectType[] =
     queryObject[attribute as keyof JsonObjectType];
   for (const [key] of Object.entries(fnGetQueryObject)) {
-    // const childObject = value as JsonObjectType;
     const rawValue: JsonObjectType =
       queryObject[attribute as keyof JsonObjectType];
 
     const keyValPair = { key, value: rawValue };
 
     attrValsOfChildren.push(keyValPair);
-
-    // console.log(`Key: ${key}, Value: ${JSON.stringify(childObject)}`);
   }
 
   return {

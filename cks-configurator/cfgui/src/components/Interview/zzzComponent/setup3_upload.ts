@@ -28,7 +28,6 @@ export const fnUpload = async (postData: JsonObjectType) => {
       }
 
       const data = await response.json(); // Parse response body as JSON
-      // console.log("Response:", data); // Log the response data
       return { data }; // Return response data
     } catch (error) {
       return { error }; // Return error if any

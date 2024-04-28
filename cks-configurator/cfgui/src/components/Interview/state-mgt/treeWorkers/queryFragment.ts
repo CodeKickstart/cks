@@ -14,7 +14,6 @@ export const fnUpsertQueryFragment: FnNodeProcessor<JsonObjectType> = (
   _indent?: number, // Add optional parameter
   updateInfo?: unknown
 ) => {
-  // console.log("fnUpsertQueryFragment: updateInfo", updateInfo);
   console.log("fnUpsertQueryFragment: queryFragment", queryFragment);
   const castedUpdateInfo = updateInfo as { [key: string]: string[] };
   if (castedUpdateInfo) {

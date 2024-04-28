@@ -16,7 +16,6 @@ export const fnPrepareQueriesForContext = (
 } => {
   const { error: tagError, processedQueries } = fnTag(queries);
   if (tagError) {
-    // console.log(tagError);
     return { error: tagError, queryBundle: null };
   }
 

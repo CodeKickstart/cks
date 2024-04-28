@@ -9,9 +9,7 @@ const ResponseContext: React.FC = () => {
     const response = valtioStore.responses as { [key: string]: JsonObjectType };
     if (response) {
       for (const key of Object.keys(response)) {
-        // console.log(key);
         if (key === "responseContext") {
-          // console.log(key);
           const val = response[key];
           return val;
         }

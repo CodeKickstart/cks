@@ -137,7 +137,6 @@ export const fnValidateValues = (jsonObj: JsonObjectType): Str => {
   function _fnCheckDpick(kind: string, key: string, sidStr: string, val: any) {
     let error = null;
 
-    // console.log(`_fnCheckDpick: ${kind}, ${key}, ${sidStr}, ${val}`);
 
     switch (kind) {
       case OP_PICKMANY:

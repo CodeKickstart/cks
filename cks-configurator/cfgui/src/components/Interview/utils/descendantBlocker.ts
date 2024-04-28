@@ -44,7 +44,6 @@ function _fnFindAllChildrenIndices(queryObject: JsonObjectType): {
 export const fnBlockUnselectedChildren = (
   queryObject: JsonObjectType
 ): { error: Str } => {
-  // console.log(`Query object: ${queryObject}`);
 
   const {
     error,

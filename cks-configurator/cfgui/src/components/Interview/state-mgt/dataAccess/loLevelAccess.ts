@@ -44,7 +44,6 @@ export const fnUpdateQueryObject = (
   sidCursor: string,
   updateInfo: { [key: string]: JsonObjectType }
 ): { error: Str } => {
-  // console.log("fnUpdateQueryObject: updateInfo", updateInfo);
   const { error } = fnInfixTraversal<JsonObjectType>(
     fnUpsertQueryFragment,
     valtioStore.queryContext as JsonObjectType,

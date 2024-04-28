@@ -31,21 +31,18 @@ export const fnDispatchOp = (
     const { error } = fnPreProcess(sidCursor);
 
     if (error) {
-      console.log(error);
-      return { error };
+      throw new Error(error);
     }
     return { error: null };
   } else {
     if (phase === ASIS_post) {
       const { error } = fnPostProcess(sidCursor);
       if (error) {
-        console.log(error);
-        return { error };
+        throw new Error(error);
       }
       return { error: null };
     } else {
-      console.log(`fnDispatchOp: phase: ${phase} not found`);
-      return { error: null };
+      throw new Error(`fnDispatchOp: phase: ${phase} not found`);
     }
   }
 };
