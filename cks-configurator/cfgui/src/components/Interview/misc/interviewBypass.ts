@@ -1,4 +1,4 @@
-import { fnCursorMoveForward } from "../state-mgt/cursor/cursor";
+import { fnCursorMoveBackward, fnCursorMoveForward } from "../state-mgt/cursor/cursor";
 
 import { Str } from "../defs/types/Str";
 import { fnShouldSkipQuestion } from "./shouldSkipQuestion";
@@ -64,4 +64,13 @@ export const fnBypassForward = (
   nextSidCursor: Str;
 } => {
   return _fnBypass(sidCursor, fnCursorMoveForward);
+};
+
+export const fnBypassBackward = (
+  sidCursor: string
+): {
+  error: Str;
+  nextSidCursor: Str;
+} => {
+  return _fnBypass(sidCursor, fnCursorMoveBackward);
 };
