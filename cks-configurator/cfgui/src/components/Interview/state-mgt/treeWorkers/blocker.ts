@@ -5,9 +5,9 @@ import { FnNodeProcessor } from "./FnNodeProcessor";
 export const fnBlock: FnNodeProcessor<null> = (
   _queryFragment: JsonObjectType, // Update the type of _queryFragment parameter
   key: string,
-  value: JsonObjectType
+  // value: JsonObjectType
 ) => {
-  console.log(`${key}: ${JSON.stringify(value)}`);
+  // console.log(`${key}: ${JSON.stringify(value)}`);
 
   if (key !== KEY_BLOCKED) {
     return { error: null };
@@ -21,9 +21,9 @@ export const fnBlock: FnNodeProcessor<null> = (
 export const fnUnblock: FnNodeProcessor<null> = (
   _queryFragment: JsonObjectType, // Update the type of _queryFragment parameter
   key: string,
-  value: JsonObjectType
+  // value: JsonObjectType
 ) => {
-  console.log(`${key}: ${JSON.stringify(value)}`);
+  // console.log(`${key}: ${JSON.stringify(value)}`);
 
   if (key !== KEY_BLOCKED) {
     return { error: null };
