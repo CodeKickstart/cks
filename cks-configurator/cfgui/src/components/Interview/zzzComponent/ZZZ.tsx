@@ -84,6 +84,7 @@ export const ZZZ: React.FC<Props> = ({
         case ZZZ_STATE_2:
           try {
             const result = await fnUpload(valtioStore.responses);
+            console.log("Upload result: ", result);
           } catch (error) {
             throw new Error("Error uploading response");
           }
