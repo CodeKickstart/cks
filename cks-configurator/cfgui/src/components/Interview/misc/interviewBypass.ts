@@ -4,8 +4,9 @@ import { Str } from "../defs/types/Str";
 import { fnShouldSkipQuestion } from "./shouldSkipQuestion";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 
-const _fnBypassForward = (
-  sidCursor: string
+const _fnBypass = (
+  sidCursor: string,
+  fnCursorMove: () => { cursor: string | null }
 ): {
   error: Str;
   nextSidCursor: Str;
@@ -62,5 +63,5 @@ export const fnBypassForward = (
   error: Str;
   nextSidCursor: Str;
 } => {
-  return _fnBypassForward(sidCursor);
+  return _fnBypass(sidCursor, fnCursorMove);
 };
