@@ -43,7 +43,7 @@ export const fnCursorInitForResponse = () => {
   valtioStore.currentIndex = 0;
 };
 
-export const fnGetCurrentCursor = (): Str => {
+export const fnGetCurrentCursor = (): string | null => {
   if (valtioStore.currentIndex === null) {
     return null;
   }

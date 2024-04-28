@@ -9,7 +9,7 @@ import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 
 const _fnBypass = (
   sidCursor: string,
-  fnCursorMoveForward: () => { cursor: string | null }
+  fnCursorMove: () => { cursor: string | null }
 ): {
   error: Str;
   newSidCursor: Str;
@@ -28,7 +28,7 @@ const _fnBypass = (
 
     let nextSidCursor = sidCursor;
     if (skipQuestion) {
-      const { cursor: newCursor } = fnCursorMoveForward();
+      const { cursor: newCursor } = fnCursorMove();
       if (newCursor === null) {
         return { error: null, newSidCursor: null };
       }
