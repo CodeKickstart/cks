@@ -55,8 +55,7 @@ export function* fnGetAllPostOrderCursors(): Generator<Str> {
   // fnValidPostOrderSids();
   const { error, validSids } = fnValidPostOrderSids();
   if (error) {
-    console.log(error);
-    return { error };
+    throw new Error(`fnGetAllPostOrderCursors: ${error}`);
   }
 
   for (const sid of validSids) {

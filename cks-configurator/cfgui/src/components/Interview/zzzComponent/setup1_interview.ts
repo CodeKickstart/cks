@@ -66,7 +66,7 @@ export const fnSetupForInterview = () => {
   // }
   const _fnPreProcessIterator = () => {
     for (const cursor of fnGetAllPreOrderCursors()) {
-      console.log(cursor);
+      // console.log(cursor);
       if (!cursor) {
         return { error: "_fnPreProcessIterator: cursor is null" };
       }
@@ -87,8 +87,7 @@ export const fnSetupForInterview = () => {
       }
     );
   if (errOrderSequences) {
-    console.log("!!!fnSetupForInterview", errOrderSequences);
-    return { error: errOrderSequences };
+    throw new Error(`fnSetupForInterview: ${errOrderSequences}`);
   }
   // valtioStore.preOrderList
   valtioStore.preOrderList = orderList.filter((item) =>

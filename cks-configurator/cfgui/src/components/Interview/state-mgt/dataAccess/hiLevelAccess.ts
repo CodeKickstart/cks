@@ -72,8 +72,7 @@ export const fnRetrieveQueryObject = () => {
   const { sidCursor } = fnSplitCursor(cursor);
   const { error, queryObject } = fnGetQueryObject(sidCursor);
   if (error) {
-    console.log(error);
-    return null;
+    throw new Error(`fnRetrieveQueryObject: ${error}`);
   }
   if (!queryObject) {
     return null;
@@ -97,8 +96,7 @@ export const fnChangeBlockingStatusOfSubtree = (treenode: object, doBlock: boole
     treenode as JsonObjectType
   );
   if (error) {
-    console.log("!!!fnChangeBlockingStatusOfSubtree", error);
-    return { error };
+    throw new Error(`fnChangeBlockingStatusOfSubtree: ${error}`);
   }
   return { error: null };
 };
@@ -108,14 +106,13 @@ export const fnGetQueryAttrOfChildren = (
   attribute: string
 ): { error: Str; value: Array<{ [key: string]: JsonObjectType }> | null } => {
   if (!queryObject) {
-    const error = `fnGetQueryChildrenAttributeList: queryObject is null`;
-    return { error, value: null };
+    throw new Error("fnGetQueryAttrOfChildren: queryObject is null");
   }
 
   const attrValsOfChildren: JsonObjectType[] =
     queryObject[attribute as keyof JsonObjectType];
-  for (const [key, value] of Object.entries(fnGetQueryObject)) {
-    const childObject = value as JsonObjectType;
+  for (const [key] of Object.entries(fnGetQueryObject)) {
+    // const childObject = value as JsonObjectType;
     const rawValue: JsonObjectType =
       queryObject[attribute as keyof JsonObjectType];
 
@@ -123,7 +120,7 @@ export const fnGetQueryAttrOfChildren = (
 
     attrValsOfChildren.push(keyValPair);
 
-    console.log(`Key: ${key}, Value: ${JSON.stringify(childObject)}`);
+    // console.log(`Key: ${key}, Value: ${JSON.stringify(childObject)}`);
   }
 
   return {

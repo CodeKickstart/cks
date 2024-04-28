@@ -69,15 +69,14 @@ export const ZZZ: React.FC<Props> = ({
 
           const { error: errorRun } = fnRunPostOrderProcessing();
           if (errorRun) {
-            console.log(errorRun);
+            throw new Error(errorRun);
           }
           try {
             const responseContext = fnGetResponseContext();
-            console.log(responseContext);
             const postData = responseContext as JsonObjectType;
             valtioStore.responses = postData;
           } catch (error) {
-            console.error("Error uploading data:", error);
+            throw new Error("Error getting response context");
           }
 
           break;
@@ -85,9 +84,8 @@ export const ZZZ: React.FC<Props> = ({
         case ZZZ_STATE_2:
           try {
             const result = await fnUpload(valtioStore.responses);
-            console.log(result); // Log the result
           } catch (error) {
-            console.error("Error uploading data:", error);
+            throw new Error("Error uploading response");
           }
           valtioStore.zzzState = ZZZ_END;
           break;

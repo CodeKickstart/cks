@@ -1,7 +1,7 @@
 import {
   KEY_OVERRIDE,
   KEY_VAL,
-  OP_LITERAL,
+  // OP_LITERAL,
 } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
@@ -11,14 +11,14 @@ import {
   fnSetQueryAttribute,
 } from "../../../state-mgt/dataAccess/loLevelAccess";
 
-const name = OP_LITERAL;
+// const name = OP_LITERAL;
 export const opsClient = () => {
   const fnPreProcess = (
     sidCursor: string
   ): {
     error: Str;
   } => {
-    console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
+    // console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
     const { error } = fnBypassForward(sidCursor);
 

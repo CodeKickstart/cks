@@ -10,7 +10,7 @@ export const opsClient = () => {
   ): {
     error: Str;
   } => {
-    console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
+    // console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
     const { error } = fnBypassForward(sidCursor);
 

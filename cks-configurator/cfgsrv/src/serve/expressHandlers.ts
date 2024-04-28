@@ -15,7 +15,7 @@ export const fnHandleFetchQuery = (req: Request, res: Response) => {
   const { error: errorFetchingData, jsonObject: usrData } =
     fnFetchRawQuery(directoryPath);
   if (errorFetchingData || !usrData) {
-    console.log(errorFetchingData);
+    // console.log(errorFetchingData);
     return res.status(500).json({ message: "Error fetching query" });
   }
 
@@ -27,15 +27,15 @@ export const fnHandleFetchQuery = (req: Request, res: Response) => {
   const { error: errorFetchingDataZZZ, jsonObject: zzzData } =
     fnFetchRawQuery(zzzDirpath);
   if (errorFetchingDataZZZ || zzzData == null) {
-    console.log(errorFetchingDataZZZ);
+    throw new Error("Error fetching zzz data");
   }
 
   const totalQueryContext = { ...usrData, ...zzzData };
-  console.log(totalQueryContext);
+  // console.log(totalQueryContext);
 
   const { error, queryBundle } = fnBundleQuery(totalQueryContext);
   if (error) {
-    console.log(error);
+    // console.log(error);
     return { error, queryBundle: null };
   }
 
@@ -66,16 +66,16 @@ export const fnHandlePostData = (req: Request, res: Response) => {
   }
 
   const data = req.body;
-  console.log(`Data received: ${data}`);
+  // console.log(`Data received: ${data}`);
 
   const FILENAME = "response.json";
   const rootDirpath = process.cwd();
-  console.log(`Dirpath: ${rootDirpath}`);
+  // console.log(`Dirpath: ${rootDirpath}`);
   const repoDirpath = resolve(rootDirpath, "repo", "prod1", OUTPUT);
   const filePath = resolve(repoDirpath, FILENAME);
   const { error } = fnWrite(data, filePath);
   if (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ message: "Error writing data" });
   }
 

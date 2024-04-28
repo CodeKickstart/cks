@@ -44,7 +44,7 @@ function _fnFindAllChildrenIndices(queryObject: JsonObjectType): {
 export const fnBlockUnselectedChildren = (
   queryObject: JsonObjectType
 ): { error: Str } => {
-  console.log(`Query object: ${queryObject}`);
+  // console.log(`Query object: ${queryObject}`);
 
   const {
     error,
@@ -87,8 +87,7 @@ export const fnBlockUnselectedChildren = (
   const { kind } = children as ObjTemplateChildren;
   if (kind === undefined) {
     let index = 0;
-    for (const [k, v] of Object.entries(children as object)) {
-      console.log(`Key: ${k}, Value: ${v}`);
+    for (const v of Object.values(children as object)) {
       if (!unblockedChildrenIndices.includes(index)) {
         const { error } = fnBlockComponentTree(v);
         if (error) {
