@@ -1,4 +1,4 @@
-import { fnCursorMove } from "../state-mgt/cursor/cursor";
+import { fnCursorMoveForward } from "../state-mgt/cursor/cursor";
 
 import { Str } from "../defs/types/Str";
 import { fnShouldSkipQuestion } from "./shouldSkipQuestion";
@@ -6,7 +6,7 @@ import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 
 const _fnBypass = (
   sidCursor: string,
-  fnCursorMove: () => { cursor: string | null }
+  fnCursorMoveForward: () => { cursor: string | null }
 ): {
   error: Str;
   nextSidCursor: Str;
@@ -25,7 +25,7 @@ const _fnBypass = (
 
     let nextSidCursor = sidCursor;
     if (skipQuestion) {
-      const { cursor: newCursor } = fnCursorMove();
+      const { cursor: newCursor } = fnCursorMoveForward();
       if (newCursor === null) {
         return { error: null, nextSidCursor: null };
       }
@@ -63,5 +63,5 @@ export const fnBypassForward = (
   error: Str;
   nextSidCursor: Str;
 } => {
-  return _fnBypass(sidCursor, fnCursorMove);
+  return _fnBypass(sidCursor, fnCursorMoveForward);
 };

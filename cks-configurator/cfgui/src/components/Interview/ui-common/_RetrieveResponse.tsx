@@ -23,7 +23,7 @@ import Repeat from "../ui-ops/Repeat";
 import { fnRetrieveQueryObject } from "../state-mgt/dataAccess/hiLevelAccess";
 import Diagnostics from "./Diagnostics";
 import { ZZZ } from "../zzzComponent/ZZZ";
-// import { fnCursorMoveBack } from "../state-mgt/cursor/cursor";
+
 
 const _RetrieveResponse: React.FC<InputProps> = ({
   onNextResponse,

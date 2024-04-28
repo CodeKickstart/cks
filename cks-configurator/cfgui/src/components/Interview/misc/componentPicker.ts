@@ -1,13 +1,16 @@
 import { KIND_ERROR, KIND_FINISH } from "../defs/constants/ComponentNames";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
-import { fnCursorMove, fnCursorMoveBack } from "../state-mgt/cursor/cursor";
+import {
+  fnCursorMoveForward,
+  fnCursorMoveBackward,
+} from "../state-mgt/cursor/cursor";
 import { Str } from "../defs/types/Str";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 import { fnBypassForward } from "./interviewBypass";
 
 export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
-  const { cursor } = fnCursorMove();
+  const { cursor } = fnCursorMoveForward();
 
   if (!cursor) {
     return {
@@ -38,8 +41,8 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
   return { error: null, nextKind: kind as Str };
 };
 
-export const fnMoveBack = (): { error: Str; nextKind: Str } => {
-  const { cursor } = fnCursorMoveBack();
+export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
+  const { cursor } = fnCursorMoveBackward();
   if (cursor === null) {
     return { error: null, nextKind: KIND_ERROR };
   }

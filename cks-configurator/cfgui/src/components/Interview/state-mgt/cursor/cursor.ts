@@ -1,11 +1,9 @@
-
 import { Str } from "../../defs/types/Str";
 import { valtioStore } from "../../defs/types/ValtioTypes";
 import { fnValidPostOrderSids } from "../dataAccess/hiLevelAccess";
 
-
 // returns cursor - null if no more questions
-export const fnCursorMove = (): { cursor: string | null } => {
+export const fnCursorMoveForward = (): { cursor: string | null } => {
   if (valtioStore.currentIndex === null) {
     return { cursor: null };
   }
@@ -20,7 +18,7 @@ export const fnCursorMove = (): { cursor: string | null } => {
   return { cursor };
 };
 
-export const fnCursorMoveBack = (): { cursor: string | null } => {
+export const fnCursorMoveBackward = (): { cursor: string | null } => {
   if (valtioStore.currentIndex === null) {
     return { cursor: null };
   }
@@ -53,15 +51,13 @@ export const fnGetCurrentCursor = (): Str => {
   return valtioStore.preOrderList[valtioStore.currentIndex];
 };
 
-
 export function* fnGetAllPostOrderCursors(): Generator<Str> {
   // fnValidPostOrderSids();
-  const { error,  validSids } = fnValidPostOrderSids()
+  const { error, validSids } = fnValidPostOrderSids();
   if (error) {
     console.log(error);
     return { error };
   }
-
 
   for (const sid of validSids) {
     const cursor = `post.${sid}`;
