@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 
 import { fnMoveToPrevious, fnMoveToNext } from "../misc/componentPicker";
 import { fnSetupForInterview } from "../zzzComponent/setup1_interview";
@@ -10,8 +10,6 @@ import {
 import { Err } from "./Err";
 import { fnBypassForward } from "../misc/interviewBypass";
 import { Str } from "../defs/types/Str";
-
-import { fnComputeAndStoreLastQuestionIndex } from "../misc/computeLastQuestionIndex";
 
 import { InputType } from "../defs/types/UITypes";
 import _RetrieveResponse from "./_RetrieveResponse";
@@ -31,18 +29,9 @@ const _PrepareForResponse: React.FC = () => {
   const handleStartInterview = useCallback(() => {
     const { error: errorInit, sidCursor } = fnSetupForInterview();
     if (errorInit) {
-      console.log(errorInit);
-      return;
+      throw new Error(errorInit);
     }
 
-    const { error: errorComputingLastQuestion, lastQuestionIndex } =
-      fnComputeAndStoreLastQuestionIndex();
-    if (errorComputingLastQuestion) {
-      console.log(errorComputingLastQuestion);
-      return;
-    }
-
-    console.log(`lastQuestionIndex: ${lastQuestionIndex}`);
     setInterviewStarted(true);
     if (sidCursor === null || sidCursor === undefined) {
       setSelectedResponseComponent(KIND_FINISH);
@@ -51,8 +40,7 @@ const _PrepareForResponse: React.FC = () => {
 
     const { error, newSidCursor } = fnBypassForward(sidCursor);
     if (error || !newSidCursor) {
-      console.log(error);
-      return;
+      throw new Error(`_PrepareForResponse: error?.toString()`);
     }
 
     const { error: errorKind, value: kind } = fnGetQueryAttributeString(
@@ -97,13 +85,6 @@ const _PrepareForResponse: React.FC = () => {
       setRerenderFlag((prev) => !prev); // Toggle rerenderFlag to force a re-render
     }
   }, []);
-
-  useEffect(() => {
-    // Logic to handle actions when interviewFinished changes
-    if (interviewFinished) {
-      console.log("Interview finished.");
-    }
-  }, [interviewFinished]);
 
   const _fnRenderCore = () => {
     switch (selectedResponseComponent) {

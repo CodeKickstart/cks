@@ -65,7 +65,6 @@ const Text: React.FC<Props> = ({
   if (!isVisible) {
     return null; // Don't render anything if isVisible is false
   }
-  console.log("backSidExist: ", backSidExist);
   return (
     <div className='flex items-start'>
       <input

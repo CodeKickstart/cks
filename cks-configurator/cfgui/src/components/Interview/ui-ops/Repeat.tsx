@@ -37,12 +37,10 @@ const Repeat: React.FC<Props> = ({
       sid?: string;
       min?: number;
       max?: number;
-      children?: JsonObjectType[];
     }
 
-    const { sid, min, max, val, children } = (queryObject || {}) as ObjTemplate;
-    console.log("children: ", children);
-    console.log("sidCursor: ", sidCursor);
+    const { sid, min, max, val } = (queryObject || {}) as ObjTemplate;
+
 
     if (min === undefined || min < 0) {
       setMinCount(0);

@@ -31,7 +31,6 @@ const _Interview = ({
     queryParams,
   };
   valtioStore.urlInfo = urlInfo;
-  console.log(apiUrl);
 
   const fetchData = useMemo(
     () => async (url: string) => {

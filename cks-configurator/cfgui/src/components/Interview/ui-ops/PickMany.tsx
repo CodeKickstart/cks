@@ -51,7 +51,7 @@ const PickMany: React.FC<Props> = ({
     fnSetQueryAttribute(sid, KEY_VAL, answer as number[]);
     const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
     if (errorBlocker) {
-      console.error(`Error blocking unselected children: ${errorBlocker}`);
+      throw new Error(`Error blocking children: ${errorBlocker}`);
     }
     setAnswer([]);
     onNextResponse();
@@ -66,23 +66,15 @@ const PickMany: React.FC<Props> = ({
     const { defval, sid } = (queryObject || {}) as ObjTemplate;
 
     if (!listOfDescendantNames || !Array.isArray(listOfDescendantNames)) {
-      const error = "Failed to retrieve query object";
-      console.error(error);
-      return;
+      throw new Error("Failed to retrieve query object");
     }
 
     if (sid === undefined) {
-      const error = "Failed to retrieve query object";
-      console.error(error);
-      return;
+      throw new Error("Failed to retrieve query object");
     }
     setSid(sid);
 
     setBackSidExist(!fnIsItTheFirstQuestion());
-
-    // const { unblockedChildrenIndices } = _fnFindAllChildrenIndices(queryObject);
-
-    // console.log(`Unblocked children indices: ${unblockedChildrenIndices}`);
 
     const { error, value } = fnGetQueryAttribute(sid, KEY_VAL);
     if (!error) {
@@ -99,8 +91,7 @@ const PickMany: React.FC<Props> = ({
 
     const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
     if (errorSetValue) {
-      console.error(`Error setting query attribute: ${errorSetValue}`);
-      return;
+      throw new Error(`Error setting query attribute: ${errorSetValue}`);
     }
 
     if (val.length > 0) {
@@ -111,12 +102,10 @@ const PickMany: React.FC<Props> = ({
   const handleCheckboxChange = (index: number) => {
     const { error, value: val } = fnGetQueryAttribute(sid, KEY_VAL);
     if (error) {
-      console.error(`Error getting query attribute: ${error}`);
-      return;
+      throw new Error(`Failed to retrieve query attribute: ${error}`);
     }
     if (val === null || val === undefined) {
-      console.error(`Failed to retrieve query attribute`);
-      return;
+      throw new Error("Failed to retrieve query attribute");
     }
 
     const newVal = [...(val as number[])];
@@ -129,8 +118,7 @@ const PickMany: React.FC<Props> = ({
 
     const { error: errorSet } = fnSetQueryAttribute(sid, KEY_VAL, newVal);
     if (errorSet) {
-      console.error(`Error setting query attribute: ${errorSet}`);
-      return;
+      throw new Error(`Error setting query attribute: ${errorSet}`);
     }
 
     setAnswer(newVal);
