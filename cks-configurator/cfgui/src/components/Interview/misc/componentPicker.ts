@@ -7,7 +7,7 @@ import {
 } from "../state-mgt/cursor/cursor";
 import { Str } from "../defs/types/Str";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
-import { fnBypassForward } from "./interviewBypass";
+import { fnBypassForward as fnBypassBackward } from "./interviewBypass";
 
 export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
   const { cursor } = fnCursorMoveForward();
@@ -21,7 +21,7 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
 
   const { sidCursor } = fnSplitCursor(cursor);
 
-  const { error, nextSidCursor } = fnBypassForward(sidCursor);
+  const { error, nextSidCursor } = fnBypassBackward(sidCursor);
   if (error) {
     return { error, nextKind: KIND_ERROR };
   }
@@ -43,13 +43,27 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
 
 export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
   const { cursor } = fnCursorMoveBackward();
-  if (cursor === null) {
-    return { error: null, nextKind: KIND_ERROR };
+
+  if (!cursor) {
+    return {
+      error: null,
+      nextKind: KIND_FINISH,
+    };
   }
+
   const { sidCursor } = fnSplitCursor(cursor);
 
+  const { error, nextSidCursor } = fnBypassBackward(sidCursor);
+  if (error) {
+    return { error, nextKind: KIND_ERROR };
+  }
+
+  if (!nextSidCursor || nextSidCursor === null) {
+    //end of the interview
+    return { error: null, nextKind: null };
+  }
   const { error: errorGettingKind, value: kind } = fnGetQueryAttributeString(
-    sidCursor,
+    nextSidCursor,
     KEY_KIND
   );
   if (errorGettingKind) {
@@ -57,4 +71,19 @@ export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
   }
 
   return { error: null, nextKind: kind as Str };
+  // const { cursor } = fnCursorMoveBackward();
+  // if (cursor === null) {
+  //   return { error: null, nextKind: KIND_ERROR };
+  // }
+  // const { sidCursor } = fnSplitCursor(cursor);
+
+  // const { error: errorGettingKind, value: kind } = fnGetQueryAttributeString(
+  //   sidCursor,
+  //   KEY_KIND
+  // );
+  // if (errorGettingKind) {
+  //   return { error: errorGettingKind, nextKind: KIND_ERROR };
+  // }
+
+  // return { error: null, nextKind: kind as Str };
 };
