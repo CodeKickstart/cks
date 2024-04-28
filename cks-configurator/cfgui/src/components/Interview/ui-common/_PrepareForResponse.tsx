@@ -67,14 +67,14 @@ const _PrepareForResponse: React.FC = () => {
   }, [setSelectedResponseComponent]);
 
   const handleNext = useCallback(() => {
-    const { error, nextKind } = fnMoveToNext();
+    const { error, newKind } = fnMoveToNext();
     if (error) {
       setSelectedResponseComponent(KIND_ERROR);
     } else {
-      if (nextKind === KIND_FINISH) {
+      if (newKind === KIND_FINISH) {
         setSelectedResponseComponent(KIND_FINISH);
       } else {
-        setInputKind(nextKind as InputType);
+        setInputKind(newKind as InputType);
         setSelectedResponseComponent(COMPONENT_INPUT);
       }
 
@@ -83,14 +83,14 @@ const _PrepareForResponse: React.FC = () => {
   }, []);
 
   const handleBack = useCallback(() => {
-    const { error, nextKind } = fnMoveToPrevious();
+    const { error, newKind } = fnMoveToPrevious();
     if (error) {
       setSelectedResponseComponent(KIND_ERROR);
     } else {
-      if (nextKind === KIND_FINISH) {
+      if (newKind === KIND_FINISH) {
         setSelectedResponseComponent(KIND_FINISH);
       } else {
-        setInputKind(nextKind as InputType);
+        setInputKind(newKind as InputType);
         setSelectedResponseComponent(COMPONENT_INPUT);
       }
 

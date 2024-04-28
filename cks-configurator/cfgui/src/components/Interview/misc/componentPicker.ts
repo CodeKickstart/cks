@@ -9,13 +9,13 @@ import { Str } from "../defs/types/Str";
 import { fnSplitCursor } from "../state-mgt/dataAccess/hiLevelAccess";
 import { fnBypassForward as fnBypassBackward } from "./interviewBypass";
 
-export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
+export const fnMoveToNext = (): { error: Str; newKind: Str } => {
   const { cursor } = fnCursorMoveForward();
 
   if (!cursor) {
     return {
       error: null,
-      nextKind: KIND_FINISH,
+      newKind: KIND_FINISH,
     };
   }
 
@@ -23,31 +23,31 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
 
   const { error, newSidCursor } = fnBypassBackward(sidCursor);
   if (error) {
-    return { error, nextKind: KIND_FINISH };
+    return { error, newKind: KIND_FINISH };
   }
 
   if (!newSidCursor || newSidCursor === null) {
     //end of the interview
-    return { error: null, nextKind: null };
+    return { error: null, newKind: null };
   }
   const { error: errorGettingKind, value: kind } = fnGetQueryAttributeString(
     newSidCursor,
     KEY_KIND
   );
   if (errorGettingKind) {
-    return { error: errorGettingKind, nextKind: KIND_FINISH };
+    return { error: errorGettingKind, newKind: KIND_FINISH };
   }
 
-  return { error: null, nextKind: kind as Str };
+  return { error: null, newKind: kind as Str };
 };
 
-export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
+export const fnMoveToPrevious = (): { error: Str; newKind: Str } => {
   const { cursor } = fnCursorMoveBackward();
 
   if (!cursor) {
     return {
       error: null,
-      nextKind: KIND_FINISH,
+      newKind: KIND_FINISH,
     };
   }
 
@@ -55,25 +55,25 @@ export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
 
   const { error, newSidCursor } = fnBypassBackward(sidCursor);
   if (error) {
-    return { error, nextKind: KIND_FINISH };
+    return { error, newKind: KIND_FINISH };
   }
 
   if (!newSidCursor || newSidCursor === null) {
     //end of the interview
-    return { error: null, nextKind: null };
+    return { error: null, newKind: null };
   }
   const { error: errorGettingKind, value: kind } = fnGetQueryAttributeString(
     newSidCursor,
     KEY_KIND
   );
   if (errorGettingKind) {
-    return { error: errorGettingKind, nextKind: KIND_FINISH };
+    return { error: errorGettingKind, newKind: KIND_FINISH };
   }
 
-  return { error: null, nextKind: kind as Str };
+  return { error: null, newKind: kind as Str };
   // const { cursor } = fnMoveToPrevious();
   // if (cursor === null) {
-  //   return { error: null, nextKind: KIND_ERROR };
+  //   return { error: null, newKind: KIND_ERROR };
   // }
   // const { sidCursor } = fnSplitCursor(cursor);
 
@@ -82,8 +82,8 @@ export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
   //   KEY_KIND
   // );
   // if (errorGettingKind) {
-  //   return { error: errorGettingKind, nextKind: KIND_ERROR };
+  //   return { error: errorGettingKind, newKind: KIND_ERROR };
   // }
 
-  // return { error: null, nextKind: kind as Str };
+  // return { error: null, newKind: kind as Str };
 };
