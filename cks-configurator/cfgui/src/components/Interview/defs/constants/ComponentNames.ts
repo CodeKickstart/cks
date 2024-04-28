@@ -1,5 +1,5 @@
 export const COMPONENT_INPUT = "_RetrieveResponse";
-export const KIND_FINISH = "Diagnostics";
+export const KIND_FINISH = "Finish";
 export const KIND_ERROR = "Error";
 
 export const INPUT_TEXT = "text";

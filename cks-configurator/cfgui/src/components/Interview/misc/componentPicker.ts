@@ -1,4 +1,4 @@
-import { KIND_ERROR, KIND_FINISH } from "../defs/constants/ComponentNames";
+import { KIND_FINISH } from "../defs/constants/ComponentNames";
 import { fnGetQueryAttributeString } from "../state-mgt/dataAccess/loLevelAccess";
 import { KEY_KIND } from "../../../shared/defs/constants";
 import {
@@ -23,7 +23,7 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
 
   const { error, newSidCursor } = fnBypassBackward(sidCursor);
   if (error) {
-    return { error, nextKind: KIND_ERROR };
+    return { error, nextKind: KIND_FINISH };
   }
 
   if (!newSidCursor || newSidCursor === null) {
@@ -35,7 +35,7 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
     KEY_KIND
   );
   if (errorGettingKind) {
-    return { error: errorGettingKind, nextKind: KIND_ERROR };
+    return { error: errorGettingKind, nextKind: KIND_FINISH };
   }
 
   return { error: null, nextKind: kind as Str };
@@ -55,7 +55,7 @@ export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
 
   const { error, newSidCursor } = fnBypassBackward(sidCursor);
   if (error) {
-    return { error, nextKind: KIND_ERROR };
+    return { error, nextKind: KIND_FINISH };
   }
 
   if (!newSidCursor || newSidCursor === null) {
@@ -67,11 +67,11 @@ export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
     KEY_KIND
   );
   if (errorGettingKind) {
-    return { error: errorGettingKind, nextKind: KIND_ERROR };
+    return { error: errorGettingKind, nextKind: KIND_FINISH };
   }
 
   return { error: null, nextKind: kind as Str };
-  // const { cursor } = fnCursorMoveBackward();
+  // const { cursor } = fnMoveToPrevious();
   // if (cursor === null) {
   //   return { error: null, nextKind: KIND_ERROR };
   // }
