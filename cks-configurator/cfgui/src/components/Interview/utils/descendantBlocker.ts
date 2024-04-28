@@ -1,4 +1,3 @@
-// import { KEY_BLOCKED } from "../../../shared/defs/constants";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../defs/types/Str";
 import { fnChangeBlockingStatusOfSubtree } from "../state-mgt/dataAccess/hiLevelAccess";
@@ -73,18 +72,30 @@ export const fnBlockUnselectedChildren = (
     kind?: string;
   }
 
+  const fnBlockComponentTree = (children: object): { error: string | null } => {
+    const { error } = _fnChangeBlockingCondition(children, true);
+    return { error };
+  };
+
+  const fnUnblockComponentTree = (
+    children: object
+  ): { error: string | null } => {
+    const { error } = _fnChangeBlockingCondition(children, false);
+    return { error };
+  };
+
   const { kind } = children as ObjTemplateChildren;
   if (kind === undefined) {
     let index = 0;
     for (const [k, v] of Object.entries(children as object)) {
       console.log(`Key: ${k}, Value: ${v}`);
       if (!unblockedChildrenIndices.includes(index)) {
-        const { error } = _fnChangeBlockingCondition(v, true);
+        const { error } = fnBlockComponentTree(v);
         if (error) {
           return { error };
         }
       } else {
-        const { error } = _fnChangeBlockingCondition(v, false);
+        const { error } = fnUnblockComponentTree(v);
         if (error) {
           return { error };
         }
