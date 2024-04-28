@@ -23,7 +23,7 @@ const PickOne: React.FC<Props> = ({
   onNextResponse,
   onBackResponse,
 }) => {
-  const [answer, setAnswer] = useState<number | null>(null); // Updated state name to 'answer'
+  const [answer, setAnswer] = useState<number | null>(null);
   const [sid, setSid] = useState<string>("");
   const [backSidExist, setBackSidExist] = useState<boolean>(false);
 
@@ -43,9 +43,7 @@ const PickOne: React.FC<Props> = ({
     }
 
     if (!listOfDescendantNames || !Array.isArray(listOfDescendantNames)) {
-      const error = "Failed to retrieve query object";
-      console.error(error);
-      return;
+      throw new Error("Failed to retrieve query object");
     }
 
     const { defval, sid } = (queryObject || {}) as ObjTemplate;
@@ -71,18 +69,16 @@ const PickOne: React.FC<Props> = ({
 
     const { error: errorSetValue } = fnSetQueryAttribute(sid, KEY_VAL, val);
     if (errorSetValue) {
-      console.error(`Error setting query attribute: ${errorSetValue}`);
-      return;
+      throw new Error(`Error setting query attribute: ${errorSetValue}`);
     }
 
     setAnswer(val);
-  }, [queryObject, listOfDescendantNames]);
+  }, []);
 
   const handleChange = (index: number) => {
     const { error: errorSet } = fnSetQueryAttribute(sid, KEY_VAL, index);
     if (errorSet) {
-      console.error(`Error setting query attribute: ${errorSet}`);
-      return;
+      throw new Error(`Error setting query attribute: ${errorSet}`);
     }
 
     setAnswer(index);
@@ -93,9 +89,9 @@ const PickOne: React.FC<Props> = ({
       fnSetQueryAttribute(sid, KEY_VAL, answer);
       const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
       if (errorBlocker) {
-        console.error(`Error blocking unselected children: ${errorBlocker}`);
+        throw new Error(`Error blocking unselected children: ${errorBlocker}`);
       }
-      setAnswer(null);
+      // setAnswer(null);
       onNextResponse();
     }
   };
@@ -105,13 +101,13 @@ const PickOne: React.FC<Props> = ({
       <div className='flex'>
         <div>
           <h2 className='font-semibold'>Select one an option:</h2>
-          {listOfDescendantNames.map((descendantName, index) => (
-            <label key={index} className='flex items-center mb-2'>
+          {listOfDescendantNames.map((descendantName, selectionIndex) => (
+            <label key={selectionIndex} className='flex items-center mb-2'>
               <input
                 type='radio'
-                value={index}
-                checked={answer === index}
-                onChange={() => handleChange(index)}
+                value={selectionIndex}
+                checked={answer === selectionIndex}
+                onChange={() => handleChange(selectionIndex)}
                 className='mr-2'
               />
               {descendantName}

@@ -5,7 +5,7 @@ import { valtioStore } from "../../defs/types/ValtioTypes";
 
 import { fnGetAllPreOrderCursors, fnGetCurrentCursor } from "../cursor/cursor";
 import { fnPostfixTraversal } from "../treeTraversal/postTraversal";
-import { fnBlock } from "../treeWorkers/blocker";
+import { fnBlock, fnUnblock } from "../treeWorkers/blocker";
 import { fnGetQueryAttribute, fnGetQueryAttributeBoolean, fnGetQueryObject } from "./loLevelAccess";
 
 export function fnSplitCursor(str: string): {
@@ -90,13 +90,14 @@ export const fnGetSidCursor = () => {
   return sidCursor;
 };
 
-export const fnBlockSubTree = (treenode: object) => {
+export const fnChangeBlockingStatusOfSubtree = (treenode: object, doBlock: boolean) => {
+  const fnBlockingFunction = doBlock ? fnBlock : fnUnblock;
   const { error } = fnPostfixTraversal<string>(
-    fnBlock,
+    fnBlockingFunction,
     treenode as JsonObjectType
   );
   if (error) {
-    console.log("!!!fnBlockSubTree", error);
+    console.log("!!!fnChangeBlockingStatusOfSubtree", error);
     return { error };
   }
   return { error: null };

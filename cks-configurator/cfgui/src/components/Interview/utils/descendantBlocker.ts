@@ -1,7 +1,7 @@
 // import { KEY_BLOCKED } from "../../../shared/defs/constants";
 import { JsonObjectType } from "../../../shared/defs/types";
 import { Str } from "../defs/types/Str";
-import { fnBlockSubTree } from "../state-mgt/dataAccess/hiLevelAccess";
+import { fnChangeBlockingStatusOfSubtree } from "../state-mgt/dataAccess/hiLevelAccess";
 // import { fnGetQueryAttrOfChildren } from "../state-mgt/dataAccess/loLevelAccess";
 
 function _fnFindAllChildrenIndices(queryObject: JsonObjectType): {
@@ -42,8 +42,6 @@ function _fnFindAllChildrenIndices(queryObject: JsonObjectType): {
   return { error: null, children, childrenIndices: unblockedChildrenIndices };
 }
 
-
-
 export const fnBlockUnselectedChildren = (
   queryObject: JsonObjectType
 ): { error: Str } => {
@@ -58,16 +56,13 @@ export const fnBlockUnselectedChildren = (
     return { error };
   }
 
-  // const { error: errorChildrenBlocks, attrValsOfChildren } =
-  //   fnGetQueryAttrOfChildren(queryObject, KEY_BLOCKED);
-  // if (errorChildrenBlocks) {
-  //   return { error: errorChildrenBlocks };
-  // }
-
-  const _fnBlockUnselectedChildren = (treeNode: object) => {
+  const _fnChangeBlockingCondition = (treeNode: object, doBlock: boolean) => {
     const value = treeNode as object;
     if (value !== null && value !== undefined && typeof value === "object") {
-      const { error } = fnBlockSubTree(treeNode as object);
+      const { error } = fnChangeBlockingStatusOfSubtree(
+        treeNode as object,
+        doBlock
+      );
       return { error };
     } else {
       return { error: "No tree node to be block" };
@@ -84,7 +79,12 @@ export const fnBlockUnselectedChildren = (
     for (const [k, v] of Object.entries(children as object)) {
       console.log(`Key: ${k}, Value: ${v}`);
       if (!unblockedChildrenIndices.includes(index)) {
-        const { error } = _fnBlockUnselectedChildren(v);
+        const { error } = _fnChangeBlockingCondition(v, true);
+        if (error) {
+          return { error };
+        }
+      } else {
+        const { error } = _fnChangeBlockingCondition(v, false);
         if (error) {
           return { error };
         }
