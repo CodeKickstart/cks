@@ -49,14 +49,14 @@ const _PrepareForResponse: React.FC = () => {
       return;
     }
 
-    const { error, nextSidCursor } = fnBypassForward(sidCursor);
-    if (error || !nextSidCursor) {
+    const { error, newSidCursor } = fnBypassForward(sidCursor);
+    if (error || !newSidCursor) {
       console.log(error);
       return;
     }
 
     const { error: errorKind, value: kind } = fnGetQueryAttributeString(
-      nextSidCursor,
+      newSidCursor,
       KEY_KIND
     );
     if (errorKind || !kind) {

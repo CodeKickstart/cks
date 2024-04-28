@@ -21,17 +21,17 @@ export const fnMoveToNext = (): { error: Str; nextKind: Str } => {
 
   const { sidCursor } = fnSplitCursor(cursor);
 
-  const { error, nextSidCursor } = fnBypassBackward(sidCursor);
+  const { error, newSidCursor } = fnBypassBackward(sidCursor);
   if (error) {
     return { error, nextKind: KIND_ERROR };
   }
 
-  if (!nextSidCursor || nextSidCursor === null) {
+  if (!newSidCursor || newSidCursor === null) {
     //end of the interview
     return { error: null, nextKind: null };
   }
   const { error: errorGettingKind, value: kind } = fnGetQueryAttributeString(
-    nextSidCursor,
+    newSidCursor,
     KEY_KIND
   );
   if (errorGettingKind) {
@@ -53,17 +53,17 @@ export const fnMoveToPrevious = (): { error: Str; nextKind: Str } => {
 
   const { sidCursor } = fnSplitCursor(cursor);
 
-  const { error, nextSidCursor } = fnBypassBackward(sidCursor);
+  const { error, newSidCursor } = fnBypassBackward(sidCursor);
   if (error) {
     return { error, nextKind: KIND_ERROR };
   }
 
-  if (!nextSidCursor || nextSidCursor === null) {
+  if (!newSidCursor || newSidCursor === null) {
     //end of the interview
     return { error: null, nextKind: null };
   }
   const { error: errorGettingKind, value: kind } = fnGetQueryAttributeString(
-    nextSidCursor,
+    newSidCursor,
     KEY_KIND
   );
   if (errorGettingKind) {
