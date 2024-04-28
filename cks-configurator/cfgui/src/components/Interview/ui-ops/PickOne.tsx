@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { KEY_VAL } from "../../../shared/defs/constants";
 import {
   fnGetQueryAttribute,
@@ -35,18 +35,6 @@ const PickOne: React.FC<Props> = ({
     throw new Error("Failed to retrieve query object");
   }
   const listOfDescendantNames = Object.values(descendantNames);
-
-  const handleNextResponse = useCallback(() => {
-    if (answer !== null) {
-      fnSetQueryAttribute(sid, KEY_VAL, answer);
-      const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
-      if (errorBlocker) {
-        console.error(`Error blocking unselected children: ${errorBlocker}`);
-      }
-      setAnswer(null);
-      onNextResponse();
-    }
-  }, [answer, onNextResponse, sid, queryObject]);
 
   useEffect(() => {
     interface ObjTemplate {
@@ -102,7 +90,13 @@ const PickOne: React.FC<Props> = ({
 
   const handleNextClick = () => {
     if (answer !== null) {
-      handleNextResponse();
+      fnSetQueryAttribute(sid, KEY_VAL, answer);
+      const { error: errorBlocker } = fnBlockUnselectedChildren(queryObject);
+      if (errorBlocker) {
+        console.error(`Error blocking unselected children: ${errorBlocker}`);
+      }
+      setAnswer(null);
+      onNextResponse();
     }
   };
 
