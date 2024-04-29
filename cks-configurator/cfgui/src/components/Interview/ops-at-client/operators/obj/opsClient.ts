@@ -1,16 +1,16 @@
-import { OP_OBJ } from "../../../../../shared/defs/constants";
+
 import { Str } from "../../../defs/types/Str";
 import { fnFindChildrenInfo } from "../_helper/postProcChildrenInfo";
 import { fnPostProcPickForSkippedDescendants } from "../_helper/postProcSkippedDescedants";
 
-const name = OP_OBJ;
+
 export const opsClient = () => {
   const fnPreProcess = (
-    sidCursor: string
+
   ): {
     error: Str;
   } => {
-    console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
+
 
     return {
       error: null,

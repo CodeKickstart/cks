@@ -1,16 +1,14 @@
-import { OP_REPEAT } from "../../../../../shared/defs/constants";
+
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassForward } from "../../../misc/interviewBypass";
 
-const name = OP_REPEAT;
 export const opsClient = () => {
   const fnPreProcess = (
     sidCursor: string
   ): {
     error: Str;
   } => {
-    console.log(`opsClient::${name}:pre sidCursor: ${sidCursor}`);
 
     const { error } = fnBypassForward(sidCursor);
 
@@ -20,11 +18,9 @@ export const opsClient = () => {
   };
 
   const fnPostProcess = (
-    sidCursor: string
   ): {
     error: Str;
   } => {
-    console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
     return { error: null };
   };
 

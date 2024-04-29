@@ -1,9 +1,9 @@
-import { OP_DEC } from "../../../../../shared/defs/constants";
+// import { OP_DEC } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnBypassForward } from "../../../misc/interviewBypass";
 
-const name = OP_DEC;
+// const name = OP_DEC;
 export const opsClient = () => {
   const fnPreProcess = (
     sidCursor: string
@@ -19,11 +19,11 @@ export const opsClient = () => {
   };
 
   const fnPostProcess = (
-    sidCursor: string
+    // sidCursor: string
   ): {
     error: Str;
   } => {
-    console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
+    // console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
     return { error: null };
   };
 

@@ -1,4 +1,4 @@
-import { OP_LITERAL, OP_PICKMANY } from "../../../../../shared/defs/constants";
+import { OP_LITERAL } from "../../../../../shared/defs/constants";
 import { Str } from "../../../defs/types/Str";
 
 import { fnGetQueryObject } from "../../../state-mgt/dataAccess/loLevelAccess";
@@ -8,7 +8,7 @@ import { fnFindChildrenInfo } from "../_helper/postProcChildrenInfo";
 import { fnPostProcPickForLiteralDescendants } from "../_helper/postProcLiteralDescendants";
 import { fnPostProcPickForSkippedDescendants } from "../_helper/postProcSkippedDescedants";
 
-const name = OP_PICKMANY;
+// const name = OP_PICKMANY;
 export const opsClient = () => {
   const fnPreProcess = (
     sidCursor: string
@@ -20,12 +20,12 @@ export const opsClient = () => {
       return { error: errorQuery };
     }
 
-    const { error: errorFindDescendantNames, descendantNames } =
+    const { error: errorFindDescendantNames } =
       fnFindAndStoreDescendantNames(queryObject);
     if (errorFindDescendantNames) {
       return { error: errorFindDescendantNames };
     }
-    console.log(`opsClient::${name}:pre descendantNames: ${descendantNames}`);
+    // console.log(`opsClient::${name}:pre descendantNames: ${descendantNames}`);
 
     return {
       error: null,

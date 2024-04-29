@@ -1,10 +1,10 @@
 import { Str } from "./Str";
 
 export type OpsClient = () => {
-  fnPreProcess: (sidCursor: string) => {
+  fnPreProcess: (sidCursor?: string) => {
     error: Str;
   };
-  fnPostProcess: (sidCursor: string) => {
+  fnPostProcess: (sidCursor?: string) => {
     error: Str;
   };
 };
