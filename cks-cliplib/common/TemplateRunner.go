@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"text/template"
 
-	"github.com/CodeKickstart/cks-clip-lib/globals"
-	"github.com/CodeKickstart/cks-clip-lib/logger"
+	"github.com/CodeKickstart/cks-cliplib/globals"
+	"github.com/CodeKickstart/cks-cliplib/logger"
 )
 
 func RunTemplate(templateText string, tmplRootData globals.SubstitionTemplateT) (string, error) {

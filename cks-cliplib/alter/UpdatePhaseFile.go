@@ -8,9 +8,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/CodeKickstart/cks-clip-lib/common"
-	"github.com/CodeKickstart/cks-clip-lib/globals"
-	"github.com/CodeKickstart/cks-clip-lib/logger"
+	"github.com/CodeKickstart/cks-cliplib/common"
+	"github.com/CodeKickstart/cks-cliplib/globals"
+	"github.com/CodeKickstart/cks-cliplib/logger"
 )
 
 // ensure that the alter location is not already present

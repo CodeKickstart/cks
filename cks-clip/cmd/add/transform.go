@@ -6,10 +6,10 @@ package add
 import (
 	"fmt"
 
-	"github.com/CodeKickstart/cks-clip-lib/globals"
-	"github.com/CodeKickstart/cks-clip-lib/mgr"
 	"github.com/CodeKickstart/cks-clip/logger"
 	"github.com/CodeKickstart/cks-clip/misc"
+	"github.com/CodeKickstart/cks-cliplib/globals"
+	"github.com/CodeKickstart/cks-cliplib/mgr"
 
 	"github.com/spf13/cobra"
 )

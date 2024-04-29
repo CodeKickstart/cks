@@ -1,8 +1,8 @@
 package domain
 
 import (
-	"github.com/CodeKickstart/cks-clip-lib/common"
-	"github.com/CodeKickstart/cks-clip-lib/globals"
+	"github.com/CodeKickstart/cks-cliplib/common"
+	"github.com/CodeKickstart/cks-cliplib/globals"
 )
 
 var MakeQueryTokenFile = func(templateMap map[string]string, content string, queryFilePath string) error {

@@ -6,9 +6,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/CodeKickstart/cks-clip-lib/common"
-	"github.com/CodeKickstart/cks-clip-lib/domain"
-	"github.com/CodeKickstart/cks-clip-lib/globals"
+	"github.com/CodeKickstart/cks-cliplib/common"
+	"github.com/CodeKickstart/cks-cliplib/domain"
+	"github.com/CodeKickstart/cks-cliplib/globals"
 )
 
 var BuildSubcommand = func(templateMap map[string]string) error {

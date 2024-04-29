@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/CodeKickstart/cks-clip-lib/globals"
-	"github.com/CodeKickstart/cks-clip-lib/logger"
+	"github.com/CodeKickstart/cks-cliplib/globals"
+	"github.com/CodeKickstart/cks-cliplib/logger"
 )
 
 var BuildStore = func(templateMap map[string]string) error {

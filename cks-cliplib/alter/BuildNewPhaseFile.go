@@ -3,8 +3,8 @@ package alter
 import (
 	"path/filepath"
 
-	"github.com/CodeKickstart/cks-clip-lib/common"
-	"github.com/CodeKickstart/cks-clip-lib/globals"
+	"github.com/CodeKickstart/cks-cliplib/common"
+	"github.com/CodeKickstart/cks-cliplib/globals"
 )
 
 var BuildNewPhaseFile = func(templateMap map[string]string) (string, error) {

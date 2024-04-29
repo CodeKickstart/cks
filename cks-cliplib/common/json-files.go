@@ -6,7 +6,7 @@ import (
 
 	"os"
 
-	"github.com/CodeKickstart/cks-clip-lib/logger"
+	"github.com/CodeKickstart/cks-cliplib/logger"
 )
 
 func ReadJsonFile(filePath string) (map[string]interface{}, error) {

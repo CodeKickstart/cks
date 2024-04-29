@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/CodeKickstart/cks-clip-lib/common"
+	"github.com/CodeKickstart/cks-cliplib/common"
 
-	"github.com/CodeKickstart/cks-clip-lib/globals"
-	"github.com/CodeKickstart/cks-clip-lib/logger"
+	"github.com/CodeKickstart/cks-cliplib/globals"
+	"github.com/CodeKickstart/cks-cliplib/logger"
 )
 
 var BuildAlterInfrastucture = func(templateMap map[string]string, queryTemplate, controlTemplate string) (globals.SubstitionTemplateT, error) {

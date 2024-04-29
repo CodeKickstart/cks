@@ -5,12 +5,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/CodeKickstart/cks-clip-lib/alter-pick"
-	"github.com/CodeKickstart/cks-clip-lib/alter-recast"
-	"github.com/CodeKickstart/cks-clip-lib/alter-transform"
-	"github.com/CodeKickstart/cks-clip-lib/domain"
-	"github.com/CodeKickstart/cks-clip-lib/globals"
-	"github.com/CodeKickstart/cks-clip-lib/logger"
+	pick "github.com/CodeKickstart/cks-cliplib/alter-pick"
+	recast "github.com/CodeKickstart/cks-cliplib/alter-recast"
+	transform "github.com/CodeKickstart/cks-cliplib/alter-transform"
+	"github.com/CodeKickstart/cks-cliplib/domain"
+	"github.com/CodeKickstart/cks-cliplib/globals"
+	"github.com/CodeKickstart/cks-cliplib/logger"
 )
 
 var BuildNewAlterDir = func(templateMap map[string]string) error {

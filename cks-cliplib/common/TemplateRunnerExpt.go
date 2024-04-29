@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"text/template"
 
-	"github.com/CodeKickstart/cks-clip-lib/globals"
-	// "github.com/CodeKickstart/cks-clip-lib/templates"
+	"github.com/CodeKickstart/cks-cliplib/globals"
+	// "github.com/CodeKickstart/cks-cliplib/templates"
 )
 
 func RunTemplateExpt(data map[string]map[string][]string, templateText string, templateMap map[string]string, substitutionTemplate globals.SubstitionTemplateT) (string, error) {

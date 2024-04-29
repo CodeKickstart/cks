@@ -1,7 +1,7 @@
 package pick
 
 import (
-	"github.com/CodeKickstart/cks-clip-lib/domain"
+	"github.com/CodeKickstart/cks-cliplib/domain"
 )
 
 var BuildSubcommand = func(templateMap map[string]string) error {

@@ -8,10 +8,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/CodeKickstart/cks-clip-lib/common"
-	"github.com/CodeKickstart/cks-clip-lib/filegen"
-	"github.com/CodeKickstart/cks-clip-lib/globals"
-	"github.com/CodeKickstart/cks-clip-lib/logger"
+	"github.com/CodeKickstart/cks-cliplib/common"
+	"github.com/CodeKickstart/cks-cliplib/filegen"
+	"github.com/CodeKickstart/cks-cliplib/globals"
+	"github.com/CodeKickstart/cks-cliplib/logger"
 	"github.com/otiai10/copy"
 )
 

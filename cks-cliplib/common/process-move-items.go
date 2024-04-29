@@ -3,7 +3,7 @@ package common
 import (
 	"strings"
 
-	"github.com/CodeKickstart/cks-clip-lib/globals"
+	"github.com/CodeKickstart/cks-cliplib/globals"
 )
 
 var GetMoveItemMap = func(templateMap map[string]string) (map[string]globals.MoveItemDetailsT, error) {

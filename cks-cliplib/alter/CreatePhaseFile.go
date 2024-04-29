@@ -1,7 +1,7 @@
 package alter
 
 import (
-	"github.com/CodeKickstart/cks-clip-lib/common"
+	"github.com/CodeKickstart/cks-cliplib/common"
 )
 
 var CreatePhaseFile = func(templateMap map[string]string) error {

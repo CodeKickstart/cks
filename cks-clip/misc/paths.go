@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/CodeKickstart/cks-clip-lib/common"
 	"github.com/CodeKickstart/cks-clip/logger"
+	"github.com/CodeKickstart/cks-cliplib/common"
 )
 
 var ComputeRecipePathForAddAter = func(recipePath, targetAppName, recipeDirName string) (string, error) {

@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/CodeKickstart/cks-clip-lib/globals"
+	"github.com/CodeKickstart/cks-cliplib/globals"
 	"github.com/spf13/viper"
 )
 
