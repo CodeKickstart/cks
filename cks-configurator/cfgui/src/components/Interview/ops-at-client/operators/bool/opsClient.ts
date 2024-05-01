@@ -20,7 +20,6 @@ export const opsClient = () => {
   ): {
     error: Str;
   } => {
-    // console.log(`opsClient::${name}:post sidCursor: ${sidCursor}`);
     return { error: null };
   };
 

@@ -9,7 +9,4 @@ export const fnRunPostProcess = () => {
       filteredPostProcessList.push(sidCursor);
     }
   }
-  console.log(
-    `fnRunPostProcess::filteredPostProcessList: ${filteredPostProcessList}`
-  );
 };

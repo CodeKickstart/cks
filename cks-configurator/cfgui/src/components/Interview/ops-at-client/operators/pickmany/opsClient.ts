@@ -25,7 +25,6 @@ export const opsClient = () => {
     if (errorFindDescendantNames) {
       return { error: errorFindDescendantNames };
     }
-    // console.log(`opsClient::${name}:pre descendantNames: ${descendantNames}`);
 
     return {
       error: null,

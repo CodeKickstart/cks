@@ -7,7 +7,6 @@ export const fnBlock: FnNodeProcessor<null> = (
   key: string,
   // value: JsonObjectType
 ) => {
-  // console.log(`${key}: ${JSON.stringify(value)}`);
 
   if (key !== KEY_BLOCKED) {
     return { error: null };
@@ -23,7 +22,6 @@ export const fnUnblock: FnNodeProcessor<null> = (
   key: string,
   // value: JsonObjectType
 ) => {
-  // console.log(`${key}: ${JSON.stringify(value)}`);
 
   if (key !== KEY_BLOCKED) {
     return { error: null };
